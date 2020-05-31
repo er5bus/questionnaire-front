@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  survey_prod:
+    build:
+      context: .
+      dockerfile: Dockerfile-prod
+    env_file:
+      - ./.env
+    ports:
+      - "80:80"
