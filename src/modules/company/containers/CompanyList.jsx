@@ -11,17 +11,17 @@ import ConfirmModal from "./../../../components/ConfirmModal"
 import CardNotFound from "./../../../components/CardNotFound"
 import InfiniteScroll from './../../../components/InfiniteScroll'
 
-import InvitationItem from "./../components/InvitationItem"
-import InvitationLoader from "./../components/InvitationLoader"
+import CompanyItem from "./../components/CompanyItem"
+import CompanyLoader from "./../components/CompanyLoader"
 
-import { fetchInvitations, filterInvitations, deleteInvitation } from "./../actions"
-import { getFilteredInvitations } from "./../selector"
+import { fetchCompanies, filterCompanies, deleteCompany } from "./../actions"
+import { getFilteredCompanies } from "./../selector"
 
 
 //import Moment from 'react-moment'
 
 
-class InvitationList extends React.Component {
+class CompanyList extends React.Component {
 
   constructor(props){
     super(props)
@@ -35,18 +35,18 @@ class InvitationList extends React.Component {
     this.setState({ openModal: !this.state.openModal, id })
   }
 
-  onFetchInvitations = (pageNumber) => {
+  onFetchCompanies = (pageNumber) => {
     if (!this.props.isLoading){
-      this.props.fetchInvitations(pageNumber)
+      this.props.fetchCompanies(pageNumber)
     }
   }
 
   onSearch = (e) => {
-    this.props.filterInvitations(e.target.value.trim())
+    this.props.filterCompanies(e.target.value.trim())
   }
 
-  onDeleteInvitation = () => {
-    this.props.deleteInvitation(this.state.id)
+  onDeleteCompany = () => {
+    this.props.deleteCompany(this.state.id)
   }
 
   render() {
@@ -56,17 +56,17 @@ class InvitationList extends React.Component {
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Company Invitations") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Companies") } </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Invitations List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Companies List")}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ superAdminRoutes.path + superAdminRoutes.routes.invitationNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={ superAdminRoutes.path + superAdminRoutes.routes.companyNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New company invitation')}
+                    {t('New company')}
                   </Link>
                 </Col>
               </Row>
@@ -78,23 +78,23 @@ class InvitationList extends React.Component {
           <ConfirmModal
             isOpen={ this.state.openModal }
             title={ t("Confirmation") }
-            content={ t("Are you sure you want to delete this invitation ?") }
-            onClick={ this.onDeleteInvitation }
+            content={ t("Are you sure you want to delete this company ?") }
+            onClick={ this.onDeleteCompany }
             onToggle={ this.onToggleModal }
-            buttonText={ t("Delete this invitation") }
+            buttonText={ t("Delete this company") }
           />
           <Row>
             <Col lg="12">
               <Row className="row-grid">
                 <InfiniteScroll
-                  loadMore={this.onFetchInvitations}
+                  loadMore={this.onFetchCompanies}
                   pageNumber={ page }
                   isLoading={isLoading}
                   hasMore={ hasMore }
-                  loader={<InvitationLoader />}
+                  loader={<CompanyLoader />}
                 >
                   { !isLoading && !items.length && <CardNotFound /> }
-                  { items.map((tag, i) => <InvitationItem key={i} {...tag} onToggleModal={this.onToggleModal} />)}
+                  { items.map((tag, i) => <CompanyItem key={i} {...tag} onToggleModal={this.onToggleModal} />)}
                 </InfiniteScroll>
               </Row>
             </Col>
@@ -105,9 +105,9 @@ class InvitationList extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchInvitations, deleteInvitation, filterInvitations }, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchCompanies, deleteCompany, filterCompanies }, dispatch)
 const mapStateToProps = state => ({
-  ...state.inviteCompany, items: getFilteredInvitations(state)
+  ...state.company, items: getFilteredCompanies(state)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationList))
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyList))
