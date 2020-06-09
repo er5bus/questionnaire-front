@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap"
 import { Redirect, Switch, Route } from "react-router-dom"
 
 import anonymousRoutes from './../../../routes/anonymous'
-import superAdminRoutes from './../../../routes/superAdmin'
+import adminRoutes from './../../../routes/admin'
 
 import Notifications from 'react-notification-system-redux'
 
@@ -17,7 +17,7 @@ class AnonymousLayout extends React.Component {
     const { authenticated, notifications = null } = this.props
 
     return authenticated
-      ? <Redirect to={superAdminRoutes.path} />
+      ? <Redirect to={adminRoutes.path} />
       : (
         <>
           { notifications && <Notifications notifications={notifications} />}

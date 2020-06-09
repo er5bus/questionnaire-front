@@ -43,7 +43,7 @@ export const createCompany = (payload) =>
         fail: ACTIONS.CREATE_COMPANY_FAILED 
       },
       messages: {
-        success: "Your invitation has been created successfuly",
+        success: "Your company has been created successfuly",
         fail: "Something went wrong please try again"
       },
       endpoint: ENDPOINT.COMPANIES,
@@ -64,7 +64,7 @@ export const editCompany = (param, payload) =>
         fail: ACTIONS.EDIT_COMPANY_FAILED
       },
       messages: {
-        success: "Your invitation has been updated successfuly",
+        success: "Your company has been updated successfuly",
         fail: "Something went wrong please try again"
       },
       endpoint: ENDPOINT.COMPANY.replace(":param", param),
@@ -84,7 +84,7 @@ export const deleteCompany = (param) =>
         fail: ACTIONS.DELETE_COMPANY_FAILED
       },
       messages: {
-        success: "Your invitation has been deleted successfuly",
+        success: "Your company has been deleted successfuly",
         fail: "Something went wrong please try again"
       },
       endpoint: ENDPOINT.COMPANY.replace(":param", param),

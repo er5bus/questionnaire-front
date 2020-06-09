@@ -12,6 +12,7 @@ import authReducer from "./modules/authentication/reducers"
 
 import inviteCompanyReducer from './modules/inviteCompany/reducers'
 import companyReducer from './modules/company/reducers'
+import inviteManagerReducer from './modules/inviteManager/reducers'
 
 
 import { reducer as formReducer } from 'redux-form'
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   form: formReducer,
   notifications: notificationReducer,
   inviteCompany: inviteCompanyReducer,
-  company: companyReducer
+  company: companyReducer,
+  inviteManager: inviteManagerReducer
 })
 
 export default ( preloadedState = {} ) => {

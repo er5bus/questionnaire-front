@@ -26,7 +26,7 @@ import routes from "./routes"
 import './i18n'
 
 const AnonymousLayout = React.lazy( () => import("./modules/layouts/containers/AnonymousLayout"))
-const SuperAdminLayout = React.lazy( () =>  import("./modules/layouts/containers/SuperAdminLayout"))
+const AdminLayout = React.lazy( () =>  import("./modules/layouts/containers/AdminLayout"))
 
 const store = configureStore()
 
@@ -45,7 +45,7 @@ sessionService.initSessionService(store, {refreshOnCheckAuth: true})
             <Switch>
               <Route path="/loader" component={Loader} />
               <Route path={ routes.anonymous.path } component={AnonymousLayout} />
-              <Route onEnter={sessionService.checkAuth} path={ routes.superAdmin.path } component={SuperAdminLayout} />
+              <Route onEnter={sessionService.checkAuth} path={ routes.admin.path } component={AdminLayout} />
               <Route component={ PageNotFound }/>
             </Switch>
           </React.Suspense>

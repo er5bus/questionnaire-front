@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col} from "reactstrap"
 
-import superAdminRoutes from './../../../routes/superAdmin'
+import adminRoutes from './../../../routes/admin'
 
 
 export default ({ onToggleModal =f=>f, name, description, universalName, color, id }) => {
@@ -26,7 +26,7 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
           <Button
             className="btn-sm mt-4"
             color="warning"
-            to={ superAdminRoutes.path + superAdminRoutes.routes.companyEdit.path.replace(":param", id) }
+            to={ adminRoutes.path + adminRoutes.routes.companyEdit.path.replace(":param", id) }
             tag={Link}
           >
             <i className="fa fa-pencil-alt" /> { t("Edit") }

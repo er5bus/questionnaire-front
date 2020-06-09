@@ -56,7 +56,7 @@ class InvitationList extends React.Component {
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Company Invitations") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Manager Invitations") } </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
@@ -64,9 +64,9 @@ class InvitationList extends React.Component {
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ adminRoutes.path + adminRoutes.routes.invitationCompanyNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New company invitation')}
+                    {t('New manager invitation')}
                   </Link>
                 </Col>
               </Row>
@@ -105,9 +105,8 @@ class InvitationList extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ fetchInvitations, deleteInvitation, filterInvitations }, dispatch)
 const mapStateToProps = state => ({
-  ...state.inviteCompany, items: getFilteredInvitations(state)
+  ...state.inviteManager, items: getFilteredInvitations(state)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationList))
+export default connect(mapStateToProps, { fetchInvitations, deleteInvitation, filterInvitations })(withTranslation()(InvitationList))

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import superAdminRoutes from "./../../../routes/superAdmin"
+import adminRoutes from "./../../../routes/admin"
 
 import { useTranslation } from "react-i18next"
 
@@ -13,7 +13,7 @@ const InvitationLinkList = () => {
     <div className="btn-wrapper">
       <Link
         className="btn-icon mb-3 mb-sm-0 btn btn-info"
-        to={ superAdminRoutes.path + superAdminRoutes.routes.invitationList.path }
+        to={ adminRoutes.path + adminRoutes.routes.invitationCompanyList.path }
       >
         <span className="btn-inner--icon mr-1">
           <i className="fas fa-tag" />

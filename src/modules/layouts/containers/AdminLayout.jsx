@@ -3,15 +3,15 @@ import { connect } from "react-redux"
 import { Redirect, Switch, Route } from "react-router-dom"
 import { withTranslation } from 'react-i18next'
 
-import superAdminRoutes from "./../../../routes/superAdmin"
+import adminRoutes from "./../../../routes/admin"
 import anonymousRoutes from "./../../../routes/anonymous"
 
-import SuperAdminNavbar from "./../components/SuperAdminNavbar"
-import SuperAdminSidebar from './../components/SuperAdminSidebar'
+import AdminNavbar from "./../components/AdminNavbar"
+import AdminSidebar from './../components/AdminSidebar'
 
 import Notifications from 'react-notification-system-redux'
 
-class UserLayout extends React.Component {
+class AdminLayout extends React.Component {
 
   constructor(props){
     super(props)
@@ -25,9 +25,10 @@ class UserLayout extends React.Component {
     const { t } = this.props
 
     return ([
-      { path: superAdminRoutes.path + "/dashbord", icon: "ni ni-shop", name: t("Dashboards") },
-      { path: superAdminRoutes.path + superAdminRoutes.routes.invitationList.path, icon: "fas fa-envelope-open-text", name: t("Company invitation") },
-      { path: superAdminRoutes.path + superAdminRoutes.routes.companyList.path, icon: "fas fa-building", name: t("Company") }
+      { path: adminRoutes.path + "/dashbord", icon: "ni ni-shop", name: t("Dashboards") },
+      { path: adminRoutes.path + adminRoutes.routes.invitationCompanyList.path, icon: "fas fa-envelope-open-text", name: t("Company invitation") },
+      { path: adminRoutes.path + adminRoutes.routes.invitationManagerList.path, icon: "fas fa-envelope-open-text", name: t("Manager invitation") },
+      { path: adminRoutes.path + adminRoutes.routes.companyList.path, icon: "fas fa-building", name: t("Company") },
     ])
   }
 
@@ -40,20 +41,20 @@ class UserLayout extends React.Component {
       : (
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
-          <SuperAdminSidebar
+          <AdminSidebar
             routes={ this.getRoutes() }
             toggle={ this.toggle }
           />
           <div className="main-content">
-            <SuperAdminNavbar userName={username} />
+            <AdminNavbar userName={username} />
             <Switch>
               {
-                Object.keys(superAdminRoutes.routes).map((routeName, i) =>
-                  superAdminRoutes.routes[routeName].path &&
+                Object.keys(adminRoutes.routes).map((routeName, i) =>
+                  adminRoutes.routes[routeName].path &&
                   <Route
                     key={i}
-                    path={ superAdminRoutes.path + superAdminRoutes.routes[routeName].path}
-                    component={ superAdminRoutes.routes[routeName].component}
+                    path={ adminRoutes.path + adminRoutes.routes[routeName].path}
+                    component={ adminRoutes.routes[routeName].component}
                   />
                 )
               }
@@ -67,4 +68,4 @@ class UserLayout extends React.Component {
 
 const mapStateToProps = state => ({ ...state.session, notifications: state.notifications })
 
-export default connect(mapStateToProps)(withTranslation()(UserLayout))
+export default connect(mapStateToProps)(withTranslation()(AdminLayout))

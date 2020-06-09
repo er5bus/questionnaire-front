@@ -5,17 +5,17 @@ const InvitationNew = React.lazy( () => import("../../modules/inviteCompany/cont
 const InvitationEdit = React.lazy( () => import("../../modules/inviteCompany/containers/InvitationEdit"))
 
 
-export const invitationList = {
+export const invitationCompanyList = {
   path: "/invitations",
   component: InvitationList
 }
 
-export const invitationNew = {
+export const invitationCompanyNew = {
   path: "/invitation/new",
   component: InvitationNew
 }
 
-export const invitationEdit = {
+export const invitationCompanyEdit = {
   path: "/invitation/:param/edit",
   component: InvitationEdit
 }
