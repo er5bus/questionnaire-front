@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
 
-import superAdminRoutes from './../../../routes/superAdmin'
+import adminRoutes from './../../../routes/admin'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
@@ -27,7 +27,7 @@ class InvitationNew extends React.Component {
   render() {
     const { error, t, item, isLoading } = this.props
     if (item && item.param){
-      return <Redirect to={ superAdminRoutes.path + superAdminRoutes.routes.invitationEdit.path.replace(":param", item.param) } />
+      return <Redirect to={ adminRoutes.path + adminRoutes.routes.invitationEdit.path.replace(":param", item.param) } />
     }else {
       return (
         <>
@@ -39,7 +39,7 @@ class InvitationNew extends React.Component {
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ superAdminRoutes.path + superAdminRoutes.routes.invitationList.path }>
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationCompanyList.path }>
                           <i class="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>

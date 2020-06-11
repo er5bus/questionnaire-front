@@ -8,39 +8,39 @@ import adminRoutes from './../../../routes/admin'
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { editCompany, fetchCompany } from "./../actions"
+import { editInvitation, fetchInvitation } from "./../actions"
 
-import CompanyForm from "./../components/CompanyForm"
+import InvitationForm from "./../components/InvitationForm"
 
-class CompanyEdit extends React.Component {
+class InvitationEdit extends React.Component {
 
   componentWillMount(){
-    this.props.fetchCompany(this.props.match.params)
+    this.props.fetchInvitation(this.props.match.params)
   }
 
   onSubmit = (values) => {
     const { item } = this.props
     console.log(item)
-    this.props.editCompany(item.id, values)
+    this.props.editInvitation(item.id, values)
   }
 
   render() {
-    const { error, t, isLoading } = this.props
+    const { error, t, isLoading, allCompanies } = this.props
     return (
       <>
         <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Companies") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Manager Invitations") } </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                          <i class="fas fa-home"></i> {t(" Company List")}
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path }>
+                          <i class="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit company")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit invitation")}</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -52,7 +52,7 @@ class CompanyEdit extends React.Component {
           <Col lg="12">
             <Card className="shadow">
               <CardBody className="px-lg-5 py-lg-5">
-                <CompanyForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
+                <InvitationForm onSubmit={this.onSubmit} allCompanies={allCompanies} errors={error} isLoading={isLoading} />
               </CardBody>
             </Card>
           </Col>
@@ -64,7 +64,7 @@ class CompanyEdit extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ editCompany, fetchCompany }, dispatch)
-const mapStateToProps = state => state.company
+const mapDispatchToProps = (dispatch) => bindActionCreators({ editInvitation, fetchInvitation }, dispatch)
+const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyEdit))
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationEdit))

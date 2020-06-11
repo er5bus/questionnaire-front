@@ -5,7 +5,7 @@ import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from "reactstrap"
 import { Link } from "react-router-dom"
 import { withTranslation } from 'react-i18next'
 
-import superAdminRoutes from './../../../routes/superAdmin'
+import adminRoutes from './../../../routes/admin'
 
 import ConfirmModal from "./../../../components/ConfirmModal"
 import CardNotFound from "./../../../components/CardNotFound"
@@ -64,7 +64,7 @@ class CompanyList extends React.Component {
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ superAdminRoutes.path + superAdminRoutes.routes.companyNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={ adminRoutes.path + adminRoutes.routes.companyNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New company')}
                   </Link>

@@ -1,8 +1,8 @@
 import anonymousRoutes from './anonymous'
-import superAdminRoutes from './superAdmin'
+import adminRoutes from './admin'
 
 
 export default {
   anonymous: anonymousRoutes,
-  superAdmin: superAdminRoutes
+  admin: adminRoutes
 }

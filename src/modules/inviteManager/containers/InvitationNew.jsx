@@ -9,40 +9,41 @@ import adminRoutes from './../../../routes/admin'
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { createCompany, clearCompanyForm } from "./../actions"
+import { createInvitation, clearInvitationForm } from "./../actions"
 
-import CompanyForm from "./../components/CompanyForm"
+import InvitationForm from "./../components/InvitationForm"
 
-class CompanyNew extends React.Component {
+
+class InvitationNew extends React.Component {
 
   componentWillMount() {
-    this.props.clearCompanyForm()
+    this.props.clearInvitationForm()
   }
 
   onSubmit = (values) => {
-    this.props.createCompany(values)
+    this.props.createInvitation(values)
   }
 
   render() {
-    const { error, t, item, isLoading } = this.props
+    const { error, t, item, isLoading, allCompanies } = this.props
     if (item && item.param){
-      return <Redirect to={ adminRoutes.path + adminRoutes.routes.companyEdit.path.replace(":param", item.param) } />
+      return <Redirect to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", item.param) } />
     }else {
       return (
         <>
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Company") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Manager Invitations") } </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                          <i class="fas fa-home"></i> {t(" Company List")}
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path }>
+                          <i className="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create company")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create invitation")}</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -54,7 +55,7 @@ class CompanyNew extends React.Component {
               <Col lg="12" md="12">
                 <Card className="shadow">
                   <CardBody className="px-lg-5 py-lg-5">
-                    <CompanyForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
+                    <InvitationForm onSubmit={this.onSubmit} allCompanies={ allCompanies } isLoading={isLoading} errors={error || {}} />
                   </CardBody>
                 </Card>
               </Col>
@@ -67,7 +68,7 @@ class CompanyNew extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ createCompany, clearCompanyForm }, dispatch)
-const mapStateToProps = state => state.company
+const mapDispatchToProps = (dispatch) => bindActionCreators({ createInvitation, clearInvitationForm }, dispatch)
+const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyNew))
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationNew))

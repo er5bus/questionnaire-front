@@ -26,7 +26,7 @@ export default ({ onToggleModal =f=>f, name, email, id }) => {
           <Button
             className="btn-sm mt-4"
             color="warning"
-            to={ adminRoutes.path + adminRoutes.routes.invitationCompanyEdit.path.replace(":param", id) }
+            to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", id) }
             tag={Link}
           >
             <i className="fa fa-pencil-alt" /> { t("Edit") }
@@ -34,7 +34,7 @@ export default ({ onToggleModal =f=>f, name, email, id }) => {
           <Button
             className="btn-sm mt-4"
             color="info"
-            to={ adminRoutes.path + adminRoutes.routes.invitationCompanyEdit.path.replace(":param", id) }
+            to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", id) }
             tag={Link}
           >
             <i className="fas fa-paper-plane" /> { t("Resend mail") }

@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
-import superAdminRoutes from './../../../routes/superAdmin'
+import adminRoutes from './../../../routes/admin'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
@@ -25,7 +25,7 @@ class InvitationEdit extends React.Component {
   }
 
   render() {
-    const { error, t, isLoading, nodes } = this.props
+    const { error, t, isLoading } = this.props
     return (
       <>
         <div className="header bg-primary pb-5">
@@ -36,7 +36,7 @@ class InvitationEdit extends React.Component {
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ superAdminRoutes.path + superAdminRoutes.routes.invitationList.path }>
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationCompanyList.path }>
                           <i class="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
@@ -52,7 +52,7 @@ class InvitationEdit extends React.Component {
           <Col lg="12">
             <Card className="shadow">
               <CardBody className="px-lg-5 py-lg-5">
-                <InvitationForm onSubmit={this.onSubmit} nodes={nodes} errors={error} isLoading={isLoading} />
+                <InvitationForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
               </CardBody>
             </Card>
           </Col>
