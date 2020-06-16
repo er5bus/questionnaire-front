@@ -1,5 +1,4 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
@@ -9,7 +8,7 @@ import adminRoutes from './../../../routes/admin'
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { createInvitation, clearInvitationForm } from "./../actions"
+import { createInvitation, clearInvitationStore } from "./../actions"
 
 import InvitationForm from "./../components/InvitationForm"
 
@@ -17,15 +16,17 @@ import InvitationForm from "./../components/InvitationForm"
 class InvitationNew extends React.Component {
 
   componentWillMount() {
-    this.props.clearInvitationForm()
+    this.props.clearInvitationStore()
   }
 
   onSubmit = (values) => {
-    this.props.createInvitation(values)
+    const { companyParam } = this.props.match.params
+    this.props.createInvitation(companyParam, values)
   }
 
   render() {
-    const { error, t, item, isLoading, allCompanies } = this.props
+    const { companyParam } = this.props.match.params
+    const { error, t, item, isLoading } = this.props
     if (item && item.param){
       return <Redirect to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", item.param) } />
     }else {
@@ -39,7 +40,7 @@ class InvitationNew extends React.Component {
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path }>
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", companyParam) }>
                           <i className="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
@@ -55,7 +56,7 @@ class InvitationNew extends React.Component {
               <Col lg="12" md="12">
                 <Card className="shadow">
                   <CardBody className="px-lg-5 py-lg-5">
-                    <InvitationForm onSubmit={this.onSubmit} allCompanies={ allCompanies } isLoading={isLoading} errors={error || {}} />
+                    <InvitationForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
                   </CardBody>
                 </Card>
               </Col>
@@ -68,7 +69,6 @@ class InvitationNew extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ createInvitation, clearInvitationForm }, dispatch)
 const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationNew))
+export default connect(mapStateToProps, { createInvitation, clearInvitationStore })(withTranslation()(InvitationNew))

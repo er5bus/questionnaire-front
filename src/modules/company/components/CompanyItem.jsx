@@ -33,6 +33,15 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
           </Button>
           <Button
             className="btn-sm mt-4"
+            color="info"
+            to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", id) }
+            tag={Link}
+          >
+            <i className="fa fa-mail-bulk" /> { t("Manager Invitations") }
+          </Button>
+
+          <Button
+            className="btn-sm mt-4"
             color="danger"
             onClick={() => onToggleModal(id) }
           >

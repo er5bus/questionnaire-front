@@ -9,7 +9,7 @@ export const filterInvitations = (searchTerm) =>
   })
 
 
-export const fetchInvitations = (pageNum) => 
+export const fetchInvitations = ( companyParam, pageNum) => 
   ({
     type: CALL_API,
     meta: {
@@ -18,7 +18,7 @@ export const fetchInvitations = (pageNum) =>
         success: ACTIONS.FETCH_MANAGER_INVITATIONS_SUCCEDED,
         fail: ACTIONS.FETCH_MANAGER_INVITATIONS_FAILED
       },
-      endpoint: ENDPOINT.MANAGER_INVITATION,
+      endpoint: ENDPOINT.MANAGER_INVITATIONS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.GET,
       params: { page: pageNum },
       jwt: true
@@ -26,29 +26,13 @@ export const fetchInvitations = (pageNum) =>
   })
 
 
-export const fetchAllCompanies = () =>
+export const clearInvitationStore = () =>
   ({
-    type: CALL_API,
-    meta: {
-      actions: {
-        init: ACTIONS.FETCH_ALL_COMPANIES_INIT,
-        success: ACTIONS.FETCH_ALL_COMPANIES_SUCCEDED,
-        fail: ACTIONS.FETCH_ALL_COMPANIES_FAILED
-      },
-      endpoint: ENDPOINT.FETCH_ALL_COMPANIES,
-      method: HTTP_METHODS.GET,
-      jwt: true
-    }
+    type: ACTIONS.CLEAR_MANAGER_INVITATION_STORE,
   })
 
 
-export const clearInvitationForm = () =>
-  ({
-    type: ACTIONS.CLEAR_MANAGER_INVITATION_FORM,
-  })
-
-
-export const createInvitation = (payload) => 
+export const createInvitation = (companyParam, payload) => 
   ({
     type: CALL_API,
     payload,
@@ -62,14 +46,14 @@ export const createInvitation = (payload) =>
         success: "Your invitation has been created successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.MANAGER_INVITATION,
+      endpoint: ENDPOINT.MANAGER_INVITATIONS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.POST,
       jwt: true
     }
   })
 
 
-export const editInvitation = (param, payload) =>
+export const editInvitation = (companyParam, managerParam, payload) =>
   ({
     type: CALL_API,
     payload,
@@ -83,14 +67,14 @@ export const editInvitation = (param, payload) =>
         success: "Your invitation has been updated successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":param", param),
+      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
       method: HTTP_METHODS.PUT,
       jwt: true
     }
   })
 
 
-export const deleteInvitation = (param) =>
+export const deleteInvitation = (companyParam, managerParam) =>
   ({
     type: CALL_API,
     meta: {
@@ -103,15 +87,33 @@ export const deleteInvitation = (param) =>
         success: "Your invitation has been deleted successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":param", param),
-      extraData: { id: param },
+      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
+      extraData: { id: managerParam },
       method: HTTP_METHODS.DELETE,
       jwt: true
     }
   })
 
+export const sendInvitation = (companyParam, managerParam) =>
+  ({
+    type: CALL_API,
+    meta: {
+      actions: {
+        init: ACTIONS.SEND_MANAGER_INVITATION_INIT,
+        success: ACTIONS.SEND_MANAGER_INVITATION_SUCCEDED,
+        fail: ACTIONS.SEND_MANAGER_INVITATION_FAILED
+      },
+      messages: {
+        success: "Your invitation has been sent successfuly",
+        fail: "Something went wrong please try again"
+      },
+      endpoint: ENDPOINT.SEND_MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
+      method: HTTP_METHODS.POST,
+      jwt: true
+    }
+  })
 
-export const fetchInvitation = ({param}) =>
+export const fetchInvitation = ({companyParam, managerParam}) =>
   ({
     type: CALL_API,
     meta: {
@@ -120,7 +122,7 @@ export const fetchInvitation = ({param}) =>
         success: ACTIONS.FETCH_MANAGER_INVITATION_SUCCEDED,
         fail: ACTIONS.FETCH_MANAGER_INVITATION_FAILED
       },
-      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":param", param),
+      endpoint: ENDPOINT.MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
       method: HTTP_METHODS.GET,
       jwt: true
     }

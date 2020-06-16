@@ -1,5 +1,4 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
@@ -15,17 +14,18 @@ import InvitationForm from "./../components/InvitationForm"
 class InvitationEdit extends React.Component {
 
   componentWillMount(){
+    console.log(this.props.match.params)
     this.props.fetchInvitation(this.props.match.params)
   }
 
   onSubmit = (values) => {
-    const { item } = this.props
-    console.log(item)
-    this.props.editInvitation(item.id, values)
+    const { companyParam, managerParam } = this.props.match.params
+    this.props.editInvitation(companyParam, managerParam, values)
   }
 
   render() {
-    const { error, t, isLoading, allCompanies } = this.props
+    const { companyParam } = this.props.match.params
+    const { error, t, isLoading } = this.props
     return (
       <>
         <div className="header bg-primary pb-5">
@@ -36,7 +36,7 @@ class InvitationEdit extends React.Component {
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path }>
+                        <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", companyParam) }>
                           <i class="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
@@ -52,7 +52,7 @@ class InvitationEdit extends React.Component {
           <Col lg="12">
             <Card className="shadow">
               <CardBody className="px-lg-5 py-lg-5">
-                <InvitationForm onSubmit={this.onSubmit} allCompanies={allCompanies} errors={error} isLoading={isLoading} />
+                <InvitationForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
               </CardBody>
             </Card>
           </Col>
@@ -64,7 +64,6 @@ class InvitationEdit extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ editInvitation, fetchInvitation }, dispatch)
 const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(InvitationEdit))
+export default connect(mapStateToProps, { editInvitation, fetchInvitation })(withTranslation()(InvitationEdit))

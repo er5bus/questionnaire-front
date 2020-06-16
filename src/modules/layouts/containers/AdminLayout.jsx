@@ -21,17 +21,7 @@ class AdminLayout extends React.Component {
   }
 
   toggle = () => this.setState({ openMenu: !this.state.openMenu })
-  getRoutes = () => {
-    const { t } = this.props
-
-    return ([
-      { path: adminRoutes.path + "/dashbord", icon: "ni ni-shop", name: t("Dashboards") },
-      { path: adminRoutes.path + adminRoutes.routes.invitationCompanyList.path, icon: "fas fa-envelope-open-text", name: t("Company invitation") },
-      { path: adminRoutes.path + adminRoutes.routes.invitationManagerList.path, icon: "fas fa-envelope-open-text", name: t("Manager invitation") },
-      { path: adminRoutes.path + adminRoutes.routes.companyList.path, icon: "fas fa-building", name: t("Company") },
-    ])
-  }
-
+  
   render() {
 
     const { user: { username }, authenticated, notifications = null } = this.props
@@ -42,7 +32,6 @@ class AdminLayout extends React.Component {
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
           <AdminSidebar
-            routes={ this.getRoutes() }
             toggle={ this.toggle }
           />
           <div className="main-content">
@@ -59,7 +48,6 @@ class AdminLayout extends React.Component {
                 )
               }
             </Switch>
-
           </div>
         </div>
       )

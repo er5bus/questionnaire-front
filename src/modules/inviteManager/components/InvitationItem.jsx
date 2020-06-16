@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
-import { Button, Card, CardBody, Col} from "reactstrap"
+import { Button, Card, CardBody, Col, Badge} from "reactstrap"
 
 import adminRoutes from './../../../routes/admin'
 
+import Moment from 'react-moment'
 
-export default ({ onToggleModal =f=>f, name, email, id }) => {
+export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, name, expiredAt, email, id, companyParam }) => {
 
   const { t } = useTranslation()
 
@@ -23,10 +24,11 @@ export default ({ onToggleModal =f=>f, name, email, id }) => {
           <p className="description mt-3">
             { email }
           </p>
+          <Badge><Moment>{ expiredAt }</Moment></Badge>
           <Button
             className="btn-sm mt-4"
             color="warning"
-            to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", id) }
+            to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":managerParam", id).replace(":companyParam", companyParam) }
             tag={Link}
           >
             <i className="fa fa-pencil-alt" /> { t("Edit") }
@@ -34,7 +36,7 @@ export default ({ onToggleModal =f=>f, name, email, id }) => {
           <Button
             className="btn-sm mt-4"
             color="info"
-            to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", id) }
+            onClick={ () => onToggleSendInvitationModal(id) }
             tag={Link}
           >
             <i className="fas fa-paper-plane" /> { t("Resend mail") }
@@ -42,7 +44,7 @@ export default ({ onToggleModal =f=>f, name, email, id }) => {
           <Button
             className="btn-sm mt-4"
             color="danger"
-            onClick={() => onToggleModal(id) }
+            onClick={() => onToggleDeleteModal(id) }
           >
             <i className="fas fa-trash" /> { t("Delete") }
           </Button>

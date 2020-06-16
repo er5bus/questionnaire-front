@@ -6,16 +6,16 @@ const InvitationEdit = React.lazy( () => import("../../modules/inviteManager/con
 
 
 export const invitationManagerList = {
-  path: "/manager/invitations",
+  path: "/company/:companyParam/manager/invitations",
   component: InvitationList
 }
 
 export const invitationManagerNew = {
-  path: "/manager/invitation/new",
+  path: "/company/:companyParam/manager/invitation/new",
   component: InvitationNew
 }
 
 export const invitationManagerEdit = {
-  path: "/manager/invitation/:param/edit",
+  path: "/company/:companyParam/manager/invitation/:managerParam/edit",
   component: InvitationEdit
 }

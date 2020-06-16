@@ -27,9 +27,9 @@ let TagForm = (props) => {
 
   React.useEffect(() => {
     if (props.errors && props.errors.error && props.errors.error.match("bad-request")){
-      props.dispatch(stopSubmit("invite-company", props.errors && props.errors.message))
+      props.dispatch(stopSubmit("company", props.errors && props.errors.message))
     }else {
-      props.dispatch(clearSubmitErrors("invite-company"))
+      props.dispatch(clearSubmitErrors("company"))
     }
   }, [props])
 

@@ -10,6 +10,7 @@ const client = axios.create({
 
 
 export default (method, url, data = {}, headers = {}, params = {}) => {
+  console.log(API_BASE_URL)
   return client.request({
     method,
     data,

@@ -11,8 +11,6 @@ import { required, maxLength, minLength } from "./../../../utils/validations"
 import Form from "./../../../components/Form"
 import InputField from "./../../../components/InputField"
 import InputTextareaField from "./../../../components/InputTextareaField"
-import SelectField from "./../../../components/SelectField"
-
 
 const minLength2 = minLength(2)
 const maxLength200 = maxLength(200)
@@ -22,7 +20,7 @@ const maxLength500 = maxLength(500)
 let TagForm = (props) => {
 
   const { t } = useTranslation()
-  const { handleSubmit, isLoading, allCompanies=[], reset } = props
+  const { handleSubmit, isLoading, reset } = props
 
   React.useEffect(() => {
     if (props.errors && props.errors.error && props.errors.error.match("bad-request")){
@@ -34,13 +32,6 @@ let TagForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field
-        name="company"
-        component={SelectField}
-        label={t("Name of the company")}
-        placeholder={t("Select a compnay")}
-        choices={ allCompanies }
-      />
       <Field
         name="email"
         component={InputField}

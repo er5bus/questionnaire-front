@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect'
 
 
-const getInvitations = state => state.inviteCompany.items
-const getSearchTerm = state => state.inviteCompany.searchTerm
+const getInvitations = state => state.inviteManager.items
+const getSearchTerm = state => state.inviteManager.searchTerm
 
 
 export const getFilteredInvitations = createSelector(

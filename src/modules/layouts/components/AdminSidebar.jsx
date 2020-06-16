@@ -3,6 +3,8 @@ import { NavLink as NavLinkRRD } from "react-router-dom"
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types"
 
+import adminRoutes from './../../../routes/admin'
+
 import logo from './../../../assets/img/qa.svg'
 
 // reactstrap components
@@ -13,10 +15,6 @@ import {
   NavItem,
   NavLink,
   Nav,
-  UncontrolledDropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu
 } from "reactstrap"
 
 class Sidebar extends React.PureComponent {
@@ -41,25 +39,6 @@ class Sidebar extends React.PureComponent {
   closeCollapse = () => {
     this.setState({
       collapseOpen: false
-    })
-  }
-
-  // creates the links that appear in the left menu / Sidebar
-  createLinks = () => {
-    return this.props.routes.map((prop, key) => {
-      return (
-        <NavItem key={key}>
-          <NavLink
-            to={ prop.path}
-            tag={NavLinkRRD}
-            onClick={this.closeCollapse}
-            activeClassName="active"
-          >
-            <i className={prop.icon} />
-            <span className="nav-link-text">{prop.name}</span>
-          </NavLink>
-        </NavItem>
-      )
     })
   }
 
@@ -92,24 +71,28 @@ class Sidebar extends React.PureComponent {
             <Collapse navbar isOpen={this.state.collapseOpen}>
               {/* Navigation */}
               <Nav navbar>
-                { this.createLinks() }
-                <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
-                    Options
-                  </DropdownToggle>
-                  <DropdownMenu right>
-                    <DropdownItem>
-                      Option 1
-                    </DropdownItem>
-                    <DropdownItem>
-                      Option 2
-                    </DropdownItem>
-                    <DropdownItem divider />
-                    <DropdownItem>
-                      Reset
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
+                <NavItem>
+                  <NavLink
+                    to={ adminRoutes.path }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="ni ni-shop" />
+                    <span className="nav-link-text">Dashbord</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={adminRoutes.path + adminRoutes.routes.companyList.path }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-building" />
+                    <span className="nav-link-text">Company</span>
+                  </NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </div>

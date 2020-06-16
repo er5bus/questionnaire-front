@@ -4,8 +4,8 @@ import { ACTIONS } from "./../constants"
 export default (state = { items: [], item: {}, allCompanies: [], page: 0, isLoading: false, searchTerm: "", hasMore: true, error: null }, action) => {
   const { payload, type } = action
   switch (type) {
-    case ACTIONS.CLEAR_MANAGER_INVITATION_FORM : {
-      return { ...state, item: payload, isLoading: false, error: null }
+    case ACTIONS.CLEAR_MANAGER_INVITATION_STORE : {
+      return { ...state, item: null, items: [], hasMore: true, isLoading: false, error: null }
     }
     case ACTIONS.CREATE_MANAGER_INVITATION_INIT : {
       return { ...state, isLoading: true, error: null }
@@ -18,16 +18,6 @@ export default (state = { items: [], item: {}, allCompanies: [], page: 0, isLoad
       return { ...state, error: payload, isLoading: false }
     }
 
-    case ACTIONS.FETCH_ALL_COMPANIES_INIT : {
-      return { ...state, error: null }
-    }
-    case ACTIONS.FETCH_ALL_COMPANIES_SUCCEDED : {
-      return { ...state, allCompanies: payload, isLoading: false, error: null }
-    }
-    case ACTIONS.FETCH_ALL_COMPANIES_FAILED : {
-      return { ...state, isLoading: false, error: payload }
-    }
-
     case ACTIONS.EDIT_MANAGER_INVITATION_INIT : {
       return { ...state, isLoading: true, error: null }
     }
@@ -37,6 +27,17 @@ export default (state = { items: [], item: {}, allCompanies: [], page: 0, isLoad
     case ACTIONS.EDIT_MANAGER_INVITATION_FAILED : {
       return { ...state, error: payload, isLoading: false }
     }
+
+    case ACTIONS.SEND_MANAGER_INVITATION_INIT : {
+      return { ...state, isLoading: false, error: null }
+    }
+    case ACTIONS.SEND_MANAGER_INVITATION_SUCCEDED : {
+      return { ...state, item: payload, items: state.items.map((item) => item.id === payload.id ? payload : item ), isLoading: false, error: null }
+    }
+    case ACTIONS.SEND_MANAGER_INVITATION_FAILED : {
+      return { ...state, error: payload, isLoading: false }
+    }
+
 
     case ACTIONS.FETCH_MANAGER_INVITATIONS_INIT : {
       state.items = payload.page === 1 ? [] : state.items

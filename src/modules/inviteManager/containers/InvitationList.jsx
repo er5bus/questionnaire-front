@@ -1,5 +1,4 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from "reactstrap"
 import { Link } from "react-router-dom"
@@ -14,30 +13,36 @@ import InfiniteScroll from './../../../components/InfiniteScroll'
 import InvitationItem from "./../components/InvitationItem"
 import InvitationLoader from "./../components/InvitationLoader"
 
-import { fetchInvitations, filterInvitations, deleteInvitation } from "./../actions"
+import { fetchInvitations, filterInvitations, deleteInvitation, sendInvitation, clearInvitationStore } from "./../actions"
 import { getFilteredInvitations } from "./../selector"
-
-
-//import Moment from 'react-moment'
-
 
 class InvitationList extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-      openModal: false,
+      openSendInvitationModal: false,
+      openDeleteModal: false,
       id: null,
     }
   }
 
-  onToggleModal = (id) => {
-    this.setState({ openModal: !this.state.openModal, id })
+  componentDidMount(){
+    this.props.clearInvitationStore()
+  }
+
+  onToggleSendInvitationModal = (id) => {
+    this.setState({ openSendInvitationModal: !this.state.openSendInvitationModal, id })
+  }
+
+  onToggleDeleteModal = (id) => {
+    this.setState({ openDeleteModal: !this.state.openDeleteModal, id })
   }
 
   onFetchInvitations = (pageNumber) => {
     if (!this.props.isLoading){
-      this.props.fetchInvitations(pageNumber)
+      const { companyParam } = this.props.match.params
+      this.props.fetchInvitations(companyParam, pageNumber)
     }
   }
 
@@ -46,10 +51,17 @@ class InvitationList extends React.Component {
   }
 
   onDeleteInvitation = () => {
-    this.props.deleteInvitation(this.state.id)
+    const { companyParam } = this.props.match.params
+    this.props.deleteInvitation(companyParam, this.state.id)
+  }
+
+  onSendInvitation = () => {
+    const { companyParam } = this.props.match.params
+    this.props.sendInvitation(companyParam, this.state.id)
   }
 
   render() {
+    const { companyParam } = this.props.match.params
     const { t, items, page, hasMore, isLoading } = this.props
     return (
       <div>
@@ -64,7 +76,7 @@ class InvitationList extends React.Component {
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerNew.path.replace(":companyParam", companyParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New manager invitation')}
                   </Link>
@@ -76,12 +88,20 @@ class InvitationList extends React.Component {
 
         <Container className="mt--4" fluid>
           <ConfirmModal
-            isOpen={ this.state.openModal }
+            isOpen={ this.state.openDeleteModal }
             title={ t("Confirmation") }
             content={ t("Are you sure you want to delete this invitation ?") }
             onClick={ this.onDeleteInvitation }
-            onToggle={ this.onToggleModal }
+            onToggle={ this.onToggleDeleteModal }
             buttonText={ t("Delete this invitation") }
+          />
+          <ConfirmModal
+            isOpen={ this.state.openSendInvitationModal }
+            title={ t("Confirmation") }
+            content={ t("Are you sure you want to send this invitation ?") }
+            onClick={ this.onSendInvitation }
+            onToggle={ this.onToggleSendInvitationModal }
+            buttonText={ t("Send this invitation") }
           />
           <Row>
             <Col lg="12">
@@ -89,12 +109,21 @@ class InvitationList extends React.Component {
                 <InfiniteScroll
                   loadMore={this.onFetchInvitations}
                   pageNumber={ page }
+                  clearStore={true}
                   isLoading={isLoading}
                   hasMore={ hasMore }
                   loader={<InvitationLoader />}
                 >
                   { !isLoading && !items.length && <CardNotFound /> }
-                  { items.map((tag, i) => <InvitationItem key={i} {...tag} onToggleModal={this.onToggleModal} />)}
+                  { items.map((tag, i) => 
+                    <InvitationItem 
+                      key={i} 
+                      companyParam={companyParam} 
+                      {...tag} 
+                      onToggleDeleteModal={this.onToggleDeleteModal} 
+                      onToggleSendInvitationModal={this.onToggleSendInvitationModal}
+                    />
+                  )}
                 </InfiniteScroll>
               </Row>
             </Col>
@@ -109,4 +138,4 @@ const mapStateToProps = state => ({
   ...state.inviteManager, items: getFilteredInvitations(state)
 })
 
-export default connect(mapStateToProps, { fetchInvitations, deleteInvitation, filterInvitations })(withTranslation()(InvitationList))
+export default connect(mapStateToProps, { fetchInvitations, deleteInvitation, sendInvitation, filterInvitations, clearInvitationStore })(withTranslation()(InvitationList))

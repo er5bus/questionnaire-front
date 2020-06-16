@@ -7,8 +7,6 @@ import { withTranslation } from "react-i18next"
 // reactstrap components
 import {Card, CardBody, Col} from "reactstrap"
 
-import userIcon from "./../../../assets/img/user.svg"
-
 import anonymousRoutes from './../../../routes/anonymous'
 import RegisterForm from "./../components/RegisterForm"
 

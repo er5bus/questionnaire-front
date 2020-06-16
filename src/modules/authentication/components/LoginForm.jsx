@@ -55,7 +55,7 @@ const LoginForm = (props) => {
       />
       <div className="text-center">
         <Button className="mt-4 btn btn-block" color="primary" type="submit">
-          { isLoading && <Spinner color="white" /> }
+          { isLoading && <Spinner color="white" className="pr-2" /> }
           {t("Sign in")}
         </Button>
       </div>
