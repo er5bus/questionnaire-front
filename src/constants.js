@@ -15,6 +15,13 @@ export const HTTP_METHODS = {
 }
 
 
+export const ROLES = {
+  ADMIN: 1,
+  MODERATOR: 2,
+  EMPLOYEE: 4
+}
+
+
 export const COMPANY_TYPE = [
   { label: "Public Company", value: "Public Company" },
   { label: "Educational", value: "Educational"},

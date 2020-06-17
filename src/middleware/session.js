@@ -8,6 +8,7 @@ export const saveSession = store => next => action => {
   }
   
   const { access_token: accessToken } = action.payload
+
   sessionService.saveUser(action.payload)
   sessionService.saveSession({accessToken})
 }

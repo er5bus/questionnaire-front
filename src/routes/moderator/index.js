@@ -6,8 +6,8 @@ import * as dashbord from './dashbord'
 import * as user from './user'
 
 export default {
-  path: "/admin",
-  role: ROLES.ADMIN, 
+  path: "/moderator",
+  role: ROLES.MODERATOR,
 
   routes: {
     ...inviteManager,

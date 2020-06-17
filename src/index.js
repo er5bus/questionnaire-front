@@ -27,6 +27,7 @@ import './i18n'
 
 const AnonymousLayout = React.lazy( () => import("./modules/layouts/containers/AnonymousLayout"))
 const AdminLayout = React.lazy( () =>  import("./modules/layouts/containers/AdminLayout"))
+const ModeratorLayout = React.lazy( () =>  import("./modules/layouts/containers/ModeratorLayout"))
 
 const store = configureStore()
 
@@ -45,6 +46,7 @@ sessionService.initSessionService(store, {refreshOnCheckAuth: true})
             <Switch>
               <Route path="/loader" component={Loader} />
               <Route path={ routes.anonymous.path } component={AnonymousLayout} />
+              <Route onEnter={sessionService.checkAuth} path={ routes.moderator.path } component={ModeratorLayout} />
               <Route onEnter={sessionService.checkAuth} path={ routes.admin.path } component={AdminLayout} />
               <Route component={ PageNotFound }/>
             </Switch>

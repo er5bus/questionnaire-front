@@ -1,5 +1,4 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 //import { Link } from 'react-router-dom'
 import { withTranslation } from "react-i18next"
@@ -48,7 +47,6 @@ class Login extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ login, clearError }, dispatch)
 const mapStateToProps = state => state.auth
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Login))
+export default connect(mapStateToProps, { login, clearError })(withTranslation()(Login))

@@ -3,9 +3,9 @@ import { connect } from "react-redux"
 import { Redirect, Switch, Route } from "react-router-dom"
 import { withTranslation } from 'react-i18next'
 
-import { isAdmin } from "./../../../utils/helpers"
+import { isModerator } from './../../../utils/helpers'
 
-import adminRoutes from "./../../../routes/admin"
+import moderatorRoutes from "./../../../routes/admin"
 import anonymousRoutes from "./../../../routes/anonymous"
 
 import AdminNavbar from "./../components/AdminNavbar"
@@ -16,7 +16,7 @@ import AccessControl from './../../security/AccessControl'
 
 import Notifications from 'react-notification-system-redux'
 
-class AdminLayout extends React.Component {
+class ModeratorLayout extends React.Component {
 
   constructor(props){
     super(props)
@@ -31,26 +31,25 @@ class AdminLayout extends React.Component {
 
     const { user: { username, role }, authenticated, notifications = null } = this.props
 
-    return !authenticated || !isAdmin(role)
+    return !authenticated || !isModerator(role)
       ? <Redirect to={ anonymousRoutes.path } />
       : (
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
           
-          { isAdmin(role) && <AdminSidebar toggle={ this.toggle } />}
-          { isModerator(role) && <ModeratorSidebar toggle={ this.toggle } />}
+          <ModeratorSidebar toggle={ this.toggle } />
 
           <div className="main-content">
             <AdminNavbar userName={username} />
             <Switch>
               {
-                Object.keys(adminRoutes.routes).map((routeName, i) =>
-                  adminRoutes.routes[routeName].path &&
-                  <AccessControl role={ adminRoutes.role }>
+                Object.keys(moderatorRoutes.routes).map((routeName, i) =>
+                  moderatorRoutes.routes[routeName].path &&
+                  <AccessControl role={ moderatorRoutes.role }>
                     <Route
                       key={i}
-                      path={ adminRoutes.path + adminRoutes.routes[routeName].path}
-                      component={ adminRoutes.routes[routeName].component}
+                      path={ moderatorRoutes.path + moderatorRoutes.routes[routeName].path}
+                      component={ moderatorRoutes.routes[routeName].component}
                     />
                   </AccessControl>
                 )
@@ -64,4 +63,4 @@ class AdminLayout extends React.Component {
 
 const mapStateToProps = state => ({ ...state.session, notifications: state.notifications })
 
-export default connect(mapStateToProps)(withTranslation()(AdminLayout))
+export default connect(mapStateToProps)(withTranslation()(ModeratorLayout))

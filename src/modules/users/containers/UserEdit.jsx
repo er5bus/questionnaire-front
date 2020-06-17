@@ -1,26 +1,27 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
+
 import adminRoutes from './../../../routes/admin'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { editCompany, fetchCompany } from "./../actions"
+import { editUser, fetchUser } from "./../actions"
 
-import CompanyForm from "./../components/CompanyForm"
+import UserForm from "./../components/UserForm"
 
-class CompanyEdit extends React.Component {
+class UserEdit extends React.Component {
 
   componentWillMount(){
-    this.props.fetchCompany(this.props.match.params)
+    this.props.fetchUser(this.props.match.params)
   }
 
   onSubmit = (values) => {
     const { item } = this.props
-    this.props.editCompany(item.id, values)
+    console.log(item)
+    this.props.editUser(item.id, values)
   }
 
   render() {
@@ -30,16 +31,16 @@ class CompanyEdit extends React.Component {
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Companies") } </h6>
+              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Users") } </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                     <BreadcrumbItem>
-                      <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                        <i class="fas fa-home"></i> {t(" Company List")}
+                      <Link to={ adminRoutes.path + adminRoutes.routes.userList.path }>
+                        <i class="fas fa-home"></i> {t(" User List")}
                       </Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit company")}</BreadcrumbItem>
+                    <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit user")}</BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
               </Row>
@@ -51,7 +52,7 @@ class CompanyEdit extends React.Component {
             <Col lg="12">
               <Card className="shadow">
                 <CardBody className="px-lg-5 py-lg-5">
-                  <CompanyForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
+                  <UserForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
                 </CardBody>
               </Card>
             </Col>
@@ -63,7 +64,6 @@ class CompanyEdit extends React.Component {
 }
 
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ editCompany, fetchCompany }, dispatch)
-const mapStateToProps = state => state.company
+const mapStateToProps = state => state.user
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyEdit))
+export default connect(mapStateToProps, { editUser, fetchUser })(withTranslation()(UserEdit))

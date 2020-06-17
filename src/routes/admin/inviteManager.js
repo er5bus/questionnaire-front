@@ -7,15 +7,15 @@ const InvitationEdit = React.lazy( () => import("../../modules/inviteManager/con
 
 export const invitationManagerList = {
   path: "/company/:companyParam/manager/invitations",
-  component: InvitationList
+  component: InvitationList,
 }
 
 export const invitationManagerNew = {
   path: "/company/:companyParam/manager/invitation/new",
-  component: InvitationNew
+  component: InvitationNew,
 }
 
 export const invitationManagerEdit = {
   path: "/company/:companyParam/manager/invitation/:managerParam/edit",
-  component: InvitationEdit
+  component: InvitationEdit,
 }

@@ -85,28 +85,6 @@ class Sidebar extends React.PureComponent {
                     <span className="nav-link-text">Dashbord</span>
                   </NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink
-                    to={adminRoutes.path + adminRoutes.routes.companyList.path }
-                    tag={NavLinkRRD}
-                    onClick={this.closeCollapse}
-                    activeClassName="active"
-                  >
-                    <i className="fas fa-building" />
-                    <span className="nav-link-text">Company</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    to={adminRoutes.path + adminRoutes.routes.userList.path }
-                    tag={NavLinkRRD}
-                    onClick={this.closeCollapse}
-                    activeClassName="active"
-                  >
-                    <i className="fas fa-user" />
-                    <span className="nav-link-text">User</span>
-                  </NavLink>
-                </NavItem>
               </Nav>
             </Collapse>
           </div>

@@ -1,5 +1,4 @@
 import React from "react"
-import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { useTranslation } from "react-i18next"
 
@@ -23,7 +22,6 @@ const Logout = ({ logout, openModal, onToggle }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ logout }, dispatch)
 const mapStateToProps = state => state.auth
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout)
+export default connect(mapStateToProps, { logout })(Logout)

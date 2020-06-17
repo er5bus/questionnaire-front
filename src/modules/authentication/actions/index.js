@@ -27,6 +27,22 @@ export const login = (payload) =>
   })
 
 
+export const fetchInvitation = (token) => 
+  ({
+    type: CALL_API,
+    payload,
+    meta: {
+      actions: {
+        init: ACTIONS.FETCH_ACCOUNT_INVITATION_INIT,
+        success: ACTIONS.FETCH_ACCOUNT_INVITATION_SUCCEDED,
+        fail: ACTIONS.FETCH_ACCOUNT_INVITATION_FAILED
+      },
+      endpoint: ENDPOINT.INVITATION.replace(":param", token),
+      method: HTTP_METHODS.GET
+    }
+  })
+
+
 export const register = (payload) => 
   ({
     type: CALL_API,

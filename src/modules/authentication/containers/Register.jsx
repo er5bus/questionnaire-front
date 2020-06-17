@@ -10,12 +10,15 @@ import {Card, CardBody, Col} from "reactstrap"
 import anonymousRoutes from './../../../routes/anonymous'
 import RegisterForm from "./../components/RegisterForm"
 
-import { register, clearError } from "./../actions"
+import { register, fetchInvitation, clearError } from "./../actions"
 
 class Register extends React.Component {
 
   componentDidMount(){
+    const { param } = this.props.match.params
+    this.props.fetchInvitation(param)
     this.props.clearError()
+
   }
 
   onSubmit = (values) => {
@@ -23,7 +26,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { t, error, isLoading } = this.props
+    const { t, invitation, error, isLoading } = this.props
     return (
       <>
         <Col lg="6" md="8">
@@ -33,7 +36,7 @@ class Register extends React.Component {
                 <h1 className="mb-3 h3"> { t('Sign up to our platform') }</h1>
                 <p className="text-gray">{ t('Use your credentials to create your account') }.</p>
               </div>
-              <RegisterForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
+              <RegisterForm initialValues={invitation} onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
               <div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
                 <span className="font-weight-normal"> { t('Already have an account?') }
                   <Link to={ anonymousRoutes.path + anonymousRoutes.routes.login.path } className="font-weight-bold">{ " " } { t('Sign in') }</Link>
@@ -47,7 +50,6 @@ class Register extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ register, clearError }, dispatch)
 const mapStateToProps = state => state.auth
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Register))
+export default connect(mapStateToProps, { register, fetchInvitation, clearError })(withTranslation()(Register))
