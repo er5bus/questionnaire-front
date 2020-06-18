@@ -30,7 +30,6 @@ export const login = (payload) =>
 export const fetchInvitation = (token) => 
   ({
     type: CALL_API,
-    payload,
     meta: {
       actions: {
         init: ACTIONS.FETCH_ACCOUNT_INVITATION_INIT,
@@ -43,7 +42,7 @@ export const fetchInvitation = (token) =>
   })
 
 
-export const register = (payload) => 
+export const register = (token, payload) => 
   ({
     type: CALL_API,
     payload,
@@ -57,7 +56,7 @@ export const register = (payload) =>
         success: "Welcome to your account",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.REGISTER,
+      endpoint: ENDPOINT.REGISTER.replace(":param", token),
       method: HTTP_METHODS.POST
     }
   })

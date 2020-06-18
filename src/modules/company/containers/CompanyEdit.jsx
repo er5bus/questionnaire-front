@@ -36,10 +36,10 @@ class CompanyEdit extends React.Component {
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                     <BreadcrumbItem>
                       <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                        <i class="fas fa-home"></i> {t(" Company List")}
+                        <i className="fas fa-home"></i> {t(" Company List")}
                       </Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit company")}</BreadcrumbItem>
+                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit company")}</BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
               </Row>

@@ -1,19 +1,19 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from "reactstrap"
-import { Link } from "react-router-dom"
+//import { Link } from "react-router-dom"
 import { withTranslation } from 'react-i18next'
 
-import adminRoutes from './../../../routes/admin'
+///import adminRoutes from './../../../routes/admin'
 
-import ConfirmModal from "./../../../components/ConfirmModal"
+//import ConfirmModal from "./../../../components/ConfirmModal"
 import CardNotFound from "./../../../components/CardNotFound"
 import InfiniteScroll from './../../../components/InfiniteScroll'
 
 import UserItem from "./../components/UserItem"
 import UserLoader from "./../components/UserLoader"
 
-import { fetchUsers, filterUsers, deleteUser } from "./../actions"
+import { fetchUsers, filterUsers } from "./../actions"
 import { getFilteredUsers } from "./../selector"
 
 
@@ -46,12 +46,12 @@ class UserList extends React.Component {
                       <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Users List")}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
-                <Col  lg="6" className="text-right">
+                {/*<Col  lg="6" className="text-right">
                   <Link to={ adminRoutes.path + adminRoutes.routes.userNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New user')}
                   </Link>
-                </Col>
+                </Col>*/}
               </Row>
             </div>
           </Container>
@@ -84,4 +84,4 @@ const mapStateToProps = state => ({
   ...state.user, items: getFilteredUsers(state)
 })
 
-export default connect(mapStateToProps, { fetchUsers, deleteUser, filterUsers })(withTranslation()(UserList))
+export default connect(mapStateToProps, { fetchUsers, filterUsers })(withTranslation()(UserList))

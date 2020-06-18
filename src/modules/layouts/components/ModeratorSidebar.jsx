@@ -1,7 +1,7 @@
 import React from "react"
 import { NavLink as NavLinkRRD } from "react-router-dom"
 
-import adminRoutes from './../../../routes/admin'
+import moderatorRoutes from "./../../../routes/moderator"
 
 import logo from './../../../assets/img/qa.svg'
 
@@ -76,7 +76,7 @@ class Sidebar extends React.PureComponent {
               <Nav navbar>
                 <NavItem>
                   <NavLink
-                    to={ adminRoutes.path + adminRoutes.routes.dashbord.path }
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"

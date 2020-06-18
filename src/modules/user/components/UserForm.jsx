@@ -4,17 +4,15 @@ import { Button } from "reactstrap"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
-import { Spinner, Col, Row } from "reactstrap"
+import { Spinner } from "reactstrap"
 
-import { required, maxLength, minLength } from "./../../../utils/validations"
+import { required, maxLength, minLength, email } from "./../../../utils/validations"
 
 import Form from "./../../../components/Form"
 import InputField from "./../../../components/InputField"
 
-const minLength2 = minLength(2)
-const maxLength200 = maxLength(200)
-const maxLength500 = maxLength(500)
-
+const minLength4 = minLength(4)
+const maxLength30 = maxLength(30)
 
 let TagForm = (props) => {
 

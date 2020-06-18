@@ -29,22 +29,34 @@ const RegisterForm = (props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Field
-        name="fullName"
-        component={InputField}
-        className="form-control"
-        icon="ni ni-hat-3"
-        placeholder={t("Name")}
-        type="text"
-        validate={[ required, minLength4, maxLength30 ]}
-      />
-      <Field
         name="email"
         component={InputField}
         className="form-control"
         icon="ni ni-email-83"
         placeholder={t("Email")}
         type="text"
+        readOnly={true}
         validate={[ email, required ]}
+      />
+      <Field
+        name="fullName"
+        component={InputField}
+        className="form-control"
+        icon="fa fa-user"
+        placeholder={t("Full Name")}
+        type="text"
+        readOnly={true}
+        validate={[ required ]}
+      />
+
+      <Field
+        name="username"
+        component={InputField}
+        className="form-control"
+        icon="ni ni-hat-3"
+        placeholder={t("Username")}
+        type="text"
+        validate={[ required, minLength4, maxLength30 ]}
       />
       <Field
         name="password"
@@ -65,7 +77,7 @@ const RegisterForm = (props) => {
       />
       <div className="text-center">
         <Button className="mt-4 btn-block" color="primary" type="submit">
-          { isLoading && <Spinner color="white" /> }
+          { isLoading && <Spinner color="white" className="mr-2" /> }
           {t("Create account")}
         </Button>
       </div>

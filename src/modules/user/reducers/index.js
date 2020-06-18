@@ -7,6 +7,19 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
     case ACTIONS.CLEAR_USER_FORM : {
       return { ...state, item: payload, isLoading: false, error: null }
     }
+
+    case ACTIONS.FETCH_USERS_INIT : {
+      state.items = payload.page === 1 ? [] : state.items
+      return { ...state, isLoading: true, hasMore: false, error: null }
+    }
+    case ACTIONS.FETCH_USERS_SUCCEDED : {
+      const { items, has_more: hasMore, page } = payload
+      return { ...state, items: page === 1 ? items : [ ...state.items, ...items], page, hasMore, isLoading: false, error: null }
+    }
+    case ACTIONS.FETCH_USERS_FAILED : {
+      return { ...state, isLoading: false, hasMore: false, page: 1, error: payload }
+    }
+
     case ACTIONS.CREATE_USER_INIT : {
       return { ...state, isLoading: true, error: null }
     }

@@ -9,7 +9,7 @@ import {
   InputGroup
 } from "reactstrap"
 
-const InputField = ({input, label, placeholder, className="from-control", icon, type, meta: { touched, error, warning }}) => {
+const InputField = ({input, label, placeholder, className="from-control", icon, type, meta: { touched, error, warning }, ...props }) => {
   
   const { t } = useTranslation()
 
@@ -24,7 +24,7 @@ const InputField = ({input, label, placeholder, className="from-control", icon, 
           </InputGroupText>
         </InputGroupAddon>
         }
-        <input {...input} className={`${className} ${touched && error && "has-danger"}`} type={type} placeholder={placeholder} />
+        <input {...input} { ...props } className={`${className} ${touched && error && "has-danger"}`} type={type} placeholder={placeholder} />
       </InputGroup>
       <div className="danger-msg">
         {touched && ((error && <span>{t(error)}</span>) || (warning && <span>{t(warning)}</span>))}

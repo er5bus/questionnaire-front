@@ -1,7 +1,7 @@
 import { ACTIONS } from "./../constants"
 
 
-export default (state = { currentUser: null, accessToken: null, isLoading: false, error: null }, action) => {
+export default (state = { currentUser: null, accessToken: null, isLoading: false, isLoadingInvitation: false, error: null }, action) => {
   const { payload, type } = action
   switch (type) {
     case ACTIONS.CLEAR_ERRORS : {
@@ -28,6 +28,17 @@ export default (state = { currentUser: null, accessToken: null, isLoading: false
     case ACTIONS.CREATE_ACCOUNT_FAILED : {
       return { ...state, error: payload, isLoading: false, currentUser: null, accessToken: null }
     }
+
+    case ACTIONS.FETCH_ACCOUNT_INVITATION_INIT : {
+      return { ...state, isLoadingInvitation: true, currentUser: null, accessToken: null, error: null }
+    }
+    case ACTIONS.FETCH_ACCOUNT_INVITATION_SUCCEDED : {
+      return { ...state, invitation: payload, isLoadingInvitation: false, error: null }
+    }
+    case ACTIONS.FETCH_ACCOUNT_INVITATION_FAILED : {
+      return { ...state, error: payload, isLoadingInvitation: false }
+    }
+
 
     default: {
       return state

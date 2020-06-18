@@ -60,7 +60,7 @@ class CompanyList extends React.Component {
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Companies List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Companies List")}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">

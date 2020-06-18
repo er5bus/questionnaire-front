@@ -1,15 +1,14 @@
 import React from "react"
 import { connect } from "react-redux"
-import { Redirect, Switch, Route } from "react-router-dom"
+import { Redirect, Switch } from "react-router-dom"
 import { withTranslation } from 'react-i18next'
 
 import { isModerator } from './../../../utils/helpers'
 
-import moderatorRoutes from "./../../../routes/admin"
+import moderatorRoutes from "./../../../routes/moderator"
 import anonymousRoutes from "./../../../routes/anonymous"
 
 import AdminNavbar from "./../components/AdminNavbar"
-import AdminSidebar from './../components/AdminSidebar'
 import ModeratorSidebar from './../components/ModeratorSidebar'
 
 import AccessControl from './../../security/AccessControl'
@@ -36,7 +35,7 @@ class ModeratorLayout extends React.Component {
       : (
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
-          
+
           <ModeratorSidebar toggle={ this.toggle } />
 
           <div className="main-content">
@@ -45,13 +44,12 @@ class ModeratorLayout extends React.Component {
               {
                 Object.keys(moderatorRoutes.routes).map((routeName, i) =>
                   moderatorRoutes.routes[routeName].path &&
-                  <AccessControl role={ moderatorRoutes.role }>
-                    <Route
-                      key={i}
-                      path={ moderatorRoutes.path + moderatorRoutes.routes[routeName].path}
-                      component={ moderatorRoutes.routes[routeName].component}
-                    />
-                  </AccessControl>
+                  <AccessControl
+                    role={ moderatorRoutes.role }
+                    key={i}
+                    path={ moderatorRoutes.path + moderatorRoutes.routes[routeName].path}
+                    component={ moderatorRoutes.routes[routeName].component}
+                  />
                 )
               }
             </Switch>

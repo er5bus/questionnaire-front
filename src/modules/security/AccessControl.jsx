@@ -9,31 +9,27 @@ import ForbiddenPage from './../../components/ForbiddenPage'
 // Component
 const AccessControl = (props) =>{
 
-  const { isAuthenticated, role, currentUser } = props
+  const { authenticated, role, user, path, component } = props
 
   const isGranted = () => {
-    if (!isAuthenticated){
+    if (!authenticated){
       return false
     }
 
     if (Array.isArray(role)){
-      return role.some((value) => hasRole(currentUser.role, value) )
+      return role.some((value) => hasRole(user.role, value) )
     }
 
-    if (typeof role === 'string'){
-      return hasRole(currentUser.role, role)
+    if (!isNaN(role)){
+      return hasRole(user.role, role)
     }
 
     return false
   }
 
-  return (
-    <>
-      { isGranted() ? props.children : <Route {...props} component={ForbiddenPage} /> }
-    </>
-  )
+  return <Route path={path} component={  isGranted() ? component  : ForbiddenPage} />
 }
 
-const mapStateToProps = (state) => state.auth
+const mapStateToProps = (state) => state.session
 
-export default connect(mapStateToProps, {})(AccessControl)
+export default connect(mapStateToProps)(AccessControl)

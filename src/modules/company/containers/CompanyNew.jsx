@@ -39,7 +39,7 @@ class CompanyNew extends React.Component {
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                          <i class="fas fa-home"></i> {t(" Company List")}
+                          <i className="fas fa-home"></i> {t(" Company List")}
                         </Link>
                       </BreadcrumbItem>
                       <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create company")}</BreadcrumbItem>

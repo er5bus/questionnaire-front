@@ -9,6 +9,7 @@ import { deleteSession, saveSession } from "./middleware/session"
 import authReducer from "./modules/authentication/reducers"
 
 import companyReducer from './modules/company/reducers'
+import userReducer from './modules/user/reducers'
 import dashbordReducer from './modules/dashbord/reducers'
 import inviteManagerReducer from './modules/inviteManager/reducers'
 
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   notifications: notificationReducer,
   company: companyReducer,
   dashbord: dashbordReducer,
+  user: userReducer,
   inviteManager: inviteManagerReducer
 })
 

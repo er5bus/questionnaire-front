@@ -9,9 +9,8 @@ export const getFilteredInvitations = createSelector(
   [getInvitations, getSearchTerm],
   (invitations, searchTerm) => invitations.filter(invitation =>
     (
-      invitation.name.match(new RegExp(searchTerm, 'i')) ||
-      invitation.description.match(new RegExp(searchTerm, 'i')) ||
-      invitation.uid.match(new RegExp(searchTerm, 'i'))
+      invitation.fullName.match(new RegExp(searchTerm, 'i')) ||
+      invitation.email.match(new RegExp(searchTerm, 'i'))
     )
   )
 )

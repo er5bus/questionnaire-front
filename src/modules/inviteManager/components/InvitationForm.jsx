@@ -42,11 +42,11 @@ let TagForm = (props) => {
         validate={[ required, minLength2, maxLength200 ]}
       />
       <Field
-        name="name"
+        name="fullName"
         component={InputField}
         className="form-control"
-        label={t("Manager Name")}
-        placeholder={t("The human readable name of the company.")}
+        label={t("Manager full name")}
+        placeholder={t("Full Name.")}
         type="text"
         validate={[ required, minLength2, maxLength200 ]}
       />

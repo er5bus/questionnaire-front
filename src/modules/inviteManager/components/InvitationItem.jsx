@@ -7,7 +7,7 @@ import adminRoutes from './../../../routes/admin'
 
 import Moment from 'react-moment'
 
-export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, name, expiredAt, email, id, companyParam }) => {
+export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, fullName, expiredAt, email, id, companyParam }) => {
 
   const { t } = useTranslation()
 
@@ -19,7 +19,7 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, n
             <i className="fas fa-mail-bulk" />
           </div>
           <h6 className="text-primary text-uppercase">
-            { name } 
+            { fullName } 
           </h6>
           <p className="description mt-3">
             { email }
@@ -37,7 +37,6 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, n
             className="btn-sm mt-4"
             color="info"
             onClick={ () => onToggleSendInvitationModal(id) }
-            tag={Link}
           >
             <i className="fas fa-paper-plane" /> { t("Resend mail") }
           </Button>
