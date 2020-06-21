@@ -8,6 +8,7 @@ import { required, maxLength, minLength } from "./../../../utils/validations"
 
 import Form from "./../../../components/Form"
 import InputField from "./../../../components/InputField"
+import SelectField from "./../../../components/SelectField"
 import InputCheckboxField from "./../../../components/InputRadioCheckboxField"
 
 const minLength4 = minLength(4)
@@ -44,6 +45,15 @@ const LoginForm = (props) => {
         icon="ni ni-lock-circle-open"
         placeholder={t("Password")}
         type="password"
+        validate={[required, minLength4, maxLength30]}
+      />
+       <Field
+        name="section"
+        component={SelectField}
+        className="form-control"
+        icon="ni ni-lock-circle-open"
+        placeholder={t("Admin area")}
+        choices={ [ { label: "Empolyeé area", value: 1 }, { label: "Manager area", value: 2 }, { label: "Admin area", value: 3 } ] } 
         validate={[required, minLength4, maxLength30]}
       />
       <Field

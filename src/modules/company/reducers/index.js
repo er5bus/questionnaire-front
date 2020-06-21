@@ -28,23 +28,12 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
       return { ...state, error: payload, isLoading: false }
     }
 
-    case ACTIONS.FETCH_ALL_NODES_INIT: {
-      return { ...state, isLoading: true, scores: [] }
-    }
-    case ACTIONS.FETCH_ALL_NODES_SUCCEDED: {
-      const nodes = payload.items.filter((item) => item.type === "ContentNode")
-      return { ...state, nodes, isLoading: false  }
-    }
-    case ACTIONS.FETCH_ALL_NODES_FAILED: {
-      return { ...state, isLoading: false, error: null }
-    }
-
     case ACTIONS.FETCH_COMPANIES_INIT : {
       state.items = payload.page === 1 ? [] : state.items
       return { ...state, isLoading: true, hasMore: false, error: null }
     }
     case ACTIONS.FETCH_COMPANIES_SUCCEDED : {
-      const { items, has_more: hasMore, page } = payload
+      const { items, has_more: hasMore=false, page } = payload
       return { ...state, items: page === 1 ? items : [ ...state.items, ...items], page, hasMore, isLoading: false, error: null }
     }
     case ACTIONS.FETCH_COMPANIES_FAILED : {

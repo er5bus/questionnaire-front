@@ -51,17 +51,19 @@ class InfiniteScroll extends React.PureComponent {
   }
 
   loadItems = (clearStore = false) => {
-    const { loadMore, pageNumber } = this.props
-    loadMore.apply(null, [ !clearStore ? pageNumber + 1 : 1 ])
+    const { loadMore, pageNumber, hasMore } = this.props
+    if (hasMore){
+      loadMore.apply(null, [ !clearStore ? pageNumber + 1 : 1 ])
+    }
   }
 
   render(){
 
-    const { loader, pageNumber, isLoading= true, children } = this.props
+    const { loader, pageNumber, hasMore, isLoading= true, children } = this.props
 
     return (
       <>
-        { pageNumber > 0 && children }
+        { (pageNumber > 0 || !hasMore ) && children }
         { (isLoading || pageNumber === 0 ) &&  loader }
       </>
     )
