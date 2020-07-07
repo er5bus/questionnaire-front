@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  survey_deploy:
+    image: predictanalyse/survey-front:latest
+    env_file: .env
+    ports:
+      - "8082:80"
+    labels:
+      - traefik.http.routers.survey_stack.rule=Host(`questionnaire-a.tk`)

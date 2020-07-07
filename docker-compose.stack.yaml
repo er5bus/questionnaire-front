@@ -1,8 +1,0 @@
-version: '2'
-
-services:
-  survey_stack:
-    image: predictanalyse/survey-front:latest
-    env_file: .env
-    ports:
-      - "8082:80"
