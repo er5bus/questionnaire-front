@@ -1,11 +1,8 @@
 version: '2'
 
 services:
-  survey_prod:
+  survey_build:
     build:
       context: .
       dockerfile: Dockerfile.build
-    env_file:
-      - ./.env
-    ports:
-      - "8000:80"
+    image: $IMAGE_NAME

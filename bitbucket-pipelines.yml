@@ -6,7 +6,7 @@ pipelines:
           - docker
         script: 
           - export IMAGE_NAME=predictanalyse/survey-front:$BITBUCKET_COMMIT
-          - docker build -t $IMAGE_NAME .
+          - docker build -f Dockerfile.build -t $IMAGE_NAME .
           - docker login --username $DOCKER_HUB_USERNAME --password $DOCKER_HUB_PASSWORD
           - docker push $IMAGE_NAME
     - step:
