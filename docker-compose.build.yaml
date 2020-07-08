@@ -5,4 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.build
-    image: $IMAGE_NAME
+    volumes:
+      - ./public:/app/public
+      - ./src:/app/src
+    env_file:
+      - ./.env

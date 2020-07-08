@@ -2,6 +2,7 @@ version: '3'
 
 services:
   survey_dev:
+    container_name: survey_dev
     build:
       context: .
     volumes:
