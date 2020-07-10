@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Register = React.lazy( () =>  import("../../modules/authentication/containers/Register"))
-const Logout = React.lazy( () => import("../../modules/authentication/containers/Logout"))
-const Login = React.lazy( () => import("../../modules/authentication/containers/Login"))
+const Register = React.lazy( () =>  import("../../modules/anonymous/authentication/containers/Register"))
+const Logout = React.lazy( () => import("../../modules/anonymous/authentication/containers/Logout"))
+const Login = React.lazy( () => import("../../modules/anonymous/authentication/containers/Login"))
 
 
 export const register = {

@@ -1,8 +1,8 @@
 import React from "react"
 
-const InvitationList = React.lazy( () => import("../../modules/inviteManager/containers/InvitationList"))
-const InvitationNew = React.lazy( () => import("../../modules/inviteManager/containers/InvitationNew"))
-const InvitationEdit = React.lazy( () => import("../../modules/inviteManager/containers/InvitationEdit"))
+const InvitationList = React.lazy( () => import("../../modules/admin/inviteManager/containers/InvitationList"))
+const InvitationNew = React.lazy( () => import("../../modules/admin/inviteManager/containers/InvitationNew"))
+const InvitationEdit = React.lazy( () => import("../../modules/admin/inviteManager/containers/InvitationEdit"))
 
 
 export const invitationManagerList = {

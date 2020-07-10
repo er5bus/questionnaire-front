@@ -1,8 +1,8 @@
 import React from "react"
 
-const DepartmentList = React.lazy( () => import("../../modules/department/containers/DepartmentList"))
-const DepartmentNew = React.lazy( () => import("../../modules/department/containers/DepartmentNew"))
-const DepartmentEdit = React.lazy( () => import("../../modules/department/containers/DepartmentEdit"))
+const DepartmentList = React.lazy( () => import("../../modules/moderator/department/containers/DepartmentList"))
+const DepartmentNew = React.lazy( () => import("../../modules/moderator/department/containers/DepartmentNew"))
+const DepartmentEdit = React.lazy( () => import("../../modules/moderator/department/containers/DepartmentEdit"))
 
 
 export const departmentList = {

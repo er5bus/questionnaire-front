@@ -25,14 +25,15 @@ import routes from "./routes"
 // load translation
 import './i18n'
 
-const AnonymousLayout = React.lazy( () => import("./modules/layouts/containers/AnonymousLayout"))
-const AdminLayout = React.lazy( () =>  import("./modules/layouts/containers/AdminLayout"))
-const ModeratorLayout = React.lazy( () =>  import("./modules/layouts/containers/ModeratorLayout"))
+const AnonymousLayout = React.lazy( () => import("./modules/anonymous/layout/containers/Layout"))
+const AdminLayout = React.lazy( () =>  import("./modules/admin/layout/containers/Layout"))
+const ModeratorLayout = React.lazy( () =>  import("./modules/moderator/layout/containers/Layout"))
+const EmployeeLayout = React.lazy( () =>  import("./modules/employee/layout/containers/Layout"))
 
 const store = configureStore()
 
 Sentry.init({
-  release: 'tree-decision-front@1.0.0',
+  release: 'survey-front@1.0.0',
   dsn: SENTRY_DSN,
 });
 
@@ -44,10 +45,10 @@ sessionService.initSessionService(store, {refreshOnCheckAuth: true})
         <BrowserRouter>
           <React.Suspense fallback={<Loader />}>
             <Switch>
-              <Route path="/loader" component={Loader} />
               <Route path={ routes.anonymous.path } component={AnonymousLayout} />
               <Route onEnter={sessionService.checkAuth} path={ routes.moderator.path } component={ModeratorLayout} />
               <Route onEnter={sessionService.checkAuth} path={ routes.admin.path } component={AdminLayout} />
+              <Route onEnter={sessionService.checkAuth} path={ routes.employee.path } component={EmployeeLayout} />
               <Route component={ PageNotFound }/>
             </Switch>
           </React.Suspense>

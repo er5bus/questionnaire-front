@@ -1,8 +1,8 @@
 import React from "react"
 
-const UserList = React.lazy( () => import("../../modules/user/containers/UserList"))
-const UserNew = React.lazy( () => import("../../modules/user/containers/UserNew"))
-const UserEdit = React.lazy( () => import("../../modules/user/containers/UserEdit"))
+const UserList = React.lazy( () => import("../../modules/admin/user/containers/UserList"))
+//const UserNew = React.lazy( () => import("../../modules/admin/user/containers/UserNew"))
+//const UserEdit = React.lazy( () => import("../../modules/admin/user/containers/UserEdit"))
 
 
 export const userList = {
@@ -10,7 +10,7 @@ export const userList = {
   component: UserList,
 }
 
-export const userNew = {
+/*export const userNew = {
   path: "/user/new",
   component: UserNew,
 }
@@ -18,4 +18,4 @@ export const userNew = {
 export const userEdit = {
   path: "/user/:param/edit",
   component: UserEdit,
-}
+}*/

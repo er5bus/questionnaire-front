@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-const Dashbord = React.lazy( () => import("../../modules/dashbord/containers/ModeratorDashbord"))
+const Dashbord = React.lazy( () => import("../../modules/moderator/dashbord/containers/Dashbord"))
 
 export const dashbord = {
   path: "/dashbord",
