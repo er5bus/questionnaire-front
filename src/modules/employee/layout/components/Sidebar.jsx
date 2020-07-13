@@ -1,7 +1,7 @@
-import React from "react"
-import { NavLink as NavLinkRRD } from "react-router-dom"
+import React from 'react'
+import { NavLink as NavLinkRRD } from 'react-router-dom'
 
-import moderatorRoutes from "./../../../../routes/moderator"
+import employeeRoutes from './../../../../routes/employee'
 
 import logo from './../../../../assets/img/qa.svg'
 
@@ -13,7 +13,7 @@ import {
   NavItem,
   NavLink,
   Nav,
-} from "reactstrap"
+} from 'reactstrap'
 
 
 class Sidebar extends React.PureComponent {
@@ -76,35 +76,24 @@ class Sidebar extends React.PureComponent {
               <Nav navbar>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path }
+                    to={ employeeRoutes.path + employeeRoutes.routes.medicalRecord.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
                   >
-                    <i className="ni ni-shop" />
-                    <span className="nav-link-text">Dashbord</span>
+                    <i className="fas fa-notes-medical" />
+                    <span className="nav-link-text">Medical Record</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path }
+                    to={ employeeRoutes.path + employeeRoutes.routes.questionnaire.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
                   >
-                    <i className="ni ni-shop" />
-                    <span className="nav-link-text">Department</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path }
-                    tag={NavLinkRRD}
-                    onClick={this.closeCollapse}
-                    activeClassName="active"
-                  >
-                    <i className="fa fa-users" />
-                    <span className="nav-link-text">Employee</span>
+                    <i className="far fa-question-circle" />
+                    <span className="nav-link-text">Questionnaire</span>
                   </NavLink>
                 </NavItem>
               </Nav>

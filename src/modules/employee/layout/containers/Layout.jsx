@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 
 import { isEmployee } from './../../../../utils/helpers'
 
-import moderatorRoutes from "./../../../../routes/moderator"
+import employeeRoutes from "./../../../../routes/employee"
 import anonymousRoutes from "./../../../../routes/anonymous"
 
 import Navbar from "./../components/Navbar"
@@ -42,13 +42,13 @@ class EmployeeLayout extends React.Component {
             <Navbar userName={username} />
             <Switch>
               {
-                Object.keys(moderatorRoutes.routes).map((routeName, i) =>
-                  moderatorRoutes.routes[routeName].path &&
+                Object.keys(employeeRoutes.routes).map((routeName, i) =>
+                  employeeRoutes.routes[routeName].path &&
                   <AccessControl
-                    role={ moderatorRoutes.role }
+                    role={ employeeRoutes.role }
                     key={i}
-                    path={ moderatorRoutes.path + moderatorRoutes.routes[routeName].path}
-                    component={ moderatorRoutes.routes[routeName].component}
+                    path={ employeeRoutes.path + employeeRoutes.routes[routeName].path}
+                    component={ employeeRoutes.routes[routeName].component}
                   />
                 )
               }

@@ -10,6 +10,9 @@ import { deleteSession, saveSession } from './middleware/session'
 // anonymous
 import authReducer from './modules/anonymous/authentication/reducers'
 
+// employee
+import medicalRecordReducer from './modules/employee/medicalRecord/reducers'
+
 // moderator
 import dashbordModeratorReducer from './modules/moderator/dashbord/reducers'
 import departmentReducer from './modules/moderator/department/reducers'
@@ -44,6 +47,9 @@ const rootReducer = combineReducers({
   department: departmentReducer,
   employee: employeeReducer,
   dashbordModerator: dashbordModeratorReducer,
+
+  // employee
+  medicalRecord: medicalRecordReducer
 })
 
 export default ( preloadedState = {} ) => {

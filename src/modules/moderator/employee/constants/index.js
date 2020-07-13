@@ -25,6 +25,6 @@ export const ACTIONS = {
 }
 
 export const ENDPOINT = {
-  EMPLOYEES: "/api/emplyees",
+  EMPLOYEES: "/api/employees",
   EMPLOYEE: "/api/employee/:param"
 }

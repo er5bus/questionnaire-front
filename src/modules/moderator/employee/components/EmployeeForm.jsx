@@ -8,7 +8,6 @@ import { Spinner } from "reactstrap"
 
 import { required, maxLength, minLength, email } from "./../../../../utils/validations"
 
-import Form from "./../../../../components/Form"
 import InputField from "./../../../../components/InputField"
 import SelectField from "./../../../../components/SelectField"
 
@@ -30,7 +29,7 @@ let TagForm = (props) => {
   }, [props])
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <Field
         name="fullName"
         component={InputField}
@@ -39,6 +38,15 @@ let TagForm = (props) => {
         label={t("Name")}
         type="text"
         validate={[ required, minLength4, maxLength30 ]}
+      />
+      <Field
+        name="username"
+        component={InputField}
+        className="form-control"
+        placeholder={t("Username")}
+        label={t("Username")}
+        type="text"
+        validate={[ required ]}
       />
       <Field
         name="email"
@@ -76,7 +84,7 @@ let TagForm = (props) => {
           <i className="fas fa-trash mr-2"></i> {t("Clear values")}
         </Button>
       </div>
-    </Form>
+    </form>
   )
 }
 

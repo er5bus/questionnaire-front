@@ -21,11 +21,11 @@ class AnonymousLayout extends React.Component {
     const { authenticated, user: { role }, notifications = null } = this.props
 
     if (authenticated && isAdmin(role) ){
-      return <Redirect to={adminRoutes.path} />
+      return <Redirect to={adminRoutes.path + moderatorRoutes.routes.dashbord.path} />
     }else if (authenticated && isModerator(role) ){
-      return <Redirect to={moderatorRoutes.path} />
+      return <Redirect to={moderatorRoutes.path + moderatorRoutes.routes.dashbord.path} />
     }else if (authenticated && isEmployee(role)){
-      return <Redirect to={employeeRoutes.path} />
+      return <Redirect to={employeeRoutes.path + employeeRoutes.routes.medicalRecord.path } />
     }
     else {
       return (<>
