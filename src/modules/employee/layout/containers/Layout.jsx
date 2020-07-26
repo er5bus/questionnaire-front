@@ -9,7 +9,7 @@ import employeeRoutes from "./../../../../routes/employee"
 import anonymousRoutes from "./../../../../routes/anonymous"
 
 import Navbar from "./../components/Navbar"
-import Sidebar from './../components/Sidebar'
+//import Sidebar from './../components/Sidebar'
 
 import AccessControl from './../../../../components/AccessControl'
 
@@ -35,8 +35,6 @@ class EmployeeLayout extends React.Component {
       : (
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
-
-          <Sidebar toggle={ this.toggle } />
 
           <div className="main-content">
             <Navbar userName={username} />

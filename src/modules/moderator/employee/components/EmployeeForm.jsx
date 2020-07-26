@@ -4,7 +4,7 @@ import { Button } from "reactstrap"
 import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
-import { Spinner } from "reactstrap"
+import { Spinner, Col, Row } from "reactstrap"
 
 import { required, maxLength, minLength, email } from "./../../../../utils/validations"
 
@@ -30,33 +30,66 @@ let TagForm = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <Row>
+        <Col lg="6">
+          <Field
+            name="firstName"
+            component={InputField}
+            className="form-control"
+            placeholder={t("First Name")}
+            label={t("First Name")}
+            type="text"
+            validate={[ required, minLength4, maxLength30 ]}
+          />
+        </Col>
+        <Col lg="6">
+          <Field
+            name="lastName"
+            component={InputField}
+            className="form-control"
+            placeholder={t("Last Name")}
+            label={t("Last Name")}
+            type="text"
+            validate={[ required, minLength4, maxLength30 ]}
+          />
+        </Col>
+      </Row>
+
       <Field
-        name="fullName"
+        name="phone"
         component={InputField}
         className="form-control"
-        placeholder={t("Name")}
-        label={t("Name")}
+        placeholder={t("Phone")}
+        label={t("Phone")}
         type="text"
         validate={[ required, minLength4, maxLength30 ]}
       />
-      <Field
-        name="username"
-        component={InputField}
-        className="form-control"
-        placeholder={t("Username")}
-        label={t("Username")}
-        type="text"
-        validate={[ required ]}
-      />
-      <Field
-        name="email"
-        component={InputField}
-        className="form-control"
-        placeholder={t("Email")}
-        label={t("Email")}
-        type="text"
-        validate={[ email, required ]}
-      />
+
+      <Row>
+        <Col lg="6">
+
+          <Field
+            name="username"
+            component={InputField}
+            className="form-control"
+            placeholder={t("Username")}
+            label={t("Username")}
+            type="text"
+            validate={[ required ]}
+          />
+        </Col>
+        <Col lg="6">
+          <Field
+            name="email"
+            component={InputField}
+            className="form-control"
+            placeholder={t("Email")}
+            label={t("Email")}
+            type="text"
+            validate={[ email, required ]}
+          />
+        </Col>
+      </Row>
       <Field
         name="password"
         component={InputField}
@@ -66,13 +99,14 @@ let TagForm = (props) => {
         type="password"
         validate={[required, minLength4, maxLength30]}
       />
+
       <Field
         name="department"
         component={SelectField}
         className="form-control"
         placeholder={t("Pick a Department")}
         label={t("Department")}
-        choices={ [ { label: "Department 1", value: 1 }, { label: "Department 2", value: 2 }, { label: "Department 3", value: 3 } ] } 
+        choices={ [ { label: "Department 1", value: 1 }, { label: "Department 2", value: 2 }, { label: "Department 3", value: 3 } ] }
         validate={[required, minLength4, maxLength30]}
       />
       <div className="mt-0">

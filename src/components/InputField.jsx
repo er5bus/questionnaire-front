@@ -14,9 +14,9 @@ const InputField = ({input, label, placeholder, className="from-control", icon, 
   const { t } = useTranslation()
 
   return (
-    <FormGroup className="mb-3">
+    <FormGroup className={"mb-3" + (type === 'hidden' && " d-none")}>
       { label && <label className="control-label">{label}</label>}
-        <InputGroup className={`"" ${touched && error && "has-danger"}`}>
+        <InputGroup className={` ${touched && error && "has-danger"}`}>
         { icon && 
         <InputGroupAddon addonType="prepend">
           <InputGroupText>

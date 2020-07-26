@@ -14,5 +14,11 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 EXPOSE 3000
 
+# Create a group and user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Tell docker that all future commands should run as the appuser user
+USER appuser
+
 # start the container
 CMD ["yarn", "start"]

@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from 'prop-types'
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
-import { Button, Spinner } from "reactstrap"
+import { Button, Spinner, Col, Row } from "reactstrap"
 import { useTranslation } from "react-i18next"
 
-import { required, email, maxLength, minLength } from "./../../../../utils/validations"
+import { required, maxLength, minLength } from "./../../../../utils/validations"
 
 import Form from "./../../../../components/Form"
 import InputField from "./../../../../components/InputField"
@@ -28,27 +28,30 @@ const RegisterForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field
-        name="email"
-        component={InputField}
-        className="form-control"
-        icon="ni ni-email-83"
-        placeholder={t("Email")}
-        type="text"
-        readOnly={true}
-        validate={[ email, required ]}
-      />
-      <Field
-        name="fullName"
-        component={InputField}
-        className="form-control"
-        icon="fa fa-user"
-        placeholder={t("Full Name")}
-        type="text"
-        readOnly={true}
-        validate={[ required ]}
-      />
-
+      <Row>
+        <Col>
+          <Field
+            name="firstName"
+            component={InputField}
+            className="form-control"
+            icon="fa fa-user"
+            placeholder={t("First Name")}
+            type="text"
+            validate={[ required ]}
+          />
+        </Col>
+        <Col>
+          <Field
+            name="lastName"
+            component={InputField}
+            className="form-control"
+            icon="fa fa-user"
+            placeholder={t("Last Name")}
+            type="text"
+            validate={[ required ]}
+          />
+        </Col>
+      </Row>
       <Field
         name="username"
         component={InputField}

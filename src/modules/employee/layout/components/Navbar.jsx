@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
 
 import anonymousRoutes from './../../../../routes/anonymous'
+import employeeRoutes from './../../../../routes/employee'
 
 import {
   DropdownMenu,
@@ -12,13 +13,17 @@ import {
   Media,
   Navbar,
   Nav,
+  NavItem,
+  NavLink,
   Container,
 } from "reactstrap"
 
 
 import { useTranslation } from "react-i18next"
 
-import userIcon from "./../../../../assets/img/user.png"
+import userIcon from './../../../../assets/img/user.png'
+import logo from './../../../../assets/img/qa.svg'
+
 
 const LogoutModal = anonymousRoutes.routes.logout.component
 
@@ -43,7 +48,14 @@ const UserNavbar = ({ userName }) => {
           >
             { " " }
           </Link>
-          <Nav className="align-items-center d-none d-md-flex" navbar>
+          <Nav className="navbar-nav-hover align-items-lg-center" navbar>
+            <NavItem>
+              <NavLink replace to={ employeeRoutes.path + employeeRoutes.routes.medicalRecord.path  } tag={Link}>
+                <img src={logo} alt="..." className="icon-sm mr-1" />
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <Nav className="align-items-lg-center ml-lg-auto" navbar>
             <UncontrolledDropdown nav>
               <DropdownToggle className="pr-0" nav>
                 <Media className="align-items-center">

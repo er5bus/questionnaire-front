@@ -27,10 +27,6 @@ class InvitationList extends React.Component {
     }
   }
 
-  componentDidMount(){
-    this.props.clearInvitationStore()
-  }
-
   onToggleSendInvitationModal = (id) => {
     this.setState({ openSendInvitationModal: !this.state.openSendInvitationModal, id })
   }
@@ -109,7 +105,6 @@ class InvitationList extends React.Component {
                 <InfiniteScroll
                   loadMore={this.onFetchInvitations}
                   pageNumber={ page }
-                  clearStore={true}
                   isLoading={isLoading}
                   hasMore={ hasMore }
                   loader={<InvitationLoader />}

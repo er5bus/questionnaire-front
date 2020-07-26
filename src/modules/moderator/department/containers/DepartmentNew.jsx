@@ -38,7 +38,7 @@ class DepartmentNew extends React.Component {
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path }>
-                          <i class="fas fa-home"></i> {t(" Department List")}
+                          <i className="fas fa-home"></i> {t(" Department List")}
                         </Link>
                       </BreadcrumbItem>
                       <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create department")}</BreadcrumbItem>

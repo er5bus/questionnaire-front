@@ -1,14 +1,12 @@
 import React from 'react'
-import { Link } from "react-router-dom"
-import { useTranslation } from 'react-i18next'
-import { Button, Card, CardBody, Col} from "reactstrap"
-
-import adminRoutes from './../../../../routes/admin'
+//import { Link } from "react-router-dom"
+//import { useTranslation } from 'react-i18next'
+import { /*Button,*/ Card, CardBody, Col} from "reactstrap"
 
 
-export default ({ fullName, username, email, company, id }) => {
+export default ({ firstName, lastName, phone, company, id }) => {
 
-  const { t } = useTranslation()
+  //const { t } = useTranslation()
 
   return (
     <Col lg="4" className="pb-5">
@@ -18,10 +16,10 @@ export default ({ fullName, username, email, company, id }) => {
             <i className="far fa-user" />
           </div>
           <h6 className="text-primary text-uppercase">
-            { fullName } ({ username })
+            { firstName } { lastName }
           </h6>
           <p className="description mt-3">
-            { email }
+            { phone }
           </p>
           {/*<Button
             className="btn-sm mt-4"
@@ -31,16 +29,6 @@ export default ({ fullName, username, email, company, id }) => {
           >
             <i className="fa fa-pencil-alt" /> { t("Edit") }
           </Button>*/}
-          { company && company.id &&
-          <Button
-            className="btn-sm mt-4"
-            color="info"
-            to={ adminRoutes.path + adminRoutes.routes.userList.path.replace(":userParam", company.id) }
-            tag={Link}
-          >
-            <i className="fa fa-mail-bulk" /> { t("show Company") }
-          </Button>
-          }
         </CardBody>
       </Card>
     </Col>

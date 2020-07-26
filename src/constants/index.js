@@ -1,9 +1,12 @@
 export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
 export const SENTRY_DSN = process.env.REACT_APP_SENTRY_DSN
+export const API_QUESTION_BASE_URL = process.env.REACT_APP_API_QUESTION_BASE_URL
 
-export const CALL_API = "CALL_API"
-export const SAVE_SESSION = "SAVE_SESSION"
-export const DELETE_SESSION = "DELETE_SESSION"
+export const CALL_API = "middleware@CALL_API"
+export const CALL_QUESTION_API = "middleware@CALL_QUESTION_API"
+
+export const SAVE_SESSION = "middleware@SAVE_SESSION"
+export const DELETE_SESSION = "middleware@DELETE_SESSION"
 
 
 export const HTTP_METHODS = {

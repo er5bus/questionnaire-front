@@ -1,16 +1,16 @@
-import React from "react"
-import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
-import { Button } from "reactstrap"
-import { useTranslation } from "react-i18next"
-import { connect } from "react-redux"
+import React from 'react'
+import { Field, reduxForm, stopSubmit, clearSubmitErrors } from 'redux-form'
+import { Button } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
+import { connect } from 'react-redux'
 
-import { Spinner } from "reactstrap"
+import { Spinner } from 'reactstrap'
 
-import { required, maxLength, minLength } from "./../../../../utils/validations"
+import { required, maxLength, minLength, email } from './../../../../utils/validations'
 
-import Form from "./../../../../components/Form"
-import InputField from "./../../../../components/InputField"
-import InputTextareaField from "./../../../../components/InputTextareaField"
+import Form from './../../../../components/Form'
+import InputField from './../../../../components/InputField'
+import InputTextareaField from './../../../../components/InputTextareaField'
 
 const minLength2 = minLength(2)
 const maxLength200 = maxLength(200)
@@ -39,7 +39,7 @@ let TagForm = (props) => {
         label={t("Manager email")}
         placeholder={t("E-mail")}
         type="text"
-        validate={[ required, minLength2, maxLength200 ]}
+        validate={[ required, email, minLength2, maxLength200 ]}
       />
       <Field
         name="fullName"

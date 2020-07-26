@@ -37,10 +37,10 @@ class InvitationEdit extends React.Component {
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", companyParam) }>
-                          <i class="fas fa-home"></i> {t(" Invitation List")}
+                          <i className="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i class="fas fa-pencil-alt"></i> {t(" Edit invitation")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit invitation")}</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>

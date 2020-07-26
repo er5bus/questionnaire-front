@@ -6,7 +6,7 @@
   .custom-control-input ~ .custom-control-label {
     cursor: pointer;
     font-size: $font-size-sm;
-    height: $custom-control-indicator-size;
+    height: auto;
   }
 
   .custom-control-input {

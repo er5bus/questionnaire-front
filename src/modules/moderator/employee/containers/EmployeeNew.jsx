@@ -19,7 +19,8 @@ class EmployeeNew extends React.Component {
   }
 
   onSubmit = (values) => {
-    this.props.createEmployee(values)
+    const { company } = this.props.user
+    this.props.createEmployee(company.id, values)
   }
 
   render() {
@@ -38,7 +39,7 @@ class EmployeeNew extends React.Component {
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path }>
-                          <i class="fas fa-home"></i> {t(" Employee List")}
+                          <i className="fas fa-home"></i> {t(" Employee List")}
                         </Link>
                       </BreadcrumbItem>
                       <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create Employee")}</BreadcrumbItem>
@@ -66,6 +67,6 @@ class EmployeeNew extends React.Component {
 }
 
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => ({ ...state.employee, user: state.session.user })
 
 export default connect(mapStateToProps, { createEmployee, clearEmployeeForm })(withTranslation()(EmployeeNew))

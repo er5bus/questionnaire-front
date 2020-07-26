@@ -5,32 +5,36 @@ import { withTranslation } from 'react-i18next'
 
 //import employeeRoutes from './../../../../routes/employee'
 
-import FirstQuestion from './../components/FirstQuestion'
-import ExitQuestions from './../components/ExitQuestions'
+import FirstPage from './../components/FirstPage'
+import SecondPage from './../components/SecondPage'
+import ThirdPage from './../components/ThirdPage'
+import ExitPage from './../components/ExitPage'
+
+import { nextPage, prevPage, exitPage } from './../actions'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container } from 'reactstrap'
 
 class Questionnaire extends React.Component {
 
-  constructor(props){
-    super(props)
-    this.state = {
-      exit: false 
-    }
+  onSubmit = (values) => {
+    //this.props.create(values)
   }
 
-  onSubmit = (values) => {
-    //this.props.createEmployee(values)
+  onNext = () => {
+    this.props.nextPage()
+  } 
+
+  onPrev = () => {
+    this.props.prevPage()
   }
 
   onExit = () => {
-    this.setState({ exit: true })
+    this.props.exitPage()
   }
 
   render() {
-    const { t/*, error, item, isLoading*/ } = this.props
-    const { exit } = this.state
+    const { t, page, exit /*, error, item, isLoading*/ } = this.props
 
     return (
       <>
@@ -46,8 +50,10 @@ class Questionnaire extends React.Component {
             <Col lg="12" md="12">
               <Card className="shadow">
                 <CardBody className="px-lg-5 py-lg-5">
-                  { !exit && <FirstQuestion onExit={this.onExit} />}
-                  { exit && <ExitQuestions /> }
+                  { page === 1 && <FirstPage onExit={this.onExit} onContinue={this.onNext} />}
+                  { page === 2 && <SecondPage onExit={this.onExit}  onContinue={this.onNext} /> }
+                  { page === 3 && <ThirdPage onExit={this.onExit} /> }
+                  { exit && <ExitPage /> }
                 </CardBody>
               </Card>
             </Col>
@@ -61,4 +67,4 @@ class Questionnaire extends React.Component {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps)(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, prevPage, exitPage })(withTranslation()(Questionnaire))

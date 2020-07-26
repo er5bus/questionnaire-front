@@ -9,7 +9,7 @@ export const filterEmployees = (searchTerm) =>
   })
 
 
-export const fetchEmployees = (pageNum) => 
+export const fetchEmployees = (companyParam, pageNum) => 
   ({
     type: CALL_API,
     meta: {
@@ -18,7 +18,7 @@ export const fetchEmployees = (pageNum) =>
         success: ACTIONS.FETCH_EMPLOYEES_SUCCEDED,
         fail: ACTIONS.FETCH_EMPLOYEES_FAILED
       },
-      endpoint: ENDPOINT.EMPLOYEES,
+      endpoint: ENDPOINT.EMPLOYEES.replace(":companyparam", companyParam),
       method: HTTP_METHODS.GET,
       params: { page: pageNum },
       jwt: true
@@ -32,7 +32,7 @@ export const clearEmployeeForm = () =>
   })
 
 
-export const createEmployee = (payload) => 
+export const createEmployee = (companyParam, payload) => 
   ({
     type: CALL_API,
     payload,
@@ -46,7 +46,7 @@ export const createEmployee = (payload) =>
         success: "Your user has been created successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.EMPLOYEES,
+      endpoint: ENDPOINT.EMPLOYEES.replace(":companyparam", companyParam),
       method: HTTP_METHODS.POST,
       jwt: true
     }

@@ -2,7 +2,7 @@ import thunk from 'redux-thunk'
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 
 // middleware redux-thunk
-import api from './middleware/api'
+import { api, questionApi } from './middleware/api'
 import { deleteSession, saveSession } from './middleware/session'
 
 // reducers
@@ -12,6 +12,7 @@ import authReducer from './modules/anonymous/authentication/reducers'
 
 // employee
 import medicalRecordReducer from './modules/employee/medicalRecord/reducers'
+import questionnaireReducer from './modules/employee/questionnaire/reducers'
 
 // moderator
 import dashbordModeratorReducer from './modules/moderator/dashbord/reducers'
@@ -49,7 +50,8 @@ const rootReducer = combineReducers({
   dashbordModerator: dashbordModeratorReducer,
 
   // employee
-  medicalRecord: medicalRecordReducer
+  medicalRecord: medicalRecordReducer,
+  questionnaire: questionnaireReducer
 })
 
 export default ( preloadedState = {} ) => {
@@ -59,7 +61,7 @@ export default ( preloadedState = {} ) => {
   const store = createStore(
     rootReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(thunk, api, deleteSession, saveSession))
+    composeEnhancers(applyMiddleware(thunk, api, questionApi, deleteSession, saveSession))
   )
 
   return store

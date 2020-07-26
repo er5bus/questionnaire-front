@@ -23,8 +23,9 @@ import { getFilteredEmployees } from './../selector'
 class EmployeeList extends React.Component {
   
   onFetchEmployees = (pageNumber) => {
+    const { company } = this.props.user
     if (!this.props.isLoading){
-      this.props.fetchEmployees(pageNumber)
+      this.props.fetchEmployees(company.id, pageNumber)
     }
   }
 
@@ -44,7 +45,7 @@ class EmployeeList extends React.Component {
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Employees List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Employees List")}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
@@ -82,7 +83,7 @@ class EmployeeList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ...state.employee, items: getFilteredEmployees(state)
+  ...state.employee, user: state.session.user, items: getFilteredEmployees(state)
 })
 
 export default connect(mapStateToProps, { fetchEmployees, filterEmployees })(withTranslation()(EmployeeList))

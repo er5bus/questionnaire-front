@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 // reactstrap components
 import { Button } from 'reactstrap'
 
-const FirstQuestion = ({ onExit }) => {
+const FirstQuestion = ({ onExit, onContinue }) => {
 
   const { t } = useTranslation()
 
@@ -15,7 +15,7 @@ const FirstQuestion = ({ onExit }) => {
         <h1 className="h2"> { t('Do you have any pain ?') }</h1>
 
         <div className="pb-5" />
-        <Button>{ t('Yes') }</Button>
+        <Button onClick={onContinue}>{ t('Yes') }</Button>
         <Button onClick={onExit}>{ t('No') }</Button>
       </div>
     </>

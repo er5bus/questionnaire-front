@@ -2,6 +2,7 @@ version: '2'
 
 services:
   survey_build:
+    image: predictanalyse/survey-front:latest
     build:
       context: .
       dockerfile: Dockerfile.build

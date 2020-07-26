@@ -9,7 +9,7 @@ export const getFilteredEmployees = createSelector(
   [getEmployees, getSearchTerm],
   (employees, searchTerm) => employees.filter(employee =>
     (
-      employee.name.match(new RegExp(searchTerm, 'i'))
+      employee.firstName.match(new RegExp(searchTerm, 'i'))
     )
   )
 )

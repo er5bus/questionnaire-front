@@ -23,7 +23,8 @@ class Register extends React.Component {
 
   onSubmit = (values) => {
     const { param } = this.props.match.params
-    this.props.register(param, values)
+    const { username, email, password, firstName, lastName } = values
+    this.props.register(param, { firstName, lastName, username, email, password })
   }
 
   render() {
@@ -31,7 +32,7 @@ class Register extends React.Component {
     if (isLoadingInvitation){
       return <Loader />
     }
-    else if (error && error.error === "not-found"){
+    else if (error && !invitation){
       return <>
         <Col lg="6" md="8" className="pt-5">
           <Card className="shadow">

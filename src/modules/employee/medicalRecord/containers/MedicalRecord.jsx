@@ -7,10 +7,12 @@ import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from 
 
 import MedicalRecordForm from './../components/MedicalRecordForm'
 
+import employeeRoutes from './../../../../routes/employee'
+
 class MedicalRecord extends React.Component {
 
   onSubmit = (values) => {
-    //this.props.createEmployee(values)
+    this.props.history.push( employeeRoutes.path + employeeRoutes.routes.questionnaire.path )
   }
 
   render() {

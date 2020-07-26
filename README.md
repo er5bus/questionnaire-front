@@ -31,6 +31,7 @@ Before you can run the project you need to set the envirment varibles:
 ``` env
 NODE_ENV=production # development
 
+REACT_APP_API_QUESTION_BASE_URL=https://back.predict-a.tk
 REACT_APP_API_BASE_URL=http://0.0.0.0:5000 # backend base url
 ```
 

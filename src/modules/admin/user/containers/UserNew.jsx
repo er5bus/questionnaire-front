@@ -38,7 +38,7 @@ class UserNew extends React.Component {
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.userList.path }>
-                          <i class="fas fa-home"></i> {t(" User List")}
+                          <i className="fas fa-home"></i> {t(" User List")}
                         </Link>
                       </BreadcrumbItem>
                       <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create user")}</BreadcrumbItem>

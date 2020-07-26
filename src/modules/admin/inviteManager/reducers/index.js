@@ -5,7 +5,7 @@ export default (state = { items: [], item: {}, allCompanies: [], page: 0, isLoad
   const { payload, type } = action
   switch (type) {
     case ACTIONS.CLEAR_MANAGER_INVITATION_STORE : {
-      return { ...state, item: null, items: [], hasMore: true, isLoading: false, error: null }
+      return { ...state, item: null, isLoading: false, error: null }
     }
     case ACTIONS.CREATE_MANAGER_INVITATION_INIT : {
       return { ...state, isLoading: true, error: null }

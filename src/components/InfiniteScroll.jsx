@@ -3,13 +3,6 @@ import PropTypes from 'prop-types'
 
 class InfiniteScroll extends React.PureComponent {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      clearStore: false
-    }
-  }
-
   componentDidMount(){
     window.scrollTo(0, 0)
     window.addEventListener('scroll', this.handleScroll)
@@ -21,11 +14,6 @@ class InfiniteScroll extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot){
-    const { clearStore } = this.props
-    if (clearStore && !this.state.clearStore){
-      this.loadItems(clearStore)
-      this.setState({ clearStore })
-    }
     this.handleScroll()
   }
 
@@ -53,7 +41,7 @@ class InfiniteScroll extends React.PureComponent {
   loadItems = (clearStore = false) => {
     const { loadMore, pageNumber, hasMore } = this.props
     if (hasMore){
-      loadMore.apply(null, [ !clearStore ? pageNumber + 1 : 1 ])
+      loadMore.apply(null, [ pageNumber + 1 ])
     }
   }
 
@@ -63,7 +51,7 @@ class InfiniteScroll extends React.PureComponent {
     return (
       <>
         { (pageNumber > 0 || !hasMore ) && children }
-        { (isLoading || pageNumber === 0 ) &&  loader }
+        { isLoading &&  loader }
       </>
     )
   }

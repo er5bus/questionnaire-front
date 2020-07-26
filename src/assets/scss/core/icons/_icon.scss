@@ -16,6 +16,21 @@
     }
 }
 
+// Extra Extra large icons
+
+.icon-xxl {
+	width: $icon-size-xxl;
+	height: $icon-size-xxl;
+
+	i, svg {
+		font-size: $icon-size-xxl - .75;
+	}
+
+    + .icon-text {
+    	width: calc(100% - #{$icon-size-xxl} - 1);
+    }
+}
+
 
 // Extra large icons
 
