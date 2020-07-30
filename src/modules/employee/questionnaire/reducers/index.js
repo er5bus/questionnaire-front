@@ -1,41 +1,43 @@
-import { ACTIONS } from './../constants'
+import { ACTIONS } from './../constants';
 
 
-export default (state = { 
-  page: 1, 
-  exit: false, 
-  isLoading: false, 
-  item: null, 
-  error: null, 
+export default (state = {
+  page: 1,
+  exit: false,
+  isLoading: false,
+  item: null,
+  error: null,
+  selectedPartBody: [],
   questionsAnswered: [],
   questions: [],
-  currentQuestion: { treeparam: "25c33f7013e74540a0d66faa8caee9a3" , nodeparam: "fede40a5aa7c4413a3c7bc25250c704b" } }, action) => {
+  currentQuestion: { treeparam: "25c33f7013e74540a0d66faa8caee9a3", nodeparam: "fede40a5aa7c4413a3c7bc25250c704b" }
+}, action) => {
   const { payload, type } = action
   switch (type) {
 
-    case ACTIONS.NEXT_PAGE : {
-      return { ...state, page: state.page + 1 } 
+    case ACTIONS.NEXT_PAGE: {
+      return { ...state, page: state.page + 1 }
     }
 
-    case ACTIONS.PREV_PAGE : {
+    case ACTIONS.PREV_PAGE: {
       return { ...state, page: state.page - 1 }
     }
 
-    case ACTIONS.EXIT_PAGE : {
+    case ACTIONS.EXIT_PAGE: {
       return { ...state, page: 0, exit: true }
     }
 
-    case ACTIONS.NEXT_QUESTION : {
-      return { ...state, questionsAnswered: [ ...state.questionsAnswered, state.currentQuestion ], currentQuestion: payload }
+    case ACTIONS.NEXT_QUESTION: {
+      return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
     }
 
-    case ACTIONS.FETCH_QUESTION_INIT : {
+    case ACTIONS.FETCH_QUESTION_INIT: {
       return { ...state, isLoading: true, item: null, error: null, success: false }
     }
-    case ACTIONS.FETCH_QUESTION_SUCCEDED : {
+    case ACTIONS.FETCH_QUESTION_SUCCEDED: {
       return { ...state, item: payload, isLoading: false, error: null }
     }
-    case ACTIONS.FETCH_QUESTION_FAILED : {
+    case ACTIONS.FETCH_QUESTION_FAILED: {
       return { ...state, isLoading: false, error: payload }
     }
 
@@ -47,6 +49,16 @@ export default (state = {
     }
     case ACTIONS.FETCH_QUESTION_SCORES_FAILED: {
       return { ...state, isLoading: false, error: null }
+    }
+    case ACTIONS.SELECT_DISELECT_FROM_BODY: {
+      var newSeletedbody = [...state.selectedPartBody]
+      if (newSeletedbody.includes(payload)) {
+        let index = newSeletedbody.indexOf(payload)
+        newSeletedbody.splice(index, 1)
+      } else {
+        newSeletedbody.push(payload)
+      }
+      return { ...state, selectedPartBody: newSeletedbody }
     }
 
     default: {

@@ -1,8 +1,8 @@
-import { ACTIONS, ENDPOINT } from './../constants'
-import { /*CALL_API,*/ HTTP_METHODS, CALL_QUESTION_API } from './../../../../constants'
+import { CALL_QUESTION_API, /*CALL_API,*/ HTTP_METHODS } from './../../../../constants';
+import { ACTIONS, ENDPOINT } from './../constants';
 
 
-export const nextPage = () => 
+export const nextPage = () =>
   ({
     type: ACTIONS.NEXT_PAGE,
   })
@@ -25,7 +25,11 @@ export const changeCurrentQuestion = (payload) =>
     type: ACTIONS.NEXT_QUESTION,
     payload
   })
-
+export const selectDiselectPartBody = (payload) =>
+  ({
+    type: ACTIONS.SELECT_DISELECT_FROM_BODY,
+    payload
+  })
 
 export const fetchQuestionScores = ({ treeparam }) =>
   ({
