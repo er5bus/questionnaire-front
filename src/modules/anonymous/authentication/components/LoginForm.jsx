@@ -53,7 +53,7 @@ const LoginForm = (props) => {
         className="form-control"
         icon="ni ni-lock-circle-open"
         placeholder={t("Admin area")}
-        choices={ [ { label: "Empolyeé area", value: 1 }, { label: "Manager area", value: 2 }, { label: "Admin area", value: 3 } ] } 
+        choices={ [ { label: "Empolyee area", value: 1 }, { label: "Manager area", value: 2 }, { label: "Admin area", value: 3 } ] } 
         validate={[required, minLength4, maxLength30]}
       />
       <Field

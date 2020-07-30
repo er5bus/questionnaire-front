@@ -17,7 +17,6 @@ class Register extends React.Component {
 
   componentDidMount() {
     const { param } = this.props.match.params
-    console.log(param);
 
     this.props.fetchInvitation(param)
     this.props.clearError()
@@ -64,7 +63,7 @@ class Register extends React.Component {
     } else {
       return (
         <>
-          <Col lg="6" md="8" className = "mt-lg-5" >
+          <Col lg="6" md="8" className="mt-lg-5" >
             <Card className="shadow">
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-md-center mb-4 mt-md-0">
