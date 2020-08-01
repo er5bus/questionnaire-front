@@ -3,17 +3,28 @@ import React from 'react';
 // reactstrap components
 import { connect } from "react-redux";
 import { Badge, Button, Col, Row } from 'reactstrap';
-import { selectDiselectPartBody } from '../actions';
+import { changeCurrentQuestion, selectDiselectPartBody } from '../actions';
+import { HUMAN_BODY, statcTreeNode } from '../constants';
 import HumanBodyBackSide from './HumanBodyBackSide';
 import HumanBodyFrontSide from './HumanBodyFrontSide';
 class FirstQuestion extends React.Component {
+  submitSelectedArea = () => {
+    let currenQuestion = statcTreeNode[this.props.selectedPartBodyID[0]];
+    this.props.changeCurrentQuestion(currenQuestion)
 
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentQuestion !== this.props.currentQuestion) {
+      this.props.onContinue()
+
+    }
+  }
   render() {
     const { t, onContinue, onExit } = this.props
     return (
       <>
         <div>
-          <h1 className="h2"> {'Select Your Pain Spot'}</h1>
+          <h1 className="h2"> {'Sélectionnez votre/vos points douloureux'}</h1>
           {this.props.selectedPartBody.length > 0 ? (<div style={{
             display: "flex",
             flexWrap: "wrap",
@@ -21,19 +32,20 @@ class FirstQuestion extends React.Component {
           }}>
             <span style={{
               marginBottom: 5
-            }}>{" Your painful spot: "}</span>
-            {this.props.selectedPartBody.map((el, index) => {
+            }}>{this.props.selectedPartBody.length === 1 ? "Votre point douleureux: " : "Vos points douleureux: "}</span>
+            {this.props.selectedPartBodyID.map((el, index) => {
+              const boyAreaObject = HUMAN_BODY[el]
               return (
-                <Badge color={index === 0 ? "danger" : "warning"} style={{
+                <Badge key={index} color={index === 0 ? "danger" : "warning"} style={{
                   marginLeft: 5,
                   marginBottom: 5
-                }}> {el} <span style={{
+                }}> {boyAreaObject.value} <span style={{
                   marginLeft: 5,
                   cursor: "pointer"
-                }}> <i className="fa fa-times" onClick={() => this.props.selectDiselectPartBody(el)}></i>  </span> </Badge>
+                }}> <i className="fa fa-times" onClick={() => this.props.selectDiselectPartBody(boyAreaObject)}></i>  </span> </Badge>
               )
             })}
-          </div>) : <span>{" No spot selected yet "}</span>}
+          </div>) : <span>{" Aucun point sélectionné pour le moment "}</span>}
 
 
           <Row>
@@ -46,9 +58,9 @@ class FirstQuestion extends React.Component {
           </Row>
 
           <div className="pb-5" />
-          <h1 className="h4 pb-2"> {'Do You Want To Continue ?'} </h1>
-          <Button onClick={onContinue} disabled={this.props.selectedPartBody.length === 0}>{'Yes'}</Button>
-          <Button onClick={onExit}>{'No'}</Button>
+          <h1 className="h4 pb-2"> {'Voulez-vous continuer ?'} </h1>
+          <Button onClick={this.submitSelectedArea} disabled={this.props.selectedPartBody.length === 0}>{'Oui'}</Button>
+          <Button onClick={onExit}>{'Non'}</Button>
         </div>
       </>
     )
@@ -56,4 +68,4 @@ class FirstQuestion extends React.Component {
 }
 
 const mapStateToProps = state => state.questionnaire
-export default connect(mapStateToProps, { selectDiselectPartBody })(FirstQuestion)
+export default connect(mapStateToProps, { selectDiselectPartBody, changeCurrentQuestion })(FirstQuestion)

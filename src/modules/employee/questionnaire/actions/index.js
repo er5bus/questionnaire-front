@@ -30,7 +30,12 @@ export const selectDiselectPartBody = (payload) =>
     type: ACTIONS.SELECT_DISELECT_FROM_BODY,
     payload
   })
-
+export const nextSelectedFromBodyQuestions = () => ({
+  type: ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION
+})
+export const askContinueScreen = () => ({
+  type: ACTIONS.ASK_SCREEN
+})
 export const fetchQuestionScores = ({ treeparam }) =>
   ({
     type: CALL_QUESTION_API,
@@ -59,3 +64,16 @@ export const fetchQuestion = ({ treeparam, nodeparam }) =>
       method: HTTP_METHODS.GET,
     }
   })
+export const getTreeNodeParamsForSelectedBodyArea = (payload) => ({
+  type: CALL_QUESTION_API,
+  payload,
+  meta: {
+    actions: {
+      init: ACTIONS.GET_TREE_NODE_PARAMS_INIT,
+      success: ACTIONS.GET_TREE_NODE_PARAMS_SUCCEDED,
+      fail: ACTIONS.GET_TREE_NODE_PARAMS_FAILED
+    },
+    endpoint: ENDPOINT.QUESTION,
+    method: HTTP_METHODS.GET
+  }
+})

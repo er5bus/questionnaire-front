@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 //import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-
+import { useTranslation } from 'react-i18next';
 // reactstrap components
-import { Button } from 'reactstrap'
+import { Button } from 'reactstrap';
+
 
 const FirstQuestion = ({ onExit, onContinue }) => {
 
@@ -12,11 +12,11 @@ const FirstQuestion = ({ onExit, onContinue }) => {
   return (
     <>
       <div>
-        <h1 className="h2"> { t('Do you have any pain ?') }</h1>
+        <h1 className="h2"> { t('Avez-vous des douleurs corporelles?') }</h1>
 
         <div className="pb-5" />
-        <Button onClick={onContinue}>{ t('Yes') }</Button>
-        <Button onClick={onExit}>{ t('No') }</Button>
+        <Button onClick={onContinue}>{ t('Oui') }</Button>
+        <Button onClick={onExit}>{ t('Non') }</Button>
       </div>
     </>
   )

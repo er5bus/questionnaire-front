@@ -16,9 +16,7 @@ class MedicalRecord extends React.Component {
 
   }
   onSubmit = (values) => {
-    console.log(values);
-
-    //this.props.createMedicalRecord(values);
+    this.props.createMedicalRecord(values);
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.medicalRecordCreated !== nextProps.medicalRecordCreated) {
