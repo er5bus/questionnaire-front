@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "reactstrap";
 import Loader from '../../../../components/Loader';
 import { statcTreeNode } from "../constants";
-import { askContinueScreen, changeCurrentQuestion, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions } from "./../actions";
+import { askContinueScreen, changeCurrentQuestion, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, updateScore } from "./../actions";
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
 class OverviewNode extends React.PureComponent {
@@ -13,7 +13,7 @@ class OverviewNode extends React.PureComponent {
     super(props)
 
     this.state = {
-      scores: {},
+      scores: [],
       nextSection: false
     }
   }
@@ -89,7 +89,6 @@ class OverviewNode extends React.PureComponent {
       this.props.fetchQuestionScores(currentQuestion)
     }
 
-    console.log(currentQuestion.nodeparam !== prevCurrentQuestion.nodeparam)
     if (currentQuestion.nodeparam && prevCurrentQuestion.nodeparam && currentQuestion.nodeparam !== prevCurrentQuestion.nodeparam) {
       this.props.fetchQuestion(currentQuestion)
     }
@@ -114,7 +113,12 @@ class OverviewNode extends React.PureComponent {
   }
 
   onSelectChoice = (item, action) => {
-    console.log(action);
+    if (action.values.length > 0) {
+      let actionValues = action.values.map(el => {
+        return { id: el.score.id, value: el.value }
+      })
+      this.props.updateScore(actionValues)
+    }
     
     let { currentQuestion } = this.props
     if (action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
@@ -128,18 +132,33 @@ class OverviewNode extends React.PureComponent {
     }
   }
 
-  calculateScore = (item, selectedAction) => {
-    if (item /*&& item.type === NODE_TYPE.CONTENT_NODE*/ && item.actions) {
-      item.actions.forEach((action) => {
-        if (action.id === selectedAction.id) {
-          let scores = this.state.scores
-          action.values.forEach((actionValue) => {
-            scores[actionValue.score.id] = parseInt(actionValue.value, 10) + parseInt(scores[actionValue.score.id] || 0, 10)
-          })
-          this.setState({ scores })
+  calculateScore = (action) => {
+    let newArray = this.state.scores
+    let arrayToTest = action.values.map(el => {
+      return { id: el.score.id, value: el.value }
+    })
+
+    if (action.values.length > 0) {
+      if (newArray.length > 0) {
+        for (let i = 0; i < arrayToTest.length; i++) {
+          let exist = newArray.filter(el => el.id === arrayToTest[i].id);
+          console.log(exist, "existt");
+
+          if (exist.length = 0) {
+            // newArray[exist] = { id: newArray[exist].id, value: newArray[exist].value + arrayToTest[i].value }
+          } else {
+            newArray.push(arrayToTest[i])
+          }
         }
-      })
+      } else {
+        newArray = action.values.map(el => {
+          return { id: el.score.id, value: el.value }
+        })
+      }
+      this.setState({ scores: newArray }, () => console.log(this.state.scores, 'aasdsdsdsdsd'))
     }
+    console.log(this.state.scores, "nonnn");
+
   }
 
   render() {
@@ -182,4 +201,4 @@ class OverviewNode extends React.PureComponent {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen })(OverviewNode)
+export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore })(OverviewNode)

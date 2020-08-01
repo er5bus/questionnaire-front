@@ -15,6 +15,7 @@ export default (state = {
   selectedPartBodyToUse: [],
   isLoadingSectionBody: false,
   selectedPartBodyIDToUse: [],
+  scores: []
 }, action) => {
   const { payload, type } = action
   switch (type) {
@@ -26,7 +27,27 @@ export default (state = {
     case ACTIONS.PREV_PAGE: {
       return { ...state, page: state.page - 1 }
     }
+    case ACTIONS.UPDATE_SCORE: {
+      let newArrayScores = [...state.scores]
+      console.log(payload, "actionsss");
 
+      if (newArrayScores.length > 0) {
+        for (let i = 0; i < payload.length; i++) {
+          let indexScore = newArrayScores.map(el => el.id).indexOf(payload[i].id);
+          console.log(indexScore, "indexxxxx");
+          if (indexScore > -1) {
+            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value }
+          } else {
+            newArrayScores.push(payload[i])
+          }
+        }
+      } else {
+        newArrayScores = payload
+      }
+      console.log(newArrayScores, "newArray");
+
+      return { ...state, scores: newArrayScores }
+    }
     case ACTIONS.EXIT_PAGE: {
       return { ...state, page: 0, exit: true }
     }

@@ -50,7 +50,10 @@ export const fetchQuestionScores = ({ treeparam }) =>
     }
   })
 
-
+export const updateScore = (payload) => ({
+  type: ACTIONS.UPDATE_SCORE,
+  payload
+})
 export const fetchQuestion = ({ treeparam, nodeparam }) =>
   ({
     type: CALL_QUESTION_API,
