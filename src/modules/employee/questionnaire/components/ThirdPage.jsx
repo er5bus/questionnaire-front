@@ -113,7 +113,7 @@ class OverviewNode extends React.PureComponent {
   }
 
   onSelectChoice = (item, action) => {
-    if (action.values.length > 0) {
+    if (action.values.length > 0 && this.props.selectedPartBodyIDToUse[0] === this.props.selectedPartBodyID[0]) {
       let actionValues = action.values.map(el => {
         return { id: el.score.id, value: el.value }
       })
