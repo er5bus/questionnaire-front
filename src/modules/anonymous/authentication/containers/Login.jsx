@@ -1,15 +1,15 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from "react";
 //import { Link } from 'react-router-dom'
-import { withTranslation } from "react-i18next"
-
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
 // reactstrap components
-import { Card, CardBody, Col } from "reactstrap"
-
+import { Card, CardBody, Col } from "reactstrap";
 //import anonymousRoutes from './../../../routes/anonymous'
-import { login, clearError } from "./../actions"
+import { clearError, login } from "./../actions";
+import LoginForm from "./../components/LoginForm";
 
-import LoginForm from "./../components/LoginForm"
+
+
 
 class Login extends React.Component {
 

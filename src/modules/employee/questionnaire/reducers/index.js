@@ -1,41 +1,68 @@
-import { ACTIONS } from './../constants'
+import { ACTIONS } from './../constants';
 
 
-export default (state = { 
-  page: 1, 
-  exit: false, 
-  isLoading: false, 
-  item: null, 
-  error: null, 
+export default (state = {
+  page: 1,
+  exit: false,
+  isLoading: false,
+  item: null,
+  error: null,
+  selectedPartBody: [],
+  selectedPartBodyID: [],
   questionsAnswered: [],
   questions: [],
-  currentQuestion: { treeparam: "25c33f7013e74540a0d66faa8caee9a3" , nodeparam: "fede40a5aa7c4413a3c7bc25250c704b" } }, action) => {
+  currentQuestion: { treeparam: "", nodeparam: "" },
+  selectedPartBodyToUse: [],
+  isLoadingSectionBody: false,
+  selectedPartBodyIDToUse: [],
+  scores: []
+}, action) => {
   const { payload, type } = action
   switch (type) {
 
-    case ACTIONS.NEXT_PAGE : {
-      return { ...state, page: state.page + 1 } 
+    case ACTIONS.NEXT_PAGE: {
+      return { ...state, page: state.page + 1 }
     }
 
-    case ACTIONS.PREV_PAGE : {
+    case ACTIONS.PREV_PAGE: {
       return { ...state, page: state.page - 1 }
     }
+    case ACTIONS.UPDATE_SCORE: {
+      let newArrayScores = [...state.scores]
+      console.log(payload, "actionsss");
 
-    case ACTIONS.EXIT_PAGE : {
+      if (newArrayScores.length > 0) {
+        for (let i = 0; i < payload.length; i++) {
+          let indexScore = newArrayScores.map(el => el.id).indexOf(payload[i].id);
+          console.log(indexScore, "indexxxxx");
+          if (indexScore > -1) {
+            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value }
+          } else {
+            newArrayScores.push(payload[i])
+          }
+        }
+      } else {
+        newArrayScores = payload
+      }
+      console.log(newArrayScores, "newArray");
+
+      return { ...state, scores: newArrayScores }
+    }
+    case ACTIONS.EXIT_PAGE: {
       return { ...state, page: 0, exit: true }
     }
 
-    case ACTIONS.NEXT_QUESTION : {
-      return { ...state, questionsAnswered: [ ...state.questionsAnswered, state.currentQuestion ], currentQuestion: payload }
+    case ACTIONS.NEXT_QUESTION: {
+      return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
     }
 
-    case ACTIONS.FETCH_QUESTION_INIT : {
+    case ACTIONS.FETCH_QUESTION_INIT: {
       return { ...state, isLoading: true, item: null, error: null, success: false }
     }
-    case ACTIONS.FETCH_QUESTION_SUCCEDED : {
-      return { ...state, item: payload, isLoading: false, error: null }
+    case ACTIONS.FETCH_QUESTION_SUCCEDED: {
+      return { ...state, item: payload, isLoading: false, error: null, isLoadingSectionBody: false }
     }
-    case ACTIONS.FETCH_QUESTION_FAILED : {
+    case ACTIONS.FETCH_QUESTION_FAILED: {
       return { ...state, isLoading: false, error: payload }
     }
 
@@ -43,10 +70,35 @@ export default (state = {
       return { ...state, isLoading: true, AllScores: [] }
     }
     case ACTIONS.FETCH_QUESTION_SCORES_SUCCEDED: {
-      return { ...state, isLoading: false, allScores: payload.items }
+      return { ...state, isLoading: false, allScores: payload.items, isLoadingSectionBody: false }
     }
     case ACTIONS.FETCH_QUESTION_SCORES_FAILED: {
       return { ...state, isLoading: false, error: null }
+    }
+    case ACTIONS.SELECT_DISELECT_FROM_BODY: {
+      var newSeletedbody = [...state.selectedPartBody]
+      var newSeletedbodyID = [...state.selectedPartBodyID]
+      if (newSeletedbody.includes(payload.value)) {
+        let index = newSeletedbody.indexOf(payload.value)
+        newSeletedbody.splice(index, 1)
+        newSeletedbodyID.splice(index, 1)
+      } else {
+        newSeletedbody.push(payload.value)
+        newSeletedbodyID.push(payload.id)
+      }
+      return { ...state, selectedPartBody: newSeletedbody, selectedPartBodyToUse: newSeletedbody, selectedPartBodyID: newSeletedbodyID, selectedPartBodyIDToUse: newSeletedbodyID }
+    }
+    case ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION: {
+      var newArray = [...state.selectedPartBodyToUse];
+      var newArrayID = [...state.selectedPartBodyIDToUse]
+      if (newArray.length > 0) {
+        newArray.shift();
+        newArrayID.shift();
+      }
+      return { ...state, selectedPartBodyToUse: newArray, isLoadingSectionBody: true, selectedPartBodyIDToUse: newArrayID }
+    }
+    case ACTIONS.ASK_SCREEN: {
+      return { ...state, isLoadingSectionBody: false }
     }
 
     default: {

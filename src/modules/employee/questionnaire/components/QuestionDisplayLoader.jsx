@@ -1,5 +1,5 @@
-import React from 'react'
-import ContentLoader from 'react-content-loader' 
+import React from 'react';
+import ContentLoader from 'react-content-loader';
 
 
 const QuestionDisplayLoader = () => (
@@ -10,6 +10,9 @@ const QuestionDisplayLoader = () => (
     viewBox="0 0 500 275"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
+    style={{
+      width:"100%"
+    }}
   >
     <rect x="10" y="79" rx="3" ry="3" width="410" height="6" /> 
     <rect x="10" y="95" rx="3" ry="3" width="380" height="6" /> 
