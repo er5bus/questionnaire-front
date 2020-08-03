@@ -3,11 +3,13 @@ export const ACTIONS = {
   PREV_PAGE: "questionnaire@PREV_PAGE",
   EXIT_PAGE: "questionnaire@EXIT_PAGE",
   NEXT_QUESTION: "questionnaire@NEXT_QUESTION",
-
+  CHANGE_PAGE: "questionnaire@CHANGE_PAGE",
   SELECT_DISELECT_FROM_BODY: "questionnaire@SELECT_DISELECT_FROM_BODY",
   NEXT_SELECTED_FROM_BODY_QUESTION: "questionnaire@nextSelectedFromBodyQuestions",
+  NEXT_OTHER_QUESTIONS_SECTION: "questionnaire@nextOtherQuestionSection",
   ASK_SCREEN: "questionnaire@ASK_CONTINUE",
   UPDATE_SCORE: "questionnaire@UPDATE_SCORE",
+
   GET_TREE_NODE_PARAMS_INIT: "questionnaire@GET_TREE_NODE_PARAMS_INIT",
   GET_TREE_NODE_PARAMS_SUCCEDED: "questionnaire@GET_TREE_NODE_PARAMS_SUCCEDED",
   GET_TREE_NODE_PARAMS_FAILED: "questionnaire@GET_TREE_NODE_PARAMS_FAILED",
@@ -53,5 +55,11 @@ export const statcTreeNode = {
   KNEES: { treeparam: "45c4308cd22347b39ee99cc2dbb4bea9", nodeparam: "690855bf0c5b44169fbe9de34aec7839" },
   LEG_FOOT: { treeparam: "25c33f7013e74540a0d66faa8caee9a3", nodeparam: "fede40a5aa7c4413a3c7bc25250c704b" },
 
+}
+
+export const otherQuestionsTreeNode = {
+  ERGONOMIE: { treeparam: "ce3ca0a588534b83bdcdbd79ce99472e", nodeparam: "d1e3f5cb64ad4a8ca4c9a09b49531982" },
+  PSYCHOLOGIE: { treeparam: "794623b5d08b4159a30b711bed94d005", nodeparam: "f3819c71e64c46cc868b321fd4ac986d" },
+  COACHING: { treeparam: "5e88325207f74342814b401467bfad98", nodeparam: "fb6a8f2fed1a42c0b0e3cd9afc5309ab" },
 }
 

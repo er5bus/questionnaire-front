@@ -14,8 +14,8 @@ const AskContinue = ({ onExit, onContinue, title }) => {
             <div>
                 <h1 className="h2"> {t(title)}</h1>
                 <div className="pb-5" />
-                <Button onClick={onContinue}>{t('Yes')}</Button>
-                <Button onClick={onExit}>{t('No')}</Button>
+                <Button onClick={onContinue}>{t('Oui')}</Button>
+                <Button onClick={onExit}>{t('Non')}</Button>
             </div>
         </>
     )

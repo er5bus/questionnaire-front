@@ -79,3 +79,10 @@
 .normal-body  {
 fill: "#dee1e0" !important
 }
+.fade-out {
+    opacity: 0;
+    transition: 3s opacity;  
+}
+.fade-in{
+    opacity: 1; 
+}

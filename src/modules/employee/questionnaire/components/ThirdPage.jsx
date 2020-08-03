@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 // reactstrap components
 import { Col, Row } from "reactstrap";
 import Loader from '../../../../components/Loader';
-import { statcTreeNode } from "../constants";
-import { askContinueScreen, changeCurrentQuestion, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, updateScore } from "./../actions";
+import { otherQuestionsTreeNode, statcTreeNode } from "../constants";
+import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, updateScore } from "./../actions";
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
+import QuestionHead from "./QuestionHead";
 class OverviewNode extends React.PureComponent {
 
   constructor(props) {
@@ -22,6 +23,8 @@ class OverviewNode extends React.PureComponent {
     const { currentQuestion } = this.props
     this.props.fetchQuestion(currentQuestion)
     this.props.fetchQuestionScores(currentQuestion)
+    console.log(this.props);
+
   }
 
   checkLogicNode = (item) => {
@@ -111,7 +114,13 @@ class OverviewNode extends React.PureComponent {
 
     }
   }
+  onContinue = () => {
 
+    let currentQuestion = otherQuestionsTreeNode[this.props.otherSectionQuestionToUse[0].id]
+
+    this.props.changeCurrentQuestion(currentQuestion)
+    this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
+  }
   onSelectChoice = (item, action) => {
     if (action.values.length > 0 && this.props.selectedPartBodyIDToUse[0] === this.props.selectedPartBodyID[0]) {
       let actionValues = action.values.map(el => {
@@ -119,7 +128,7 @@ class OverviewNode extends React.PureComponent {
       })
       this.props.updateScore(actionValues)
     }
-    
+
     let { currentQuestion } = this.props
     if (action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
       currentQuestion = { nodeparam: action.pointToTree.firstNode.uid, treeparam: action.pointToTree.uid }
@@ -132,53 +141,15 @@ class OverviewNode extends React.PureComponent {
     }
   }
 
-  calculateScore = (action) => {
-    let newArray = this.state.scores
-    let arrayToTest = action.values.map(el => {
-      return { id: el.score.id, value: el.value }
-    })
-
-    if (action.values.length > 0) {
-      if (newArray.length > 0) {
-        for (let i = 0; i < arrayToTest.length; i++) {
-          let exist = newArray.filter(el => el.id === arrayToTest[i].id);
-          console.log(exist, "existt");
-
-          if (exist.length = 0) {
-            // newArray[exist] = { id: newArray[exist].id, value: newArray[exist].value + arrayToTest[i].value }
-          } else {
-            newArray.push(arrayToTest[i])
-          }
-        }
-      } else {
-        newArray = action.values.map(el => {
-          return { id: el.score.id, value: el.value }
-        })
-      }
-      this.setState({ scores: newArray }, () => console.log(this.state.scores, 'aasdsdsdsdsd'))
-    }
-    console.log(this.state.scores, "nonnn");
-
-  }
-
   render() {
     const { item, isLoading, isLoadingSectionBody } = this.props
     return (
-      <> {this.props.isLoadingSectionBody ? <Loader /> :
+      <> {isLoadingSectionBody ? <Loader /> :
         <>
           {!this.state.nextSection ? (
             <Row className="justify-content-center">
               <Col lg="12">
-                {this.props.selectedPartBodyToUse.length > 0 && (
-                  <div style={{
-                    textAlign: "center"
-                  }}>
-                    <p className="text-primary" style={{
-                      fontSize: 19,
-                      fontWeight: "bold"
-                    }}> Questions about: {this.props.selectedPartBodyToUse[0]} </p>
-                  </div>
-                )}
+                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Des questions à propos  ${this.props.selectedPartBodyToUse[0]} `} pageTitle={false} />}
                 <QuestionDisplay
                   item={item}
                   onSelectChoice={this.onSelectChoice}
@@ -188,7 +159,7 @@ class OverviewNode extends React.PureComponent {
             </Row>
           ) : <div>
               <AskContinue title={"Vous avez déjà répondu à des questions sur les douleurs corporelles, souhaitez-vous continuer ?"}
-                onContinue={this.props.onContinue} onExit={this.props.onExit}  >
+                onContinue={this.onContinue} onExit={this.props.onExit}  >
               </AskContinue>
             </div>} </>}
 
@@ -201,4 +172,4 @@ class OverviewNode extends React.PureComponent {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore })(OverviewNode)
+export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage })(OverviewNode)
