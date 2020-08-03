@@ -24,7 +24,7 @@ class FirstQuestion extends React.Component {
     return (
       <>
         <div>
-          <h1 className="h2"> {'Sélectionnez votre/vos points douloureux'}</h1>
+          <h1 className="h2"> {'Sélectionnez votre points douloureux'}</h1>
           {this.props.selectedPartBody.length > 0 ? (<div style={{
             display: "flex",
             flexWrap: "wrap",
