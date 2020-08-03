@@ -17,8 +17,6 @@ class FourthPage extends React.Component {
     }
     componentDidMount() {
         const { currentQuestion } = this.props
-        console.log(currentQuestion, "currentQuestionPage4");
-
         this.props.fetchQuestion(currentQuestion)
     }
     onContinue = () => {
@@ -31,7 +29,6 @@ class FourthPage extends React.Component {
     }
     componentDidUpdate(prevProps) {
         const { currentQuestion } = this.props
-        console.log(currentQuestion);
         const { currentQuestion: prevCurrentQuestion } = prevProps
         if (currentQuestion && prevCurrentQuestion) {
             if (currentQuestion.nodeparam !== null && prevCurrentQuestion.nodeparam !== null) {
@@ -64,7 +61,6 @@ class FourthPage extends React.Component {
         }
     }
     onSelectChoice = (item, action) => {
-        console.log(action, "actionnnnn");
         if (action.values.length > 0) {
             let actionValues = action.values.map(el => {
                 return { id: el.score.id, value: el.value }
@@ -77,7 +73,6 @@ class FourthPage extends React.Component {
             this.props.changeCurrentQuestion(currentQuestion)
         } else if (action.pointToNode && Object.keys(action.pointToNode).length !== 0) {
             currentQuestion = { ...currentQuestion, nodeparam: action.pointToNode.uid }
-            console.log(currentQuestion, "currr2222");
             this.props.changeCurrentQuestion(currentQuestion)
 
         } else if (action.pointToType === "NOTHING" && action.pointToNode == null && action.pointToTree == null) {
@@ -85,8 +80,8 @@ class FourthPage extends React.Component {
         }
     }
     render() {
-        const { t, isLoading, item } = this.props
-        console.log("prprprprororororo");
+        const { t, isLoading, item, page } = this.props
+        console.log(page);
 
         return (
             <>
@@ -103,7 +98,7 @@ class FourthPage extends React.Component {
                     </Row>
                 ) : <div>
                         <AskContinue title={`Vous avez déjà répondu à des questions ${this.state.titleAsk}, souhaitez-vous continuer ?`}
-                            onContinue={this.props.onContinue} onExit={this.props.onExit}  >
+                            onContinue={this.onContinue} onExit={this.props.onExit}  >
                         </AskContinue>
                     </div>}
             </>

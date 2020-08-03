@@ -17,7 +17,7 @@ export default (state = {
   selectedPartBodyIDToUse: [],
   scores: [],
   otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
-  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }, { id: "COACHING", value: "Activité Physique", page: 6 }],
+  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }],
   isLoadingNextOtherSectionQuestion: false
 }, action) => {
   const { payload, type } = action
