@@ -15,7 +15,10 @@ export default (state = {
   selectedPartBodyToUse: [],
   isLoadingSectionBody: false,
   selectedPartBodyIDToUse: [],
-  scores: []
+  scores: [],
+  otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
+  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }],
+  isLoadingNextOtherSectionQuestion: false
 }, action) => {
   const { payload, type } = action
   switch (type) {
@@ -55,12 +58,15 @@ export default (state = {
     case ACTIONS.NEXT_QUESTION: {
       return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
     }
-
+    case ACTIONS.CHANGE_PAGE: {
+      let newPage = payload
+      return { ...state, page: newPage }
+    }
     case ACTIONS.FETCH_QUESTION_INIT: {
       return { ...state, isLoading: true, item: null, error: null, success: false }
     }
     case ACTIONS.FETCH_QUESTION_SUCCEDED: {
-      return { ...state, item: payload, isLoading: false, error: null, isLoadingSectionBody: false }
+      return { ...state, item: payload, isLoading: false, error: null, isLoadingSectionBody: false, isLoadingNextOtherSectionQuestion: false }
     }
     case ACTIONS.FETCH_QUESTION_FAILED: {
       return { ...state, isLoading: false, error: payload }
@@ -83,8 +89,8 @@ export default (state = {
         newSeletedbody.splice(index, 1)
         newSeletedbodyID.splice(index, 1)
       } else {
-        newSeletedbody.push(payload.value)
-        newSeletedbodyID.push(payload.id)
+        newSeletedbody[0] = payload.value
+        newSeletedbodyID[0] = payload.id
       }
       return { ...state, selectedPartBody: newSeletedbody, selectedPartBodyToUse: newSeletedbody, selectedPartBodyID: newSeletedbodyID, selectedPartBodyIDToUse: newSeletedbodyID }
     }
@@ -99,6 +105,13 @@ export default (state = {
     }
     case ACTIONS.ASK_SCREEN: {
       return { ...state, isLoadingSectionBody: false }
+    }
+    case ACTIONS.NEXT_OTHER_QUESTIONS_SECTION: {
+      let nextArray = [...state.otherSectionQuestionToUse]
+      if (nextArray.length > 0) {
+        nextArray.shift()
+      }
+      return { ...state, otherSectionQuestionToUse: nextArray, isLoadingNextOtherSectionQuestion: true }
     }
 
     default: {

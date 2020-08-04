@@ -33,6 +33,9 @@ export const selectDiselectPartBody = (payload) =>
 export const nextSelectedFromBodyQuestions = () => ({
   type: ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION
 })
+export const nextOtherQuestionsSection = () => ({
+  type: ACTIONS.NEXT_OTHER_QUESTIONS_SECTION
+})
 export const askContinueScreen = () => ({
   type: ACTIONS.ASK_SCREEN
 })
@@ -52,6 +55,10 @@ export const fetchQuestionScores = ({ treeparam }) =>
 
 export const updateScore = (payload) => ({
   type: ACTIONS.UPDATE_SCORE,
+  payload
+})
+export const changePage = (payload) => ({
+  type: ACTIONS.CHANGE_PAGE,
   payload
 })
 export const fetchQuestion = ({ treeparam, nodeparam }) =>

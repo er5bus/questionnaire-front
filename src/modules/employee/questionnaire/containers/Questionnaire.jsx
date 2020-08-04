@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 // reactstrap components
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import FourthPage from '../components/FourthPage';
-import { exitPage, nextPage, prevPage } from './../actions';
+import NutritionalPage from '../components/NutritionalPage';
+import QuestionHead from '../components/QuestionHead';
+import { otherQuestionsTreeNode } from '../constants';
+import { changeCurrentQuestion, changePage, exitPage, nextOtherQuestionsSection, nextPage, prevPage } from './../actions';
 import ExitPage from './../components/ExitPage';
 //import employeeRoutes from './../../../../routes/employee'
 import FirstPage from './../components/FirstPage';
@@ -14,8 +17,15 @@ import ThirdPage from './../components/ThirdPage';
 
 
 
-
 class Questionnaire extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      titlePage: "",
+      showWhitePage: false,
+      fade: false
+    }
+  }
 
   onSubmit = (values) => {
     //this.props.create(values)
@@ -28,14 +38,53 @@ class Questionnaire extends React.Component {
   onPrev = () => {
     this.props.prevPage()
   }
-
+  onContinueFirstPage = () => {
+    
+    this.props.nextOtherQuestionsSection();
+    this.onNext()
+  }
+  changePage = () => {
+    this.props.changeCurrentQuestion(otherQuestionsTreeNode["ERGONOMIE"])
+    this.props.changePage(4)
+  }
   onExit = () => {
     this.props.exitPage()
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps.page, "pagee");
+    if (nextProps.page !== this.props.page && nextProps.page > 2) {
+      console.log("entereedddd");
+
+      this.setState({ showWhitePage: true, fade: false })
+      this.setState({ titlePage: this.titleWhitePage(nextProps.page) })
+      setTimeout(() => {
+        this.setState({ fade: true })
+      }, 1000);
+      setTimeout(() => {
+        this.setState({ showWhitePage: false })
+      }, 2500);
+    }
+  }
+  titleWhitePage = (page) => {
+
+    switch (page) {
+      case 3:
+        return "Questionnaire Santé"
+      case 4:
+        return 'Questionnaire Ergonomie '
+      case 5:
+        return "Questionnaire Psychologie"
+      case 6:
+        return 'Questionnaire Activité Physique '
+      case 7:
+        return 'Questionnaire Nutritionnelle'
+      default:
+        break;
+    }
   }
 
   render() {
     const { t, page, exit /*, error, item, isLoading*/ } = this.props
-
     return (
       <>
         <div className="header bg-primary pb-5">
@@ -49,14 +98,27 @@ class Questionnaire extends React.Component {
           <Row className="justify-content-center">
             <Col lg="12" md="12">
               <Card className="shadow" style={{
-                minHeight:300
+                minHeight: 300
               }}>
+
                 <CardBody className="px-lg-5 py-lg-5">
-                  {page === 1 && <FirstPage onExit={this.onExit} onContinue={this.onNext} />}
-                  {page === 2 && <SecondPage onExit={this.onExit} onContinue={this.onNext} />}
-                  {page === 3 && <ThirdPage onExit={this.onExit} onContinue={this.onNext} />}
-                  {page === 4 && <FourthPage onExit={this.onExit} onContinue={this.onNext} />}
-                  {exit && <ExitPage />}
+                  {this.state.showWhitePage ?
+                    <div className={`d-flex justify-content-center align-items-center ${this.state.fade ? "fade-out" : "fade-in"}  `} style={{
+                      height: 240
+                    }}>
+                      <QuestionHead title={this.state.titlePage} pageTitle={true} />
+                    </div>
+                    :
+                    <>
+                      {page === 1 && <FirstPage onExit={this.changePage} onContinue={this.onContinueFirstPage} />}
+                      {page === 2 && <SecondPage onExit={this.onExit} onContinue={this.onNext} />}
+                      {page === 3 && <ThirdPage onExit={this.onExit} onContinue={this.onNext} />}
+                      {(page === 4 || page === 5 || page === 6) && <FourthPage onExit={this.onExit} onContinue={this.onNext} />}
+                      {page === 7 && <NutritionalPage />}
+                      {exit && <ExitPage />}
+                    </>
+                  }
+
                 </CardBody>
               </Card>
             </Col>
@@ -70,4 +132,4 @@ class Questionnaire extends React.Component {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { nextPage, prevPage, exitPage })(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage, nextOtherQuestionsSection, changeCurrentQuestion })(withTranslation()(Questionnaire))
