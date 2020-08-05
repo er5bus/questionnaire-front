@@ -2,7 +2,7 @@ import { ACTIONS } from './../constants';
 
 
 export default (state = {
-  page: 1,
+  page: 7,
   exit: false,
   isLoading: false,
   item: null,
@@ -18,7 +18,12 @@ export default (state = {
   scores: [],
   otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
   otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }],
-  isLoadingNextOtherSectionQuestion: false
+  isLoadingNextOtherSectionQuestion: false,
+  foodCategories: [],
+  foods: [],
+  isLoadingFoodCategories: false,
+  isLoadingFoods: false
+
 }, action) => {
   const { payload, type } = action
   switch (type) {
@@ -113,7 +118,26 @@ export default (state = {
       }
       return { ...state, otherSectionQuestionToUse: nextArray, isLoadingNextOtherSectionQuestion: true }
     }
+    case ACTIONS.FETCH_CATEGORY_FOOD_INIT: {
 
+      return { ...state, isLoadingFoodCategories: true }
+    }
+    case ACTIONS.FETCH_CATEGORY_FOOD_SUCCEDED: {
+     
+      return { ...state, isLoadingFoodCategories: false, foodCategories: payload }
+    }
+    case ACTIONS.FETCH_CATEGORY_FOOD_FAILED: {
+      return { ...state, isLoadingFoodCategories: false, foodCategories: [] }
+    }
+    case ACTIONS.FETCH_FOODS_INIT: {
+      return { ...state, isLoadingFoods: true }
+    }
+    case ACTIONS.FETCH_FOODS_SUCCEDED: {
+      return { ...state, isLoadingFoods: false, foods: payload }
+    }
+    case ACTIONS.FETCH_FOODS_FAILED: {
+      return { ...state, isLoadingFoodCategories: false, foods: [] }
+    }
     default: {
       return state
     }

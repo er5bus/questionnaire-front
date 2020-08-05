@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { API_BASE_URL, API_QUESTION_BASE_URL } from '../constants'
+import axios from 'axios';
+import { API_BASE_URL, API_FOOD_BASE_URL, API_QUESTION_BASE_URL } from '../constants';
 
 const client = axios.create({
   baseURL: API_BASE_URL,
@@ -16,7 +16,12 @@ const questionClient = axios.create({
   }
 })
 
-
+const questionFood = axios.create({
+  baseURL: API_FOOD_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
 export const makeBaseCall = (method, url, data = {}, headers = {}, params = {}) => client.request({
   method,
   data,
@@ -34,3 +39,11 @@ export const makeQuestionCall = (method, url, data = {}, headers = {}, params = 
   params
 })
 
+
+export const makeFoodQuestion = (method, url, data = {}, headers = {}, params = {}) => questionFood.request({
+  method,
+  data,
+  url,
+  headers,
+  params
+})

@@ -1,4 +1,4 @@
-import { CALL_QUESTION_API, /*CALL_API,*/ HTTP_METHODS } from './../../../../constants';
+import { CALL_FOOD_API, CALL_QUESTION_API, /*CALL_API,*/ HTTP_METHODS } from './../../../../constants';
 import { ACTIONS, ENDPOINT } from './../constants';
 
 
@@ -74,6 +74,30 @@ export const fetchQuestion = ({ treeparam, nodeparam }) =>
       method: HTTP_METHODS.GET,
     }
   })
+export const fetchFoodCategories = () => ({
+  type: CALL_FOOD_API,
+  meta: {
+    actions: {
+      init: ACTIONS.FETCH_CATEGORY_FOOD_INIT,
+      success: ACTIONS.FETCH_CATEGORY_FOOD_SUCCEDED,
+      fail: ACTIONS.FETCH_CATEGORY_FOOD_FAILED
+    },
+    endpoint: ENDPOINT.FOOD_CATEGORY,
+    method: HTTP_METHODS.GET,
+  }
+})
+export const fetchFoods = () => ({
+  type: CALL_FOOD_API,
+  meta: {
+    actions: {
+      init: ACTIONS.FETCH_FOODS_INIT,
+      success: ACTIONS.FETCH_FOODS_SUCCEDED,
+      fail: ACTIONS.FETCH_FOODS_FAILED
+    },
+    endpoint: ENDPOINT.FOOD_FOODS,
+    method: HTTP_METHODS.GET,
+  }
+})
 export const getTreeNodeParamsForSelectedBodyArea = (payload) => ({
   type: CALL_QUESTION_API,
   payload,

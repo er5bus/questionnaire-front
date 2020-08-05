@@ -53,8 +53,6 @@ class Questionnaire extends React.Component {
   componentWillReceiveProps(nextProps) {
     console.log(nextProps.page, "pagee");
     if (nextProps.page !== this.props.page && nextProps.page > 2) {
-      console.log("entereedddd");
-
       this.setState({ showWhitePage: true, fade: false })
       this.setState({ titlePage: this.titleWhitePage(nextProps.page) })
       setTimeout(() => {
