@@ -22,7 +22,9 @@ export default (state = {
   foodCategories: [],
   foods: [],
   isLoadingFoodCategories: false,
-  isLoadingFoods: false
+  isLoadingFoods: false,
+  selectedScoreNut: 0,
+  deselectedScoreNut: 0
 
 }, action) => {
   const { payload, type } = action
@@ -123,7 +125,7 @@ export default (state = {
       return { ...state, isLoadingFoodCategories: true }
     }
     case ACTIONS.FETCH_CATEGORY_FOOD_SUCCEDED: {
-     
+
       return { ...state, isLoadingFoodCategories: false, foodCategories: payload }
     }
     case ACTIONS.FETCH_CATEGORY_FOOD_FAILED: {
@@ -137,6 +139,24 @@ export default (state = {
     }
     case ACTIONS.FETCH_FOODS_FAILED: {
       return { ...state, isLoadingFoodCategories: false, foods: [] }
+    }
+    case ACTIONS.UPDATE_SELECTED_SCORE: {
+      let newScoreNut = state.selectedScoreNut;
+      if (payload.type == "add") {
+        newScoreNut = newScoreNut + payload.value
+      } else {
+        newScoreNut = newScoreNut - payload.value
+      }
+      return { ...state, selectedScoreNut: newScoreNut }
+    }
+    case ACTIONS.UPDATE_DESELECTED_SCORE: {
+      let newDeselctScore = state.deselectedScoreNut
+      if (payload.type == "add") {
+        newDeselctScore = newDeselctScore + payload.value
+      } else {
+        newDeselctScore = newDeselctScore - payload.value
+      }
+      return { ...state, deselectedScoreNut: newDeselctScore }
     }
     default: {
       return state

@@ -9,6 +9,8 @@ export const ACTIONS = {
   NEXT_OTHER_QUESTIONS_SECTION: "questionnaire@nextOtherQuestionSection",
   ASK_SCREEN: "questionnaire@ASK_CONTINUE",
   UPDATE_SCORE: "questionnaire@UPDATE_SCORE",
+  UPDATE_SELECTED_SCORE: "questionnaire@UPDATE_SELECTED_SCORE",
+  UPDATE_DESELECTED_SCORE: "questionnaire@UPDATE_DESELECTED_SCORE",
 
   GET_TREE_NODE_PARAMS_INIT: "questionnaire@GET_TREE_NODE_PARAMS_INIT",
   GET_TREE_NODE_PARAMS_SUCCEDED: "questionnaire@GET_TREE_NODE_PARAMS_SUCCEDED",
@@ -82,17 +84,17 @@ export const zonePeriodeData = {
   columns: {
     'column-1': {
       id: 'column-1',
-      title: 'Souvent',
+      title: 'Fréquement',
       taskIds: [],
     },
     'column-2': {
       id: 'column-2',
-      title: 'Parfois',
+      title: 'Régulièrement',
       taskIds: [],
     },
     'column-3': {
       id: 'column-3',
-      title: 'Occasionnellement',
+      title: 'Parfois',
       taskIds: [],
     },
     'column-4': {

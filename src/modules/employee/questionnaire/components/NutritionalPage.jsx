@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 import Loader from '../../../../components/Loader';
-import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods } from '../actions';
+import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
 import { zonePeriodeData } from '../constants';
 import Column from './column';
 
 
 const Container = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: ${props => props.isHeight ? 'space-around' : 'space-between'};
 width:100%;
 flex-wrap: wrap;
 flex-direction:column;
@@ -96,14 +96,13 @@ class NutritionalPage extends React.Component {
     renderTitle(periode) {
         switch (periode) {
             case 1:
-                return "Matin"
+                return "Petit déjeuner"
             case 2:
-                return "Midi"
+                return "Déjeuner"
             case 3:
-                return "Soir"
+                return "Collation (matin ou soir)"
             case 4:
-                return "Nuit"
-
+                return "Diner"
             default:
                 break;
         }
@@ -159,20 +158,37 @@ class NutritionalPage extends React.Component {
             });
             return [...tasksCat]
         })
+
         let tasksToPut = []
         tasks.forEach(element => {
             element.forEach(el => {
                 tasksToPut.push(el)
             })
         });
+
         tasks.forEach(element => {
             Object.assign(copyOriginalTable.tasks, ...element)
         });
+
+        let deselectedScore = 0;
+
+        tasksToPut.forEach(element => {
+            let taskScore = 0;
+            if (element[Object.keys(element)[0]]["deselected_score"] !== null) {
+                taskScore = Number(element[Object.keys(element)[0]]["deselected_score"])
+            }
+            deselectedScore = deselectedScore + taskScore
+        });
+        this.props.updateDeSelectedScoreNutrition({ type: "add", value: deselectedScore })
         return copyOriginalTable
 
 
     }
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps.deselectedScoreNut, "desslll");
+        console.log(nextProps.selectedScoreNut);
+
+
         let categoriesFood = [];
         let filtredFoods = [];
         let breakfast = [];
@@ -181,16 +197,21 @@ class NutritionalPage extends React.Component {
         let dinner = [];
         if (nextProps.foodCategories !== this.props.foodCategories) {
             categoriesFood = Object.entries(nextProps.foodCategories).map((el) => el[1]);
-            filtredFoods = categoriesFood.filter(el => el.foods.length !== 0 && el.meals.length);
+            filtredFoods = categoriesFood.filter(el => el.foods.length !== 0 && el.meals.length !== 0);
             breakfast = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 4).length > 0);
             lunch = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 5).length > 0);
             snack = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 3).length > 0);
             dinner = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 6).length > 0);
             this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast) }, () => {
-                this.setState({ isLoadingFood: false })
+                this.setState({ dataMidi: this.formattedTabel(zonePeriodeData, lunch) }, () => {
+                    this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack) }, () => {
+                        this.setState({ dataNuit: this.formattedTabel(zonePeriodeData, dinner) }, () => {
+                            this.setState({ isLoadingFood: false })
+                        })
+                    })
+                })
 
             })
-
 
 
         }
@@ -210,6 +231,7 @@ class NutritionalPage extends React.Component {
 
         const start = this.renderState(this.state.periode).columns[source.droppableId];
         const finish = this.renderState(this.state.periode).columns[destination.droppableId];
+
 
         if (start === finish) {
             const newTaskIds = Array.from(start.taskIds);
@@ -233,9 +255,49 @@ class NutritionalPage extends React.Component {
             return;
         }
         // Try to move between nutritional droppable
-        if (!finish.id.includes("column") && !draggableId.includes(finish.id)) {
+        if (!finish.id.toString().includes("column") && !draggableId.toString().slice(0, draggableId.toString().indexOf('-')).includes(finish.id.toString())) {
             return
         }
+        if(start.id.toString().includes("column")) {
+            if(!finish.id.toString().includes("column")) {
+                let draggable = this.renderState(this.state.periode).tasks[draggableId];
+                let selectedScore = 0;
+                let deselectedScore = 0;
+    
+                if (draggable.deselected_score !== null) {
+                    deselectedScore = Number(draggable.deselected_score);
+    
+    
+                }
+                if (draggable.selected_score !== null) {
+                    selectedScore = Number(draggable.selected_score);
+    
+    
+                }
+                this.props.updateDeSelectedScoreNutrition({ type: "add", value: deselectedScore })
+                this.props.updateSelectedScoreNutrition({ type: "subs", value: selectedScore })
+            }
+
+        } else {
+            if (finish.id.toString().includes("column")) {
+                let draggable = this.renderState(this.state.periode).tasks[draggableId];
+                let selectedScore = 0;
+                let deselectedScore = 0;
+    
+                if (draggable.deselected_score !== null) {
+                    deselectedScore = Number(draggable.deselected_score);
+    
+    
+                }
+                if (draggable.selected_score !== null) {
+                    selectedScore = Number(draggable.selected_score);
+    
+                }
+                this.props.updateDeSelectedScoreNutrition({ type: "subs", value: deselectedScore })
+                this.props.updateSelectedScoreNutrition({ type: "add", value: selectedScore })
+            } 
+        }
+      
         // Moving from one list to another
         const startTaskIds = Array.from(start.taskIds);
         startTaskIds.splice(source.index, 1);
@@ -294,7 +356,7 @@ class NutritionalPage extends React.Component {
                         <Row>
                             <Col xs="6" className="shadow-nutrition" >
 
-                                <Container className=" justify-content-center " isHeight={true} >
+                                <Container isHeight={true} >
                                     <TitleTable> Déplacer les aliments dans le tableau </TitleTable>
                                     {zoneData.map(columnId => {
                                         const column = this.renderState(this.state.periode).columns[columnId];
@@ -326,4 +388,4 @@ class NutritionalPage extends React.Component {
 }
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods })(NutritionalPage) 
+export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition })(NutritionalPage) 
