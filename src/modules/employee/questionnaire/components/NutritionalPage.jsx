@@ -3,6 +3,7 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from "react-redux";
 import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
+import Loader from '../../../../components/Loader';
 import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods } from '../actions';
 import { zonePeriodeData } from '../constants';
 import Column from './column';
@@ -14,7 +15,10 @@ justify-content: space-between;
 width:100%;
 flex-wrap: wrap;
 flex-direction:column;
-height: ${props => props.isHeight ? '100%' : 'auto'}
+height: ${props => props.isHeight ? '100%' : 'auto'};
+box-shadow: 6px 10px 23px -5px rgba(0,0,0,0.66);
+padding:20px;
+border-radius: 20px;
 `
 const PeriodeTitle = styled.div`
     display:flex;
@@ -33,19 +37,29 @@ const ArrowWrapper = styled.div`
  align-items center;
  margin: 0 20px;
 `
+const TitleTable = styled.div`
+ width:100%;
+ padding: 0 20px 10px;
+ height:50px;
+ font-weight: bold;
+ color:#32325d;
+ font-size: 1.5 rem
 
+`
 
 class NutritionalPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             data: zonePeriodeData,
+            dataMidi: zonePeriodeData,
+            dataSoir: zonePeriodeData,
+            dataNuit: zonePeriodeData,
             isLoadingFood: true,
             foodExist: false,
             periode: 1,
-            dataMidi: zonePeriodeData,
-            dataSoir: zonePeriodeData,
-            dataNuit: zonePeriodeData
+            testData: []
+
         };
 
     }
@@ -95,37 +109,92 @@ class NutritionalPage extends React.Component {
         }
     }
     componentDidMount() {
-        //this.props.fetchFoodCategories()
+        this.props.fetchFoodCategories()
     }
     componentDidUpdate(prevProps) {
 
     }
+    formattedTabel = (orignalTable, tableToFormat) => {
+        let copyOriginalTable = JSON.parse(JSON.stringify(orignalTable));
+
+        if (tableToFormat.length == 0) {
+            return orignalTable
+        }
+        let columOrder = tableToFormat.map(el => el.id);
+        copyOriginalTable.columnOrder.push(...columOrder);
+        let columns = tableToFormat.map(elementToformat => {
+            let idElment = elementToformat.id;
+            let titleElment = elementToformat.name
+            let tasksId = elementToformat.foods.map(task => `${task.category_id}-${task.id}`)
+            return {
+                [`${idElment}`]: {
+                    id: idElment,
+                    title: titleElment,
+                    taskIds: tasksId
+                }
+            }
+        });
+        columns.forEach(element => {
+            Object.assign(copyOriginalTable.columns, element)
+        });
+
+        let tasks = tableToFormat.map(ele => {
+            let tasksCat = ele.foods.map(food => {
+                let foodId = `${food.category_id}-${food.id}`;
+                let content = food.name;
+                let description = food.description
+                let selected_score = food.selected_score;
+                let deselected_score = food.deselected_score;
+                let uniqueId = food.id
+                return {
+                    [`${foodId}`]: {
+                        id: foodId,
+                        content: content,
+                        description: description,
+                        selected_score: selected_score,
+                        deselected_score: deselected_score,
+                        uniqueId: uniqueId,
+                    }
+                }
+            });
+            return [...tasksCat]
+        })
+        let tasksToPut = []
+        tasks.forEach(element => {
+            element.forEach(el => {
+                tasksToPut.push(el)
+            })
+        });
+        tasks.forEach(element => {
+            Object.assign(copyOriginalTable.tasks, ...element)
+        });
+        return copyOriginalTable
+
+
+    }
     componentWillReceiveProps(nextProps) {
-        // let categoriesFood = [];
-        // let foodsFood = []
-        // if (nextProps.foodCategories !== this.props.foodCategories) {
-        //     if (nextProps.foodCategories["categories"].length > 0) {
-        //         categoriesFood = nextProps.foodCategories["categories"];
+        let categoriesFood = [];
+        let filtredFoods = [];
+        let breakfast = [];
+        let lunch = [];
+        let snack = [];
+        let dinner = [];
+        if (nextProps.foodCategories !== this.props.foodCategories) {
+            categoriesFood = Object.entries(nextProps.foodCategories).map((el) => el[1]);
+            filtredFoods = categoriesFood.filter(el => el.foods.length !== 0 && el.meals.length);
+            breakfast = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 4).length > 0);
+            lunch = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 5).length > 0);
+            snack = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 3).length > 0);
+            dinner = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 6).length > 0);
+            this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast) }, () => {
+                this.setState({ isLoadingFood: false })
+
+            })
 
 
-        //         this.props.fetchFoods()
-        //     } else {
-        //         this.setState({ isLoadingFood: false })
-        //     }
-        // }
-        // if (nextProps.foods !== this.props.foods) {
-        //     if (nextProps.foods["foods"].length > 0) {
-        //         foodsFood = nextProps.foods["foods"];
-        //         let customCatgorie = categoriesFood.map(el => {
-        //             return {}
-        //         } )
 
+        }
 
-        //     } else {
-        //         this.setState({ isLoadingFood: false })
-        //     }
-
-        // }
 
     }
     onDragEnd = (result) => {
@@ -197,54 +266,59 @@ class NutritionalPage extends React.Component {
 
     }
     render() {
-        console.log(this.renderState(this.state.periode));
 
         const zoneData = this.renderState(this.state.periode).columnOrder.slice(0, 4);
         const nutritional = this.renderState(this.state.periode).columnOrder.slice(4, this.renderState(this.state.periode).columnOrder.length);
         return (
             <>
-                <PeriodeTitle>
-                    <ArrowWrapper><i className="fas fa-arrow-left" onClick={() => {
-                        if (this.state.periode > 1) {
-                            this.setState({ periode: this.state.periode - 1 })
-                        }
-                    }} style={{
-                        fontSize: 19
-                    }}></i> </ArrowWrapper>
+                {this.state.isLoadingFood ? <Loader></Loader> : <>
+                    <PeriodeTitle>
+                        <ArrowWrapper><i className="fas fa-arrow-left" onClick={() => {
+                            if (this.state.periode > 1) {
+                                this.setState({ periode: this.state.periode - 1 })
+                            }
+                        }} style={{
+                            fontSize: 19
+                        }}></i> </ArrowWrapper>
 
-                    {this.renderTitle(this.state.periode)}
-                    <ArrowWrapper> <i className="fas fa-arrow-right" onClick={() => {
-                        if (this.state.periode < 4) {
-                            this.setState({ periode: this.state.periode + 1 })
-                        }
-                    }} style={{
-                        fontSize: 19
-                    }}></i> </ArrowWrapper>
-                </PeriodeTitle>
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Row>
-                        <Col xs="6" >
-                            <Container className=" justify-content-center " isHeight={true} >
-                                {zoneData.map(columnId => {
-                                    const column = this.renderState(this.state.periode).columns[columnId];
-                                    const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                    return <Column key={column.id} column={column} tasks={tasks} />
-                                })}
-                            </Container>
-                        </Col>
-                        <Col xs="6">
-                            <Container className=" justify-content-center" isHeight={false}>
+                        {this.renderTitle(this.state.periode)}
+                        <ArrowWrapper> <i className="fas fa-arrow-right" onClick={() => {
+                            if (this.state.periode < 4) {
+                                this.setState({ periode: this.state.periode + 1 })
+                            }
+                        }} style={{
+                            fontSize: 19
+                        }}></i> </ArrowWrapper>
+                    </PeriodeTitle>
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Row>
+                            <Col xs="6" className="shadow-nutrition" >
 
-                                {nutritional.map(columnId => {
-                                    const column = this.renderState(this.state.periode).columns[columnId];
-                                    const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                    return <Column key={column.id} column={column} type={this.state.type} tasks={tasks} />
-                                })}
-                            </Container>
-                        </Col>
-                    </Row>
+                                <Container className=" justify-content-center " isHeight={true} >
+                                    <TitleTable> Déplacer les aliments dans le tableau </TitleTable>
+                                    {zoneData.map(columnId => {
+                                        const column = this.renderState(this.state.periode).columns[columnId];
+                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
+                                        return <Column key={column.id} column={column} tasks={tasks} />
+                                    })}
+                                </Container>
+                            </Col>
+                            <Col xs="6" className="shadow-nutrition">
 
-                </DragDropContext>
+                                <Container className=" justify-content-center" isHeight={false}>
+                                    <TitleTable>Les aliments </TitleTable>
+                                    {nutritional.map(columnId => {
+                                        const column = this.renderState(this.state.periode).columns[columnId];
+                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
+                                        return <Column key={column.id} column={column} type={this.state.type} tasks={tasks} />
+                                    })}
+                                </Container>
+                            </Col>
+                        </Row>
+
+                    </DragDropContext>
+                </>}
+
             </>
         )
     }
