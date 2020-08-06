@@ -20,12 +20,24 @@ export const ACTIONS = {
 
   FETCH_QUESTION_INIT: "questionnaire@FETCH_QUESTION_INIT",
   FETCH_QUESTION_SUCCEDED: "questionnaire@FETCH_QUESTION_SUCCEDED",
-  FETCH_QUESTION_FAILED: "questionnaire@FETCH_QUESTION_FAILED"
+  FETCH_QUESTION_FAILED: "questionnaire@FETCH_QUESTION_FAILED",
+
+  FETCH_CATEGORY_FOOD_INIT: 'questionnaire@FETCH_CATEGORY_FOOD_INIT',
+  FETCH_CATEGORY_FOOD_SUCCEDED: 'questionnaire@FETCH_CATEGORY_FOOD_SUCCEDED',
+  FETCH_CATEGORY_FOOD_FAILED: 'questionnaire@FETCH_CATEGORY_FOOD_FAILED',
+
+  FETCH_FOODS_INIT: 'questionnaire@FETCH_FOODS_INIT',
+  FETCH_FOODS_SUCCEDED: 'questionnaire@FETCH_FOODS_SUCCEDED',
+  FETCH_FOODS_FAILED: 'questionnaire@FETCH_FOODS_FAILED',
+
 }
 
 export const ENDPOINT = {
   QUESTION_SCORES: "/api/tree/:treeparam/all/scores",
-  QUESTION: "/api/tree/:treeparam/node/:nodeparam"
+  QUESTION: "/api/tree/:treeparam/node/:nodeparam",
+  FOOD_CATEGORY: 'category/list?page=1&searchName=&searchLegend=',
+  FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
+
 
 }
 
@@ -63,3 +75,64 @@ export const otherQuestionsTreeNode = {
   COACHING: { treeparam: "5e88325207f74342814b401467bfad98", nodeparam: "fb6a8f2fed1a42c0b0e3cd9afc5309ab" },
 }
 
+export const zonePeriodeData = {
+  tasks: {
+    'Liquid-water': { id: 'Liquid-water', content: 'Eau' },
+    'Liquid-milk': { id: 'Liquid-milk', content: 'Lait' },
+    'Liquid-jus': { id: 'Liquid-jus', content: 'Jus' },
+    'Fruit-banane': { id: 'Fruit-banane', content: 'Bananes' },
+    'Fruit-apple': { id: 'Fruit-apple', content: 'Pommes' },
+    'Fruit-Grape': { id: 'Fruit-Grape', content: 'Grain de raisin' },
+    'Vegtables-peas': { id: 'Vegtables-peas', content: 'Pois' },
+    'Vegtables-potato': { id: 'Vegtables-potato', content: 'Patates' },
+    'Vegtables-onion': { id: 'Vegtables-onion', content: 'Oignons' },
+    'Meat-chicken': { id: 'Meat-chicken', content: 'Poulet' },
+    'Meat-beef': { id: 'Meat-beef', content: 'Boeuf' },
+    'Meat-porc': { id: 'Meat-porc', content: 'Couchon' },
+
+  },
+  columns: {
+    'column-1': {
+      id: 'column-1',
+      title: 'Souvent',
+      taskIds: [],
+    },
+    'column-2': {
+      id: 'column-2',
+      title: 'Parfois',
+      taskIds: [],
+    },
+    'column-3': {
+      id: 'column-3',
+      title: 'Occasionnellement',
+      taskIds: [],
+    },
+    'column-4': {
+      id: 'column-4',
+      title: 'Rarement',
+      taskIds: [],
+    },
+    'Liquid': {
+      id: 'Liquid',
+      title: 'Liquides',
+      taskIds: ['Liquid-water', 'Liquid-milk', 'Liquid-jus'],
+    },
+    'Fruit': {
+      id: 'Fruit',
+      title: 'Fruits',
+      taskIds: ['Fruit-banane', 'Fruit-apple', 'Fruit-Grape'],
+    },
+    'Vegtables': {
+      id: 'Vegtables',
+      title: 'Légumes',
+      taskIds: ['Vegtables-peas', 'Vegtables-potato', 'Vegtables-onion'],
+    },
+    'Meat': {
+      id: 'Meat',
+      title: 'Viandes',
+      taskIds: ['Meat-chicken', 'Meat-beef', 'Meat-porc'],
+    },
+  },
+  // Facilitate reordering of the columns
+  columnOrder: ['column-1', 'column-2', 'column-3', 'column-4', "Liquid", "Fruit", "Vegtables", "Meat"]
+};
