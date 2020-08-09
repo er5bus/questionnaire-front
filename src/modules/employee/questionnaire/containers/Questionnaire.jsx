@@ -95,7 +95,8 @@ class Questionnaire extends React.Component {
           <Row className="justify-content-center">
             <Col lg="12" md="12">
               <Card className="shadow" style={{
-                minHeight: 500
+                minHeight: 500,
+                backgroundColor: this.props.page === 7 ? "#FBFBFF" : "white"
               }}>
 
                 <CardBody className="px-lg-5 py-lg-5">

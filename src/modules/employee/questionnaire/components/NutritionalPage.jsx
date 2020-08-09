@@ -6,19 +6,32 @@ import styled from 'styled-components';
 import Loader from '../../../../components/Loader';
 import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
 import { zonePeriodeData } from '../constants';
+import ColumnAliments from './ColumAliments';
 import Column from './column';
 
 
 const Container = styled.div`
+display: flex;
+width:100%;
+flex-wrap: wrap;
+flex-direction:column;
+height: 100%;
+padding:20px;
+background: #FFFFFF;
+box-shadow: 0px 0px 45px rgba(219, 228, 240, 0.21);
+border-radius: 24px;
+`
+const ContainerAliments = styled.div`
 display: flex;
 justify-content: ${props => props.isHeight ? 'space-around' : 'space-between'};
 width:100%;
 flex-wrap: wrap;
 flex-direction:column;
 height: ${props => props.isHeight ? '100%' : 'auto'};
-box-shadow: 6px 10px 23px -5px rgba(0,0,0,0.66);
 padding:20px;
-border-radius: 20px;
+background: #FFFFFF;
+box-shadow: 0px 0px 45px rgba(219, 228, 240, 0.21);
+border-radius: 24px;
 `
 const PeriodeTitle = styled.div`
     display:flex;
@@ -27,7 +40,8 @@ const PeriodeTitle = styled.div`
     width:100%;
     height: 100px;
     font-size:30px;
-    color: #0C41B3
+    color: #0C41B3;
+    font-family: 'Montserrat', sans-serif;
 `
 const ArrowWrapper = styled.div`
  width: 30px;
@@ -358,23 +372,23 @@ class NutritionalPage extends React.Component {
 
                                 <Container isHeight={true} >
                                     <TitleTable> Déplacer les aliments dans le tableau </TitleTable>
-                                    {zoneData.map(columnId => {
+                                    {zoneData.map((columnId, index) => {
                                         const column = this.renderState(this.state.periode).columns[columnId];
                                         const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                        return <Column key={column.id} column={column} tasks={tasks} />
+                                        return <Column indexColumn = {index} key={column.id} column={column} tasks={tasks} />
                                     })}
                                 </Container>
                             </Col>
                             <Col xs="6" className="shadow-nutrition">
 
-                                <Container className=" justify-content-center" isHeight={false}>
+                                <ContainerAliments className=" justify-content-center" isHeight={false}>
                                     <TitleTable>Les aliments </TitleTable>
                                     {nutritional.map(columnId => {
                                         const column = this.renderState(this.state.periode).columns[columnId];
                                         const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                        return <Column key={column.id} column={column} type={this.state.type} tasks={tasks} />
+                                        return <ColumnAliments key={column.id} column={column} type={this.state.type} tasks={tasks} />
                                     })}
-                                </Container>
+                                </ContainerAliments>
                             </Col>
                         </Row>
 

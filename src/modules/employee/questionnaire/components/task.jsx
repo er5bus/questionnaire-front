@@ -6,13 +6,16 @@ const Container = styled.div`
   border-radius: 20px;
   padding:0 20px;
   margin: 8px;
-  height:39px;
+  height:43px;
   display:flex;
   align-items : center;
   transition: background-color 0.2s ease;
   transition: color 0.2s ease;
   color: ${props => props.isDragging ? 'white' : '#32325d'};
-  background-color: ${props => props.isDragging ? '#0C41B3' : 'white'}
+  background-color: ${props => props.isDragging ? '#0C41B3' : 'white'};
+  &:focus {
+    outline:none;
+  }
 `;
 
 export default class Task extends React.Component {
