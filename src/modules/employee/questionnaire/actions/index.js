@@ -52,6 +52,14 @@ export const fetchQuestionScores = ({ treeparam }) =>
       method: HTTP_METHODS.GET,
     }
   })
+export const updateSelectedScoreNutrition = (payload) => ({
+  type: ACTIONS.UPDATE_SELECTED_SCORE,
+  payload
+});
+export const updateDeSelectedScoreNutrition = (payload) => ({
+  type: ACTIONS.UPDATE_DESELECTED_SCORE,
+  payload
+});
 
 export const updateScore = (payload) => ({
   type: ACTIONS.UPDATE_SCORE,

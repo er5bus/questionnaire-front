@@ -17,7 +17,7 @@
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,900;1,100;1,200;1,300;1,400;1,500;1,700&display=swap" );
 // Bootstrap functions
 @import 'bootstrap/functions';
 @import "bootstrap/mixins";
@@ -85,4 +85,7 @@ fill: "#dee1e0" !important
 }
 .fade-in{
     opacity: 1; 
+}
+.shadow-nutrition {
+  padding: 30px
 }

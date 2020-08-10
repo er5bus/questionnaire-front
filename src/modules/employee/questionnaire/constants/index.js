@@ -9,6 +9,8 @@ export const ACTIONS = {
   NEXT_OTHER_QUESTIONS_SECTION: "questionnaire@nextOtherQuestionSection",
   ASK_SCREEN: "questionnaire@ASK_CONTINUE",
   UPDATE_SCORE: "questionnaire@UPDATE_SCORE",
+  UPDATE_SELECTED_SCORE: "questionnaire@UPDATE_SELECTED_SCORE",
+  UPDATE_DESELECTED_SCORE: "questionnaire@UPDATE_DESELECTED_SCORE",
 
   GET_TREE_NODE_PARAMS_INIT: "questionnaire@GET_TREE_NODE_PARAMS_INIT",
   GET_TREE_NODE_PARAMS_SUCCEDED: "questionnaire@GET_TREE_NODE_PARAMS_SUCCEDED",
@@ -35,7 +37,7 @@ export const ACTIONS = {
 export const ENDPOINT = {
   QUESTION_SCORES: "/api/tree/:treeparam/all/scores",
   QUESTION: "/api/tree/:treeparam/node/:nodeparam",
-  FOOD_CATEGORY: 'category/list?page=1&searchName=&searchLegend=',
+  FOOD_CATEGORY: 'category/cat-foods-meals',
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
 
 
@@ -77,34 +79,22 @@ export const otherQuestionsTreeNode = {
 
 export const zonePeriodeData = {
   tasks: {
-    'Liquid-water': { id: 'Liquid-water', content: 'Eau' },
-    'Liquid-milk': { id: 'Liquid-milk', content: 'Lait' },
-    'Liquid-jus': { id: 'Liquid-jus', content: 'Jus' },
-    'Fruit-banane': { id: 'Fruit-banane', content: 'Bananes' },
-    'Fruit-apple': { id: 'Fruit-apple', content: 'Pommes' },
-    'Fruit-Grape': { id: 'Fruit-Grape', content: 'Grain de raisin' },
-    'Vegtables-peas': { id: 'Vegtables-peas', content: 'Pois' },
-    'Vegtables-potato': { id: 'Vegtables-potato', content: 'Patates' },
-    'Vegtables-onion': { id: 'Vegtables-onion', content: 'Oignons' },
-    'Meat-chicken': { id: 'Meat-chicken', content: 'Poulet' },
-    'Meat-beef': { id: 'Meat-beef', content: 'Boeuf' },
-    'Meat-porc': { id: 'Meat-porc', content: 'Couchon' },
 
   },
   columns: {
     'column-1': {
       id: 'column-1',
-      title: 'Souvent',
+      title: 'Fréquement',
       taskIds: [],
     },
     'column-2': {
       id: 'column-2',
-      title: 'Parfois',
+      title: 'Régulièrement',
       taskIds: [],
     },
     'column-3': {
       id: 'column-3',
-      title: 'Occasionnellement',
+      title: 'Parfois',
       taskIds: [],
     },
     'column-4': {
@@ -112,27 +102,8 @@ export const zonePeriodeData = {
       title: 'Rarement',
       taskIds: [],
     },
-    'Liquid': {
-      id: 'Liquid',
-      title: 'Liquides',
-      taskIds: ['Liquid-water', 'Liquid-milk', 'Liquid-jus'],
-    },
-    'Fruit': {
-      id: 'Fruit',
-      title: 'Fruits',
-      taskIds: ['Fruit-banane', 'Fruit-apple', 'Fruit-Grape'],
-    },
-    'Vegtables': {
-      id: 'Vegtables',
-      title: 'Légumes',
-      taskIds: ['Vegtables-peas', 'Vegtables-potato', 'Vegtables-onion'],
-    },
-    'Meat': {
-      id: 'Meat',
-      title: 'Viandes',
-      taskIds: ['Meat-chicken', 'Meat-beef', 'Meat-porc'],
-    },
+
   },
   // Facilitate reordering of the columns
-  columnOrder: ['column-1', 'column-2', 'column-3', 'column-4', "Liquid", "Fruit", "Vegtables", "Meat"]
+  columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
 };

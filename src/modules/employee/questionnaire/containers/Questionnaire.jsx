@@ -39,7 +39,7 @@ class Questionnaire extends React.Component {
     this.props.prevPage()
   }
   onContinueFirstPage = () => {
-    
+
     this.props.nextOtherQuestionsSection();
     this.onNext()
   }
@@ -51,7 +51,6 @@ class Questionnaire extends React.Component {
     this.props.exitPage()
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.page, "pagee");
     if (nextProps.page !== this.props.page && nextProps.page > 2) {
       this.setState({ showWhitePage: true, fade: false })
       this.setState({ titlePage: this.titleWhitePage(nextProps.page) })
@@ -96,7 +95,8 @@ class Questionnaire extends React.Component {
           <Row className="justify-content-center">
             <Col lg="12" md="12">
               <Card className="shadow" style={{
-                minHeight: 300
+                minHeight: 500,
+                backgroundColor: this.props.page === 7 ? "#FBFBFF" : "white"
               }}>
 
                 <CardBody className="px-lg-5 py-lg-5">
