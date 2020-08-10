@@ -2,7 +2,7 @@ import { ACTIONS } from './../constants';
 
 
 export default (state = {
-  page: 7,
+  page: 1,
   exit: false,
   isLoading: false,
   item: null,
