@@ -1,23 +1,23 @@
 /*
 
 =========================================================
-* Impact Design System - v1.0.0
-=========================================================
+ * Impact Design System - v1.0.0
+ =========================================================
 
-* Product Page: https://www.creative-tim.com/product/impact-design-system
-* Copyright 2010 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/impact-design-system/blob/master/LICENSE.md)
+ * Product Page: https://www.creative-tim.com/product/impact-design-system
+ * Copyright 2010 Creative Tim (https://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/impact-design-system/blob/master/LICENSE.md)
 
-* Coded by Creative Tim
+ * Coded by Creative Tim
 
-=========================================================
+ =========================================================
 
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-*/
+ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,900;1,100;1,200;1,300;1,400;1,500;1,700&display=swap" );
 // Bootstrap functions
 @import 'bootstrap/functions';
 @import "bootstrap/mixins";
@@ -74,15 +74,18 @@
 // nucleo icons
 @import "nucleo/nucleo.scss";
 .active-body {
-    fill:#f7911e !important
+  fill:#f7911e !important
 }
 .normal-body  {
-fill: "#dee1e0" !important
+  fill: "#dee1e0" !important
 }
 .fade-out {
-    opacity: 0;
-    transition: 3s opacity;  
+  opacity: 0;
+  transition: 3s opacity;
 }
 .fade-in{
-    opacity: 1; 
+  opacity: 1;
+}
+.shadow-nutrition {
+  padding: 30px
 }

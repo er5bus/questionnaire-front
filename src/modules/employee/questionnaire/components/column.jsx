@@ -3,29 +3,46 @@ import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Task from './task';
 const Container = styled.div`
-  margin: 8px;
-  border: 1px solid lightgrey;
-  border-radius: 2px;
+  margin: 0px 8px;
   min-width: 280px;
-  display: block
+  border-top: 1px solid #DBE4F0;
+  border-right:  1px solid #DBE4F0;
+  border-left:  1px solid #DBE4F0;
+  border-bottom:${props => props.indexColumn === 3 ? "1px solid #DBE4F0" : ""};
+  border-top-left-radius: ${props => props.indexColumn === 0 ? "24px" : "0px"} ;
+  border-top-right-radius: ${props => props.indexColumn === 0 ? "24px" : "0px"} ;
+  border-bottom-right-radius: ${props => props.indexColumn === 3 ? "24px" : "0px"} ;
+  border-bottom-left-radius: ${props => props.indexColumn === 3 ? "24px" : "0px"} ;
+  display: block; 
+  display:flex;
 `;
-const Title = styled.h3`
+const Title = styled.div`
   margin-bottom:-0.5rem;
-  padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid lightgrey;
+  padding: 0px 8px;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  border-right :1px solid #DBE4F0;
+  max-height:100%;
+  width: 200px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 20px;
+color: #7C7C7C;
 
 `;
 const TaskList = styled.div`
-  padding: 8px;
-  margin-top: 8px;
   transition: background-color 0.2s ease;
-  background-color: ${props => (props.isDraggingOver ? 'skyblue' : 'white')};
-  flex-grow:1;
+  background-color: ${props => (props.isDraggingOver ? '#32325d' : 'white')};
   min-height: 100px;
   display : flex;
   flex-wrap:wrap;
+  width: 100%;
   max-width:100%;
+  border-top-right-radius: ${props => props.indexColumn === 0 ? "24px" : "0px"};
+  border-bottom-right-radius: ${props => props.indexColumn === 3 ? "24px" : "0px"}
 `;
 class InnerList extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -41,8 +58,10 @@ class InnerList extends React.Component {
 
 export default class column extends React.Component {
   render() {
+
+
     return (
-      <Container>
+      <Container indexColumn={this.props.indexColumn}>
         <Title>{this.props.column.title}</Title>
         <Droppable droppableId={this.props.column.id}
           direction="horizontal"
@@ -52,6 +71,7 @@ export default class column extends React.Component {
               {...provided.droppableProps}
               ref={provided.innerRef}
               isDraggingOver={snapshot.isDraggingOver}
+              indexColumn={this.props.indexColumn}
             >
               <InnerList tasks={this.props.tasks} />
               {provided.placeholder}
