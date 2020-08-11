@@ -35,7 +35,6 @@ color: #7C7C7C;
 `;
 const TaskList = styled.div`
   transition: background-color 0.2s ease;
-  background-color: ${props => (props.isDraggingOver ? '#32325d' : 'white')};
   min-height: 100px;
   display : flex;
   flex-wrap:wrap;

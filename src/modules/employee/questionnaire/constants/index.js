@@ -39,8 +39,7 @@ export const ENDPOINT = {
   QUESTION: "/api/tree/:treeparam/node/:nodeparam",
   FOOD_CATEGORY: 'category/cat-foods-meals',
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
-
-
+  IMAGES_PATH: "http://predicta-alim.fulltech.io/assets/uploads/"
 }
 
 
