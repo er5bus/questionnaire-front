@@ -4,7 +4,7 @@ import 'awesome-steps/dist/style.css';
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { connect } from "react-redux";
-import { Col, Row } from 'reactstrap';
+import { Button, Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 import Loader from '../../../../components/Loader';
 import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
@@ -30,8 +30,6 @@ width:100%;
 flex-wrap: wrap;
 flex-direction:column;
 height: ${props => props.isHeight ? '100%' : 'auto'};
-padding:20px;
-background: #FFFFFF;
 box-shadow: 0px 0px 45px rgba(219, 228, 240, 0.21);
 border-radius: 24px;
 `
@@ -119,9 +117,7 @@ class NutritionalPage extends React.Component {
     componentDidMount() {
         this.props.fetchFoodCategories()
     }
-    componentDidUpdate(prevProps) {
 
-    }
     formattedTabel = (orignalTable, tableToFormat) => {
         let copyOriginalTable = JSON.parse(JSON.stringify(orignalTable));
 
@@ -153,7 +149,8 @@ class NutritionalPage extends React.Component {
                 let description = food.description
                 let selected_score = food.selected_score;
                 let deselected_score = food.deselected_score;
-                let uniqueId = food.id
+                let uniqueId = food.id;
+                let image_url = food.image_url
                 return {
                     [`${foodId}`]: {
                         id: foodId,
@@ -162,6 +159,7 @@ class NutritionalPage extends React.Component {
                         selected_score: selected_score,
                         deselected_score: deselected_score,
                         uniqueId: uniqueId,
+                        image_url: image_url
                     }
                 }
             });
@@ -211,6 +209,8 @@ class NutritionalPage extends React.Component {
             lunch = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 5).length > 0);
             snack = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 3).length > 0);
             dinner = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 6).length > 0);
+            console.log(this.formattedTabel(zonePeriodeData, breakfast), "tababababababa");
+
             this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast) }, () => {
                 this.setState({ dataMidi: this.formattedTabel(zonePeriodeData, lunch) }, () => {
                     this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack) }, () => {
@@ -346,27 +346,25 @@ class NutritionalPage extends React.Component {
         return (
             <>
                 {this.state.isLoadingFood ? <Loader></Loader> : <>
-
                     <Row>
-                        <Col md={{ size:6, offset:3 }}>
-                    <Steps current={this.state.periode}
-                        labelPlacement={"vertical"}
-                        direction={"horizontal"}
+                        <Col md={{ size: 6, offset: 3 }}>
+                            <Steps current={this.state.periode}
+                                labelPlacement={"vertical"}
+                                direction={"horizontal"}
 
-                    >
-                        <Steps.Step title="Petit déjeuner" onClick={() => this.handlePeriode(0)} />
-                        <Steps.Step title="Déjeuner" onClick={() => this.handlePeriode(1)} />
-                        <Steps.Step title="Dîner" onClick={() => this.handlePeriode(2)} />
-                        <Steps.Step title="Collation" description="(matin ou soir)" onClick={() => this.handlePeriode(3)} />
-                    </Steps>
-                    </Col>
+                            >
+                                <Steps.Step title="Petit déjeuner" onClick={() => this.handlePeriode(0)} />
+                                <Steps.Step title="Déjeuner" onClick={() => this.handlePeriode(1)} />
+                                <Steps.Step title="Dîner" onClick={() => this.handlePeriode(2)} />
+                                <Steps.Step title="Collation" description="(matin ou soir)" onClick={() => this.handlePeriode(3)} />
+                            </Steps>
+                        </Col>
                     </Row>
-                   
+
 
                     <DragDropContext onDragEnd={this.onDragEnd}>
                         <Row>
                             <Col xs="6" className="shadow-nutrition" >
-
                                 <Container isHeight={true} >
                                     <PeriodeTitle>
                                         {this.renderTitle(this.state.periode)}
@@ -380,20 +378,44 @@ class NutritionalPage extends React.Component {
                                 </Container>
                             </Col>
                             <Col xs="6" className="shadow-nutrition">
-
                                 <ContainerAliments className=" justify-content-center" isHeight={false}>
-                                    <TitleTable>Les aliments </TitleTable>
-                                    {nutritional.map(columnId => {
+                                    {nutritional.map((columnId, index) => {
                                         const column = this.renderState(this.state.periode).columns[columnId];
                                         const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                        return <ColumnAliments key={column.id} column={column} type={this.state.type} tasks={tasks} />
+                                        return <ColumnAliments indexColumn={index} key={column.id} column={column} type={this.state.type} tasks={tasks} />
                                     })}
                                 </ContainerAliments>
                             </Col>
                         </Row>
 
                     </DragDropContext>
-                </>}
+                    <Row className="justify-content-end">
+                        {this.state.periode !== 0 ?
+                        <Button className = "nutri-button" 
+                        style={{
+                            background:"#AABCC9",
+                            borderColor:"#AABCC9"
+                        }}
+                        onClick = {() => {
+                            this.setState({periode: this.state.periode - 1})
+                        }}
+                        > 
+                        Retour </Button> : ""
+                     }
+                        <Button className = "nutri-button" 
+                        style={{
+                            background:"#062484",
+                            borderColor:" #062484"
+                        }}
+                        onClick = {() => {
+                            this.state.periode === 3 ? console.log('next page') : this.setState({periode:this.state.periode + 1});
+                            
+                        }}
+                        > {this.state.periode === 3 ? "Terminer" : "Suivant"} </Button>
+                         
+                    </Row>
+                </>
+            }
 
             </>
         )

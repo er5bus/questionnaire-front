@@ -149,3 +149,38 @@
         border-color: #CFCFCF !important
     }
 }
+
+.popver-style {
+    background:  #DBE4F0
+}
+.inner-popver-style{
+
+font-family: Montserrat;
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 10px;
+text-align: center;
+color: #18223D;
+padding: 5px 0px;
+}
+.bs-popover-bottom > .arrow::after, .bs-popover-auto[x-placement^="bottom"] > .arrow::after {
+    border-bottom-color: #DBE4F0 !important
+}
+.nutri-button {
+box-shadow: 0px 0px 20px rgba(24, 34, 61, 0.1);
+border-radius: 10px;
+font-family: "Montserrat", sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 26px;
+color: #FFFFFF;
+display: flex;
+align-items: center;
+text-align: center;
+padding: 0.620rem 2.75rem;
+&:hover {
+    color: #FFFFFF;
+}
+}
