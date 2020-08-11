@@ -20,7 +20,10 @@ class MedicalRecord extends React.Component {
   }
   componentWillReceiveProps(nextProps) {
     if (this.props.medicalRecordCreated !== nextProps.medicalRecordCreated) {
-      this.props.history.push(employeeRoutes.path + employeeRoutes.routes.questionnaire.path)
+      if (Object.entries(nextProps.medicalRecordCreated).length !== 0) {
+        this.props.history.push(employeeRoutes.path + employeeRoutes.routes.questionnaire.path)
+      }
+
     }
 
   }

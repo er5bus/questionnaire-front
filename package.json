@@ -13,6 +13,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.12.1",
     "@sentry/browser": "^5.15.5",
+    "awesome-steps": "^1.0.5",
     "axios": "^0.18.0",
     "i18next": "^19.3.4",
     "moment": "^2.24.0",

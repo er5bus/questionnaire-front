@@ -89,3 +89,63 @@
 .shadow-nutrition {
   padding: 30px
 }
+.rc-steps-icon {
+    display:none
+}
+.rc-steps-item-finish  {
+    .rc-steps-item-title {
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        text-align: center;
+        color: #062484 !important; 
+    }
+    .rc-steps-item-icon {
+        background-color:#062484 !important;
+    border-color: #062484 !important;
+    box-shadow: 0px 0px 10px 1px rgba(42, 82, 188, 0.86) !important;
+    }
+    .rc-steps-item-icon > .rc-steps-icon {
+        color: white !important;
+        font-size: 16px !important;
+        top: -1px !important
+    }
+}
+.rc-steps-item-finish .rc-steps-item-tail:after {
+    background-color: #062484 !important;
+}
+.rc-steps-item-process {
+.rc-steps-item-icon {
+    background-color:#062484 !important;
+    border-color: #062484 !important;
+    box-shadow: 0px 0px 10px 1px rgba(42, 82, 188, 0.86) !important;
+}
+    .rc-steps-item-title, .rc-steps-item-description {
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 16px;
+        text-align: center;
+        color: #062484 !important;
+        }
+}
+
+
+ 
+.rc-steps-item-wait  {
+    .rc-steps-item-description, .rc-steps-item-title {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 15px;
+    color: #CFCFCF !important;
+    }
+    .rc-steps-item-icon {
+        background: #CFCFCF !important;
+        border-color: #CFCFCF !important
+    }
+}
