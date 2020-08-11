@@ -10,7 +10,8 @@ services:
       - traefik
     labels:
       - traefik.enable=true
-      - traefik.http.routers.survey_deploy.rule=Host(`questionnaire-a.tk`)
+      - traefik.http.routers.survey_back.tls=${TLS}
+      - traefik.http.routers.survey_back.rule=Host("${SITE_DOMAINE_NAME}")
       - traefik.http.services.survey.loadbalancer.server.port=80
 
 networks:

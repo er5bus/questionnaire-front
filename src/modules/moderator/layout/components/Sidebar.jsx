@@ -82,7 +82,73 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="ni ni-shop" />
-                    <span className="nav-link-text">Dashbord</span>
+                    <span className="nav-link-text">Général</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/rps" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-bone" />
+                    <span className="nav-link-text">TMS</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/rps" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-brain" />
+                    <span className="nav-link-text">RPS</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/ergonomie" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-chair" />
+                    <span className="nav-link-text">Ergonomie</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/nutrition" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-apple-alt" />
+                    <span className="nav-link-text">Nutrition</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/activity" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-dumbbell" />
+                    <span className="nav-link-text">Activités physiques</span>
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/planning" }
+                    tag={NavLinkRRD}
+                    onClick={this.closeCollapse}
+                    activeClassName="active"
+                  >
+                    <i className="fas fa-calendar-week" />
+                    <span className="nav-link-text">Planning</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
