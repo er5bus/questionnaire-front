@@ -13,7 +13,10 @@ export const prevPage = () =>
     type: ACTIONS.PREV_PAGE,
   })
 
-
+export const tasksEnded = () =>
+  ({
+    type: ACTIONS.TASKES_ENDED,
+  })
 export const exitPage = () =>
   ({
     type: ACTIONS.EXIT_PAGE

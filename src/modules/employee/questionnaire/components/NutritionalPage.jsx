@@ -114,6 +114,9 @@ class NutritionalPage extends React.Component {
                 break;
         }
     }
+    scrollToTop = () => {
+        window.scrollTo({top:0,behavior:"smooth"})
+    }
     componentDidMount() {
         this.props.fetchFoodCategories()
     }
@@ -397,7 +400,9 @@ class NutritionalPage extends React.Component {
                             borderColor:"#AABCC9"
                         }}
                         onClick = {() => {
-                            this.setState({periode: this.state.periode - 1})
+                            this.setState({periode: this.state.periode - 1} , () => {
+                               this.scrollToTop()
+                            })
                         }}
                         > 
                         Retour </Button> : ""
@@ -408,7 +413,9 @@ class NutritionalPage extends React.Component {
                             borderColor:" #062484"
                         }}
                         onClick = {() => {
-                            this.state.periode === 3 ? console.log('next page') : this.setState({periode:this.state.periode + 1});
+                            this.state.periode === 3 ? this.props.changePage(8): this.setState({periode:this.state.periode + 1}, () => {
+                               this.scrollToTop()  
+                            });
                             
                         }}
                         > {this.state.periode === 3 ? "Terminer" : "Suivant"} </Button>

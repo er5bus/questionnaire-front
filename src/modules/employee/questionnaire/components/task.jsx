@@ -2,6 +2,7 @@ import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Popover, PopoverBody } from "reactstrap";
 import styled from 'styled-components';
+import { ENDPOINT } from '../constants';
 
 
 const Container = styled.div`
@@ -49,9 +50,9 @@ export default class Task extends React.Component {
               }
               toggled={this.state.tooltipOpen}
             >
-              <img src={"http://predicta-alim.fulltech.io/assets/uploads/163a44ace49b0be03aa93435425522f4.jpeg"} id={`Tooltip-${this.props.task.id}-IMG`} style={{
-                height: 30,
-                width: 30
+              <img src={`${ENDPOINT.IMAGES_PATH}${this.props.task.image_url}`} id={`Tooltip-${this.props.task.id}-IMG`} style={{
+                height: 40,
+                width: 40
               }} />
 
             </Container>

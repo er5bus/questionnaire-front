@@ -3,6 +3,7 @@ import { ACTIONS } from './../constants';
 
 export default (state = {
   page: 1,
+  tasksEnded: false,
   exit: false,
   isLoading: false,
   item: null,
@@ -37,16 +38,17 @@ export default (state = {
     case ACTIONS.PREV_PAGE: {
       return { ...state, page: state.page - 1 }
     }
+    case ACTIONS.TASKES_ENDED: {
+      localStorage.setItem("taskEnd", true)
+      return { ...state, tasksEnded: true }
+    }
     case ACTIONS.UPDATE_SCORE: {
       let newArrayScores = [...state.scores]
-      console.log(payload, "actionsss");
-
       if (newArrayScores.length > 0) {
         for (let i = 0; i < payload.length; i++) {
           let indexScore = newArrayScores.map(el => el.id).indexOf(payload[i].id);
-          console.log(indexScore, "indexxxxx");
           if (indexScore > -1) {
-            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value }
+            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value, name: payload[i].name }
           } else {
             newArrayScores.push(payload[i])
           }

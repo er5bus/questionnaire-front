@@ -61,9 +61,11 @@ class FourthPage extends React.Component {
         }
     }
     onSelectChoice = (item, action) => {
+        console.log(action.values);
+
         if (action.values.length > 0) {
             let actionValues = action.values.map(el => {
-                return { id: el.score.id, value: el.value }
+                return { id: el.score.id, value: el.value, name: el.score.name }
             })
             this.props.updateScore(actionValues)
         }

@@ -122,9 +122,11 @@ class OverviewNode extends React.PureComponent {
     this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
   }
   onSelectChoice = (item, action) => {
+
+
     if (action.values.length > 0 && this.props.selectedPartBodyIDToUse[0] === this.props.selectedPartBodyID[0]) {
       let actionValues = action.values.map(el => {
-        return { id: el.score.id, value: el.value }
+        return { id: el.score.id, value: el.value, name: el.score.name }
       })
       this.props.updateScore(actionValues)
     }
