@@ -16,12 +16,35 @@ class FourthPage extends React.Component {
         }
     }
     componentDidMount() {
+        if (JSON.parse(localStorage.getItem("nextSectionFourth"))) {
+            this.props.nextOtherQuestionsSection()
+            this.setState({ nextSection: true })
+            this.setState({titleAsk: this.returnTextAsk(this.props.page)})
+            return
+        }
+
         const { currentQuestion } = this.props
         this.props.fetchQuestion(currentQuestion)
+        console.log(this.props.otherSectionQuestionToUse, "");
+
+
+    }
+    returnTextAsk = (currentPage) => {
+        switch (currentPage) {
+            case 4:
+                return "Ergonomique "
+            case 5:
+                return "Psychologique "
+            case 6:
+                return "Activité Physique"
+            default:
+                break;
+        }
     }
     onContinue = () => {
         if (this.props.otherSectionQuestionToUse.length > 0) {
             this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
+            localStorage.setItem("nextSectionFourth", false)
         } else {
             this.props.changePage(7)
         }
@@ -47,6 +70,7 @@ class FourthPage extends React.Component {
                 let currentQuestion = otherQuestionsTreeNode[nextProps.otherSectionQuestionToUse[0].id]
                 this.props.changeCurrentQuestion(currentQuestion);
                 this.setState({ nextSection: true }, () => {
+                    localStorage.setItem("nextSectionFourth", true)
                     setTimeout(() => {
                         this.props.askContinueScreen()
                     }, 2000);
@@ -54,6 +78,7 @@ class FourthPage extends React.Component {
             } else {
                 this.setState({ nextSection: true }, () => {
                     setTimeout(() => {
+                        localStorage.setItem("nextSectionFourth", true)
                         this.props.askContinueScreen()
                     }, 2000);
                 })

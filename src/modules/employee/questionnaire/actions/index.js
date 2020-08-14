@@ -85,6 +85,10 @@ export const fetchQuestion = ({ treeparam, nodeparam }) =>
       method: HTTP_METHODS.GET,
     }
   })
+export const fillScoresTable = (payload) => ({
+  type: ACTIONS.FILL_SCORES,
+  payload
+})
 export const fetchFoodCategories = () => ({
   type: CALL_FOOD_API,
   meta: {

@@ -32,6 +32,8 @@ export const ACTIONS = {
   FETCH_FOODS_SUCCEDED: 'questionnaire@FETCH_FOODS_SUCCEDED',
   FETCH_FOODS_FAILED: 'questionnaire@FETCH_FOODS_FAILED',
 
+  FILL_SCORES: 'questionnaire@FILL_SCORES'
+
 }
 
 export const ENDPOINT = {

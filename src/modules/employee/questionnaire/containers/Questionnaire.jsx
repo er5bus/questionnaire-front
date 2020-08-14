@@ -9,7 +9,7 @@ import NutritionalPage from '../components/NutritionalPage';
 import QuestionHead from '../components/QuestionHead';
 import ScoresInterpratation from '../components/ScoresInterpratation';
 import { otherQuestionsTreeNode } from '../constants';
-import { changeCurrentQuestion, changePage, exitPage, nextOtherQuestionsSection, nextPage, prevPage, tasksEnded } from './../actions';
+import { changeCurrentQuestion, changePage, exitPage, fillScoresTable, nextOtherQuestionsSection, nextPage, prevPage, selectDiselectPartBody, tasksEnded } from './../actions';
 import ExitPage from './../components/ExitPage';
 //import employeeRoutes from './../../../../routes/employee'
 import FirstPage from './../components/FirstPage';
@@ -27,11 +27,53 @@ class Questionnaire extends React.Component {
     }
   }
   componentDidMount() {
-
-    if (localStorage.getItem("taskEnd")) {
+    let taskEnd = localStorage.getItem("taskEnd");
+    if (taskEnd) {
       this.props.tasksEnded()
-        this.props.exitPage()
+      this.props.exitPage()
+      return
     }
+    let CurrentPage = 1;
+    if (localStorage.getItem("CurrentPage") !== null) {
+      CurrentPage = Number(localStorage.getItem("CurrentPage"));
+      if (CurrentPage === 2) {
+        this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
+        this.props.changePage(CurrentPage)
+        return
+      }
+      if (CurrentPage >= 3 && CurrentPage < 7) {
+        if (localStorage.getItem('ScoresArray')) {
+          this.props.fillScoresTable(JSON.parse(localStorage.getItem('ScoresArray')))
+        }
+        if (CurrentPage === 3) {
+          this.props.nextOtherQuestionsSection()
+          this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
+          this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
+          this.props.changePage(CurrentPage)
+          return
+        }
+        if (CurrentPage === 6) {
+          this.props.nextOtherQuestionsSection()
+        }
+        if (CurrentPage === 5) {
+          this.props.nextOtherQuestionsSection()
+          this.props.nextOtherQuestionsSection()
+        }
+        this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
+        this.props.changePage(CurrentPage)
+      } else if (CurrentPage === 7) {
+
+      } else if (CurrentPage === 8) {
+        this.props.changePage(CurrentPage)
+      }
+
+    }
+
+
+
+    // this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
+    // this.props.changePage(CurrentPage)
+
   }
 
   onSubmit = (values) => {
@@ -141,4 +183,4 @@ class Questionnaire extends React.Component {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded })(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable })(withTranslation()(Questionnaire))

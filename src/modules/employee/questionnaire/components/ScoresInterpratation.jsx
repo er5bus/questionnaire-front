@@ -52,7 +52,7 @@ const scoreTable = [
     },
 ]
 const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded }) => {
-    const [isLoading, setLoading] = useState(true);
+    const [scoresArray, setScoresArray] = useState([]);
     const calculateScore = (type, scores) => {
         let finalScore = 0;
         let filtredTable = scores.filter(el => el.name === type)
@@ -65,6 +65,10 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
         return finalScore
     }
     useEffect(() => {
+        let scoresSaved = JSON.parse(localStorage.getItem("ScoresArray"));
+        if (scoresSaved) {
+            setScoresArray(scoresSaved)
+        }
 
     }, []);
     const { t } = useTranslation()
@@ -84,10 +88,10 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
                 </thead>
                 <tbody>
                     {scoreTable.map(el => (
-                        <tr>
+                        <tr key={el.name}>
                             <th scope="row"> {t(`${el.name}`)}  </th>
                             <td> {t(`${el.descriptions}`)}  </td>
-                            <td> {calculateScore(el.id, scores)} </td>
+                            <td> {scores.length !== 0 ? calculateScore(el.id, scores) : calculateScore(el.id, scoresArray)} </td>
                         </tr>
                     ))}
                     <tr>
