@@ -13,7 +13,6 @@ import MedicalRecordForm from './../components/MedicalRecordForm';
 class MedicalRecord extends React.Component {
   componentDidMount() {
     this.props.retriveMedicalRecord()
-
   }
   onSubmit = (values) => {
     this.props.createMedicalRecord(values);

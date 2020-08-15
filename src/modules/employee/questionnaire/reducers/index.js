@@ -3,6 +3,7 @@ import { ACTIONS } from './../constants';
 
 export default (state = {
   page: 1,
+  tasksEnded: false,
   exit: false,
   isLoading: false,
   item: null,
@@ -31,22 +32,27 @@ export default (state = {
   switch (type) {
 
     case ACTIONS.NEXT_PAGE: {
+      console.log("Fanhdell");
+
+      localStorage.setItem("CurrentPage", state.page + 1)
       return { ...state, page: state.page + 1 }
     }
 
     case ACTIONS.PREV_PAGE: {
+      localStorage.setItem("CurrentPage", state.page - 1)
       return { ...state, page: state.page - 1 }
+    }
+    case ACTIONS.TASKES_ENDED: {
+      localStorage.setItem("taskEnd", true)
+      return { ...state, tasksEnded: true }
     }
     case ACTIONS.UPDATE_SCORE: {
       let newArrayScores = [...state.scores]
-      console.log(payload, "actionsss");
-
       if (newArrayScores.length > 0) {
         for (let i = 0; i < payload.length; i++) {
           let indexScore = newArrayScores.map(el => el.id).indexOf(payload[i].id);
-          console.log(indexScore, "indexxxxx");
           if (indexScore > -1) {
-            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value }
+            newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value, name: payload[i].name }
           } else {
             newArrayScores.push(payload[i])
           }
@@ -54,19 +60,24 @@ export default (state = {
       } else {
         newArrayScores = payload
       }
-      console.log(newArrayScores, "newArray");
+      localStorage.setItem("ScoresArray", JSON.stringify(newArrayScores))
 
       return { ...state, scores: newArrayScores }
+    }
+    case ACTIONS.FILL_SCORES: {
+      return { ...state, scores: payload }
     }
     case ACTIONS.EXIT_PAGE: {
       return { ...state, page: 0, exit: true }
     }
 
     case ACTIONS.NEXT_QUESTION: {
+      localStorage.setItem("CurrentQuestion", JSON.stringify(payload))
       return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
     }
     case ACTIONS.CHANGE_PAGE: {
       let newPage = payload
+      localStorage.setItem("CurrentPage", newPage)
       return { ...state, page: newPage }
     }
     case ACTIONS.FETCH_QUESTION_INIT: {
@@ -99,6 +110,10 @@ export default (state = {
         newSeletedbody[0] = payload.value
         newSeletedbodyID[0] = payload.id
       }
+
+      ;
+
+      localStorage.setItem("selectedBodyArea", JSON.stringify({ value: payload.value, id: payload.id }))
       return { ...state, selectedPartBody: newSeletedbody, selectedPartBodyToUse: newSeletedbody, selectedPartBodyID: newSeletedbodyID, selectedPartBodyIDToUse: newSeletedbodyID }
     }
     case ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION: {

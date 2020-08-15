@@ -11,7 +11,7 @@ export const ACTIONS = {
   UPDATE_SCORE: "questionnaire@UPDATE_SCORE",
   UPDATE_SELECTED_SCORE: "questionnaire@UPDATE_SELECTED_SCORE",
   UPDATE_DESELECTED_SCORE: "questionnaire@UPDATE_DESELECTED_SCORE",
-
+  TASKES_ENDED: "questionnaire@TASKES_ENDED",
   GET_TREE_NODE_PARAMS_INIT: "questionnaire@GET_TREE_NODE_PARAMS_INIT",
   GET_TREE_NODE_PARAMS_SUCCEDED: "questionnaire@GET_TREE_NODE_PARAMS_SUCCEDED",
   GET_TREE_NODE_PARAMS_FAILED: "questionnaire@GET_TREE_NODE_PARAMS_FAILED",
@@ -32,6 +32,8 @@ export const ACTIONS = {
   FETCH_FOODS_SUCCEDED: 'questionnaire@FETCH_FOODS_SUCCEDED',
   FETCH_FOODS_FAILED: 'questionnaire@FETCH_FOODS_FAILED',
 
+  FILL_SCORES: 'questionnaire@FILL_SCORES'
+
 }
 
 export const ENDPOINT = {
@@ -39,7 +41,7 @@ export const ENDPOINT = {
   QUESTION: "/api/tree/:treeparam/node/:nodeparam",
   FOOD_CATEGORY: 'category/cat-foods-meals',
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
-  IMAGES_PATH: "http://predicta-alim.fulltech.io/assets/uploads/"
+  IMAGES_PATH: "https://predicta.fulltech.io/public/uploads/"
 }
 
 

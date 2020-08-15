@@ -13,8 +13,8 @@ export const createMedicalRecord = (payload) =>
         fail: ACTIONS.CREATE_MEDICAL_RECORD_FAILED
       },
       messages: {
-        success: "Your medical record has been created successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre dossier médical a été créé avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessaye"
       },
       endpoint: ENDPOINT.CREATE_MEDICAL_RECORD,
       method: HTTP_METHODS.POST,
@@ -31,7 +31,7 @@ export const retriveMedicalRecord = () =>
         fail: ACTIONS.RETEIVE_MEDICAL_RECORD_FAILED
       },
       messages: {
-        fail: "Something went wrong please try again"
+        fail: "Une erreur s'est produite. Veuillez réessaye"
       },
       endpoint: ENDPOINT.RETEIVE_MEDICAL_RECORD,
       method: HTTP_METHODS.GET,
