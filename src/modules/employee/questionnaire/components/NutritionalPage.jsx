@@ -114,25 +114,47 @@ class NutritionalPage extends React.Component {
                 break;
         }
     }
+
     scrollToTop = () => {
-        window.scrollTo({top:0,behavior:"smooth"})
-    }
-    componentDidMount() {
-        this.props.fetchFoodCategories()
+        window.scrollTo({ top: 0, behavior: "smooth" })
     }
 
-    formattedTabel = (orignalTable, tableToFormat) => {
+    componentDidMount() {
+        this.props.fetchFoodCategories()
+        let lastPeriode = localStorage.getItem("PeriodeNuti")
+        if(lastPeriode) {
+            this.setState({periode: Number(lastPeriode)})
+        }
+    
+    }
+
+    formattedTabel = (orignalTable, tableToFormat, periode) => {
         let copyOriginalTable = JSON.parse(JSON.stringify(orignalTable));
 
         if (tableToFormat.length == 0) {
             return orignalTable
         }
+        let lastdDeselctScore = localStorage.getItem("DeSelctedNutriScore")
+        let savedData = JSON.parse(localStorage.getItem(this.renderIdPeriode(periode)));
+        let selectedNutri = []
+        let selectedColumn = [[],[],[],[]]
+        if (savedData) {
+            selectedNutri = savedData.selectedNutri
+            selectedColumn = savedData.selectedColumn
+        }
+        let orderColum = 0
+        for (const key in copyOriginalTable.columns) {
+            copyOriginalTable.columns[key].taskIds =selectedColumn[orderColum] ;
+            orderColum++
+        }
+
         let columOrder = tableToFormat.map(el => el.id);
         copyOriginalTable.columnOrder.push(...columOrder);
         let columns = tableToFormat.map(elementToformat => {
             let idElment = elementToformat.id;
             let titleElment = elementToformat.name
             let tasksId = elementToformat.foods.map(task => `${task.category_id}-${task.id}`)
+            tasksId = tasksId.filter(el => selectedNutri.indexOf(el) == -1)
             return {
                 [`${idElment}`]: {
                     id: idElment,
@@ -189,16 +211,54 @@ class NutritionalPage extends React.Component {
             }
             deselectedScore = deselectedScore + taskScore
         });
-        this.props.updateDeSelectedScoreNutrition({ type: "add", value: deselectedScore })
+        if(!lastdDeselctScore) {
+            this.props.updateDeSelectedScoreNutrition({ type: "add", value: deselectedScore })
+        }
+        
         return copyOriginalTable
 
 
     }
+    renderIdPeriode = (periode) => {
+        switch (periode) {
+            case 0:
+                return "Breakfast";
+            case 1:
+                return "Lunch";
+            case 2:
+                return "Dinner";
+            case 3:
+                return "Snack";
+            default:
+                break;
+        }
+    }
+    saveData = () => {
+        let i = 1;
+        let selectedColumn = []
+        let selectedNutri = []
+        while (i < 5) {
+            selectedColumn.push(this.renderState(this.state.periode).columns[`column-${i}`].taskIds);
+            selectedNutri = [...selectedNutri, ...this.renderState(this.state.periode).columns[`column-${i}`].taskIds];
+            i++
+        }
+        localStorage.setItem("SelctedNutriScore", this.props.selectedScoreNut)
+        localStorage.setItem("DeSelctedNutriScore", this.props.deselectedScoreNut)
+        localStorage.setItem("PeriodeNuti", this.state.periode + 1)
+        localStorage.setItem(this.renderIdPeriode(this.state.periode), JSON.stringify({
+            selectedColumn: selectedColumn,
+            selectedNutri: selectedNutri
+        })
+
+        )
+
+        this.setState({
+            periode: this.state.periode < 3 ? this.state.periode + 1 : this.props.changePage(8)
+        }, () => {
+            this.scrollToTop()
+        });
+    }
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.deselectedScoreNut, "desslll");
-        console.log(nextProps.selectedScoreNut);
-
-
         let categoriesFood = [];
         let filtredFoods = [];
         let breakfast = [];
@@ -214,15 +274,14 @@ class NutritionalPage extends React.Component {
             dinner = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 6).length > 0);
             console.log(this.formattedTabel(zonePeriodeData, breakfast), "tababababababa");
 
-            this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast) }, () => {
-                this.setState({ dataMidi: this.formattedTabel(zonePeriodeData, lunch) }, () => {
-                    this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack) }, () => {
-                        this.setState({ dataNuit: this.formattedTabel(zonePeriodeData, dinner) }, () => {
+            this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast, 0) }, () => {
+                this.setState({ dataMidi: this.formattedTabel(zonePeriodeData, lunch, 1) }, () => {
+                    this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack, 3) }, () => {
+                        this.setState({ dataNuit: this.formattedTabel(zonePeriodeData, dinner, 2) }, () => {
                             this.setState({ isLoadingFood: false })
                         })
                     })
                 })
-
             })
 
 
@@ -394,35 +453,33 @@ class NutritionalPage extends React.Component {
                     </DragDropContext>
                     <Row className="justify-content-end">
                         {this.state.periode !== 0 ?
-                        <Button className = "nutri-button" 
-                        style={{
-                            background:"#AABCC9",
-                            borderColor:"#AABCC9"
-                        }}
-                        onClick = {() => {
-                            this.setState({periode: this.state.periode - 1} , () => {
-                               this.scrollToTop()
-                            })
-                        }}
-                        > 
-                        Retour </Button> : ""
-                     }
-                        <Button className = "nutri-button" 
-                        style={{
-                            background:"#062484",
-                            borderColor:" #062484"
-                        }}
-                        onClick = {() => {
-                            this.state.periode === 3 ? this.props.changePage(8): this.setState({periode:this.state.periode + 1}, () => {
-                               this.scrollToTop()  
-                            });
-                            
-                        }}
+                            <Button className="nutri-button"
+                                style={{
+                                    background: "#AABCC9",
+                                    borderColor: "#AABCC9"
+                                }}
+                                onClick={() => {
+                                    this.setState({ periode: this.state.periode - 1 }, () => {
+                                        this.scrollToTop()
+                                    })
+                                }}
+                            >
+                                Retour </Button> : ""
+                        }
+                        <Button className="nutri-button"
+                            style={{
+                                background: "#062484",
+                                borderColor: " #062484"
+                            }}
+                            onClick={() => {
+                                this.saveData()
+
+                            }}
                         > {this.state.periode === 3 ? "Terminer" : "Suivant"} </Button>
-                         
+
                     </Row>
                 </>
-            }
+                }
 
             </>
         )

@@ -173,6 +173,11 @@ export default (state = {
       }
       return { ...state, deselectedScoreNut: newDeselctScore }
     }
+    case ACTIONS.FILL_SELECTED_DESELECTED_NUTRI_SCORES: {
+      let lastSelectedScore = payload.lastSelectedScore;
+      let lastDeselectedScore = payload.lastDeselectedScore
+      return { ...state, selectedScoreNut: lastSelectedScore, deselectedScoreNut: lastDeselectedScore }
+    }
     default: {
       return state
     }
