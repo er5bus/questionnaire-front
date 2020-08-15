@@ -11,6 +11,12 @@ import MedicalRecordForm from './../components/MedicalRecordForm';
 
 
 class MedicalRecord extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoadingData: true
+    }
+  }
   componentDidMount() {
     this.props.retriveMedicalRecord()
   }
@@ -21,6 +27,9 @@ class MedicalRecord extends React.Component {
     if (this.props.medicalRecordCreated !== nextProps.medicalRecordCreated) {
       if (Object.entries(nextProps.medicalRecordCreated).length !== 0) {
         this.props.history.push(employeeRoutes.path + employeeRoutes.routes.questionnaire.path)
+      } else {
+        this.setState({ isLoadingData: false })
+
       }
 
     }
@@ -33,7 +42,7 @@ class MedicalRecord extends React.Component {
 
     return (
       <>
-        {isLoadingRecord && Object.entries(medicalRecordCreated).length !== 0 ? <Loader></Loader> :
+        {this.state.isLoadingData && isLoadingRecord ? <Loader></Loader> :
           <>
             <div className="header bg-primary pb-5">
               <Container fluid>
