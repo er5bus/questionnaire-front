@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from "react-redux";
 import { Col, Row } from "reactstrap";
-import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, nextOtherQuestionsSection, updateScore } from '../actions';
+import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, nextOtherQuestionsSection, saveQuestionAnswered, updateScore } from '../actions';
 import { otherQuestionsTreeNode } from '../constants';
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
@@ -19,7 +19,7 @@ class FourthPage extends React.Component {
         if (JSON.parse(localStorage.getItem("nextSectionFourth"))) {
             this.props.nextOtherQuestionsSection()
             this.setState({ nextSection: true })
-            this.setState({titleAsk: this.returnTextAsk(this.props.page)})
+            this.setState({ titleAsk: this.returnTextAsk(this.props.page) })
             return
         }
 
@@ -64,6 +64,7 @@ class FourthPage extends React.Component {
 
     }
     componentWillReceiveProps(nextProps) {
+
         if (nextProps.otherSectionQuestionToUse !== this.props.otherSectionQuestionToUse) {
             this.setState({ titleAsk: this.props.otherSectionQuestionToUse[0].value })
             if (nextProps.otherSectionQuestionToUse.length > 0) {
@@ -86,14 +87,30 @@ class FourthPage extends React.Component {
         }
     }
     onSelectChoice = (item, action) => {
-        console.log(action.values);
+        console.log(action, "actionnn");
+
+        let pageAction = this.props.page
+        let questionAction = item;
+        let nameAction = action.name;
+        let scoreAction = 0;
+        let idAction = action.id
 
         if (action.values.length > 0) {
             let actionValues = action.values.map(el => {
                 return { id: el.score.id, value: el.value, name: el.score.name }
             })
+            actionValues.forEach(element => {
+                scoreAction = scoreAction + Number(element.value)
+            });
             this.props.updateScore(actionValues)
         }
+        this.props.saveQuestionAnswered({
+            page: pageAction,
+            question: questionAction,
+            name: nameAction,
+            score: scoreAction,
+            id: idAction
+        })
         let { currentQuestion } = this.props
         if (action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
             currentQuestion = { nodeparam: action.pointToTree.firstNode.uid, treeparam: action.pointToTree.uid }
@@ -133,4 +150,4 @@ class FourthPage extends React.Component {
     }
 }
 const mapStateToProps = state => state.questionnaire
-export default connect(mapStateToProps, { fetchQuestion, changeCurrentQuestion, nextOtherQuestionsSection, askContinueScreen, updateScore, changePage })(withTranslation()(FourthPage))
+export default connect(mapStateToProps, { fetchQuestion, changeCurrentQuestion, nextOtherQuestionsSection, askContinueScreen, updateScore, changePage, saveQuestionAnswered })(withTranslation()(FourthPage))

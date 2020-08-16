@@ -25,7 +25,11 @@ export default (state = {
   isLoadingFoodCategories: false,
   isLoadingFoods: false,
   selectedScoreNut: 0,
-  deselectedScoreNut: 0
+  deselectedScoreNut: 0,
+  healthAnsweredQuestion: [],
+  ergonomicsAnsweredQuestion: [],
+  coachingAnsweredQuestion: [],
+  psychologiqueAnsweredQuestion: []
 
 }, action) => {
   const { payload, type } = action
@@ -177,6 +181,21 @@ export default (state = {
       let lastSelectedScore = payload.lastSelectedScore;
       let lastDeselectedScore = payload.lastDeselectedScore
       return { ...state, selectedScoreNut: lastSelectedScore, deselectedScoreNut: lastDeselectedScore }
+    }
+    case ACTIONS.SAVE_QUESTION_ANSWER: {
+      if (payload.page === 3) {
+        let newAnswersHealth = [...state.healthAnsweredQuestion, payload]
+        return { ...state, healthAnsweredQuestion: newAnswersHealth }
+      } else if (payload.page === 4) {
+        let newAnswersErgonimics = [...state.ergonomicsAnsweredQuestion, payload]
+        return { ...state, ergonomicsAnsweredQuestion: newAnswersErgonimics }
+      } else if (payload.page === 5) {
+        let newAnswersPsy = [...state.psychologiqueAnsweredQuestion, payload]
+        return { ...state, psychologiqueAnsweredQuestion: newAnswersPsy }
+      } else if (payload.page === 6) {
+        let newAnswersCoching = [...state.coachingAnsweredQuestion, payload]
+        return { ...state, coachingAnsweredQuestion: newAnswersCoching }
+      }
     }
     default: {
       return state

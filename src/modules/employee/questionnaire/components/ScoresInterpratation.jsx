@@ -14,6 +14,13 @@ font-family: Montserrat;
 color:#18223D;
 margin: 20px 0
 `
+const TitleCatgorie = styled.div`
+display : flex;
+font-size: 1.1rem;
+font-family: Montserrat;
+color: #0A48B3;
+margin: 40px 0px 10px `
+
 const scoreTable = [
     {
         name: "Kinésithérapie",
@@ -51,7 +58,7 @@ const scoreTable = [
         id: "AT"
     },
 ]
-const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded }) => {
+const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion }) => {
     const [scoresArray, setScoresArray] = useState([]);
     const calculateScore = (type, scores) => {
         let finalScore = 0;
@@ -65,6 +72,7 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
         return finalScore
     }
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
         let scoresSaved = JSON.parse(localStorage.getItem("ScoresArray"));
         if (scoresSaved) {
             setScoresArray(scoresSaved)
@@ -75,8 +83,118 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
 
     return (
         <>
+
             <TableTitle>
-                <span>{t(" Tableu des scores")} </span>
+                {selectedPartBody.length > 0 &&
+                    <span> {t(`Votre point douloureux selectionné est ${selectedPartBody[0]}`)} </span>
+                }
+            </TableTitle>
+            {healthAnsweredQuestion.length > 0 &&
+                <>
+                    <TitleCatgorie>
+                        Réponses de questionnaire santé
+                </TitleCatgorie>
+                    <Table responsive={true} hover bordered >
+                        <thead>
+                            <tr>
+                                <th>  {t("Question")}  </th>
+                                <th> {t("Réponse")}  </th>
+                                <th>  {t("Score de la question")} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {healthAnsweredQuestion.map(el => (
+                                <tr key={el.id}>
+                                    <th scope="row"> {t(`${el.question}`)}  </th>
+                                    <td> {t(`${el.name}`)}  </td>
+                                    <td> {el.score} </td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                    </Table>
+                </>
+            }
+            {ergonomicsAnsweredQuestion.length > 0 &&
+                <>
+                    <TitleCatgorie>
+                        Réponses de questionnaire ergonomie
+                </TitleCatgorie>
+                    <Table responsive={true} hover bordered >
+                        <thead>
+                            <tr>
+                                <th>  {t("Question")}  </th>
+                                <th> {t("Réponse")}  </th>
+                                <th>  {t("Score de la question")} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ergonomicsAnsweredQuestion.map(el => (
+                                <tr key={el.id}>
+                                    <th scope="row"> {t(`${el.question}`)}  </th>
+                                    <td> {t(`${el.name}`)}  </td>
+                                    <td> {el.score} </td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                    </Table>
+                </>
+            }
+            {coachingAnsweredQuestion.length > 0 &&
+                <>
+                    <TitleCatgorie>
+                        Réponses de questionnaire activité physique
+                </TitleCatgorie>
+                    <Table responsive={true} hover bordered >
+                        <thead>
+                            <tr>
+                                <th>  {t("Question")}  </th>
+                                <th> {t("Réponse")}  </th>
+                                <th>  {t("Score de la question")} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {coachingAnsweredQuestion.map(el => (
+                                <tr key={el.id}>
+                                    <th scope="row"> {t(`${el.question}`)}  </th>
+                                    <td> {t(`${el.name}`)}  </td>
+                                    <td> {el.score} </td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                    </Table>
+                </>
+            }
+            {psychologiqueAnsweredQuestion.length > 0 &&
+                <>
+                    <TitleCatgorie>
+                        Réponse de questionnaire Psychologie
+                </TitleCatgorie>
+                    <Table responsive={true} hover bordered >
+                        <thead>
+                            <tr>
+                                <th>  {t("Question")}  </th>
+                                <th> {t("Réponse")}  </th>
+                                <th>  {t("Score de la question")} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {psychologiqueAnsweredQuestion.map(el => (
+                                <tr key={el.id}>
+                                    <th scope="row"> {t(`${el.question}`)}  </th>
+                                    <td> {t(`${el.name}`)}  </td>
+                                    <td> {el.score} </td>
+                                </tr>
+                            ))}
+                        </tbody>
+
+                    </Table>
+                </>
+            }
+            <TableTitle>
+                {t('Table des scores par categorie')}
             </TableTitle>
             <Table responsive={true} hover >
                 <thead>

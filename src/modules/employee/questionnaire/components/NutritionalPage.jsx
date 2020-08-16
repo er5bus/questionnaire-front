@@ -244,7 +244,7 @@ class NutritionalPage extends React.Component {
         }
         localStorage.setItem("SelctedNutriScore", this.props.selectedScoreNut)
         localStorage.setItem("DeSelctedNutriScore", this.props.deselectedScoreNut)
-        localStorage.setItem("PeriodeNuti", this.state.periode === 3 ? 3:this.state.periode + 1)
+        localStorage.setItem("PeriodeNuti", this.state.periode === 3 ? 3: this.state.periode + 1)
         localStorage.setItem(this.renderIdPeriode(this.state.periode), JSON.stringify({
             selectedColumn: selectedColumn,
             selectedNutri: selectedNutri
