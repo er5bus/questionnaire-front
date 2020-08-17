@@ -9,7 +9,7 @@ import NutritionalPage from '../components/NutritionalPage';
 import QuestionHead from '../components/QuestionHead';
 import ScoresInterpratation from '../components/ScoresInterpratation';
 import { otherQuestionsTreeNode } from '../constants';
-import { changeCurrentQuestion, changePage, exitPage, fillScoresTable, nextOtherQuestionsSection, nextPage, prevPage, selectDiselectPartBody, tasksEnded } from './../actions';
+import { changeCurrentQuestion, changePage, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, nextPage, prevPage, selectDiselectPartBody, tasksEnded } from './../actions';
 import ExitPage from './../components/ExitPage';
 //import employeeRoutes from './../../../../routes/employee'
 import FirstPage from './../components/FirstPage';
@@ -37,7 +37,10 @@ class Questionnaire extends React.Component {
     if (localStorage.getItem("CurrentPage") !== null) {
       CurrentPage = Number(localStorage.getItem("CurrentPage"));
       if (CurrentPage === 2) {
-        this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
+        if (localStorage.getItem("selectedBodyArea")) {
+          this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
+        }
+       
         this.props.changePage(CurrentPage)
         return
       }
@@ -62,7 +65,16 @@ class Questionnaire extends React.Component {
         this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
         this.props.changePage(CurrentPage)
       } else if (CurrentPage === 7) {
-
+        
+         let lastSelectedScore =localStorage.getItem("SelctedNutriScore");
+         let lastDeslectedScore = localStorage.getItem("DeSelctedNutriScore");
+         if(lastSelectedScore && lastDeslectedScore) {
+           this.props.fillSelectedDeselectedNutriScores({
+             lastSelectedScore:Number(lastSelectedScore),
+             lastDeselectedScore: Number(lastDeslectedScore)
+            })
+         }
+        this.props.changePage(CurrentPage)
       } else if (CurrentPage === 8) {
         this.props.changePage(CurrentPage)
       }
@@ -183,4 +195,4 @@ class Questionnaire extends React.Component {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable })(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage,fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable })(withTranslation()(Questionnaire))

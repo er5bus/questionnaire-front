@@ -89,6 +89,14 @@ export const fillScoresTable = (payload) => ({
   type: ACTIONS.FILL_SCORES,
   payload
 })
+export const fillSelectedDeselectedNutriScores = (payload) => ({
+  type: ACTIONS.FILL_SELECTED_DESELECTED_NUTRI_SCORES,
+  payload
+})
+export const saveQuestionAnswered = (payload) => ({
+  type: ACTIONS.SAVE_QUESTION_ANSWER,
+  payload
+})
 export const fetchFoodCategories = () => ({
   type: CALL_FOOD_API,
   meta: {

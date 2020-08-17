@@ -11,6 +11,7 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
 
   const { t } = useTranslation()
 
+
   return (
     <>
       {isLoading ? <QuestionDisplayLoader />
@@ -26,7 +27,7 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
                     <Button
                       className="btn mt-4 mr-2"
                       color="primary"
-                      onClick={() => onSelectChoice(item, action)}
+                      onClick={() => onSelectChoice(item.question, action)}
                     >
                       {action.name}
                     </Button>
@@ -34,7 +35,7 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
                   : <div
                     key={action.id}
                     className="panel-link mb-2"
-                    onClick={() => onSelectChoice(item, action)}
+                    onClick={() => onSelectChoice(item.question, action)}
                   >
                     {action.name}
                   </div>

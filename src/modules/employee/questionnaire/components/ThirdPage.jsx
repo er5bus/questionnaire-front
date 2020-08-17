@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "reactstrap";
 import Loader from '../../../../components/Loader';
 import { otherQuestionsTreeNode, statcTreeNode } from "../constants";
-import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, updateScore } from "./../actions";
+import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, saveQuestionAnswered, updateScore } from "./../actions";
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionHead from "./QuestionHead";
@@ -126,13 +126,27 @@ class OverviewNode extends React.PureComponent {
   }
   onSelectChoice = (item, action) => {
 
-
+    let pageAction = this.props.page
+    let questionAction = item;
+    let nameAction = action.name;
+    let scoreAction = 0
+    let idAction = action.id
     if (action.values.length > 0 && this.props.selectedPartBodyIDToUse[0] === this.props.selectedPartBodyID[0]) {
       let actionValues = action.values.map(el => {
         return { id: el.score.id, value: el.value, name: el.score.name }
       })
+      actionValues.forEach(element => {
+        scoreAction = scoreAction + Number(element.value)
+      });
       this.props.updateScore(actionValues)
     }
+    this.props.saveQuestionAnswered({
+      page: pageAction,
+      question: questionAction,
+      name: nameAction,
+      score: scoreAction,
+      id: idAction
+    })
 
     let { currentQuestion } = this.props
     if (action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
@@ -179,4 +193,4 @@ class OverviewNode extends React.PureComponent {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage })(OverviewNode)
+export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage, saveQuestionAnswered })(OverviewNode)
