@@ -40,7 +40,6 @@ class Questionnaire extends React.Component {
         if (localStorage.getItem("selectedBodyArea")) {
           this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
         }
-       
         this.props.changePage(CurrentPage)
         return
       }
