@@ -1,24 +1,24 @@
-import { SAVE_SESSION, DELETE_SESSION } from "./../constants"
-import { sessionService } from "redux-react-session"
+import { sessionService } from "redux-react-session";
+import { DELETE_SESSION, SAVE_SESSION } from "./../constants";
 
 
 export const saveSession = store => next => action => {
-  if (!action || action.type !== SAVE_SESSION ){
+  if (!action || action.type !== SAVE_SESSION) {
     return next(action)
   }
-  
+
   const { access_token: accessToken } = action.payload
 
   sessionService.saveUser(action.payload)
-  sessionService.saveSession({accessToken})
+  sessionService.saveSession({ accessToken })
 }
 
 
 export const deleteSession = store => next => action => {
-  if (!action || action.type !== DELETE_SESSION ){
+  if (!action || action.type !== DELETE_SESSION) {
     return next(action)
   }
-  
+  localStorage.clear()
   sessionService.deleteUser()
   sessionService.deleteSession()
 }
