@@ -12,7 +12,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.survey_front.tls=${TLS}
       - traefik.http.routers.survey_front.rule=Host("${SITE_DOMAINE_NAME}")
-      - traefik.http.services.survey_front_service.loadbalancer.server.port=80
+      - traefik.http.services.survey_front_service.loadbalancer.server.port=8080
 
 networks:
   traefik:
