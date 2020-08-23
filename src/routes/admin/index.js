@@ -3,7 +3,7 @@ import { ROLES } from './../../constants'
 import * as inviteManager from './inviteManager'
 import * as company from './company'
 import * as dashbord from './dashbord'
-import * as user from './user'
+import * as manager from './manager'
 
 export default {
   path: "/admin",
@@ -13,6 +13,6 @@ export default {
     ...inviteManager,
     ...company,
     ...dashbord,
-    ...user
+    ...manager
   }
 }

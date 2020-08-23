@@ -19,7 +19,7 @@ class DepartmentNew extends React.Component {
   }
 
   onSubmit = (values) => {
-    this.props.createDepartment(values)
+    this.props.createDepartment(this.props.user.company.id, values)
   }
 
   render() {
@@ -66,6 +66,6 @@ class DepartmentNew extends React.Component {
 }
 
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => ({ ...state.department, ...state.session })
 
 export default connect(mapStateToProps, { createDepartment, clearDepartmentForm })(withTranslation()(DepartmentNew))

@@ -38,6 +38,15 @@ let DepartmentForm = (props) => {
         type="text"
         validate={[ required, minLength4, maxLength30 ]}
       />
+      <Field
+        name="description"
+        component={InputField}
+        className="form-control"
+        placeholder={t("Department Description")}
+        label={t("Department Description")}
+        type="text"
+        validate={[ required, minLength4, maxLength30 ]}
+      />
       
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">

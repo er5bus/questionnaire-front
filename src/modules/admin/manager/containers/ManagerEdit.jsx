@@ -3,44 +3,45 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
 
-import adminRoutes from './../../../routes/admin'
+import adminRoutes from './../../../../routes/admin'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { editUser, fetchUser } from "./../actions"
+import { editManager, fetchManager } from "./../actions"
 
-import UserForm from "./../components/UserForm"
+import ManagerForm from "./../components/ManagerForm"
 
-class UserEdit extends React.Component {
+class ManagerEdit extends React.Component {
 
   componentWillMount(){
-    this.props.fetchUser(this.props.match.params)
+    this.props.fetchManager(this.props.match.params)
   }
 
   onSubmit = (values) => {
-    const { item } = this.props
-    console.log(item)
-    this.props.editUser(item.id, values)
+    const { companyParam, param } = this.props.match.params
+    this.props.editManager(companyParam, param, values)
   }
 
   render() {
     const { error, t, isLoading } = this.props
+    const { companyParam } = this.props.match.params
+
     return (
       <>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Users") } </h6>
+              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Managers") } </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                     <BreadcrumbItem>
-                      <Link to={ adminRoutes.path + adminRoutes.routes.userList.path }>
-                        <i className="fas fa-home"></i> {t(" User List")}
+                      <Link to={ adminRoutes.path + adminRoutes.routes.managerList.path.replace(":companyParam", companyParam) }>
+                        <i className="fas fa-home"></i> {t(" Manager List")}
                       </Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit user")}</BreadcrumbItem>
+                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit manager")}</BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
               </Row>
@@ -52,7 +53,7 @@ class UserEdit extends React.Component {
             <Col lg="12">
               <Card className="shadow">
                 <CardBody className="px-lg-5 py-lg-5">
-                  <UserForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
+                  <ManagerForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
                 </CardBody>
               </Card>
             </Col>
@@ -64,6 +65,6 @@ class UserEdit extends React.Component {
 }
 
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => state.manager
 
-export default connect(mapStateToProps, { editUser, fetchUser })(withTranslation()(UserEdit))
+export default connect(mapStateToProps, { editManager, fetchManager })(withTranslation()(ManagerEdit))

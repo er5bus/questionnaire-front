@@ -1,31 +1,27 @@
-import { reducer as notificationReducer } from 'react-notification-system-redux';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import { sessionReducer } from 'redux-react-session';
-import thunk from 'redux-thunk';
+import { reducer as notificationReducer } from 'react-notification-system-redux'
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+import { sessionReducer } from 'redux-react-session'
+import thunk from 'redux-thunk'
 // middleware redux-thunk
-import { api, questionApi, questionFoodApi } from './middleware/api';
-import { deleteSession, saveSession } from './middleware/session';
+import { api, questionApi, questionFoodApi } from './middleware/api'
+import { deleteSession, saveSession } from './middleware/session'
 // admin
-import companyReducer from './modules/admin/company/reducers';
-import dashbordAdminReducer from './modules/admin/dashbord/reducers';
-import inviteManagerReducer from './modules/admin/inviteManager/reducers';
-import userReducer from './modules/admin/user/reducers';
+import companyReducer from './modules/admin/company/reducers'
+import dashbordAdminReducer from './modules/admin/dashbord/reducers'
+import inviteManagerReducer from './modules/admin/inviteManager/reducers'
+import managerReducer from './modules/admin/manager/reducers'
 // reducers
 // anonymous
-import authReducer from './modules/anonymous/authentication/reducers';
+import authReducer from './modules/anonymous/authentication/reducers'
 // employee
-import medicalRecordReducer from './modules/employee/medicalRecord/reducers';
-import questionnaireReducer from './modules/employee/questionnaire/reducers';
+import medicalRecordReducer from './modules/employee/medicalRecord/reducers'
+import questionnaireReducer from './modules/employee/questionnaire/reducers'
 // moderator
-import dashbordModeratorReducer from './modules/moderator/dashbord/reducers';
-import departmentReducer from './modules/moderator/department/reducers';
-import employeeReducer from './modules/moderator/employee/reducers';
-
-
-
-
-
+import dashbordModeratorReducer from './modules/moderator/dashbord/reducers'
+import departmentReducer from './modules/moderator/department/reducers'
+import employeeReducer from './modules/moderator/employee/reducers'
+import inviteEmployeeReducer from './modules/moderator/inviteEmployee/reducers'
 
 
 const rootReducer = combineReducers({
@@ -40,13 +36,14 @@ const rootReducer = combineReducers({
   // admin 
   company: companyReducer,
   dashbordAdmin: dashbordAdminReducer,
-  user: userReducer,
+  manager: managerReducer,
   inviteManager: inviteManagerReducer,
 
   // moderator
   department: departmentReducer,
   employee: employeeReducer,
   dashbordModerator: dashbordModeratorReducer,
+  inviteEmployee: inviteEmployeeReducer,
 
   // employee
   medicalRecord: medicalRecordReducer,
@@ -55,7 +52,7 @@ const rootReducer = combineReducers({
 
 export default (preloadedState = {}) => {
 
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
   const store = createStore(
     rootReducer,

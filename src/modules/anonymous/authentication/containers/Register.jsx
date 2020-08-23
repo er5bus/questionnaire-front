@@ -11,8 +11,6 @@ import RegisterEmployeeForm from './../components/RegisterEmployeeForm';
 import RegisterForm from './../components/RegisterForm';
 
 
-
-
 class Register extends React.Component {
 
   componentDidMount() {
@@ -24,16 +22,10 @@ class Register extends React.Component {
 
   onSubmit = (values) => {
     const { param } = this.props.match.params
-    const { username, email, password, firstName, lastName } = values
-    this.props.register(param, { firstName, lastName, username, email, password })
+    const { username, email, password, professionalEmail } = values
+    this.props.register(param, { professionalEmail, username, email, password })
   }
-  onSubmitEmployee = (values) => {
-    console.log(values);
-
-    //  const { param } = this.props.match.params
-    // const { emailPro, emailPerso, password, pseudo } = values
-    // this.props.register(param, { firstName, lastName, username, email, password })
-  }
+  
   render() {
     const { param } = this.props.match.params
     const { t, invitation, error, isLoading, isLoadingInvitation } = this.props
@@ -42,7 +34,7 @@ class Register extends React.Component {
     }
     else if (error && !invitation && param !== "employee") {
       return <>
-        <Col lg="6" md="8" className="pt-5">
+        <Col lg="8" md="8" className="pt-5">
           <Card className="shadow">
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-md-center mb-4 mt-md-0">
@@ -63,15 +55,15 @@ class Register extends React.Component {
     } else {
       return (
         <>
-          <Col lg="6" md="8" className="mt-lg-5" >
+          <Col lg="8" md="8" className="mt-lg-5" >
             <Card className="shadow">
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-md-center mb-4 mt-md-0">
                   <h1 className="mb-3 h3"> {t('Sign up to our platform')}</h1>
                   <p className="text-gray">{t('Use your credentials to create your account')}.</p>
-                  {param == "employee" && <p className="text-gray">{t('Choose a pseudo to connect anonymously to the platform  ')}.</p>}
+                  <p className="text-gray">{t('Choose a pseudo to connect anonymously to the platform  ')}.</p>
                 </div>
-                {param !== "employee" ? <RegisterForm initialValues={invitation} onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} /> : <RegisterEmployeeForm onSubmit={this.onSubmitEmployee} isLoading={isLoading} errors={error || {}} />}
+                <RegisterForm initialValues={invitation} onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
                 <div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
                   <span className="font-weight-normal"> {t('Already have an account?')}
                     <Link to={anonymousRoutes.path + anonymousRoutes.routes.login.path} className="font-weight-bold">{" "} {t('Sign in')}</Link>

@@ -37,7 +37,16 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
             to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", id) }
             tag={Link}
           >
-            <i className="fa fa-mail-bulk" /> { t("Manager Invitations") }
+            <i className="fa fa-mail-bulk" /> { t("Invitations") }
+          </Button>
+
+          <Button
+            className="btn-sm mt-4"
+            color="primary"
+            to={ adminRoutes.path + adminRoutes.routes.managerList.path.replace(":companyParam", id) }
+            tag={Link}
+          >
+            <i className="fa fa-eye" /> { t("Managers") }
           </Button>
 
           <Button

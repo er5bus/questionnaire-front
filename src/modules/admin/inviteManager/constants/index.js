@@ -29,7 +29,7 @@ export const ACTIONS = {
 }
 
 export const ENDPOINT = {
-  MANAGER_INVITATIONS: "/api/company/:companyParam/invitations/manager",
-  MANAGER_INVITATION: "/api/company/:companyParam/invitation/manager/:managerParam",
-  SEND_MANAGER_INVITATION: "/api/company/:companyParam/send/invitation/manager/:managerParam"
+  MANAGER_INVITATIONS: "/api/company/:companyParam/manager-invitations",
+  MANAGER_INVITATION: "/api/company/:companyParam/manager-invitation/:managerParam",
+  SEND_MANAGER_INVITATION: "/api/company/:companyParam/manager-invitation/:managerParam/send"
 }

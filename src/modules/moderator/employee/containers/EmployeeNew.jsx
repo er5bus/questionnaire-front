@@ -19,14 +19,15 @@ class EmployeeNew extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { company } = this.props.user
-    this.props.createEmployee(company.id, values)
+    this.props.createEmployee(this.props.match.params.departmentParam, values)
   }
 
   render() {
     const { error, t, item, isLoading } = this.props
+    const { departmentParam } = this.props.match.params
+
     if (item && item.param){
-      return <Redirect to={ moderatorRoutes.path + moderatorRoutes.routes.employeeEdit.path.replace(":param", item.param) } />
+      return <Redirect to={ moderatorRoutes.path + moderatorRoutes.routes.employeeEdit.path.replace(":departmentParam", departmentParam).replace(":param", item.param) } />
     }else {
       return (
         <>
@@ -38,7 +39,7 @@ class EmployeeNew extends React.Component {
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path }>
+                        <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path.replace(":departmentParam", departmentParam) }>
                           <i className="fas fa-home"></i> {t(" Employee List")}
                         </Link>
                       </BreadcrumbItem>

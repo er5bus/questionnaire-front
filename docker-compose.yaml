@@ -2,11 +2,9 @@ version: '3'
 
 services:
   survey_dev:
-    container_name: survey_dev
     build:
       context: .
     volumes:
-      - ./public:/app/public
       - ./src:/app/src
     env_file:
       - ./.env

@@ -23,7 +23,7 @@ class DepartmentList extends React.Component {
   
   onFetchDepartments = (pageNumber) => {
     if (!this.props.isLoading){
-      this.props.fetchDepartments(pageNumber)
+      this.props.fetchDepartments(this.props.user.company.id, pageNumber)
     }
   }
 
@@ -42,11 +42,11 @@ class DepartmentList extends React.Component {
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i class="fas fa-home"></i> {t(" Departments List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Departments List")}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ moderatorRoutes.path + moderatorRoutes.routes.departmentNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={  moderatorRoutes.path + moderatorRoutes.routes.departmentList.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New department')}
                   </Link>
@@ -80,7 +80,7 @@ class DepartmentList extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  ...state.department, items: getFilteredDepartments(state)
+  ...state.department, ...state.session, items: getFilteredDepartments(state)
 })
 
 export default connect(mapStateToProps, { fetchDepartments, filterDepartments })(withTranslation()(DepartmentList))

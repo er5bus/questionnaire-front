@@ -25,6 +25,6 @@ export const ACTIONS = {
 }
 
 export const ENDPOINT = {
-  DEPARTMENTS: "/api/emplyees",
-  DEPARTMENT: "/api/employee/:param"
+  DEPARTMENTS: "/api/company/:companyParam/departments",
+  DEPARTMENT: "/api/company/:companyParam/department/:param"
 }

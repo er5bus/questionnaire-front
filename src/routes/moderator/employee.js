@@ -5,16 +5,16 @@ const EmployeeNew = React.lazy( () => import("../../modules/moderator/employee/c
 const EmployeeEdit = React.lazy( () => import("../../modules/moderator/employee/containers/EmployeeEdit"))
 
 export const employeeList = {
-  path: "/employees",
+  path: "/department/:departmentParam/employees",
   component: EmployeeList
 }
 
 export const employeeNew = {
-  path: "/employee/new",
+  path: "/department/:departmentParam/employee/new",
   component: EmployeeNew
 }
 
 export const employeeEdit = {
-  path: "/employee/:param/edit",
+  path: "/department/:departmentParam/employee/:param/edit",
   component: EmployeeEdit
 }

@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
 
-import adminRoutes from './../../../../routes/admin'
+import moderatorRoutes from './../../../../routes/moderator'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
@@ -19,13 +19,14 @@ class EmployeeEdit extends React.Component {
   }
 
   onSubmit = (values) => {
-    const { item } = this.props
-    console.log(item)
-    this.props.editEmployee(item.id, values)
+    const { departmentParam, param } = this.props.match.params
+    this.props.editEmployee(departmentParam, param, values)
   }
 
   render() {
     const { error, t, isLoading } = this.props
+    const { departmentParam } = this.props.match.params
+
     return (
       <>
         <div className="header bg-primary pb-5">
@@ -36,11 +37,11 @@ class EmployeeEdit extends React.Component {
                 <Col lg="6">
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                     <BreadcrumbItem>
-                      <Link to={ adminRoutes.path + adminRoutes.routes.userList.path }>
+                      <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path.replace(":departmentParam", departmentParam) }>
                         <i className="fas fa-home"></i> {t(" Employee List")}
                       </Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit user")}</BreadcrumbItem>
+                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit employee")}</BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
               </Row>

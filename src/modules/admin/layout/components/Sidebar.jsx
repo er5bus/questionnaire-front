@@ -17,7 +17,7 @@ import {
 
 
 class Sidebar extends React.PureComponent {
-  
+
   constructor(props) {
     super(props);
     this.activeRoute.bind(this)
@@ -94,17 +94,6 @@ class Sidebar extends React.PureComponent {
                   >
                     <i className="fas fa-building" />
                     <span className="nav-link-text">Company</span>
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink
-                    to={adminRoutes.path + adminRoutes.routes.userList.path }
-                    tag={NavLinkRRD}
-                    onClick={this.closeCollapse}
-                    activeClassName="active"
-                  >
-                    <i className="fas fa-user" />
-                    <span className="nav-link-text">User</span>
                   </NavLink>
                 </NavItem>
               </Nav>

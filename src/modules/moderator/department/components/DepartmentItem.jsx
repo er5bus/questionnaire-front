@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col} from "reactstrap"
 
-import adminRoutes from './../../../../routes/admin'
+import moderatorRoutes from './../../../../routes/moderator'
 
 
-export default ({ fullName, username, email, company, id }) => {
+export default ({ name, description, id, onToggleModal }) => {
 
   const { t } = useTranslation()
 
@@ -15,32 +15,46 @@ export default ({ fullName, username, email, company, id }) => {
       <Card className="shadow border-0">
         <CardBody className="py-5">
           <div className="icon icon-shape icon-shape-primary rounded-circle mb-4">
-            <i className="far fa-user" />
+            <i className="far fa-building" />
           </div>
           <h6 className="text-primary text-uppercase">
-            { fullName } ({ username })
+            { name }
           </h6>
           <p className="description mt-3">
-            { email }
+            { description }
           </p>
-          {/*<Button
-            className="btn-sm mt-4"
-            color="warning"
-            to={ adminRoutes.path + adminRoutes.routes.userEdit.path.replace(":param", id) }
-            tag={Link}
-          >
-            <i className="fa fa-pencil-alt" /> { t("Edit") }
-          </Button>*/}
-          { company && company.id &&
           <Button
             className="btn-sm mt-4"
             color="info"
-            to={ adminRoutes.path + adminRoutes.routes.userList.path.replace(":userParam", company.id) }
+            to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeList.path.replace(":departmentParam", id) }
             tag={Link}
           >
-            <i className="fa fa-mail-bulk" /> { t("show Company") }
+            <i className="fa fa-eye" /> { t("Invitations") }
           </Button>
-          }
+          <Button
+            className="btn-sm mt-4"
+            color="primary"
+            to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path.replace(":departmentParam", id) }
+            tag={Link}
+          >
+            <i className="fa fa-eye" /> { t("Empolyees") }
+          </Button>
+          <Button
+            className="btn-sm mt-4"
+            color="warning"
+            to={ moderatorRoutes.path + moderatorRoutes.routes.departmentEdit.path.replace(":param", id) }
+            tag={Link}
+          >
+            <i className="fa fa-pencil-alt" /> { t("Edit") }
+          </Button>
+          <Button
+            className="btn-sm mt-4"
+            color="danger"
+            onClick={() => onToggleModal(id) }
+          >
+            <i className="fas fa-trash" /> { t("Delete") }
+          </Button>
+
         </CardBody>
       </Card>
     </Col>

@@ -6,7 +6,7 @@ class InfiniteScroll extends React.PureComponent {
   componentDidMount(){
     window.scrollTo(0, 0)
     window.addEventListener('scroll', this.handleScroll)
-    this.loadItems()
+    this.loadItems(true)
   }
 
   componentWillUnmount(){
@@ -40,7 +40,9 @@ class InfiniteScroll extends React.PureComponent {
 
   loadItems = (clearStore = false) => {
     const { loadMore, pageNumber, hasMore } = this.props
-    if (hasMore){
+    if (clearStore){
+      loadMore.apply(null, [ 1 ])
+    }else if (!clearStore && hasMore){
       loadMore.apply(null, [ pageNumber + 1 ])
     }
   }

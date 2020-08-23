@@ -31,22 +31,22 @@ const RegisterForm = (props) => {
       <Row>
         <Col>
           <Field
-            name="firstName"
+            name="professionalEmail"
             component={InputField}
             className="form-control"
-            icon="fa fa-user"
-            placeholder={t("First Name")}
+            icon="ni ni-email-83"
+            placeholder={t("Professional email")}
             type="text"
             validate={[ required ]}
           />
         </Col>
         <Col>
           <Field
-            name="lastName"
+            name="email"
             component={InputField}
             className="form-control"
-            icon="fa fa-user"
-            placeholder={t("Last Name")}
+            icon="ni ni-email-83"
+            placeholder={t("Personal Email")}
             type="text"
             validate={[ required ]}
           />

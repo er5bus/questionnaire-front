@@ -9,7 +9,7 @@ export const filterDepartments = (searchTerm) =>
   })
 
 
-export const fetchDepartments = (pageNum) => 
+export const fetchDepartments = (companyParam, pageNum) => 
   ({
     type: CALL_API,
     meta: {
@@ -18,7 +18,7 @@ export const fetchDepartments = (pageNum) =>
         success: ACTIONS.FETCH_DEPARTMENTS_SUCCEDED,
         fail: ACTIONS.FETCH_DEPARTMENTS_FAILED
       },
-      endpoint: ENDPOINT.DEPARTMENTS,
+      endpoint: ENDPOINT.DEPARTMENTS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.GET,
       params: { page: pageNum },
       jwt: true
@@ -32,7 +32,7 @@ export const clearDepartmentForm = () =>
   })
 
 
-export const createDepartment = (payload) => 
+export const createDepartment = (companyParam, payload) => 
   ({
     type: CALL_API,
     payload,
@@ -46,14 +46,14 @@ export const createDepartment = (payload) =>
         success: "Your user has been created successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.DEPARTMENTS,
+      endpoint: ENDPOINT.DEPARTMENTS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.POST,
       jwt: true
     }
   })
 
 
-export const editDepartment = (param, payload) =>
+export const editDepartment = (companyParam, param, payload) =>
   ({
     type: CALL_API,
     payload,
@@ -67,14 +67,14 @@ export const editDepartment = (param, payload) =>
         success: "Your user has been updated successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.DEPARTMENT.replace(":param", param),
+      endpoint: ENDPOINT.DEPARTMENT.replace(":companyParam", companyParam).replace(":param", param),
       method: HTTP_METHODS.PUT,
       jwt: true
     }
   })
 
 
-export const fetchDepartment = ({param}) =>
+export const fetchDepartment = (companyParam, param) =>
   ({
     type: CALL_API,
     meta: {
@@ -83,7 +83,7 @@ export const fetchDepartment = ({param}) =>
         success: ACTIONS.FETCH_DEPARTMENT_SUCCEDED,
         fail: ACTIONS.FETCH_DEPARTMENT_FAILED
       },
-      endpoint: ENDPOINT.DEPARTMENT.replace(":param", param),
+      endpoint: ENDPOINT.DEPARTMENT.replace(":companyParam", companyParam).replace(":param", param),
       method: HTTP_METHODS.GET,
       jwt: true
     }

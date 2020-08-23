@@ -33,7 +33,7 @@ const LoginForm = (props) => {
         name="username_or_email"
         component={InputField}
         className="form-control"
-        icon="ni ni-hat-3"
+        icon="ni ni-email-83"
         placeholder={t("Email or Username")}
         type="text"
         validate={[ required ]}

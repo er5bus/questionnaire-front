@@ -54,17 +54,15 @@ let TagForm = (props) => {
           />
         </Col>
       </Row>
-
       <Field
-        name="phone"
+        name="professionalEmail"
         component={InputField}
         className="form-control"
-        placeholder={t("Phone")}
-        label={t("Phone")}
+        placeholder={t("Professional Email")}
+        label={t("Professional Email")}
         type="text"
-        validate={[ required, minLength4, maxLength30 ]}
+        validate={[ email, required ]}
       />
-
       <Row>
         <Col lg="6">
 
@@ -97,16 +95,6 @@ let TagForm = (props) => {
         placeholder={t("Password")}
         label={t("Password")}
         type="password"
-        validate={[required, minLength4, maxLength30]}
-      />
-
-      <Field
-        name="department"
-        component={SelectField}
-        className="form-control"
-        placeholder={t("Pick a Department")}
-        label={t("Department")}
-        choices={ [ { label: "Department 1", value: 1 }, { label: "Department 2", value: 2 }, { label: "Department 3", value: 3 } ] }
         validate={[required, minLength4, maxLength30]}
       />
       <div className="mt-0">

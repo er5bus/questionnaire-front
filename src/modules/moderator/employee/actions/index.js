@@ -9,7 +9,7 @@ export const filterEmployees = (searchTerm) =>
   })
 
 
-export const fetchEmployees = (companyParam, pageNum) => 
+export const fetchEmployees = (departmentParam, pageNum) => 
   ({
     type: CALL_API,
     meta: {
@@ -18,7 +18,7 @@ export const fetchEmployees = (companyParam, pageNum) =>
         success: ACTIONS.FETCH_EMPLOYEES_SUCCEDED,
         fail: ACTIONS.FETCH_EMPLOYEES_FAILED
       },
-      endpoint: ENDPOINT.EMPLOYEES.replace(":companyparam", companyParam),
+      endpoint: ENDPOINT.EMPLOYEES.replace(":departmentParam", departmentParam),
       method: HTTP_METHODS.GET,
       params: { page: pageNum },
       jwt: true
@@ -32,7 +32,7 @@ export const clearEmployeeForm = () =>
   })
 
 
-export const createEmployee = (companyParam, payload) => 
+export const createEmployee = (departmentParam, payload) => 
   ({
     type: CALL_API,
     payload,
@@ -46,14 +46,14 @@ export const createEmployee = (companyParam, payload) =>
         success: "Your user has been created successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.EMPLOYEES.replace(":companyparam", companyParam),
+      endpoint: ENDPOINT.EMPLOYEES.replace(":departmentParam", departmentParam),
       method: HTTP_METHODS.POST,
       jwt: true
     }
   })
 
 
-export const editEmployee = (param, payload) =>
+export const editEmployee = (departmentParam, param, payload) =>
   ({
     type: CALL_API,
     payload,
@@ -67,14 +67,14 @@ export const editEmployee = (param, payload) =>
         success: "Your user has been updated successfuly",
         fail: "Something went wrong please try again"
       },
-      endpoint: ENDPOINT.EMPLOYEE.replace(":param", param),
+      endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", param),
       method: HTTP_METHODS.PUT,
       jwt: true
     }
   })
 
 
-export const fetchEmployee = ({param}) =>
+export const fetchEmployee = ({departmentParam, param}) =>
   ({
     type: CALL_API,
     meta: {
@@ -83,7 +83,7 @@ export const fetchEmployee = ({param}) =>
         success: ACTIONS.FETCH_EMPLOYEE_SUCCEDED,
         fail: ACTIONS.FETCH_EMPLOYEE_FAILED
       },
-      endpoint: ENDPOINT.EMPLOYEE.replace(":param", param),
+      endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", param),
       method: HTTP_METHODS.GET,
       jwt: true
     }

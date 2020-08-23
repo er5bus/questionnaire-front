@@ -1,10 +1,10 @@
 import React from 'react'
-import { Field, reduxForm, stopSubmit, clearSubmitErrors } from 'redux-form'
+import { Field, reduxForm, stopSubmit, clearSubmitErrors, FieldArray } from 'redux-form'
 import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
-import { Spinner } from 'reactstrap'
+import { Spinner, Row, Col } from 'reactstrap'
 
 import { required, maxLength, minLength, email } from './../../../../utils/validations'
 
@@ -17,7 +17,50 @@ const maxLength200 = maxLength(200)
 const maxLength500 = maxLength(500)
 
 
-let TagForm = (props) => {
+const renderInvitations = ({ fields, t }) => (
+  <div>
+    <div className="mt-4">
+      <Button onClick={() => fields.push({})} color="primary" type="button">
+        <i className="fas fa-plus-circle" />
+        { t(" Add invitation") }
+      </Button>
+    </div>
+    {fields.map((invitation, index) => (
+      <Row key={index} className="mt-4">
+        <Col lg="6">
+          <Field
+            name={`${invitation}.email`}
+            component={InputField}
+            className="form-control"
+            label={t("Manager email")}
+            placeholder={t("E-mail")}
+            type="text"
+            validate={[ required, email, minLength2, maxLength200 ]}
+          />
+        </Col>
+        <Col lg="5">
+          <Field
+            name={`${invitation}.fullName`}
+            component={InputField}
+            className="form-control"
+            label={t("Manager full name")}
+            placeholder={t("Full Name.")}
+            type="text"
+            validate={[ required, minLength2, maxLength200 ]}
+          />
+        </Col>
+        <Col lg="1">
+          <Button className="form-controle-button mt-4" onClick={() => fields.remove(index)} color="danger" type="button">
+            <i className="fas fa-trash" />
+          </Button>
+        </Col>
+      </Row>
+    ))}
+  </div>
+)
+
+
+let InvitationForm = (props) => {
 
   const { t } = useTranslation()
   const { handleSubmit, isLoading, reset } = props
@@ -33,24 +76,6 @@ let TagForm = (props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Field
-        name="email"
-        component={InputField}
-        className="form-control"
-        label={t("Manager email")}
-        placeholder={t("E-mail")}
-        type="text"
-        validate={[ required, email, minLength2, maxLength200 ]}
-      />
-      <Field
-        name="fullName"
-        component={InputField}
-        className="form-control"
-        label={t("Manager full name")}
-        placeholder={t("Full Name.")}
-        type="text"
-        validate={[ required, minLength2, maxLength200 ]}
-      />
-      <Field
         name="subject"
         component={InputTextareaField}
         className="form-control"
@@ -59,6 +84,7 @@ let TagForm = (props) => {
         type="text"
         validate={[ required, minLength2, maxLength500 ]}
       />
+      <FieldArray name="invitations" t={t} component={renderInvitations} />
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
           { isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-paper-plane mr-2"></i> }
@@ -73,13 +99,13 @@ let TagForm = (props) => {
 }
 
 
-TagForm = reduxForm({
+InvitationForm = reduxForm({
   form: 'invite-company',
   touchOnBlur: false
-})(TagForm)
+})(InvitationForm)
 
 export default connect(
   state => ({
     initialValues: state.inviteManager.item // pull initial values from account reducer
   })
-)(TagForm)
+)(InvitationForm)

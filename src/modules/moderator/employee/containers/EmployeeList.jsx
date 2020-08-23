@@ -23,9 +23,8 @@ import { getFilteredEmployees } from './../selector'
 class EmployeeList extends React.Component {
   
   onFetchEmployees = (pageNumber) => {
-    const { company } = this.props.user
     if (!this.props.isLoading){
-      this.props.fetchEmployees(company.id, pageNumber)
+      this.props.fetchEmployees(this.props.match.params.departmentParam, pageNumber)
     }
   }
 
@@ -35,7 +34,7 @@ class EmployeeList extends React.Component {
 
   render() {
     const { t, items, page, hasMore, isLoading } = this.props
-    console.log(hasMore)
+    const { departmentParam } = this.props.match.params
     return (
       <div>
         <div className="header bg-primary pb-5">
@@ -49,7 +48,7 @@ class EmployeeList extends React.Component {
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeNew.path } className="btn btn-sm btn-neutral">
+                  <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeNew.path.replace(":departmentParam", departmentParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New Employee')}
                   </Link>
@@ -71,7 +70,7 @@ class EmployeeList extends React.Component {
                   loader={<EmployeeLoader />}
                 >
                   { !isLoading && !items.length && <CardNotFound /> }
-                  { items.map((tag, i) => <EmployeeItem key={i} {...tag} onToggleModal={this.onToggleModal} />)}
+                  { items.map((tag, i) => <EmployeeItem key={i} {...tag} departmentParam={departmentParam} onToggleModal={this.onToggleModal} />)}
                 </InfiniteScroll>
               </Row>
             </Col>

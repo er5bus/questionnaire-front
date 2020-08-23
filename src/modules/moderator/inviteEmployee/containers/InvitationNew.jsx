@@ -3,45 +3,48 @@ import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
 import { withTranslation } from "react-i18next"
 
-import adminRoutes from './../../../routes/admin'
+import moderatorRoutes from './../../../../routes/moderator'
 
 // reactstrap components
 import { Card, Row, CardBody, Col, Container, Breadcrumb, BreadcrumbItem } from "reactstrap"
 
-import { createUser, clearUserForm } from "./../actions"
+import { createInvitation, clearInvitationStore } from "./../actions"
 
-import UserForm from "./../components/UserForm"
+import InvitationForm from "./../components/InvitationForm"
 
-class UserNew extends React.Component {
+
+class InvitationNew extends React.Component {
 
   componentWillMount() {
-    this.props.clearUserForm()
+    this.props.clearInvitationStore()
   }
 
   onSubmit = (values) => {
-    this.props.createUser(values)
+    const { departmentParam } = this.props.match.params
+    this.props.createInvitation(departmentParam, values)
   }
 
   render() {
+    const { departmentParam } = this.props.match.params
     const { error, t, item, isLoading } = this.props
     if (item && item.param){
-      return <Redirect to={ adminRoutes.path + adminRoutes.routes.userEdit.path.replace(":param", item.param) } />
+      return <Redirect to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeEdit.path.replace(":param", item.param) } />
     }else {
       return (
         <>
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" User") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Employee Invitation") } </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
-                        <Link to={ adminRoutes.path + adminRoutes.routes.userList.path }>
-                          <i className="fas fa-home"></i> {t(" User List")}
+                        <Link to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeList.path.replace(":departmentParam", departmentParam) }>
+                          <i className="fas fa-home"></i> {t(" Invitation List")}
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create user")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create invitation")}</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -53,7 +56,7 @@ class UserNew extends React.Component {
               <Col lg="12" md="12">
                 <Card className="shadow">
                   <CardBody className="px-lg-5 py-lg-5">
-                    <UserForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
+                    <InvitationForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
                   </CardBody>
                 </Card>
               </Col>
@@ -66,6 +69,6 @@ class UserNew extends React.Component {
 }
 
 
-const mapStateToProps = state => state.user
+const mapStateToProps = state => state.inviteEmployee
 
-export default connect(mapStateToProps, { createUser, clearUserForm })(withTranslation()(UserNew))
+export default connect(mapStateToProps, { createInvitation, clearInvitationStore })(withTranslation()(InvitationNew))
