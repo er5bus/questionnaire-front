@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Col, Row } from "reactstrap";
 import Loader from '../../../../components/Loader';
 import { otherQuestionsTreeNode, statcTreeNode } from "../constants";
-import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fetchQuestionScores, nextSelectedFromBodyQuestions, saveQuestionAnswered, updateScore } from "./../actions";
+import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fetchQuestionScores, nextSectionThird, nextSelectedFromBodyQuestions, saveQuestionAnswered, updateScore } from "./../actions";
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionHead from "./QuestionHead";
@@ -22,10 +22,6 @@ class OverviewNode extends React.PureComponent {
   componentDidMount() {
     const { currentQuestion } = this.props
     this.props.fetchQuestion(currentQuestion)
-    if (JSON.parse(localStorage.getItem("nextSectionThird"))) {
-      this.setState({ nextSection: true })
-    }
-
     //this.props.fetchQuestionScores(currentQuestion)
   }
 
@@ -107,20 +103,16 @@ class OverviewNode extends React.PureComponent {
         let currentQuestion = statcTreeNode[nextProps.selectedPartBodyIDToUse[0]]
         this.props.changeCurrentQuestion(currentQuestion)
       } else {
-        this.setState({ nextSection: true }, () => {
-          localStorage.setItem("nextSectionThird", true)
-          setTimeout(() => {
-            this.props.askContinueScreen()
-          }, 2000);
-        })
+        this.props.nextSectionThird(true)
+        setTimeout(() => {
+          this.props.askContinueScreen()
+        }, 1500);
       }
 
     }
   }
   onContinue = () => {
-
     let currentQuestion = otherQuestionsTreeNode[this.props.otherSectionQuestionToUse[0].id]
-
     this.props.changeCurrentQuestion(currentQuestion)
     this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
   }
@@ -162,12 +154,12 @@ class OverviewNode extends React.PureComponent {
 
   render() {
     const { item, isLoading, isLoadingSectionBody, scores } = this.props
-    console.log(scores, "brasss olaalala");
+    console.log(this.props.nextSectionThirdState);
 
     return (
       <> {isLoadingSectionBody ? <Loader /> :
         <>
-          {!this.state.nextSection ? (
+          {!this.props.nextSectionThirdState ? (
             <Row className="justify-content-center">
               <Col lg="12">
                 {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Des questions à propos  ${this.props.selectedPartBodyToUse[0]} `} pageTitle={false} />}
@@ -193,4 +185,4 @@ class OverviewNode extends React.PureComponent {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage, saveQuestionAnswered })(OverviewNode)
+export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage, saveQuestionAnswered, nextSectionThird })(OverviewNode)

@@ -18,7 +18,6 @@ export const deleteSession = store => next => action => {
   if (!action || action.type !== DELETE_SESSION) {
     return next(action)
   }
-  localStorage.clear()
   sessionService.deleteUser()
   sessionService.deleteSession()
 }

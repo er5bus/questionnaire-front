@@ -59,6 +59,7 @@ const scoreTable = [
     },
 ]
 const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion }) => {
+        
     const [scoresArray, setScoresArray] = useState([]);
     const calculateScore = (type, scores) => {
         let finalScore = 0;
@@ -73,10 +74,6 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
     }
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-        let scoresSaved = JSON.parse(localStorage.getItem("ScoresArray"));
-        if (scoresSaved) {
-            setScoresArray(scoresSaved)
-        }
 
     }, []);
     const { t } = useTranslation()

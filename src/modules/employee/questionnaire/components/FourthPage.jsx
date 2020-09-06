@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from "react-redux";
 import { Col, Row } from "reactstrap";
-import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, nextOtherQuestionsSection, saveQuestionAnswered, updateScore } from '../actions';
+import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, nextOtherQuestionsSection, nextSectionFourth, saveQuestionAnswered, updateScore } from '../actions';
 import { otherQuestionsTreeNode } from '../constants';
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
@@ -16,9 +16,11 @@ class FourthPage extends React.Component {
         }
     }
     componentDidMount() {
-        if (JSON.parse(localStorage.getItem("nextSectionFourth"))) {
-            this.props.nextOtherQuestionsSection()
-            this.setState({ nextSection: true })
+        if (this.props.nextSectionFourthState) {
+            console.log("trueeeueeueu next section");
+            
+            // this.props.nextOtherQuestionsSection()
+            // this.setState({ nextSection: true })
             this.setState({ titleAsk: this.returnTextAsk(this.props.page) })
             return
         }
@@ -44,7 +46,7 @@ class FourthPage extends React.Component {
     onContinue = () => {
         if (this.props.otherSectionQuestionToUse.length > 0) {
             this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
-            localStorage.setItem("nextSectionFourth", false)
+            this.props.nextSectionFourth(false)
         } else {
             this.props.changePage(7)
         }
@@ -70,24 +72,23 @@ class FourthPage extends React.Component {
             if (nextProps.otherSectionQuestionToUse.length > 0) {
                 let currentQuestion = otherQuestionsTreeNode[nextProps.otherSectionQuestionToUse[0].id]
                 this.props.changeCurrentQuestion(currentQuestion);
-                this.setState({ nextSection: true }, () => {
-                    localStorage.setItem("nextSectionFourth", true)
+                
+                this.props.nextSectionFourth(true)
                     setTimeout(() => {
                         this.props.askContinueScreen()
                     }, 2000);
-                })
+                
             } else {
-                this.setState({ nextSection: true }, () => {
+                    this.props.nextSectionFourth(true)
                     setTimeout(() => {
-                        localStorage.setItem("nextSectionFourth", true)
+                        
                         this.props.askContinueScreen()
                     }, 2000);
-                })
+                
             }
         }
     }
     onSelectChoice = (item, action) => {
-        console.log(action, "actionnn");
 
         let pageAction = this.props.page
         let questionAction = item;
@@ -125,11 +126,10 @@ class FourthPage extends React.Component {
     }
     render() {
         const { t, isLoading, item, page } = this.props
-        console.log(page);
 
         return (
             <>
-                {!this.state.nextSection ? (
+                {!this.props.nextSectionFourthState ? (
                     <Row className="justify-content-center">
                         <Col lg="12">
                             {this.props.otherSectionQuestionToUse.length > 0 && <QuestionHead title={`Des questions à propos  ${this.props.otherSectionQuestionToUse[0].value} `} pageTitle={false} />}
@@ -150,4 +150,4 @@ class FourthPage extends React.Component {
     }
 }
 const mapStateToProps = state => state.questionnaire
-export default connect(mapStateToProps, { fetchQuestion, changeCurrentQuestion, nextOtherQuestionsSection, askContinueScreen, updateScore, changePage, saveQuestionAnswered })(withTranslation()(FourthPage))
+export default connect(mapStateToProps, { fetchQuestion, changeCurrentQuestion, nextOtherQuestionsSection, askContinueScreen, updateScore, changePage, saveQuestionAnswered, nextSectionFourth })(withTranslation()(FourthPage))

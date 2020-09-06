@@ -34,7 +34,22 @@ export const ACTIONS = {
 
   FILL_SCORES: 'questionnaire@FILL_SCORES',
   FILL_SELECTED_DESELECTED_NUTRI_SCORES: 'questionnaire@FILL_SELECTED_DESELECTED_NUTRI_SCORES',
-  SAVE_QUESTION_ANSWER: 'questionnaire@SAVE_QUEStION_ANSWER'
+  SAVE_QUESTION_ANSWER: 'questionnaire@SAVE_QUEStION_ANSWER',
+
+  SAVE_STATE_INIT: 'questionnaire@SAVE_STATE_INIT',
+  SAVE_STATE_SUCCEDED: 'questionnaire@SAVE_STATE_SUCCEDED',
+  SAVE_STATE_FAILED: 'questionnaire@SAVE_STATE_FAILED',
+
+  GET_STATE_INIT: 'questionnaire@GET_STATE_INIT',
+  GET_STATE_SUCCEDED: 'questionnaire@GET_STATE_SUCCEDED',
+  GET_STATE_FAILED: 'questionnaire@GET_STATE_FAILED',
+
+  NEXT_SECTION_THIRD: 'questionnaire@NEXT_SECTION_THIRD',
+  NEXT_SECTION_FOURTH: 'questionnaire@NEXT_SECTION_FOURTH',
+
+  UPDATE_OTHER_QUESTION_TO_USE: 'questionnaire@UPDATE_OTHER_QUESTION_TO_USE',
+
+  SAVE_NUTRI_STATE: 'questionnaire@SAVE_NUTRI_STATE'
 }
 
 export const ENDPOINT = {
@@ -42,7 +57,8 @@ export const ENDPOINT = {
   QUESTION: "/api/tree/:treeparam/node/:nodeparam",
   FOOD_CATEGORY: 'category/cat-foods-meals',
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
-  IMAGES_PATH: "https://predicta.fulltech.io/public/uploads/"
+  IMAGES_PATH: "https://predicta.fulltech.io/public/uploads/",
+  HISTORY_SAVE: "/api/question-history"
 }
 
 
@@ -78,6 +94,8 @@ export const otherQuestionsTreeNode = {
   PSYCHOLOGIE: { treeparam: "794623b5d08b4159a30b711bed94d005", nodeparam: "f3819c71e64c46cc868b321fd4ac986d" },
   COACHING: { treeparam: "5e88325207f74342814b401467bfad98", nodeparam: "fb6a8f2fed1a42c0b0e3cd9afc5309ab" },
 }
+
+export const otherSectionToUseQuestions = [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }]
 
 export const zonePeriodeData = {
   tasks: {

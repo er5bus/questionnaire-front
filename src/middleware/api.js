@@ -30,6 +30,8 @@ export const api = store => next => async action => {
 
   let headers = {}
   if (jwt) {
+
+
     headers = { Authorization: `Bearer  ${accessToken}` }
   }
 
