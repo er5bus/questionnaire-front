@@ -102,6 +102,21 @@ export const saveNutriState = (payload) => ({
   payload
 })
 
+export const saveScoresUser = (payload) => ({
+  type: CALL_API,
+  payload,
+  meta: {
+    actions: {
+      init: ACTIONS.SAVE_SCORES_INIT,
+      success: ACTIONS.SAVE_SCORES_SUCCEDED,
+      fail: ACTIONS.SAVE_SCORES_FAILED
+    },
+    jwt: true,
+    endpoint: ENDPOINT.SAVE_SCORS,
+    method: HTTP_METHODS.POST,
+  }
+})
+
 export const getUserHistory = () => ({
   type: CALL_API,
   meta: {
@@ -129,6 +144,9 @@ export const saveUserState = (payload) => ({
     method: HTTP_METHODS.POST,
   }
 })
+
+
+
 export const fillScoresTable = (payload) => ({
   type: ACTIONS.FILL_SCORES,
   payload

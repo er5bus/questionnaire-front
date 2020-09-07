@@ -49,7 +49,11 @@ export const ACTIONS = {
 
   UPDATE_OTHER_QUESTION_TO_USE: 'questionnaire@UPDATE_OTHER_QUESTION_TO_USE',
 
-  SAVE_NUTRI_STATE: 'questionnaire@SAVE_NUTRI_STATE'
+  SAVE_NUTRI_STATE: 'questionnaire@SAVE_NUTRI_STATE',
+
+  SAVE_SCORES_INIT: 'questionnaire@SAVE_SCORES_INIT',
+  SAVE_SCORES_SUCCEDED: 'questionnaire@SAVE_SCORES_SUCCEDED',
+  SAVE_SCORES_FAILED: 'questionnaire@SAVE_SCORES_FAILED',
 }
 
 export const ENDPOINT = {
@@ -58,7 +62,8 @@ export const ENDPOINT = {
   FOOD_CATEGORY: 'category/cat-foods-meals',
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
   IMAGES_PATH: "https://predicta.fulltech.io/public/uploads/",
-  HISTORY_SAVE: "/api/question-history"
+  HISTORY_SAVE: "/api/question-history",
+  SAVE_SCORS: `/api/employee/${localStorage.getItem("id")}/questionnaires`
 }
 
 

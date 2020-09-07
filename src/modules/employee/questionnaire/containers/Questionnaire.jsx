@@ -185,9 +185,7 @@ const Questionnaire = (props) => {
 
     if (prevPage && prevPage !== page) {
       if (firstLoad) {
-        console.log(questionnaire, "firstt objecctt");
         if ((page === 6 || page === 4 || page === 5) && questionnaire.otherSectionQuestionToUse.length === 0) {
-          console.log(questionnaire, "firstt objecctt 3434343");
           props.updateotherSectionQuestionToUse(page)
         }
         setFirstLoad(false)
@@ -220,7 +218,7 @@ const Questionnaire = (props) => {
   }, [questionnaire])
   // first Load ........................
   useEffect(() => {
-    //props.saveUserState({})
+   // props.saveUserState({})
      props.getUserHistory()
 
   }, [])

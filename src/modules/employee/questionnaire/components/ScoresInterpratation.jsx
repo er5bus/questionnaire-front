@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Button, Row, Table } from 'reactstrap';
 import styled from 'styled-components';
-import { exitPage, tasksEnded } from '../actions';
+import { exitPage, saveScoresUser, tasksEnded } from '../actions';
 
 const TableTitle = styled.div`
 display : flex;
@@ -25,42 +25,61 @@ const scoreTable = [
     {
         name: "Kinésithérapie",
         descriptions: "Besoin interventionnel d'un kinésithérapeute",
-        id: "Kinésithérapie"
+        id: "Kinésithérapie",
+        idForSend: "PHYSIOTHERAPY"
     },
     {
         name: "Ergonomie",
         descriptions: "Besoin interventionnel d'un ergonome",
-        id: "Ergonomie"
+        id: "Ergonomie",
+        idForSend: "ERGONOMICS"
     },
     {
         name: "Médecine",
         descriptions: "Besoin interventionnel d'un médecin",
-        id: "Médecine"
+        id: "Médecine",
+        idForSend: "MEDICINE"
     },
     {
         name: "Psychologie",
         descriptions: "Besoin interventionnel d'un psychologue",
-        id: "Psychologie"
+        id: "Psychologie",
+        idForSend: "PSYCHOLOGY"
     },
     {
         name: "Coach",
         descriptions: "Besoin interventionnel en coaching",
-        id: "Coach"
+        id: "Coach",
+        idForSend: "COACH"
     },
     {
         name: "Ostéopathie",
         descriptions: "Besoin interventionnel en ostéopathie",
-        id: "Ostéopathie"
+        id: "Ostéopathie",
+        idForSend: "OSTEOPATHY"
     },
     {
         name: "Arrêt de travail",
         descriptions: "Risque d'arrêt de travail",
-        id: "AT"
+        id: "AT",
+        idForSend: "STOPP_WORKING"
     },
 ]
-const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion }) => {
-        
-    const [scoresArray, setScoresArray] = useState([]);
+const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
+    const [scoresToSubmit, setScoresToSubmit] = useState([])
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setScoresToSubmit(FormatScoresToSend())
+    }, []);
+
+    useEffect(() => {
+        if (scorsSaved) {
+            tasksEnded()
+            exitPage()
+        }
+    }, [scorsSaved])
+
+
     const calculateScore = (type, scores) => {
         let finalScore = 0;
         let filtredTable = scores.filter(el => el.name === type)
@@ -72,10 +91,44 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
         });
         return finalScore
     }
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+    const testQuestion = {
+        question: "test",
+        answer: "test",
+        score: 0
+    }
+    const formatAnsewerQuestionTable = (table) => {
 
-    }, []);
+        return table.map(el => {
+            return {
+                question: el.question,
+                answer: el.name,
+                score: el.score
+            }
+        })
+    }
+    const saveScoresUserFun = () => {
+        saveScoresUser({
+            questionCategories: scoresToSubmit
+        })
+    }
+
+    const FormatScoresToSend = () => {
+        const totalScores = scoreTable.map(el => {
+            return {
+                score: calculateScore(el.id, scores),
+                category: el.idForSend
+            }
+
+        })
+      
+        totalScores[1] = { ...totalScores[1], questions: healthAnsweredQuestion.length > 0 ? formatAnsewerQuestionTable(healthAnsweredQuestion) : formatAnsewerQuestionTable(ergonomicsAnsweredQuestion) }
+        totalScores[3] = { ...totalScores[3], questions: formatAnsewerQuestionTable(psychologiqueAnsweredQuestion) }
+        totalScores[4] = { ...totalScores[4], questions: formatAnsewerQuestionTable(coachingAnsweredQuestion) }
+
+        return totalScores
+
+    }
+
     const { t } = useTranslation()
 
     return (
@@ -206,7 +259,7 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
                         <tr key={el.name}>
                             <th scope="row"> {t(`${el.name}`)}  </th>
                             <td> {t(`${el.descriptions}`)}  </td>
-                            <td> {scores.length !== 0 ? calculateScore(el.id, scores) : calculateScore(el.id, scoresArray)} </td>
+                            <td> {calculateScore(el.id, scores)} </td>
                         </tr>
                     ))}
                     <tr>
@@ -230,8 +283,7 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
                         borderColor: " #062484"
                     }}
                     onClick={() => {
-                        tasksEnded()
-                        exitPage()
+                        saveScoresUserFun()
                     }}
                 > {t("Terminer")} </Button>
 
@@ -242,4 +294,4 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
 
 
 const mapStateToProps = state => state.questionnaire
-export default connect(mapStateToProps, { exitPage, tasksEnded })(ScoresInterpratation)
+export default connect(mapStateToProps, { exitPage, tasksEnded, saveScoresUser })(ScoresInterpratation)

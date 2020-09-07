@@ -27,7 +27,7 @@ export default (state = {
   isLoadingFoods: false,
   selectedScoreNut: 0,
   deselectedScoreNut: 0,
-  deselectedScoreNutState:false,
+  deselectedScoreNutState: false,
   healthAnsweredQuestion: [],
   ergonomicsAnsweredQuestion: [],
   coachingAnsweredQuestion: [],
@@ -38,13 +38,20 @@ export default (state = {
   Breakfast: { selectedColumn: [[], [], [], []], selectedNutri: [] },
   Lunch: { selectedColumn: [[], [], [], []], selectedNutri: [] },
   Dinner: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] }
+  Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  scorsSaved: null
 }, action) => {
   const { payload, type } = action
 
   switch (type) {
     case ACTIONS.GET_STATE_INIT: {
       return { ...state, isLoadingUserState: true }
+    }
+    case ACTIONS.SAVE_SCORES_SUCCEDED: {
+      return { ...state, scorsSaved: true }
+    }
+    case ACTIONS.SAVE_SCORES_FAILED: {
+      return { ...state, scorsSaved: false }
     }
     case ACTIONS.GET_STATE_SUCCEDED: {
       let newState = payload
@@ -71,24 +78,24 @@ export default (state = {
       return { ...state, otherSectionQuestionToUse: newArraySections }
     }
     case ACTIONS.SAVE_NUTRI_STATE: {
-     
+
       if (payload.Breakfast) {
-        return {...state, periodeNut: payload.periodeNut, Breakfast:payload.Breakfast}
+        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast }
 
       } else if (payload.Lunch) {
-        return {...state, periodeNut: payload.periodeNut, Lunch:payload.Lunch}
+        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch }
 
       } else if (payload.Snack) {
-        return {...state, periodeNut: payload.periodeNut, Snack:payload.Snack}
+        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack }
 
-      }else if (payload.Dinner) {
-        return {...state, periodeNut: payload.periodeNut, Dinner:payload.Dinner}
+      } else if (payload.Dinner) {
+        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner }
 
       } else {
         return state
       }
-      
-    
+
+
     }
 
     case ACTIONS.NEXT_SECTION_THIRD: {
