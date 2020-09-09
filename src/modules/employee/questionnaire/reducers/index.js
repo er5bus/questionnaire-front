@@ -1,10 +1,11 @@
-import { ACTIONS } from './../constants';
+import { ACTIONS, otherSectionToUseQuestions } from './../constants';
 
 
 export default (state = {
   page: 1,
   tasksEnded: false,
   exit: false,
+  isLoadingUserState: false,
   isLoading: false,
   item: null,
   error: null,
@@ -26,28 +27,94 @@ export default (state = {
   isLoadingFoods: false,
   selectedScoreNut: 0,
   deselectedScoreNut: 0,
+  deselectedScoreNutState: false,
   healthAnsweredQuestion: [],
   ergonomicsAnsweredQuestion: [],
   coachingAnsweredQuestion: [],
-  psychologiqueAnsweredQuestion: []
-
+  psychologiqueAnsweredQuestion: [],
+  nextSectionThirdState: false,
+  nextSectionFourthState: false,
+  periodeNut: 0,
+  Breakfast: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Lunch: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Dinner: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  scorsSaved: null
 }, action) => {
   const { payload, type } = action
+
   switch (type) {
+    case ACTIONS.GET_STATE_INIT: {
+      return { ...state, isLoadingUserState: true }
+    }
+    case ACTIONS.SAVE_SCORES_SUCCEDED: {
+      return { ...state, scorsSaved: true }
+    }
+    case ACTIONS.SAVE_SCORES_FAILED: {
+      return { ...state, scorsSaved: false }
+    }
+    case ACTIONS.GET_STATE_SUCCEDED: {
+      let newState = payload
 
+      if (Object.entries(newState).length) {
+        Object.assign(state, newState)
+        return { ...state, isLoadingUserState: false }
+      }
+      return { ...state, isLoadingUserState: false }
+
+    }
+    case ACTIONS.UPDATE_OTHER_QUESTION_TO_USE: {
+      let newArraySections = [...otherSectionToUseQuestions]
+      switch (payload) {
+        case 5:
+          newArraySections.splice(0, 2)
+          return newArraySections
+        case 6:
+          newArraySections.splice(0, 1)
+          return newArraySections
+        default:
+          break;
+      }
+      return { ...state, otherSectionQuestionToUse: newArraySections }
+    }
+    case ACTIONS.SAVE_NUTRI_STATE: {
+
+      if (payload.Breakfast) {
+        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast }
+
+      } else if (payload.Lunch) {
+        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch }
+
+      } else if (payload.Snack) {
+        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack }
+
+      } else if (payload.Dinner) {
+        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner }
+
+      } else {
+        return state
+      }
+
+
+    }
+
+    case ACTIONS.NEXT_SECTION_THIRD: {
+      return { ...state, nextSectionThirdState: true }
+    }
+    case ACTIONS.NEXT_SECTION_FOURTH: {
+      return { ...state, nextSectionFourthState: payload }
+    }
     case ACTIONS.NEXT_PAGE: {
-      console.log("Fanhdell");
 
-      localStorage.setItem("CurrentPage", state.page + 1)
       return { ...state, page: state.page + 1 }
     }
 
     case ACTIONS.PREV_PAGE: {
-      localStorage.setItem("CurrentPage", state.page - 1)
+
       return { ...state, page: state.page - 1 }
     }
     case ACTIONS.TASKES_ENDED: {
-      localStorage.setItem("taskEnd", true)
+
       return { ...state, tasksEnded: true }
     }
     case ACTIONS.UPDATE_SCORE: {
@@ -64,7 +131,6 @@ export default (state = {
       } else {
         newArrayScores = payload
       }
-      localStorage.setItem("ScoresArray", JSON.stringify(newArrayScores))
 
       return { ...state, scores: newArrayScores }
     }
@@ -76,12 +142,11 @@ export default (state = {
     }
 
     case ACTIONS.NEXT_QUESTION: {
-      localStorage.setItem("CurrentQuestion", JSON.stringify(payload))
       return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
     }
     case ACTIONS.CHANGE_PAGE: {
       let newPage = payload
-      localStorage.setItem("CurrentPage", newPage)
+
       return { ...state, page: newPage }
     }
     case ACTIONS.FETCH_QUESTION_INIT: {
@@ -117,7 +182,6 @@ export default (state = {
 
       ;
 
-      localStorage.setItem("selectedBodyArea", JSON.stringify({ value: payload.value, id: payload.id }))
       return { ...state, selectedPartBody: newSeletedbody, selectedPartBodyToUse: newSeletedbody, selectedPartBodyID: newSeletedbodyID, selectedPartBodyIDToUse: newSeletedbodyID }
     }
     case ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION: {

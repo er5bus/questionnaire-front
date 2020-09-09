@@ -10,7 +10,10 @@ export const api = store => next => async action => {
 
   const dispatch = dispatchActions(next)
   const { actions, messages = {}, endpoint, method, jwt, params = {}, extraData = {} } = action.meta
-  const { user: { access_token: accessToken = null } } = store.getState().session
+  const { user: { access_token: accessToken = null, id } } = store.getState().session
+  localStorage.setItem('id', id)
+
+
 
   const createNotificationOpts = (title, message) => ({
     title,
@@ -30,6 +33,8 @@ export const api = store => next => async action => {
 
   let headers = {}
   if (jwt) {
+
+
     headers = { Authorization: `Bearer  ${accessToken}` }
   }
 

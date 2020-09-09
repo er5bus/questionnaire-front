@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { Button, Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 import Loader from '../../../../components/Loader';
-import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
+import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, saveNutriState, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
 import { zonePeriodeData } from '../constants';
 import ColumnAliments from './ColumAliments';
 import Column from './column';
@@ -65,7 +65,6 @@ class NutritionalPage extends React.Component {
             isLoadingFood: true,
             foodExist: false,
             periode: 0,
-            testData: []
 
         };
 
@@ -121,11 +120,7 @@ class NutritionalPage extends React.Component {
 
     componentDidMount() {
         this.props.fetchFoodCategories()
-        let lastPeriode = localStorage.getItem("PeriodeNuti")
-        if(lastPeriode) {
-            this.setState({periode: Number(lastPeriode)})
-        }
-    
+        this.setState({ periode: this.props.periodeNut })
     }
 
     formattedTabel = (orignalTable, tableToFormat, periode) => {
@@ -134,17 +129,19 @@ class NutritionalPage extends React.Component {
         if (tableToFormat.length == 0) {
             return orignalTable
         }
-        let lastdDeselctScore = localStorage.getItem("DeSelctedNutriScore")
-        let savedData = JSON.parse(localStorage.getItem(this.renderIdPeriode(periode)));
+        let savedData = this.props[`${this.renderIdPeriode(periode)}`];
+
         let selectedNutri = []
-        let selectedColumn = [[],[],[],[]]
+        let selectedColumn = [[], [], [], []]
         if (savedData) {
             selectedNutri = savedData.selectedNutri
             selectedColumn = savedData.selectedColumn
         }
+
+
         let orderColum = 0
         for (const key in copyOriginalTable.columns) {
-            copyOriginalTable.columns[key].taskIds =selectedColumn[orderColum] ;
+            copyOriginalTable.columns[key].taskIds = selectedColumn[orderColum];
             orderColum++
         }
 
@@ -211,10 +208,12 @@ class NutritionalPage extends React.Component {
             }
             deselectedScore = deselectedScore + taskScore
         });
-        if(!lastdDeselctScore) {
+
+
+        if (this.props.periodeNut === 0) {
             this.props.updateDeSelectedScoreNutrition({ type: "add", value: deselectedScore })
         }
-        
+
         return copyOriginalTable
 
 
@@ -242,15 +241,14 @@ class NutritionalPage extends React.Component {
             selectedNutri = [...selectedNutri, ...this.renderState(this.state.periode).columns[`column-${i}`].taskIds];
             i++
         }
-        localStorage.setItem("SelctedNutriScore", this.props.selectedScoreNut)
-        localStorage.setItem("DeSelctedNutriScore", this.props.deselectedScoreNut)
-        localStorage.setItem("PeriodeNuti", this.state.periode === 3 ? 3: this.state.periode + 1)
-        localStorage.setItem(this.renderIdPeriode(this.state.periode), JSON.stringify({
-            selectedColumn: selectedColumn,
-            selectedNutri: selectedNutri
-        })
-
-        )
+        let payloadToSave = {
+            periodeNut: this.state.periode === 3 ? 3 : this.state.periode + 1,
+            [`${this.renderIdPeriode(this.state.periode)}`]: {
+                selectedColumn: selectedColumn,
+                selectedNutri: selectedNutri
+            }
+        }
+        this.props.saveNutriState(payloadToSave)
 
         this.setState({
             periode: this.state.periode < 3 ? this.state.periode + 1 : this.props.changePage(8)
@@ -272,18 +270,22 @@ class NutritionalPage extends React.Component {
             lunch = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 5).length > 0);
             snack = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 3).length > 0);
             dinner = filtredFoods.filter(el => el.meals.filter(meal => meal.id == 6).length > 0);
-            console.log(this.formattedTabel(zonePeriodeData, breakfast), "tababababababa");
-
             this.setState({ data: this.formattedTabel(zonePeriodeData, breakfast, 0) }, () => {
                 this.setState({ dataMidi: this.formattedTabel(zonePeriodeData, lunch, 1) }, () => {
                     this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack, 3) }, () => {
                         this.setState({ dataNuit: this.formattedTabel(zonePeriodeData, dinner, 2) }, () => {
                             this.setState({ isLoadingFood: false })
+                            console.log(this.props.deselectedScoreNut);
+
                         })
                     })
                 })
             })
 
+
+        }
+        if (nextProps.deselectedScoreNut !== this.props.deselectedScoreNut) {
+            console.log(nextProps.deselectedScoreNut);
 
         }
 
@@ -399,6 +401,11 @@ class NutritionalPage extends React.Component {
 
     }
     handlePeriode = (periode) => {
+        if (periode > this.state.periode) {
+           
+            
+            this.saveData()
+        }
         this.setState({ periode: periode })
     }
     render() {
@@ -488,4 +495,4 @@ class NutritionalPage extends React.Component {
 }
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition })(NutritionalPage) 
+export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition, saveNutriState })(NutritionalPage) 

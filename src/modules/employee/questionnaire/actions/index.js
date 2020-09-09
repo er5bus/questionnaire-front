@@ -1,4 +1,4 @@
-import { CALL_FOOD_API, CALL_QUESTION_API, /*CALL_API,*/ HTTP_METHODS } from './../../../../constants';
+import { CALL_API, CALL_FOOD_API, CALL_QUESTION_API, HTTP_METHODS } from './../../../../constants';
 import { ACTIONS, ENDPOINT } from './../constants';
 
 
@@ -63,7 +63,10 @@ export const updateDeSelectedScoreNutrition = (payload) => ({
   type: ACTIONS.UPDATE_DESELECTED_SCORE,
   payload
 });
-
+export const updateotherSectionQuestionToUse = (payload) => ({
+  type: ACTIONS.UPDATE_OTHER_QUESTION_TO_USE,
+  payload
+})
 export const updateScore = (payload) => ({
   type: ACTIONS.UPDATE_SCORE,
   payload
@@ -85,6 +88,65 @@ export const fetchQuestion = ({ treeparam, nodeparam }) =>
       method: HTTP_METHODS.GET,
     }
   })
+export const nextSectionThird = (payload) => ({
+  type: ACTIONS.NEXT_SECTION_THIRD,
+  payload
+})
+export const nextSectionFourth = (payload) => ({
+  type: ACTIONS.NEXT_SECTION_FOURTH,
+  payload
+})
+
+export const saveNutriState = (payload) => ({
+  type: ACTIONS.SAVE_NUTRI_STATE,
+  payload
+})
+
+export const saveScoresUser = (payload) => ({
+  type: CALL_API,
+  payload,
+  meta: {
+    actions: {
+      init: ACTIONS.SAVE_SCORES_INIT,
+      success: ACTIONS.SAVE_SCORES_SUCCEDED,
+      fail: ACTIONS.SAVE_SCORES_FAILED
+    },
+    jwt: true,
+    endpoint: ENDPOINT.SAVE_SCORS,
+    method: HTTP_METHODS.POST,
+  }
+})
+
+export const getUserHistory = () => ({
+  type: CALL_API,
+  meta: {
+    actions: {
+      init: ACTIONS.GET_STATE_INIT,
+      success: ACTIONS.GET_STATE_SUCCEDED,
+      fail: ACTIONS.GET_STATE_FAILED
+    },
+    jwt: true,
+    endpoint: ENDPOINT.HISTORY_SAVE,
+    method: HTTP_METHODS.GET,
+  }
+})
+export const saveUserState = (payload) => ({
+  type: CALL_API,
+  payload,
+  meta: {
+    actions: {
+      init: ACTIONS.SAVE_STATE_INIT,
+      success: ACTIONS.SAVE_STATE_SUCCEDED,
+      fail: ACTIONS.SAVE_STATE_FAILED
+    },
+    jwt: true,
+    endpoint: ENDPOINT.HISTORY_SAVE,
+    method: HTTP_METHODS.POST,
+  }
+})
+
+
+
 export const fillScoresTable = (payload) => ({
   type: ACTIONS.FILL_SCORES,
   payload
