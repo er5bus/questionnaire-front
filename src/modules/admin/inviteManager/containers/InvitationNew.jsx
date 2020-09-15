@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 
 import adminRoutes from './../../../../routes/admin'
 
@@ -26,7 +25,7 @@ class InvitationNew extends React.Component {
 
   render() {
     const { companyParam } = this.props.match.params
-    const { error, t, item, isLoading } = this.props
+    const { error, item, isLoading } = this.props
     if (item && item.param){
       return <Redirect to={ adminRoutes.path + adminRoutes.routes.invitationManagerEdit.path.replace(":param", item.param) } />
     }else {
@@ -35,16 +34,16 @@ class InvitationNew extends React.Component {
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Manager Invitations") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Invitations des responsables </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", companyParam) }>
-                          <i className="fas fa-home"></i> {t(" Invitation List")}
+                          <i className="fas fa-home"></i> Liste d'invitations
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create invitation")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> Créer une invitation </BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -71,4 +70,4 @@ class InvitationNew extends React.Component {
 
 const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, { createInvitation, clearInvitationStore })(withTranslation()(InvitationNew))
+export default connect(mapStateToProps, { createInvitation, clearInvitationStore })(InvitationNew)

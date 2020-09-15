@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from 'prop-types'
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
 import { Button, Spinner, Col, Row } from "reactstrap"
-import { useTranslation } from "react-i18next"
 
 import { required, maxLength, minLength } from "./../../../../utils/validations"
 
@@ -15,7 +14,6 @@ const maxLength30 = maxLength(30)
 
 const RegisterForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading } = props
 
   React.useEffect(() => {
@@ -35,7 +33,7 @@ const RegisterForm = (props) => {
             component={InputField}
             className="form-control"
             icon="ni ni-email-83"
-            placeholder={t("Professional email")}
+            placeholder="Email professionnel"
             type="text"
             validate={[ required ]}
           />
@@ -46,7 +44,7 @@ const RegisterForm = (props) => {
             component={InputField}
             className="form-control"
             icon="ni ni-email-83"
-            placeholder={t("Personal Email")}
+            placeholder="Email personnel"
             type="text"
             validate={[ required ]}
           />
@@ -57,7 +55,7 @@ const RegisterForm = (props) => {
         component={InputField}
         className="form-control"
         icon="ni ni-hat-3"
-        placeholder={t("Username")}
+        placeholder="Nom d'utilisateur"
         type="text"
         validate={[ required, minLength4, maxLength30 ]}
       />
@@ -66,7 +64,7 @@ const RegisterForm = (props) => {
         component={InputField}
         className="form-control"
         icon="ni ni-lock-circle-open"
-        placeholder={t("Password")}
+        placeholder="Mot de passe"
         type="password"
         validate={[required, minLength4, maxLength30]}
       />
@@ -74,14 +72,14 @@ const RegisterForm = (props) => {
         name="privacy_policy"
         component={InputRadioField}
         type="checkbox"
-        label={t("I agree with the Privacy Policy")}
+        label="Je suis d'accord avec la politique de confidentialité"
         value={true}
         validate={[required]}
       />
       <div className="text-center">
         <Button className="mt-4 btn-block" color="primary" type="submit">
           { isLoading && <Spinner color="white" className="mr-2" /> }
-          {t("Create account")}
+          Créer un compte
         </Button>
       </div>
     </Form>

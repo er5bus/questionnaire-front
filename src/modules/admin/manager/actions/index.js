@@ -43,8 +43,8 @@ export const createManager = (companyParam, payload) =>
         fail: ACTIONS.CREATE_MANAGER_FAILED 
       },
       messages: {
-        success: "Your user has been created successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre utilisateur a été créé avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.MANAGERS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.POST,
@@ -64,8 +64,8 @@ export const editManager = (companyParam, param, payload) =>
         fail: ACTIONS.EDIT_MANAGER_FAILED
       },
       messages: {
-        success: "Your user has been updated successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre utilisateur a été mis à jour avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.MANAGER.replace(":companyParam", companyParam).replace(":param", param),
       method: HTTP_METHODS.PUT,

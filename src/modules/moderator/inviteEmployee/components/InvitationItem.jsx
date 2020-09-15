@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col, Badge} from "reactstrap"
 
 import moderatorRoutes from './../../../../routes/moderator'
@@ -9,7 +8,6 @@ import Moment from 'react-moment'
 
 export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, sendAt, invitations, id, isExpired, departmentParam }) => {
 
-  const { t } = useTranslation()
 
   return (
     <Col lg="4" className="pb-5">
@@ -19,9 +17,9 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, s
             <i className="fas fa-mail-bulk" />
           </div>
           <h6 className="text-info">
-            { isExpired && <>{ t("Invitation expired") }</> }
-            { !isExpired && !sendAt && <>{ t("Invitation not sent") }</> }
-            { !isExpired && sendAt && <>{ t("Invitation sent at") } <Moment>{ sendAt }</Moment></> }
+            { isExpired && <>Invitation expirée</> }
+            { !isExpired && !sendAt && <>Invitation non envoyée</> }
+            { !isExpired && sendAt && <>Invitation envoyée à <Moment>{ sendAt }</Moment></> }
           </h6>
           <div>
             {
@@ -37,7 +35,7 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, s
             to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeEdit.path.replace(":employeeParam", id).replace(":departmentParam", departmentParam) }
             tag={Link}
           >
-            <i className="fa fa-pencil-alt" /> { t("Edit") }
+            <i className="fa fa-pencil-alt" /> Éditer
           </Button>
           <Button
             className="btn-sm mt-4"
@@ -45,7 +43,7 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, s
             disabled={ isExpired }
             onClick={ () => onToggleSendInvitationModal(id) }
           >
-            <i className="fas fa-paper-plane" /> { t("Resend mail") }
+            <i className="fas fa-paper-plane" /> Renvoyer le courrier
           </Button>
           <Button
             className="btn-sm mt-4"
@@ -53,7 +51,7 @@ export default ({ onToggleDeleteModal =f=>f, onToggleSendInvitationModal=f=>f, s
             disabled={ isExpired }
             onClick={() => onToggleDeleteModal(id) }
           >
-            <i className="fas fa-trash" /> { t("Delete") }
+            <i className="fas fa-trash" /> Supprimer
           </Button>
         </CardBody>
       </Card>

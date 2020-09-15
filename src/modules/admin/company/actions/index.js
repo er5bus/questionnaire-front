@@ -42,8 +42,8 @@ export const createCompany = (payload) =>
         fail: ACTIONS.CREATE_COMPANY_FAILED 
       },
       messages: {
-        success: "Your company has been created successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre entreprise a été créée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.COMPANIES,
       method: HTTP_METHODS.POST,
@@ -63,8 +63,8 @@ export const editCompany = (param, payload) =>
         fail: ACTIONS.EDIT_COMPANY_FAILED
       },
       messages: {
-        success: "Your company has been updated successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre entreprise a été mise à jour avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.COMPANY.replace(":param", param),
       method: HTTP_METHODS.PUT,
@@ -83,8 +83,8 @@ export const deleteCompany = (param) =>
         fail: ACTIONS.DELETE_COMPANY_FAILED
       },
       messages: {
-        success: "Your company has been deleted successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre entreprise a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.COMPANY.replace(":param", param),
       extraData: { id: param },

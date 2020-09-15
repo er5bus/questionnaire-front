@@ -1,6 +1,5 @@
 import React from "react";
 //import { Link } from 'react-router-dom'
-import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 // reactstrap components
 import { Card, CardBody, Col } from "reactstrap";
@@ -22,15 +21,15 @@ class Login extends React.Component {
   }
 
   render() {
-    const { t, error, isLoading } = this.props
+    const { error, isLoading } = this.props
     return (
       <>
         <Col lg="6" md="8">
           <Card className="shadow">
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-md-center mb-4 mt-md-0">
-                <h1 className="mb-3 h3"> { t('Sign in to our platform') }</h1>
-                <p className="text-gray">{ t('Use your credentials to access your account') }.</p>
+                <h1 className="mb-3 h3"> Connectez-vous à notre plateforme </h1>
+                <p className="text-gray">Utilisez vos identifiants pour accéder à votre compte.</p>
               </div>
               <LoginForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
               { /*<div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
@@ -49,4 +48,4 @@ class Login extends React.Component {
 
 const mapStateToProps = state => state.auth
 
-export default connect(mapStateToProps, { login, clearError })(withTranslation()(Login))
+export default connect(mapStateToProps, { login, clearError })(Login)

@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { withTranslation } from 'react-i18next'
 
 import adminRoutes from './../../../../routes/admin'
 
@@ -50,23 +49,23 @@ class CompanyList extends React.Component {
   }
 
   render() {
-    const { t, items, page, hasMore, isLoading } = this.props
+    const { items, page, hasMore, isLoading } = this.props
     return (
       <div>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Companies") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> Entreprise </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Companies List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> Liste des entreprises </BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
                   <Link to={ adminRoutes.path + adminRoutes.routes.companyNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New company')}
+                    Nouvelle entreprise
                   </Link>
                 </Col>
               </Row>
@@ -77,11 +76,11 @@ class CompanyList extends React.Component {
         <Container className="mt--4" fluid>
           <ConfirmModal
             isOpen={ this.state.openModal }
-            title={ t("Confirmation") }
-            content={ t("Are you sure you want to delete this company ?") }
+            title="Confirmation"
+            content="Voulez-vous vraiment supprimer cette société?"
             onClick={ this.onDeleteCompany }
             onToggle={ this.onToggleModal }
-            buttonText={ t("Delete this company") }
+            buttonText="Supprimer cette entreprise"
           />
           <Row>
             <Col lg="12">
@@ -110,4 +109,4 @@ const mapStateToProps = state => ({
   ...state.company, items: getFilteredCompanies(state)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyList))
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyList)

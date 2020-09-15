@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { withTranslation } from 'react-i18next'
 
 import adminRoutes from './../../../../routes/admin'
 
@@ -33,24 +32,24 @@ class ManagerList extends React.Component {
   }
 
   render() {
-    const { t, items, page, hasMore, isLoading } = this.props
+    const { items, page, hasMore, isLoading } = this.props
     const { companyParam } = this.props.match.params
     return (
       <div>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Managers") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> Responsables </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Managers List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> Liste des responsables</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
                   <Link to={ adminRoutes.path + adminRoutes.routes.managerNew.path.replace(":companyParam", companyParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New Manager')}
+                    Nouveau responsable
                   </Link>
                 </Col>
               </Row>
@@ -85,4 +84,4 @@ const mapStateToProps = state => ({
   ...state.manager, items: getFilteredManagers(state)
 })
 
-export default connect(mapStateToProps, { fetchManagers, filterManagers })(withTranslation()(ManagerList))
+export default connect(mapStateToProps, { fetchManagers, filterManagers })(ManagerList)

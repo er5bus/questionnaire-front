@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { useTranslation } from 'react-i18next'
 
 import { logout } from './../actions'
 
@@ -8,16 +7,15 @@ import ConfirmModal from './../../../../components/ConfirmModal'
 
 
 const Logout = ({ logout, openModal, onToggle }) => {
-  const { t } = useTranslation()
 
   return (
     <ConfirmModal
       isOpen={ openModal }
-      title={ t("Confirmation") }
-      content={ t("Are you sure you want to logout ?") }
+      title="Confirmation"
+      content="Êtes-vous sûr de vouloir vous déconnecter ?"
       onToggle={onToggle}
       onClick={ logout }
-      buttonText={ t("Logout") }
+      buttonText="Se déconnecter"
     />
   )
 }

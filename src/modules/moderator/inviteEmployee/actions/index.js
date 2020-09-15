@@ -43,8 +43,8 @@ export const createInvitation = (departmentParam, payload) =>
         fail: ACTIONS.CREATE_EMPLOYEE_INVITATION_FAILED 
       },
       messages: {
-        success: "Your invitation has been created successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été créée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.EMPLOYEE_INVITATIONS.replace(":departmentParam", departmentParam),
       method: HTTP_METHODS.POST,
@@ -64,8 +64,8 @@ export const editInvitation = (departmentParam, employeeParam, payload) =>
         fail: ACTIONS.EDIT_EMPLOYEE_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been updated successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été mise à jour avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.EMPLOYEE_INVITATION.replace(":departmentParam", departmentParam).replace(":employeeParam", employeeParam),
       method: HTTP_METHODS.PUT,
@@ -84,8 +84,8 @@ export const deleteInvitation = (departmentParam, employeeParam) =>
         fail: ACTIONS.DELETE_EMPLOYEE_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been deleted successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.EMPLOYEE_INVITATION.replace(":departmentParam", departmentParam).replace(":employeeParam", employeeParam),
       extraData: { id: employeeParam },
@@ -104,8 +104,8 @@ export const sendInvitation = (departmentParam, employeeParam) =>
         fail: ACTIONS.SEND_EMPLOYEE_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been sent successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été envoyée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.SEND_EMPLOYEE_INVITATION.replace(":departmentParam", departmentParam).replace(":employeeParam", employeeParam),
       method: HTTP_METHODS.POST,

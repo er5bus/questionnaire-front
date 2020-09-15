@@ -43,8 +43,8 @@ export const createInvitation = (companyParam, payload) =>
         fail: ACTIONS.CREATE_MANAGER_INVITATION_FAILED 
       },
       messages: {
-        success: "Your invitation has been created successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été créée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.MANAGER_INVITATIONS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.POST,
@@ -64,8 +64,8 @@ export const editInvitation = (companyParam, managerParam, payload) =>
         fail: ACTIONS.EDIT_MANAGER_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been updated successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été mise à jour avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
       method: HTTP_METHODS.PUT,
@@ -84,8 +84,8 @@ export const deleteInvitation = (companyParam, managerParam) =>
         fail: ACTIONS.DELETE_MANAGER_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been deleted successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
       extraData: { id: managerParam },
@@ -104,8 +104,8 @@ export const sendInvitation = (companyParam, managerParam) =>
         fail: ACTIONS.SEND_MANAGER_INVITATION_FAILED
       },
       messages: {
-        success: "Your invitation has been sent successfuly",
-        fail: "Something went wrong please try again"
+        success: "Votre invitation a été envoyée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.SEND_MANAGER_INVITATION.replace(":companyParam", companyParam).replace(":managerParam", managerParam),
       method: HTTP_METHODS.POST,

@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col} from "reactstrap"
 
 import adminRoutes from './../../../../routes/admin'
 
 
 export default ({ firstName, lastName, email, companyParam, id }) => {
-
-  const { t } = useTranslation()
 
   return (
     <Col lg="4" className="pb-5">
@@ -29,7 +26,7 @@ export default ({ firstName, lastName, email, companyParam, id }) => {
             to={ adminRoutes.path + adminRoutes.routes.managerEdit.path.replace(":companyParam", companyParam).replace(":param", id) }
             tag={Link}
           >
-            <i className="fa fa-pencil-alt" /> { t("Edit") }
+            <i className="fa fa-pencil-alt" /> Éditer
           </Button>
         </CardBody>
       </Card>

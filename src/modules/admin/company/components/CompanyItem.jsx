@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col} from "reactstrap"
 
 import adminRoutes from './../../../../routes/admin'
 
 
 export default ({ onToggleModal =f=>f, name, description, universalName, color, id }) => {
-
-  const { t } = useTranslation()
 
   return (
     <Col lg="4" className="pb-5">
@@ -29,7 +26,7 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
             to={ adminRoutes.path + adminRoutes.routes.companyEdit.path.replace(":param", id) }
             tag={Link}
           >
-            <i className="fa fa-pencil-alt" /> { t("Edit") }
+            <i className="fa fa-pencil-alt" /> Éditer
           </Button>
           <Button
             className="btn-sm mt-4"
@@ -37,7 +34,7 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
             to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", id) }
             tag={Link}
           >
-            <i className="fa fa-mail-bulk" /> { t("Invitations") }
+            <i className="fa fa-mail-bulk" /> Invitations
           </Button>
 
           <Button
@@ -46,7 +43,7 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
             to={ adminRoutes.path + adminRoutes.routes.managerList.path.replace(":companyParam", id) }
             tag={Link}
           >
-            <i className="fa fa-eye" /> { t("Managers") }
+            <i className="fa fa-eye" /> Directeur
           </Button>
 
           <Button
@@ -54,7 +51,7 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
             color="danger"
             onClick={() => onToggleModal(id) }
           >
-            <i className="fas fa-trash" /> { t("Delete") }
+            <i className="fas fa-trash" /> Supprimer
           </Button>
         </CardBody>
       </Card>

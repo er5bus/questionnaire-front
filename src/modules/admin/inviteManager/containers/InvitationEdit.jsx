@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 import adminRoutes from './../../../../routes/admin'
 
 // reactstrap components
@@ -25,22 +24,22 @@ class InvitationEdit extends React.Component {
 
   render() {
     const { companyParam } = this.props.match.params
-    const { error, t, isLoading } = this.props
+    const { error, isLoading } = this.props
     return (
       <>
         <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Manager Invitations") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Invitations des responsables </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.invitationManagerList.path.replace(":companyParam", companyParam) }>
-                          <i className="fas fa-home"></i> {t(" Invitation List")}
+                          <i className="fas fa-home"></i> Liste d'invitations
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit invitation")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> Modifier l'invitation</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -66,4 +65,4 @@ class InvitationEdit extends React.Component {
 
 const mapStateToProps = state => state.inviteManager
 
-export default connect(mapStateToProps, { editInvitation, fetchInvitation })(withTranslation()(InvitationEdit))
+export default connect(mapStateToProps, { editInvitation, fetchInvitation })(InvitationEdit)

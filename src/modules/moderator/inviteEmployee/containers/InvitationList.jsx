@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { withTranslation } from 'react-i18next'
 
 import moderatorRoutes from './../../../../routes/moderator'
 
@@ -58,23 +57,23 @@ class InvitationList extends React.Component {
 
   render() {
     const { departmentParam } = this.props.match.params
-    const { t, items, page, hasMore, isLoading } = this.props
+    const { items, page, hasMore, isLoading } = this.props
     return (
       <div>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Employee Invitations") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> Invitations des employés </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Invitations List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> Liste d'invitations </BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
                   <Link to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeNew.path.replace(":departmentParam", departmentParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New employee invitation')}
+                    Invitation de nouvel employé
                   </Link>
                 </Col>
               </Row>
@@ -85,19 +84,19 @@ class InvitationList extends React.Component {
         <Container className="mt--4" fluid>
           <ConfirmModal
             isOpen={ this.state.openDeleteModal }
-            title={ t("Confirmation") }
-            content={ t("Are you sure you want to delete this invitation ?") }
+            title="Confirmation"
+            content="Êtes-vous sûr de vouloir supprimer cette invitation?"
             onClick={ this.onDeleteInvitation }
             onToggle={ this.onToggleDeleteModal }
-            buttonText={ t("Delete this invitation") }
+            buttonText="Supprimer cette invitation"
           />
           <ConfirmModal
             isOpen={ this.state.openSendInvitationModal }
-            title={ t("Confirmation") }
-            content={ t("Are you sure you want to send this invitation ?") }
+            title="Confirmation"
+            content="Êtes-vous sûr d'envoyer cette invitation?"
             onClick={ this.onSendInvitation }
             onToggle={ this.onToggleSendInvitationModal }
-            buttonText={ t("Send this invitation") }
+            buttonText="Envoyez cette invitation"
           />
           <Row>
             <Col lg="12">
@@ -133,4 +132,4 @@ const mapStateToProps = state => ({
   ...state.inviteEmployee, items: getFilteredInvitations(state)
 })
 
-export default connect(mapStateToProps, { fetchInvitations, deleteInvitation, sendInvitation, filterInvitations, clearInvitationStore })(withTranslation()(InvitationList))
+export default connect(mapStateToProps, { fetchInvitations, deleteInvitation, sendInvitation, filterInvitations, clearInvitationStore })(InvitationList)

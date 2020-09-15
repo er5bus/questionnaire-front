@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 
 import adminRoutes from './../../../../routes/admin'
 
@@ -23,7 +22,7 @@ class ManagerNew extends React.Component {
   }
 
   render() {
-    const { error, t, item, isLoading } = this.props
+    const { error, item, isLoading } = this.props
     const { companyParam } = this.props.match.params
 
     if (item && item.param){
@@ -34,16 +33,16 @@ class ManagerNew extends React.Component {
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Manager") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Responsable </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.managerList.path.replace(":companyParam", companyParam) }>
-                          <i className="fas fa-home"></i> {t(" Manager List")}
+                          <i className="fas fa-home"></i> Liste des responsables
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create Manager")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> Créer un responsable</BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -70,4 +69,4 @@ class ManagerNew extends React.Component {
 
 const mapStateToProps = state => state.manager
 
-export default connect(mapStateToProps, { createManager, clearManagerForm })(withTranslation()(ManagerNew))
+export default connect(mapStateToProps, { createManager, clearManagerForm })(ManagerNew)

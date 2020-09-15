@@ -1,5 +1,4 @@
 import React from "react";
-import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 // reactstrap components
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, Col, Container, Row } from "reactstrap";
@@ -38,7 +37,7 @@ class MedicalRecord extends React.Component {
 
 
   render() {
-    const { error, t, isLoading, isLoadingRecord, medicalRecordCreated } = this.props
+    const { error, isLoading, isLoadingRecord } = this.props
 
     return (
       <>
@@ -47,11 +46,11 @@ class MedicalRecord extends React.Component {
             <div className="header bg-primary pb-5">
               <Container fluid>
                 <div className="header-body">
-                  <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> {t("Medical Record")} </h6>
+                  <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Dossier médical </h6>
                   <Row className="align-items-center py-2">
                     <Col lg="6">
                       <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                        <BreadcrumbItem active><i className="fas fa-save"></i> {t("Save Your Medical Record")}</BreadcrumbItem>
+                        <BreadcrumbItem active><i className="fas fa-save"></i> Sauvegardez votre dossier médical </BreadcrumbItem>
                       </Breadcrumb>
                     </Col>
                   </Row>
@@ -81,4 +80,4 @@ const mapStateToProps = state => state.medicalRecord
 
 
 
-export default connect(mapStateToProps, { retriveMedicalRecord, createMedicalRecord })(withTranslation()(MedicalRecord))
+export default connect(mapStateToProps, { retriveMedicalRecord, createMedicalRecord })(MedicalRecord)

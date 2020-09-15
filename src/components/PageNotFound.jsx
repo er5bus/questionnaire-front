@@ -18,10 +18,10 @@ const PageNotFound = () => {
               <Link to={ anonymousRoutes.path }>
                 <img className="img-fluid w-75" src={ notFoundImg } alt="404 not found" />
               </Link>
-              <h1 className="mt-5">Page not <span className="font-weight-bolder text-primary">found</span></h1>
-              <p className="lead my-4">Oops! Looks like you followed a bad link. If you think this is a problem with us, please tell us.</p>
+              <h1 className="mt-5"> Page non <span className="font-weight-bolder text-primary">trouvée</span></h1>
+              <p className="lead my-4">Oups! Il semble que vous ayez suivi un mauvais lien. Si vous pensez qu'il s'agit d'un problème avec nous, veuillez nous en informer.</p>
               <Link className="btn btn-primary animate-hover" to={ anonymousRoutes.path }>
-                <i className="fas fa-chevron-left mr-3 pl-2 animate-left-3"></i>Go back home
+                <i className="fas fa-chevron-left mr-3 pl-2 animate-left-3"></i> Accueil
               </Link>
             </div>
           </Col>

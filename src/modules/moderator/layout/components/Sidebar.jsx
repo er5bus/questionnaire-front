@@ -148,7 +148,7 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="fas fa-calendar-week" />
-                    <span className="nav-link-text">Planning</span>
+                    <span className="nav-link-text">Planification</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -159,7 +159,7 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="ni ni-shop" />
-                    <span className="nav-link-text">Department</span>
+                    <span className="nav-link-text">Département</span>
                   </NavLink>
                 </NavItem>
               </Nav>

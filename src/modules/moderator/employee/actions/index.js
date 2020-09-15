@@ -43,7 +43,7 @@ export const createEmployee = (departmentParam, payload) =>
         fail: ACTIONS.CREATE_EMPLOYEE_FAILED 
       },
       messages: {
-        success: "Your user has been created successfuly",
+        success: "Votre utilisateur a été créé avec succès",
         fail: "Something went wrong please try again"
       },
       endpoint: ENDPOINT.EMPLOYEES.replace(":departmentParam", departmentParam),
@@ -64,7 +64,7 @@ export const editEmployee = (departmentParam, param, payload) =>
         fail: ACTIONS.EDIT_EMPLOYEE_FAILED
       },
       messages: {
-        success: "Your user has been updated successfuly",
+        success: "Votre utilisateur a été mis à jour avec succès",
         fail: "Something went wrong please try again"
       },
       endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", param),

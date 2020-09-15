@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field, reduxForm, stopSubmit, clearSubmitErrors, FieldArray } from 'redux-form'
 import { Button } from 'reactstrap'
-import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 
 import { Spinner, Row, Col } from 'reactstrap'
@@ -17,12 +16,12 @@ const maxLength200 = maxLength(200)
 const maxLength500 = maxLength(500)
 
 
-const renderInvitations = ({ fields, t }) => (
+const renderInvitations = ({ fields }) => (
   <div>
     <div className="mt-4">
       <Button onClick={() => fields.push({})} color="primary" type="button">
         <i className="fas fa-plus-circle" />
-        { t(" Add invitation") }
+        Ajouter une invitation
       </Button>
     </div>
     {fields.map((invitation, index) => (
@@ -32,8 +31,8 @@ const renderInvitations = ({ fields, t }) => (
             name={`${invitation}.email`}
             component={InputField}
             className="form-control"
-            label={t("Manager email")}
-            placeholder={t("E-mail")}
+            label="E-mail du responsable"
+            placeholder="E-mail"
             type="text"
             validate={[ required, email, minLength2, maxLength200 ]}
           />
@@ -43,8 +42,8 @@ const renderInvitations = ({ fields, t }) => (
             name={`${invitation}.fullName`}
             component={InputField}
             className="form-control"
-            label={t("Manager full name")}
-            placeholder={t("Full Name.")}
+            label="Nom complet du responsable"
+            placeholder="Nom complet."
             type="text"
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -62,7 +61,6 @@ const renderInvitations = ({ fields, t }) => (
 
 let InvitationForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading, reset } = props
 
   React.useEffect(() => {
@@ -75,24 +73,24 @@ let InvitationForm = (props) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FieldArray name="invitations" t={t} component={renderInvitations} />
+      <FieldArray name="invitations" component={renderInvitations} />
       <div className="mt-4" />
       <Field
         name="subject"
         component={InputTextareaField}
         className="form-control"
-        label={t("Invitation body")}
-        placeholder={t("Describe your invitation")}
+        label="Corps d'invitation"
+        placeholder="Décrivez votre invitation"
         type="text"
         validate={[ required, minLength2, maxLength500 ]}
       />
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
           { isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-paper-plane mr-2"></i> }
-          {t("Send invitation")}
+          Envoyer une invitation
         </Button>
         <Button className="mt-4 pl-5 pr-5" color="warning" onClick={reset}>
-          <i className="fas fa-trash mr-2"></i> {t("Clear values")}
+          <i className="fas fa-trash mr-2"></i> Effacer les valeurs
         </Button>
       </div>
     </Form>

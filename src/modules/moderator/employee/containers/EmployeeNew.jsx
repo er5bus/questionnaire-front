@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 
 import moderatorRoutes from './../../../../routes/moderator'
 
@@ -23,7 +22,7 @@ class EmployeeNew extends React.Component {
   }
 
   render() {
-    const { error, t, item, isLoading } = this.props
+    const { error, item, isLoading } = this.props
     const { departmentParam } = this.props.match.params
 
     if (item && item.param){
@@ -34,16 +33,16 @@ class EmployeeNew extends React.Component {
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Employee") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Employée </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path.replace(":departmentParam", departmentParam) }>
-                          <i className="fas fa-home"></i> {t(" Employee List")}
+                          <i className="fas fa-home"></i> Liste des employés
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create Employee")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> Créer un employé </BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -70,4 +69,4 @@ class EmployeeNew extends React.Component {
 
 const mapStateToProps = state => ({ ...state.employee, user: state.session.user })
 
-export default connect(mapStateToProps, { createEmployee, clearEmployeeForm })(withTranslation()(EmployeeNew))
+export default connect(mapStateToProps, { createEmployee, clearEmployeeForm })(EmployeeNew)

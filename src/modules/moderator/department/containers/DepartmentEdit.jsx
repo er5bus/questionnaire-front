@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { withTranslation } from 'react-i18next'
 
 import moderatorRoutes from './../../../../routes/moderator'
 
@@ -24,22 +23,22 @@ class DepartmentEdit extends React.Component {
   }
 
   render() {
-    const { error, t, isLoading } = this.props
+    const { error, isLoading } = this.props
     return (
       <>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Departments") } </h6>
+              <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Départements </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                     <BreadcrumbItem>
                       <Link to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path }>
-                        <i className="fas fa-home"></i> {t(" Department List")}
+                        <i className="fas fa-home"></i> Liste des départements
                       </Link>
                     </BreadcrumbItem>
-                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> {t(" Edit department")}</BreadcrumbItem>
+                    <BreadcrumbItem active><i className="fas fa-pencil-alt"></i> Modifier le département </BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
               </Row>
@@ -65,4 +64,4 @@ class DepartmentEdit extends React.Component {
 
 const mapStateToProps = state => ({ ...state.department, ...state.session })
 
-export default connect(mapStateToProps, { editDepartment, fetchDepartment })(withTranslation()(DepartmentEdit))
+export default connect(mapStateToProps, { editDepartment, fetchDepartment })(DepartmentEdit)

@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Provider } from 'react-redux'
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
 import { sessionService } from 'redux-react-session'
 
 import * as Sentry from '@sentry/browser'
@@ -21,9 +21,6 @@ import Loader from "./components/Loader"
 
 import { SENTRY_DSN } from './constants'
 import routes from "./routes"
-
-// load translation
-import './i18n'
 
 const AnonymousLayout = React.lazy( () => import("./modules/anonymous/layout/containers/Layout"))
 const AdminLayout = React.lazy( () =>  import("./modules/admin/layout/containers/Layout"))
@@ -49,6 +46,7 @@ sessionService.initSessionService(store, {refreshOnCheckAuth: true})
               <Route onEnter={sessionService.checkAuth} path={ routes.moderator.path } component={ModeratorLayout} />
               <Route onEnter={sessionService.checkAuth} path={ routes.admin.path } component={AdminLayout} />
               <Route onEnter={sessionService.checkAuth} path={ routes.employee.path } component={EmployeeLayout} />
+              <Redirect from="/" to={ routes.anonymous.path + routes.anonymous.routes.login.path } />
               <Route component={ PageNotFound }/>
             </Switch>
           </React.Suspense>

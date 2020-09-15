@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from 'prop-types'
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
 import { Button, Spinner } from "reactstrap"
-import { useTranslation } from "react-i18next"
 
 import { required, maxLength, minLength } from "./../../../../utils/validations"
 
@@ -16,7 +15,6 @@ const maxLength30 = maxLength(30)
 
 const LoginForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading } = props
 
   React.useEffect(() => {
@@ -34,7 +32,7 @@ const LoginForm = (props) => {
         component={InputField}
         className="form-control"
         icon="ni ni-email-83"
-        placeholder={t("Email or Username")}
+        placeholder="E-mail ou nom d'utilisateur"
         type="text"
         validate={[ required ]}
       />
@@ -43,7 +41,7 @@ const LoginForm = (props) => {
         component={InputField}
         className="form-control"
         icon="ni ni-lock-circle-open"
-        placeholder={t("Password")}
+        placeholder="Mot de passe"
         type="password"
         validate={[required, minLength4, maxLength30]}
       />
@@ -52,21 +50,21 @@ const LoginForm = (props) => {
         component={SelectField}
         className="form-control"
         icon="ni ni-lock-circle-open"
-        placeholder={t("Admin area")}
-        choices={ [ { label: "Empolyee area", value: 1 }, { label: "Manager area", value: 2 }, { label: "Admin area", value: 3 } ] } 
+        placeholder="Espace d'administration"
+        choices={ [ { label: "Espace employé", value: 1 }, { label: "Espace Manager", value: 2 }, { label: "Espace d'administration", value: 3 } ] } 
         validate={[required, minLength4, maxLength30]}
       />
       <Field
         name="remember_me"
         component={InputCheckboxField}
-        label={ t("Remember me") }
+        label="Souviens-toi de moi"
         value={true}
         type="checkbox"
       />
       <div className="text-center">
         <Button className="mt-4 btn btn-block" color="primary" type="submit">
           { isLoading && <Spinner color="white" className="mr-2" /> }
-          {t("Sign in")}
+          Se connecter
         </Button>
       </div>
     </Form>

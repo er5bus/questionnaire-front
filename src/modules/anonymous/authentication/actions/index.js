@@ -18,8 +18,7 @@ export const login = (payload) =>
         fail: ACTIONS.ACCOUNT_LOGIN_FAILED
       },
       messages: {
-        success: "Welcome back.",
-        fail: "Invalid email or password."
+        fail: "email ou mot de passe invalide, veuillez réessayer"
       },
       endpoint: ENDPOINT.LOGIN,
       method: HTTP_METHODS.POST
@@ -53,8 +52,7 @@ export const register = (token, payload) =>
         fail: ACTIONS.CREATE_ACCOUNT_FAILED
       },
       messages: {
-        success: "Welcome to your account",
-        fail: "Something went wrong please try again"
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.REGISTER.replace(":param", token),
       method: HTTP_METHODS.POST
@@ -72,8 +70,8 @@ export const logout = () =>
         fail: ACTIONS.ACCOUNT_LOGOUT_FAILED
       },
       messages: {
-        success: "You've been logged out successfully",
-        fail: "Something went wrong please try again"
+        success: "Vous avez été déconnecté avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.LOGOUT,
       method: HTTP_METHODS.POST,

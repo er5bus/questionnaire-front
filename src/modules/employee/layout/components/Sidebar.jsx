@@ -82,7 +82,7 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="fas fa-notes-medical" />
-                    <span className="nav-link-text">Medical Record</span>
+                    <span className="nav-link-text">Dossier médical</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>

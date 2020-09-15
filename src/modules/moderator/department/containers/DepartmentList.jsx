@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Container,Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { withTranslation } from 'react-i18next'
 
 import moderatorRoutes from './../../../../routes/moderator'
 
@@ -32,23 +31,23 @@ class DepartmentList extends React.Component {
   }
 
   render() {
-    const { t, items, page, hasMore, isLoading } = this.props
+    const { items, page, hasMore, isLoading } = this.props
     return (
       <div>
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Departments") } </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> Départements </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Departments List")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-home"></i> Liste des départements </BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
-                  <Link to={  moderatorRoutes.path + moderatorRoutes.routes.departmentList.path } className="btn btn-sm btn-neutral">
+                  <Link to={  moderatorRoutes.path + moderatorRoutes.routes.departmentNew.path } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    {t('New department')}
+                    Nouveau département
                   </Link>
                 </Col>
               </Row>
@@ -83,4 +82,4 @@ const mapStateToProps = state => ({
   ...state.department, ...state.session, items: getFilteredDepartments(state)
 })
 
-export default connect(mapStateToProps, { fetchDepartments, filterDepartments })(withTranslation()(DepartmentList))
+export default connect(mapStateToProps, { fetchDepartments, filterDepartments })(DepartmentList)

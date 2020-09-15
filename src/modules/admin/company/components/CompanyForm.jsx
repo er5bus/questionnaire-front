@@ -1,7 +1,6 @@
 import React from "react"
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
 import { Button } from "reactstrap"
-import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
 import { Spinner, Col, Row } from "reactstrap"
@@ -22,7 +21,6 @@ const maxLength500 = maxLength(500)
 
 let TagForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading, reset } = props
 
   React.useEffect(() => {
@@ -41,8 +39,8 @@ let TagForm = (props) => {
             name="name"
             component={InputField}
             className="form-control"
-            label={t("Company name")}
-            placeholder={t("The human readable name of the company")}
+            label="Le nom de l'entreprise"
+            placeholder="Le nom de l'entreprise"
             type="text"
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -52,8 +50,8 @@ let TagForm = (props) => {
             name="universalName"
             component={InputField}
             className="form-control"
-            label={t("Company universal name")}
-            placeholder={t("The unique string identifier for a company.")}
+            label="Nom universel de l'entreprise"
+            placeholder="Identificateur de chaîne unique pour une entreprise."
             type="text"
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -63,8 +61,8 @@ let TagForm = (props) => {
         name="description"
         component={InputTextareaField}
         className="form-control"
-        label={t("Company Description")}
-        placeholder={t("Describe your company")}
+        label="Description de l'entreprise"
+        placeholder="Décrivez votre entreprise"
         type="text"
         validate={[ required, minLength2, maxLength500 ]}
       />
@@ -74,8 +72,8 @@ let TagForm = (props) => {
             name="companyType"
             component={SelectField}
             className="form-control"
-            label={t("Type of company")}
-            placeholder={t("Public Company")}
+            label="Type de compagnie"
+            placeholder="Public Company"
             choices={ COMPANY_TYPE }
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -85,8 +83,8 @@ let TagForm = (props) => {
             name="status"
             component={SelectField}
             className="form-control"
-            label={t("Company status")}
-            placeholder={t("Operating")}
+            label="Statut de l'entreprise"
+            placeholder="Operating"
             choices={ COMPANY_STATUS }
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -96,8 +94,8 @@ let TagForm = (props) => {
         name="employeeCountRange"
         component={SelectField}
         className="form-control"
-        label={t("Number range of employees at the company")}
-        placeholder={t("2-10")}
+        label="Gamme de nombres d'employés dans l'entreprise"
+        placeholder="2-10"
         choices={ COMPANY_RANGE }
         validate={[ required, minLength2, maxLength200 ]}
       />
@@ -105,8 +103,8 @@ let TagForm = (props) => {
         name="specialities"
         component={InputField}
         className="form-control"
-        label={t("Company specialties")}
-        placeholder={t("Company specialties")}
+        label="Spécialités de l'entreprise"
+        placeholder="Spécialités de l'entreprise"
         type="text"
         validate={[ required, minLength2, maxLength200 ]}
       />
@@ -116,8 +114,8 @@ let TagForm = (props) => {
             name="location"
             component={InputField}
             className="form-control"
-            label={t("Company location")}
-            placeholder={t("Company location")}
+            label="Emplacement de la société"
+            placeholder="Emplacement de la société"
             type="text"
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -127,8 +125,8 @@ let TagForm = (props) => {
             name="foundedYear"
             component={InputField}
             className="form-control"
-            label={t("Founded Year")}
-            placeholder={t("Year listed for the company's founding")}
+            label="Année de fondation"
+            placeholder="Année inscrite pour la création de l'entreprise"
             type="text"
             validate={[ required, minLength2, maxLength200 ]}
           />
@@ -138,10 +136,10 @@ let TagForm = (props) => {
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
           { isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-save mr-2"></i> }
-          {t("Save Company")}
+          Enregistrer l'entreprise
         </Button>
         <Button className="mt-4 pl-5 pr-5" color="warning" onClick={reset}>
-          <i className="fas fa-trash mr-2"></i> {t("Clear values")}
+          <i className="fas fa-trash mr-2"></i> Effacer les valeurs
         </Button>
       </div>
     </Form>

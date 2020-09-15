@@ -19,8 +19,6 @@ import {
 } from "reactstrap"
 
 
-import { useTranslation } from "react-i18next"
-
 import userIcon from './../../../../assets/img/user.png'
 import logo from './../../../../assets/img/qa.svg'
 
@@ -29,7 +27,6 @@ const LogoutModal = anonymousRoutes.routes.logout.component
 
 const UserNavbar = ({ userName }) => {
 
-  const { t } = useTranslation()
 
   const [ showModal, setShowModal ] = React.useState(false)
 
@@ -76,16 +73,16 @@ const UserNavbar = ({ userName }) => {
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-single-02" />
-                  <span>{ t("Profile") }</span>
+                  <span>Profil</span>
                 </DropdownItem>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-settings-gear-65" />
-                  <span>{ t("Settings") }</span>
+                  <span> Paramètres </span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={onToggleModal}>
                   <i className="ni ni-user-run" />
-                  <span>{ t("Logout") }</span>
+                  <span>Se déconnecter</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

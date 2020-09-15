@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 
 import moderatorRoutes from './../../../../routes/moderator'
 
@@ -23,7 +22,7 @@ class DepartmentNew extends React.Component {
   }
 
   render() {
-    const { error, t, item, isLoading } = this.props
+    const { error, item, isLoading } = this.props
     if (item && item.param){
       return <Redirect to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path.replace(":param", item.param) } />
     }else {
@@ -32,16 +31,16 @@ class DepartmentNew extends React.Component {
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Department") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> département </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path }>
-                          <i className="fas fa-home"></i> {t(" Department List")}
+                          <i className="fas fa-home"></i> Liste des départements
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create department")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> Créer un département </BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -68,4 +67,4 @@ class DepartmentNew extends React.Component {
 
 const mapStateToProps = state => ({ ...state.department, ...state.session })
 
-export default connect(mapStateToProps, { createDepartment, clearDepartmentForm })(withTranslation()(DepartmentNew))
+export default connect(mapStateToProps, { createDepartment, clearDepartmentForm })(DepartmentNew)

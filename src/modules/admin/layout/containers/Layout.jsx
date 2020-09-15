@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { Redirect, Switch } from "react-router-dom"
-import { withTranslation } from 'react-i18next'
 
 import { isAdmin } from "./../../../../utils/helpers"
 
@@ -61,4 +60,4 @@ class AdminLayout extends React.Component {
 
 const mapStateToProps = state => ({ ...state.session, notifications: state.notifications })
 
-export default connect(mapStateToProps)(withTranslation()(AdminLayout))
+export default connect(mapStateToProps)(AdminLayout)

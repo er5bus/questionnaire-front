@@ -82,7 +82,7 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="ni ni-shop" />
-                    <span className="nav-link-text">Dashbord</span>
+                    <span className="nav-link-text">Tableau de bord</span>
                   </NavLink>
                 </NavItem>
                 <NavItem>
@@ -93,7 +93,7 @@ class Sidebar extends React.PureComponent {
                     activeClassName="active"
                   >
                     <i className="fas fa-building" />
-                    <span className="nav-link-text">Company</span>
+                    <span className="nav-link-text">Entreprise</span>
                   </NavLink>
                 </NavItem>
               </Nav>

@@ -44,7 +44,7 @@ export const createDepartment = (companyParam, payload) =>
       },
       messages: {
         success: "Your user has been created successfuly",
-        fail: "Something went wrong please try again"
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.DEPARTMENTS.replace(":companyParam", companyParam),
       method: HTTP_METHODS.POST,
@@ -65,7 +65,7 @@ export const editDepartment = (companyParam, param, payload) =>
       },
       messages: {
         success: "Your user has been updated successfuly",
-        fail: "Something went wrong please try again"
+        fail: "Une erreur s'est produite. Veuillez réessayer"
       },
       endpoint: ENDPOINT.DEPARTMENT.replace(":companyParam", companyParam).replace(":param", param),
       method: HTTP_METHODS.PUT,

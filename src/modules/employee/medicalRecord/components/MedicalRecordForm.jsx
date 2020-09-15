@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 // Bootstrap
 import { Button, Spinner } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
@@ -10,12 +9,8 @@ import SelectField from "./../../../../components/SelectField";
 import { number, required } from "./../../../../utils/validations";
 
 
-
-
-
 const MedicalRecordForm = props => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading } = props
   useEffect(() => {
     props.initialize({ sexe: '1' })
@@ -29,7 +24,7 @@ const MedicalRecordForm = props => {
             name="sexe"
             component={InputRadioCheckboxField}
             className="form-control"
-            label={t("Un homme")}
+            label="Un homme"
             type="radio"
             value="1"
           />
@@ -37,8 +32,8 @@ const MedicalRecordForm = props => {
             name="sexe"
             component={InputRadioCheckboxField}
             className="form-control"
-            placeholder={t("")}
-            label={t("Une femme")}
+            placeholder=""
+            label="Une femme"
             type="radio"
             value="2"
           />
@@ -47,8 +42,8 @@ const MedicalRecordForm = props => {
           name="age"
           component={InputField}
           className="form-control"
-          placeholder={t("Quel âge avez-vous ?")}
-          label={t("L'âge")}
+          placeholder="Quel âge avez-vous ?"
+          label="L'âge"
           type="text"
           validate={[required, number]}
         />
@@ -56,8 +51,8 @@ const MedicalRecordForm = props => {
           name="tall"
           component={InputField}
           className="form-control"
-          placeholder={t("Quelle est votre taille ?")}
-          label={t("La taille")}
+          placeholder="Quelle est votre taille ?"
+          label="La taille"
           type="text"
           validate={[required, number]}
         />
@@ -65,8 +60,8 @@ const MedicalRecordForm = props => {
           name="weight"
           component={InputField}
           className="form-control"
-          placeholder={t("Quel est votre poids ?")}
-          label={t("Le poids")}
+          placeholder="Quel est votre poids ?"
+          label="Le poids"
           type="text"
           validate={[required, number]}
         />
@@ -74,8 +69,8 @@ const MedicalRecordForm = props => {
           name="profession"
           component={InputField}
           className="form-control"
-          placeholder={t("Quelle est votre profession ?")}
-          label={t("Le secteur d’activité.")}
+          placeholder="Quelle est votre profession ?"
+          label="Le secteur d’activité."
           type="text"
           validate={[required]}
         />
@@ -83,15 +78,15 @@ const MedicalRecordForm = props => {
           name="homeWork"
           component={SelectField}
           className="form-control"
-          placeholder={t("Faites-vous du télétravail ? (oui, souvent - oui, parfois - non)")}
-          label={t("La situation du salarié face au télétravail.")}
+          placeholder="Faites-vous du télétravail ? (oui, souvent - oui, parfois - non)"
+          label="La situation du salarié face au télétravail."
           choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }]}
           validate={[required]}
         />
         <div className="mt-0">
           <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
             {isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-save mr-2"></i>}
-            {t("Save")}
+            Save
           </Button>
         </div>
       </form>

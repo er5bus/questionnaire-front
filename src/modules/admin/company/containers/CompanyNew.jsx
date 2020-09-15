@@ -2,7 +2,6 @@ import React from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { Redirect, Link } from "react-router-dom"
-import { withTranslation } from "react-i18next"
 
 import adminRoutes from './../../../../routes/admin'
 
@@ -24,7 +23,7 @@ class CompanyNew extends React.Component {
   }
 
   render() {
-    const { error, t, item, isLoading } = this.props
+    const { error, item, isLoading } = this.props
     if (item && item.param){
       return <Redirect to={ adminRoutes.path + adminRoutes.routes.companyEdit.path.replace(":param", item.param) } />
     }else {
@@ -33,16 +32,16 @@ class CompanyNew extends React.Component {
           <div className="header bg-primary pb-5">
             <Container fluid>
               <div className="header-body">
-                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> { t(" Company") } </h6>
+                <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> Entreprise </h6>
                 <Row className="align-items-center py-2">
                   <Col lg="6">
                     <Breadcrumb className="breadcrumb-links breadcrumb-dark">
                       <BreadcrumbItem>
                         <Link to={ adminRoutes.path + adminRoutes.routes.companyList.path }>
-                          <i className="fas fa-home"></i> {t(" Company List")}
+                          <i className="fas fa-home"></i> Liste des entreprises
                         </Link>
                       </BreadcrumbItem>
-                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> {t(" Create company")}</BreadcrumbItem>
+                      <BreadcrumbItem active><i className="fas fa-plus-circle"></i> Créer une entreprise </BreadcrumbItem>
                     </Breadcrumb>
                   </Col>
                 </Row>
@@ -70,4 +69,4 @@ class CompanyNew extends React.Component {
 const mapDispatchToProps = (dispatch) => bindActionCreators({ createCompany, clearCompanyForm }, dispatch)
 const mapStateToProps = state => state.company
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CompanyNew))
+export default connect(mapStateToProps, mapDispatchToProps)(CompanyNew)
