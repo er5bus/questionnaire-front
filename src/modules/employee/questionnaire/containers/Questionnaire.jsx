@@ -209,17 +209,13 @@ const Questionnaire = (props) => {
 
   // state handel
   useEffect(() => {
-
-    if (!firstLoad && prevUserState && (prevUserState !== questionnaire)) {
-
       props.saveUserState(questionnaire)
-    }
-
-  }, [questionnaire])
+  }
+  , [questionnaire])
   // first Load ........................
   useEffect(() => {
-   // props.saveUserState({})
-     props.getUserHistory()
+    // props.saveUserState({})
+    props.getUserHistory()
 
   }, [])
   //..............................
