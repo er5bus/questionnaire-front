@@ -137,7 +137,8 @@ class OverviewNode extends React.PureComponent {
       question: questionAction,
       name: nameAction,
       score: scoreAction,
-      id: idAction
+      id: idAction,
+      type: this.props.selectedPartBodyIDToUse[0]
     })
 
     let { currentQuestion } = this.props
