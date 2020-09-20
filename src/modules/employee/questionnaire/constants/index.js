@@ -81,7 +81,7 @@ export const HUMAN_BODY = {
   LEG_FOOT: { value: "Jambe/Pied", id: "LEG_FOOT" },
 }
 export const statcTreeNode = {
-  HEADACHE: { treeparam: "c0812a5f1610401485c1bf3148085844", nodeparam: "f4e92c0e40094d5685b8de5a6c3020dc" },
+  HEADACHE: { treeparam: "39c3358bf398410480c20c6df669d69a", nodeparam: "892cababeedc4ba799c7406c8fe7ed16" },
   CERVICAL: { treeparam: "f1b49c3b2919444f969f173de6db8c9b", nodeparam: "0324c2cbec264e16aa61a8dc3ff209f4" },
   SHOULDERS: { treeparam: "437448c11c9348a6af4697361fdca0dc", nodeparam: "1f9a641de655458c8e4907508c03e4c6" },
   BACK_THORAX: { treeparam: "bc1254428f474bb5ba2525d84c66055c", nodeparam: "29bcc98ac5bf410a93d432cafd71a83d" },
