@@ -16,6 +16,7 @@ import ExitPage from './../components/ExitPage';
 import FirstPage from './../components/FirstPage';
 import SecondPage from './../components/SecondPage';
 import ThirdPage from './../components/ThirdPage';
+
 // class Questionnaire extends React.Component {
 //   constructor(props) {
 //     super(props)
@@ -180,6 +181,7 @@ const Questionnaire = (props) => {
   const [firstLoad, setFirstLoad] = useState(true)
   const [showWhitePage, setShowWhitePage] = useState(false)
   const [fade, setFade] = useState(false)
+  const [continueSecond, setContinueSecond] = useState(true)
   // PAgeHandle
   useEffect(() => {
 
@@ -192,7 +194,8 @@ const Questionnaire = (props) => {
       }
 
     }
-    if (page > 2) {
+
+    if (page && continueSecond || page !== 2) {
       setShowWhitePage(true);
       setFade(false)
       setTitlePage(titleWhitePage(page))
@@ -209,17 +212,33 @@ const Questionnaire = (props) => {
 
   // state handel
   useEffect(() => {
-
-    if (!firstLoad && prevUserState && (prevUserState !== questionnaire)) {
-
+    if (prevUserState && prevUserState !== questionnaire && Object.values(questionnaire).length !== 0) {
       props.saveUserState(questionnaire)
     }
-
-  }, [questionnaire])
-  // first Load ........................
+  }
+    , [questionnaire])
+  //first Load ........................
   useEffect(() => {
-   // props.saveUserState({})
-     props.getUserHistory()
+    //props.saveUserState({})
+    // fetch('https://predicta.fulltech.io/api/login_check', {
+    //   method: "post",
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     password: "&20HelloPredict20!",
+    //     username: "admin@predict-a.com",
+    //     _remember_me: ""
+    //   }),
+    // }).then(resp => {
+    //   return resp.json()
+
+    // }).then(response => {
+
+
+    // })
+    props.getUserHistory()
 
   }, [])
   //..............................
@@ -235,6 +254,7 @@ const Questionnaire = (props) => {
     props.prevPage()
   }
   const onContinueFirstPage = () => {
+    setContinueSecond(false)
     props.nextOtherQuestionsSection();
     onNext()
   }
@@ -248,15 +268,17 @@ const Questionnaire = (props) => {
   const titleWhitePage = (page) => {
     switch (page) {
       case 3:
+      case 1:
+      case 2:
         return "Questionnaire Santé"
       case 4:
         return 'Questionnaire Ergonomie '
       case 5:
-        return "Questionnaire Psychologie"
+        return "Questionnaire  Psycho-social"
       case 6:
         return 'Questionnaire Activité Physique '
       case 7:
-        return 'Questionnaire Nutritionnelle'
+        return 'Questionnaire nutritionnel'
       case 8:
         return 'Résultat et Scores'
       default:
@@ -277,7 +299,7 @@ const Questionnaire = (props) => {
           <Col lg="12" md="12">
             <Card className="shadow" style={{
               minHeight: 500,
-              backgroundColor: page === 7 ? "#FBFBFF" : "white"
+              backgroundColor: "#E5E5E5"
             }}>
               {
                 isLoadingUserState ? <Loader /> :

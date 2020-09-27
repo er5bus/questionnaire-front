@@ -10,7 +10,7 @@ export const number = value =>
   value && isNaN(Number(value)) ? 'Doit être un nombre' : undefined
 
 export const minValue = min => value =>
-  value && value < min ? `Doit être d'au moins ${min}` : undefined
+  value && value < min ? `Doit être au moins ${min}` : undefined
 
 export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)

@@ -132,7 +132,7 @@ class FourthPage extends React.Component {
                 {!this.props.nextSectionFourthState ? (
                     <Row className="justify-content-center">
                         <Col lg="12">
-                            {this.props.otherSectionQuestionToUse.length > 0 && <QuestionHead title={`Des questions à propos  ${this.props.otherSectionQuestionToUse[0].value} `} pageTitle={false} />}
+                            {this.props.otherSectionQuestionToUse.length > 0 && <QuestionHead title={`${this.props.otherSectionQuestionToUse[0].value} `} pageTitle={false} />}
                             <QuestionDisplay
                                 item={item}
                                 onSelectChoice={this.onSelectChoice}
@@ -141,7 +141,7 @@ class FourthPage extends React.Component {
                         </Col>
                     </Row>
                 ) : <div>
-                        <AskContinue title={`Vous avez déjà répondu à des questions ${this.state.titleAsk}, souhaitez-vous continuer ?`}
+                        <AskContinue title={`Vous avez déjà répondu à des questions ${this.state.titleAsk}, passez à l'étape suivante`}
                             onContinue={this.onContinue} onExit={this.props.onExit}  >
                         </AskContinue>
                     </div>}

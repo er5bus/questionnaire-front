@@ -15,10 +15,12 @@ const MedicalRecordForm = props => {
   useEffect(() => {
     props.initialize({ sexe: '1' })
   }, []);
+ 
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Label>Le sexe. Vous êtes : (une femme - un homme)</Label>
+        <Label> Vous êtes:</Label>
         <div className="form-inline mb-3">
           <Field
             name="sexe"

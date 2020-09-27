@@ -1,14 +1,13 @@
-import React from "react"
-import PropTypes from 'prop-types'
-import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
-import { Button, Spinner } from "reactstrap"
+import PropTypes from 'prop-types';
+import React from "react";
+import { Button, Spinner } from "reactstrap";
+import { clearSubmitErrors, Field, reduxForm, stopSubmit } from "redux-form";
+import Form from "./../../../../components/Form";
+import InputField from "./../../../../components/InputField";
+import InputCheckboxField from "./../../../../components/InputRadioCheckboxField";
+import SelectField from "./../../../../components/SelectField";
+import { maxLength, minLength, required } from "./../../../../utils/validations";
 
-import { required, maxLength, minLength } from "./../../../../utils/validations"
-
-import Form from "./../../../../components/Form"
-import InputField from "./../../../../components/InputField"
-import SelectField from "./../../../../components/SelectField"
-import InputCheckboxField from "./../../../../components/InputRadioCheckboxField"
 
 const minLength4 = minLength(4)
 const maxLength30 = maxLength(30)

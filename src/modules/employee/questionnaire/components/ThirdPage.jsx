@@ -137,7 +137,8 @@ class OverviewNode extends React.PureComponent {
       question: questionAction,
       name: nameAction,
       score: scoreAction,
-      id: idAction
+      id: idAction,
+      type: this.props.selectedPartBodyIDToUse[0]
     })
 
     let { currentQuestion } = this.props
@@ -162,7 +163,7 @@ class OverviewNode extends React.PureComponent {
           {!this.props.nextSectionThirdState ? (
             <Row className="justify-content-center">
               <Col lg="12">
-                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Des questions à propos  ${this.props.selectedPartBodyToUse[0]} `} pageTitle={false} />}
+                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Questionnaire santé pour  ${this.props.selectedPartBodyToUse[0]} `} pageTitle={false} />}
                 <QuestionDisplay
                   item={item}
                   onSelectChoice={this.onSelectChoice}
@@ -171,7 +172,7 @@ class OverviewNode extends React.PureComponent {
               </Col>
             </Row>
           ) : <div>
-              <AskContinue title={"Vous avez déjà répondu à des questions sur les douleurs corporelles, souhaitez-vous continuer ?"}
+              <AskContinue title={"Vous avez déjà répondu à des questions sur les douleurs corporelles, passez à l'étape suivante"}
                 onContinue={this.onContinue} onExit={this.props.onExit}  >
               </AskContinue>
             </div>} </>}

@@ -54,6 +54,8 @@ export const ACTIONS = {
   SAVE_SCORES_INIT: 'questionnaire@SAVE_SCORES_INIT',
   SAVE_SCORES_SUCCEDED: 'questionnaire@SAVE_SCORES_SUCCEDED',
   SAVE_SCORES_FAILED: 'questionnaire@SAVE_SCORES_FAILED',
+  CLEAN_CACH: "CLEAN_CACH",
+  GO_TO_NUTRUTION: "questionnaire@GO_TO_NUTRUTION"
 }
 
 export const ENDPOINT = {
@@ -81,9 +83,9 @@ export const HUMAN_BODY = {
   LEG_FOOT: { value: "Jambe/Pied", id: "LEG_FOOT" },
 }
 export const statcTreeNode = {
-  HEADACHE: { treeparam: "c0812a5f1610401485c1bf3148085844", nodeparam: "f4e92c0e40094d5685b8de5a6c3020dc" },
+  HEADACHE: { treeparam: "39c3358bf398410480c20c6df669d69a", nodeparam: "892cababeedc4ba799c7406c8fe7ed16" },
   CERVICAL: { treeparam: "f1b49c3b2919444f969f173de6db8c9b", nodeparam: "0324c2cbec264e16aa61a8dc3ff209f4" },
-  SHOULDERS: { treeparam: "437448c11c9348a6af4697361fdca0dc", nodeparam: "1f9a641de655458c8e4907508c03e4c6" },
+  SHOULDERS: { treeparam: "37f56136dc4a42a1ae72e421453ffec6", nodeparam: "1d44f88ae48643a7b72bb14efb3de95d" },
   BACK_THORAX: { treeparam: "bc1254428f474bb5ba2525d84c66055c", nodeparam: "29bcc98ac5bf410a93d432cafd71a83d" },
   ELBOW_WIRST_HAND: { treeparam: "5a96522e51364c658a20e8c05cf6f22e", nodeparam: "d3792daabdab44b490edbee950b2200f" },
   ABDOMINAL_PAIN: { treeparam: "2c7c3f37da444d52a6fece527f4a0b99", nodeparam: "910e49087df64539b00ab1b3731c3169" },
@@ -109,7 +111,7 @@ export const zonePeriodeData = {
   columns: {
     'column-1': {
       id: 'column-1',
-      title: 'Fréquement',
+      title: 'Très fréquemment',
       taskIds: [],
     },
     'column-2': {
