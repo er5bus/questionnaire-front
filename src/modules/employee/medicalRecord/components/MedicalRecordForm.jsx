@@ -20,16 +20,18 @@ const MedicalRecordForm = props => {
   useEffect(() => {
     props.initialize({ sexe: '1' })
   }, []);
+ 
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Label>Le sexe. Vous êtes : (une femme - un homme)</Label>
+        <Label> Vous êtes:</Label>
         <div className="form-inline mb-3">
           <Field
             name="sexe"
             component={InputRadioCheckboxField}
             className="form-control"
-            label={t("Un homme")}
+            label={t("Homme")}
             type="radio"
             value="1"
           />
@@ -38,7 +40,7 @@ const MedicalRecordForm = props => {
             component={InputRadioCheckboxField}
             className="form-control"
             placeholder={t("")}
-            label={t("Une femme")}
+            label={t("Femme")}
             type="radio"
             value="2"
           />
@@ -47,8 +49,7 @@ const MedicalRecordForm = props => {
           name="age"
           component={InputField}
           className="form-control"
-          placeholder={t("Quel âge avez-vous ?")}
-          label={t("L'âge")}
+          label={t("Quel âge avez-vous ? ")}
           type="text"
           validate={[required, number]}
         />
@@ -56,8 +57,7 @@ const MedicalRecordForm = props => {
           name="tall"
           component={InputField}
           className="form-control"
-          placeholder={t("Quelle est votre taille ?")}
-          label={t("La taille")}
+          label={t("Quelle est votre taille ?")}
           type="text"
           validate={[required, number]}
         />
@@ -65,8 +65,7 @@ const MedicalRecordForm = props => {
           name="weight"
           component={InputField}
           className="form-control"
-          placeholder={t("Quel est votre poids ?")}
-          label={t("Le poids")}
+          label={t("Quel est votre poids ?")}
           type="text"
           validate={[required, number]}
         />
@@ -74,8 +73,7 @@ const MedicalRecordForm = props => {
           name="profession"
           component={InputField}
           className="form-control"
-          placeholder={t("Quelle est votre profession ?")}
-          label={t("Le secteur d’activité.")}
+          label={t("Quelle est votre profession ?")}
           type="text"
           validate={[required]}
         />
@@ -83,9 +81,8 @@ const MedicalRecordForm = props => {
           name="homeWork"
           component={SelectField}
           className="form-control"
-          placeholder={t("Faites-vous du télétravail ? (oui, souvent - oui, parfois - non)")}
-          label={t("La situation du salarié face au télétravail.")}
-          choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }]}
+          label={t("Faites-vous du télétravail ")}
+          choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }, { label: "Non", value: 4 }]}
           validate={[required]}
         />
         <div className="mt-0">

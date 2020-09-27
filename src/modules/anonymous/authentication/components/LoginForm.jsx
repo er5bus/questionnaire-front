@@ -1,15 +1,15 @@
-import React from "react"
-import PropTypes from 'prop-types'
-import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
-import { Button, Spinner } from "reactstrap"
-import { useTranslation } from "react-i18next"
+import PropTypes from 'prop-types';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Button, Spinner } from "reactstrap";
+import { clearSubmitErrors, Field, reduxForm, stopSubmit } from "redux-form";
+import Form from "./../../../../components/Form";
+import InputField from "./../../../../components/InputField";
+import InputCheckboxField from "./../../../../components/InputRadioCheckboxField";
+import SelectField from "./../../../../components/SelectField";
+import { maxLength, minLength, required } from "./../../../../utils/validations";
 
-import { required, maxLength, minLength } from "./../../../../utils/validations"
 
-import Form from "./../../../../components/Form"
-import InputField from "./../../../../components/InputField"
-import SelectField from "./../../../../components/SelectField"
-import InputCheckboxField from "./../../../../components/InputRadioCheckboxField"
 
 const minLength4 = minLength(4)
 const maxLength30 = maxLength(30)
@@ -53,7 +53,9 @@ const LoginForm = (props) => {
         className="form-control"
         icon="ni ni-lock-circle-open"
         placeholder={t("Admin area")}
-        choices={ [ { label: "Empolyee area", value: 1 }, { label: "Manager area", value: 2 }, { label: "Admin area", value: 3 } ] } 
+        choices={ [ { label: "Empolyee area", value: 1 }
+        , { label: "Manager area", value: 2 },
+         { label: "Admin area", value: 3 } ] } 
         validate={[required, minLength4, maxLength30]}
       />
       <Field

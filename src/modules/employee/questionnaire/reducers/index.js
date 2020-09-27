@@ -1,7 +1,6 @@
 import { ACTIONS, otherSectionToUseQuestions } from './../constants';
 
-
-export default (state = {
+const defaultState = {
   page: 1,
   tasksEnded: false,
   exit: false,
@@ -19,7 +18,7 @@ export default (state = {
   selectedPartBodyIDToUse: [],
   scores: [],
   otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
-  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }],
+  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Questionnaire Ergonomique", page: 4 }, { id: "COACHING", value: "Questionnaire activité physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Questionnaire psycho-social", page: 5 }],
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
   foods: [],
@@ -39,7 +38,49 @@ export default (state = {
   Lunch: { selectedColumn: [[], [], [], []], selectedNutri: [] },
   Dinner: { selectedColumn: [[], [], [], []], selectedNutri: [] },
   Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  scorsSaved: null
+  scorsSaved: null,
+  nutrutionalInformationPage: true
+}
+export default (state = {
+  page: 1,
+  tasksEnded: false,
+  exit: false,
+  isLoadingUserState: false,
+  isLoading: false,
+  item: null,
+  error: null,
+  selectedPartBody: [],
+  selectedPartBodyID: [],
+  questionsAnswered: [],
+  questions: [],
+  currentQuestion: { treeparam: "", nodeparam: "" },
+  selectedPartBodyToUse: [],
+  isLoadingSectionBody: false,
+  selectedPartBodyIDToUse: [],
+  scores: [],
+  otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
+  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Questionnaire Ergonomique", page: 4 }, { id: "COACHING", value: "Questionnaire activité physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Questionnaire psycho-social", page: 5 }],
+  isLoadingNextOtherSectionQuestion: false,
+  foodCategories: [],
+  foods: [],
+  isLoadingFoodCategories: false,
+  isLoadingFoods: false,
+  selectedScoreNut: 0,
+  deselectedScoreNut: 0,
+  deselectedScoreNutState: false,
+  healthAnsweredQuestion: [],
+  ergonomicsAnsweredQuestion: [],
+  coachingAnsweredQuestion: [],
+  psychologiqueAnsweredQuestion: [],
+  nextSectionThirdState: false,
+  nextSectionFourthState: false,
+  periodeNut: 0,
+  Breakfast: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Lunch: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Dinner: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] },
+  scorsSaved: null,
+  nutrutionalInformationPage: true
 }, action) => {
   const { payload, type } = action
 
@@ -54,13 +95,13 @@ export default (state = {
       return { ...state, scorsSaved: false }
     }
     case ACTIONS.GET_STATE_SUCCEDED: {
-      let newState = payload
+      const newState = payload
 
-      if (Object.entries(newState).length) {
-        Object.assign(state, newState)
-        return { ...state, isLoadingUserState: false }
+      if (Object.entries(newState).length > 0) {
+        console.log("bababaabab");
+        return { ...newState, isLoadingUserState: false }
       }
-      return { ...state, isLoadingUserState: false }
+      return { ...state, ...defaultState, isLoadingUserState: false }
 
     }
     case ACTIONS.UPDATE_OTHER_QUESTION_TO_USE: {
@@ -260,6 +301,14 @@ export default (state = {
         let newAnswersCoching = [...state.coachingAnsweredQuestion, payload]
         return { ...state, coachingAnsweredQuestion: newAnswersCoching }
       }
+    }
+    case ACTIONS.GO_TO_NUTRUTION : {
+      return {...state,nutrutionalInformationPage:false}
+    }
+    case ACTIONS.CLEAN_CACH: {
+      Object.assign(state, {})
+      return state
+
     }
     default: {
       return state

@@ -1,5 +1,5 @@
-import { ACTIONS, ENDPOINT } from "./../constants"
-import { CALL_API, HTTP_METHODS, SAVE_SESSION, DELETE_SESSION } from "./../../../../constants"
+import { CALL_API, DELETE_SESSION, HTTP_METHODS, SAVE_SESSION } from "./../../../../constants";
+import { ACTIONS, ENDPOINT } from "./../constants";
 
 
 export const clearError = () => ({
@@ -27,7 +27,7 @@ export const login = (payload) =>
   })
 
 
-export const fetchInvitation = (token) => 
+export const fetchInvitation = (token) =>
   ({
     type: CALL_API,
     meta: {
@@ -42,7 +42,7 @@ export const fetchInvitation = (token) =>
   })
 
 
-export const register = (token, payload) => 
+export const register = (token, payload) =>
   ({
     type: CALL_API,
     payload,
@@ -68,7 +68,7 @@ export const logout = () =>
     meta: {
       actions: {
         init: ACTIONS.ACCOUNT_LOGOUT_INIT,
-        success: [DELETE_SESSION, ACTIONS.ACCOUNT_LOGOUT_SUCCEDED],
+        success: [DELETE_SESSION, ACTIONS.ACCOUNT_LOGOUT_SUCCEDED, ACTIONS.CLEAN_CACH],
         fail: ACTIONS.ACCOUNT_LOGOUT_FAILED
       },
       messages: {

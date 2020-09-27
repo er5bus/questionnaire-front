@@ -7,11 +7,10 @@ import { connect } from "react-redux";
 import { Button, Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 import Loader from '../../../../components/Loader';
-import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, saveNutriState, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
+import { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, readedInformationsNutri, saveNutriState, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition } from '../actions';
 import { zonePeriodeData } from '../constants';
 import ColumnAliments from './ColumAliments';
 import Column from './column';
-
 const Container = styled.div`
 display: flex;
 width:100%;
@@ -402,8 +401,8 @@ class NutritionalPage extends React.Component {
     }
     handlePeriode = (periode) => {
         if (periode > this.state.periode) {
-           
-            
+
+
             this.saveData()
         }
         this.setState({ periode: periode })
@@ -415,76 +414,109 @@ class NutritionalPage extends React.Component {
         return (
             <>
                 {this.state.isLoadingFood ? <Loader></Loader> : <>
-                    <Row>
-                        <Col md={{ size: 6, offset: 3 }}>
-                            <Steps current={this.state.periode}
-                                labelPlacement={"vertical"}
-                                direction={"horizontal"}
+                    {
+                        this.props.nutrutionalInformationPage ? (
+                            <>
+                                <Row style={{
+                                    display: "flex",
+                                    justifyContent: "center"
+                                }} >
+                                    <Col xs="6" className="shadow-nutrition">
+                                        <p>
+                                            “Passons au questionnaire nutritionnel. Pour chaque repas, veuillez renseigner ce que vous mangez habituellement par ordre de fréquence sur
+                                            une semaine type. Les petits écarts exceptionnels ne comptent pas
+                                            Si vous ne mangez pas lors d’un repas, ne remplissez pas le tableau”
+                                        </p>
+                                        <Button className="nutri-button"
+                                            style={{
+                                                background: "#062484",
+                                                borderColor: " #062484"
+                                            }}
+                                            onClick={() => {
+                                                
+                                                this.props.readedInformationsNutri()
+                                            }}
+                                        > SuiVant </Button>
+                                    </Col>
+                                </Row>
+                            </>
+                        ) : (
+                                <>
+                                    <Row>
+                                        <Col md={{ size: 6, offset: 3 }}>
+                                            <Steps current={this.state.periode}
+                                                labelPlacement={"vertical"}
+                                                direction={"horizontal"}
 
-                            >
-                                <Steps.Step title="Petit déjeuner" onClick={() => this.handlePeriode(0)} />
-                                <Steps.Step title="Déjeuner" onClick={() => this.handlePeriode(1)} />
-                                <Steps.Step title="Dîner" onClick={() => this.handlePeriode(2)} />
-                                <Steps.Step title="Collation" description="(matin ou soir)" onClick={() => this.handlePeriode(3)} />
-                            </Steps>
-                        </Col>
-                    </Row>
+                                            >
+                                                <Steps.Step title="Petit déjeuner" onClick={() => this.handlePeriode(0)} />
+                                                <Steps.Step title="Déjeuner" onClick={() => this.handlePeriode(1)} />
+                                                <Steps.Step title="Dîner" onClick={() => this.handlePeriode(2)} />
+                                                <Steps.Step title="Collation" description="(matin ou soir)" onClick={() => this.handlePeriode(3)} />
+                                            </Steps>
+                                        </Col>
+                                    </Row>
 
 
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                        <Row>
-                            <Col xs="6" className="shadow-nutrition" >
-                                <Container isHeight={true} >
-                                    <PeriodeTitle>
-                                        {this.renderTitle(this.state.periode)}
-                                    </PeriodeTitle>
-                                    <TitleTable> Déplacer les aliments dans le tableau </TitleTable>
-                                    {zoneData.map((columnId, index) => {
-                                        const column = this.renderState(this.state.periode).columns[columnId];
-                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                        return <Column indexColumn={index} key={column.id} column={column} tasks={tasks} />
-                                    })}
-                                </Container>
-                            </Col>
-                            <Col xs="6" className="shadow-nutrition">
-                                <ContainerAliments className=" justify-content-center" isHeight={false}>
-                                    {nutritional.map((columnId, index) => {
-                                        const column = this.renderState(this.state.periode).columns[columnId];
-                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
-                                        return <ColumnAliments indexColumn={index} key={column.id} column={column} type={this.state.type} tasks={tasks} />
-                                    })}
-                                </ContainerAliments>
-                            </Col>
-                        </Row>
+                                    <DragDropContext onDragEnd={this.onDragEnd}>
+                                        <Row>
+                                            <Col xs="6" className="shadow-nutrition" >
+                                                <Container isHeight={true} >
+                                                    <PeriodeTitle>
+                                                        {this.renderTitle(this.state.periode)}
+                                                    </PeriodeTitle>
+                                                    <TitleTable> Déplacer les aliments dans le tableau </TitleTable>
+                                                    {zoneData.map((columnId, index) => {
+                                                        const column = this.renderState(this.state.periode).columns[columnId];
+                                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
+                                                        return <Column indexColumn={index} key={column.id} column={column} tasks={tasks} />
+                                                    })}
+                                                </Container>
+                                            </Col>
+                                            <Col xs="6" className="shadow-nutrition">
+                                                <ContainerAliments className=" justify-content-center" isHeight={false}>
+                                                    {nutritional.map((columnId, index) => {
+                                                        const column = this.renderState(this.state.periode).columns[columnId];
+                                                        const tasks = column.taskIds.map(taskId => this.renderState(this.state.periode).tasks[taskId])
+                                                        return <ColumnAliments indexColumn={index} key={column.id} column={column} type={this.state.type} tasks={tasks} />
+                                                    })}
+                                                </ContainerAliments>
+                                            </Col>
+                                        </Row>
 
-                    </DragDropContext>
-                    <Row className="justify-content-end">
-                        {this.state.periode !== 0 ?
-                            <Button className="nutri-button"
-                                style={{
-                                    background: "#AABCC9",
-                                    borderColor: "#AABCC9"
-                                }}
-                                onClick={() => {
-                                    this.setState({ periode: this.state.periode - 1 }, () => {
-                                        this.scrollToTop()
-                                    })
-                                }}
-                            >
-                                Retour </Button> : ""
-                        }
-                        <Button className="nutri-button"
-                            style={{
-                                background: "#062484",
-                                borderColor: " #062484"
-                            }}
-                            onClick={() => {
-                                this.saveData()
+                                    </DragDropContext>
+                                    <Row className="justify-content-end">
+                                        {this.state.periode !== 0 ?
+                                            <Button className="nutri-button"
+                                                style={{
+                                                    background: "#AABCC9",
+                                                    borderColor: "#AABCC9"
+                                                }}
+                                                onClick={() => {
+                                                    this.setState({ periode: this.state.periode - 1 }, () => {
+                                                        this.scrollToTop()
+                                                    })
+                                                }}
+                                            >
+                                                Retour </Button> : ""
+                                        }
+                                        <Button className="nutri-button"
+                                            style={{
+                                                background: "#062484",
+                                                borderColor: " #062484"
+                                            }}
+                                            onClick={() => {
+                                                this.saveData()
 
-                            }}
-                        > {this.state.periode === 3 ? "Terminer" : "Suivant"} </Button>
+                                            }}
+                                        > {this.state.periode === 3 ? "Terminer" : "Suivant"} </Button>
 
-                    </Row>
+                                    </Row>
+                                </>
+                            )
+
+                    }
+
                 </>
                 }
 
@@ -495,4 +527,4 @@ class NutritionalPage extends React.Component {
 }
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition, saveNutriState })(NutritionalPage) 
+export default connect(mapStateToProps, { askContinueScreen, changePage, fetchFoodCategories, fetchFoods, updateDeSelectedScoreNutrition, updateSelectedScoreNutrition, saveNutriState, readedInformationsNutri })(NutritionalPage) 

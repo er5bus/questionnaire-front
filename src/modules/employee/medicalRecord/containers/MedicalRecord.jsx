@@ -47,11 +47,11 @@ class MedicalRecord extends React.Component {
             <div className="header bg-primary pb-5">
               <Container fluid>
                 <div className="header-body">
-                  <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> {t("Medical Record")} </h6>
+                  <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> {t("Votre profil")} </h6>
                   <Row className="align-items-center py-2">
                     <Col lg="6">
                       <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                        <BreadcrumbItem active><i className="fas fa-save"></i> {t("Save Your Medical Record")}</BreadcrumbItem>
+                        <BreadcrumbItem active><i className="fas fa-save"></i> {t("Remplissez vos informations personnelles")}</BreadcrumbItem>
                       </Breadcrumb>
                     </Col>
                   </Row>

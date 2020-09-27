@@ -1,19 +1,17 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Container, Row, Col } from 'reactstrap'
-import { Redirect, Switch, Route } from 'react-router-dom'
+import React from 'react';
+import Notifications from 'react-notification-system-redux';
+import { connect } from 'react-redux';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Container, Row } from 'reactstrap';
+import adminRoutes from './../../../../routes/admin';
+import anonymousRoutes from './../../../../routes/anonymous';
+import employeeRoutes from './../../../../routes/employee';
+import moderatorRoutes from './../../../../routes/moderator';
+import { isAdmin, isEmployee, isModerator } from './../../../../utils/helpers';
 
-import { isAdmin, isModerator, isEmployee } from './../../../../utils/helpers'
 
-import anonymousRoutes from './../../../../routes/anonymous'
-import adminRoutes from './../../../../routes/admin'
-import moderatorRoutes from './../../../../routes/moderator'
-import employeeRoutes from './../../../../routes/employee'
 
-import Notifications from 'react-notification-system-redux'
 
-import signinLeftImg from './../../../../assets/img/signin-left.svg'
-import signinRightImg from './../../../../assets/img/signin-right.svg'
 
 class AnonymousLayout extends React.Component {
 
@@ -34,7 +32,6 @@ class AnonymousLayout extends React.Component {
           {/* Page content */}
           <Container className="section-content">
             <Row className="justify-content-center">
-              <Col lg="2" style={{ backgroundImage: `url(${signinLeftImg})`, backgroundPosition: "center", backgroundRepeat: "no-repeat" }} />
               <Switch>
                 {
                   Object.keys(anonymousRoutes.routes).map((routeName, i) =>
@@ -48,7 +45,6 @@ class AnonymousLayout extends React.Component {
                 }
                 <Redirect from="*" to={ anonymousRoutes.path + anonymousRoutes.routes.login.path } />
               </Switch>
-              <Col lg="2" style={{ backgroundImage: `url(${signinRightImg})`, backgroundPosition: "center", backgroundRepeat: "no-repeat" }} />
             </Row>
           </Container>
         </div>

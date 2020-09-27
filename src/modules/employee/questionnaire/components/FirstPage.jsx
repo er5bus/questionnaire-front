@@ -14,7 +14,7 @@ const FirstQuestion = ({ onExit, onContinue }) => {
   return (
     <>
       <div>
-        <h1 className="h2"> {t('Avez-vous des douleurs corporelles?')}</h1>
+        <h1 className="h2"> {t('Votre corps vous fait-il souffrir?')}</h1>
 
         <div className="pb-5" />
         <Button onClick={onContinue}>{t('Oui')}</Button>

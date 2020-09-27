@@ -145,6 +145,9 @@ export const saveUserState = (payload) => ({
   }
 })
 
+export const readedInformationsNutri = () => ({
+  type: ACTIONS.GO_TO_NUTRUTION
+})
 
 
 export const fillScoresTable = (payload) => ({
@@ -155,6 +158,7 @@ export const fillSelectedDeselectedNutriScores = (payload) => ({
   type: ACTIONS.FILL_SELECTED_DESELECTED_NUTRI_SCORES,
   payload
 })
+
 export const saveQuestionAnswered = (payload) => ({
   type: ACTIONS.SAVE_QUESTION_ANSWER,
   payload

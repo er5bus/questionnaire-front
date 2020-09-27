@@ -54,6 +54,8 @@ export const ACTIONS = {
   SAVE_SCORES_INIT: 'questionnaire@SAVE_SCORES_INIT',
   SAVE_SCORES_SUCCEDED: 'questionnaire@SAVE_SCORES_SUCCEDED',
   SAVE_SCORES_FAILED: 'questionnaire@SAVE_SCORES_FAILED',
+  CLEAN_CACH: "CLEAN_CACH",
+  GO_TO_NUTRUTION: "questionnaire@GO_TO_NUTRUTION"
 }
 
 export const ENDPOINT = {
@@ -109,7 +111,7 @@ export const zonePeriodeData = {
   columns: {
     'column-1': {
       id: 'column-1',
-      title: 'Fréquement',
+      title: 'Très fréquemment',
       taskIds: [],
     },
     'column-2': {

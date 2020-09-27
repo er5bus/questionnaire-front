@@ -1,16 +1,16 @@
-export const required = value => value && value !== " " ? undefined : 'This field is required'
+export const required = value => value && value !== " " ? undefined : 'Champs Obligatoire'
 
 export const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined
+  value && value.length > max ? `Doit contenir ${max} caractères ou moins` : undefined
 
 export const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined
+  value && value.length < min ? `Doit contenir ${min} caractères ou plus` : undefined
 
 export const number = value =>
-  value && isNaN(Number(value)) ? 'Must be a number' : undefined
+  value && isNaN(Number(value)) ? 'Doit être un nombre' : undefined
 
 export const minValue = min => value =>
-  value && value < min ? `Must be at least ${min}` : undefined
+  value && value < min ? `Doit être au moins ${min}` : undefined
 
 export const email = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
