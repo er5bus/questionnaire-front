@@ -12,7 +12,7 @@ import LoginForm from "./../components/LoginForm";
 
 class Login extends React.Component {
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.clearError()
   }
 
