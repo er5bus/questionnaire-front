@@ -1,13 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { useTranslation } from "react-i18next"
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useTranslation } from "react-i18next";
+import Select from 'react-select';
+import { FormGroup, Label } from "reactstrap";
 
-import Select from 'react-select'
 
-import {
-  FormGroup,
-  Label
-} from "reactstrap"
 
 const singleChangeHandler = (func, input) => (choice) => {
   func(choice.value)
@@ -31,7 +28,7 @@ const transformValue = (value, options, multi) => {
 }
 
 
-const SelectField = ({input, label, placeholder, multi = false, choices = [], meta: { touched, error, warning }}) => {
+const SelectField = ({ input, label, placeholder, multi = false, choices = [], meta: { touched, error, warning } }) => {
 
   const { t } = useTranslation()
   const { value, ...inputAttr } = input
@@ -39,7 +36,7 @@ const SelectField = ({input, label, placeholder, multi = false, choices = [], me
 
   return (
     <FormGroup className="mb-3">
-      { label && <Label>{ label }</Label>}
+      {label && <Label className="control-label">{label}</Label>}
       <Select
         {...inputAttr}
         isMulti={multi}
@@ -48,8 +45,9 @@ const SelectField = ({input, label, placeholder, multi = false, choices = [], me
         classNamePrefix="react-select"
         options={choices}
         onChange={multi ? multiChangeHandler(input.onChange, input) : singleChangeHandler(input.onChange, input)}
-        onBlur={() => input.onBlur(input.value )}
+        onBlur={() => input.onBlur(input.value)}
         placeholder={placeholder}
+
       />
       <div className="danger-msg">
         {touched && ((error && <span>{t(error)}</span>) || (warning && <span>{t(warning)}</span>))}

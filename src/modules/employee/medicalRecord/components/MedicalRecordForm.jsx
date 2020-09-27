@@ -30,7 +30,7 @@ const MedicalRecordForm = props => {
           <Field
             name="sexe"
             component={InputRadioCheckboxField}
-            className="form-control"
+            className="form-control input-style"
             label={t("Homme")}
             type="radio"
             value="1"
@@ -38,7 +38,7 @@ const MedicalRecordForm = props => {
           <Field
             name="sexe"
             component={InputRadioCheckboxField}
-            className="form-control"
+            className="form-control input-style"
             placeholder={t("")}
             label={t("Femme")}
             type="radio"
@@ -48,7 +48,7 @@ const MedicalRecordForm = props => {
         <Field
           name="age"
           component={InputField}
-          className="form-control"
+          className="form-control input-style"
           label={t("Quel âge avez-vous ? ")}
           type="text"
           validate={[required, number]}
@@ -56,15 +56,16 @@ const MedicalRecordForm = props => {
         <Field
           name="tall"
           component={InputField}
-          className="form-control"
+          className="form-control input-style"
           label={t("Quelle est votre taille ?")}
           type="text"
           validate={[required, number]}
+          
         />
         <Field
           name="weight"
           component={InputField}
-          className="form-control"
+          className="form-control input-style"
           label={t("Quel est votre poids ?")}
           type="text"
           validate={[required, number]}
@@ -72,7 +73,7 @@ const MedicalRecordForm = props => {
         <Field
           name="profession"
           component={InputField}
-          className="form-control"
+          className="form-control input-style"
           label={t("Quelle est votre profession ?")}
           type="text"
           validate={[required]}
@@ -80,7 +81,7 @@ const MedicalRecordForm = props => {
         <Field
           name="homeWork"
           component={SelectField}
-          className="form-control"
+          className="form-control input-style"
           label={t("Faites-vous du télétravail ")}
           choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }, { label: "Non", value: 4 }]}
           validate={[required]}
