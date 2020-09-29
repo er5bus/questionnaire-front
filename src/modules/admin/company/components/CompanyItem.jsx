@@ -45,6 +45,14 @@ export default ({ onToggleModal =f=>f, name, description, universalName, color, 
           >
             <i className="fa fa-eye" /> Directeur
           </Button>
+          <Button
+            className="btn-sm mt-4"
+            color="primary"
+            to={ adminRoutes.path + adminRoutes.routes.departmentList.path.replace(":companyParam", id) }
+            tag={Link}
+          >
+            <i className="fa fa-building" /> { t("Departement") }
+          </Button>
 
           <Button
             className="btn-sm mt-4"
