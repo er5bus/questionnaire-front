@@ -19,14 +19,13 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
           ? <>
             <h1 className="pb-2">{item.node_name}</h1>
             { /*<p className="pb-2" dangerouslySetInnerHTML={{ __html: item.content_area }} />*/}
-            <div>
-              <h3 className="pb-4 text-primary">{item.question && item.question}</h3>
+            <div className="question-answer">
+              <div className="pb-4 question">{item.question && item.question}</div>
               {item.actions.map((action, i) =>
                 (item.display_style === "BUTTON"
-                  ? <div key={action.id}>
+                  ? <div className="ansewer" key={action.id}>
                     <Button
-                      className="btn mt-4 mr-2"
-                      color="primary"
+                      className=" mt-4 mr-2 answer-item"
                       onClick={() => onSelectChoice(item.question, action)}
                     >
                       {action.name}
@@ -34,10 +33,13 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
                   </div>
                   : <div
                     key={action.id}
-                    className="panel-link mb-2"
+                    className="ansewer mb-2"
                     onClick={() => onSelectChoice(item.question, action)}
                   >
-                    {action.name}
+                    <div className="answer-item">
+                      {action.name}
+                    </div>
+
                   </div>
                 ))}
             </div>
@@ -45,7 +47,7 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
           : <div className="text-center">
             <img src={emptyIcon} alt="..." />
             <h6 className="pt-4 text-primary text-uppercase">
-              {t("Oops! no question found")}
+              {t("Veuillez réssayer, aucune question trouvée")}
             </h6>
           </div>
       }

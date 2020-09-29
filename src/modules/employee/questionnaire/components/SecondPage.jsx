@@ -3,7 +3,7 @@ import React from 'react';
 // reactstrap components
 import { connect } from "react-redux";
 import { Badge, Button, Col, Row } from 'reactstrap';
-import { changeCurrentQuestion, saveUserState, selectDiselectPartBody } from '../actions';
+import { changeCurrentQuestion, selectDiselectPartBody } from '../actions';
 import { HUMAN_BODY, statcTreeNode } from '../constants';
 import HumanBodyBackSide from './HumanBodyBackSide';
 import HumanBodyFrontSide from './HumanBodyFrontSide';
@@ -77,4 +77,4 @@ class FirstQuestion extends React.Component {
 const mapStateToProps = state => state.questionnaire
 
 
-export default connect(mapStateToProps, { selectDiselectPartBody, changeCurrentQuestion, saveUserState })(FirstQuestion)
+export default connect(mapStateToProps, { selectDiselectPartBody, changeCurrentQuestion })(FirstQuestion)

@@ -138,7 +138,9 @@ export default (state = {
 
 
     }
-
+    case ACTIONS.CHANGE_PAGE_AFTER_SELECTION : {
+      return {...state, page:4, selectedPartBody:[], selectedPartBodyID:[], selectedPartBodyToUse:[], selectedPartBodyIDToUse:[] }
+    }
     case ACTIONS.NEXT_SECTION_THIRD: {
       return { ...state, nextSectionThirdState: true }
     }

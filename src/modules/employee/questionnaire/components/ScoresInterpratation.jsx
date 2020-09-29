@@ -120,7 +120,7 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
             }
 
         })
-      
+
         totalScores[1] = { ...totalScores[1], questions: healthAnsweredQuestion.length > 0 ? formatAnsewerQuestionTable(healthAnsweredQuestion) : formatAnsewerQuestionTable(ergonomicsAnsweredQuestion) }
         totalScores[3] = { ...totalScores[3], questions: formatAnsewerQuestionTable(psychologiqueAnsweredQuestion) }
         totalScores[4] = { ...totalScores[4], questions: formatAnsewerQuestionTable(coachingAnsweredQuestion) }
@@ -277,11 +277,13 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
             </Table>
             <Row className="justify-content-end pt-5">
 
-                <Button className="nutri-button"
+                <Button className="next-button login-button"
                     style={{
-                        background: "#062484",
-                        borderColor: " #062484"
-                    }}
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                    }
+                    }
                     onClick={() => {
                         saveScoresUserFun()
                     }}

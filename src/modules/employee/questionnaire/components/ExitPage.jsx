@@ -19,20 +19,21 @@ padding: 20px 0
 const ExitQuestions = ({ tasksEnded }) => {
 
   const { t } = useTranslation()
- 
+
   return (
     <>
-      <div className=" d-flex flex-column align-items-center justify-content-center">
+      <div className=" d-flex flex-column align-items-center justify-content-center login-title">
         <img width="200" src={thanksImg} alt="..." />
-        <h1 className="h3 pt-4 mb-0"> {t('Merci pour votre temps')}</h1>
-      </div>
-      {tasksEnded && (
-        <>
-          <Container>
+        <h1 className=" pt-4 mb-0"> {t('Merci pour votre temps')}</h1>
+        {tasksEnded && (
+
+          < div className="">
             {t("Vous avez completer le  parcour des questions, vous recevrez une réponse le plus tôt possible")}
-          </Container>
-        </>
-      )}
+          </div>
+
+        )}
+      </div>
+
 
     </>
   )

@@ -4,7 +4,8 @@ import ErgoLogo from '../../../../assets/img/ErgoLogo.svg';
 import HealthLogo from '../../../../assets/img/HealthLogo.svg';
 import NutriLogo from '../../../../assets/img/NutriLogo.svg';
 import PsyLogo from '../../../../assets/img/PsyLogo.svg';
-const Transitionpages = ({ title, page }) => {
+import whiteLogo from '../../../../assets/img/white.png';
+const Transitionpages = ({ title, page, exit }) => {
 
     const returnLogo = (page) => {
         let logo = ""
@@ -28,6 +29,7 @@ const Transitionpages = ({ title, page }) => {
                 logo = NutriLogo
                 break;
             default:
+            logo = whiteLogo
                 break;
         }
         return logo
@@ -40,7 +42,7 @@ const Transitionpages = ({ title, page }) => {
                 alignItems: "center"
             }}>
                 <div>
-                    <img src={returnLogo(page)} alt="..." />
+                    { <img src={returnLogo(page)} alt="..." />}
                 </div>
                 <div className="transition-text">
                     {title}

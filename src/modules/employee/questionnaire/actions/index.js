@@ -75,6 +75,9 @@ export const changePage = (payload) => ({
   type: ACTIONS.CHANGE_PAGE,
   payload
 })
+export const changePageAfterSelection = () => ({
+  type: ACTIONS.CHANGE_PAGE_AFTER_SELECTION,
+})
 export const fetchQuestion = ({ treeparam, nodeparam }) =>
   ({
     type: CALL_QUESTION_API,

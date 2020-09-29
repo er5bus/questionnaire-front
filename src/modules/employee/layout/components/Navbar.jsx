@@ -57,7 +57,9 @@ const UserNavbar = ({ userName }) => {
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0 text-sm font-weight-bold text-capitalize">
+                    <span className="mb-0 text-sm font-weight-bold text-capitalize" style={{
+                      color:"#0B2B5C"
+                    }}>
                       {userName}
                     </span>
                   </Media>

@@ -10,139 +10,13 @@ import NutritionalPage from '../components/NutritionalPage';
 import ScoresInterpratation from '../components/ScoresInterpratation';
 import Transitionpages from '../components/TransitionPages';
 import { otherQuestionsTreeNode } from '../constants';
-import { changeCurrentQuestion, changePage, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, getUserHistory, nextOtherQuestionsSection, nextPage, prevPage, saveUserState, selectDiselectPartBody, tasksEnded, updateotherSectionQuestionToUse } from './../actions';
+import { changeCurrentQuestion, changePage, changePageAfterSelection, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, getUserHistory, nextOtherQuestionsSection, nextPage, prevPage, saveUserState, selectDiselectPartBody, tasksEnded, updateotherSectionQuestionToUse } from './../actions';
 import ExitPage from './../components/ExitPage';
 //import employeeRoutes from './../../../../routes/employee'
 import FirstPage from './../components/FirstPage';
 import SecondPage from './../components/SecondPage';
 import ThirdPage from './../components/ThirdPage';
-// class Questionnaire extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       titlePage: "",
-//       showWhitePage: false,
-//       fade: false
-//     }
-//   }
-//   componentDidMount() {
-//     //props.getUserHistory()
 
-//     let taskEnd = localStorage.getItem("taskEnd");
-//     if (taskEnd) {
-//       this.props.tasksEnded()
-//       this.props.exitPage()
-//       return
-//     }
-//     let CurrentPage = 1;
-//     if (localStorage.getItem("CurrentPage") !== null) {
-//       CurrentPage = Number(localStorage.getItem("CurrentPage"));
-//       if (CurrentPage === 2) {
-//         if (localStorage.getItem("selectedBodyArea")) {
-//           this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
-//         }
-//         this.props.changePage(CurrentPage)
-//         return
-//       }
-//       if (CurrentPage >= 3 && CurrentPage < 7) {
-//         if (localStorage.getItem('ScoresArray')) {
-//           this.props.fillScoresTable(JSON.parse(localStorage.getItem('ScoresArray')))
-//         }
-//         if (CurrentPage === 3) {
-//           this.props.nextOtherQuestionsSection()
-//           this.props.selectDiselectPartBody(JSON.parse(localStorage.getItem("selectedBodyArea")))
-//           this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
-//           this.props.changePage(CurrentPage)
-//           return
-//         }
-//         if (CurrentPage === 6) {
-//           this.props.nextOtherQuestionsSection()
-//         }
-//         if (CurrentPage === 5) {
-//           this.props.nextOtherQuestionsSection()
-//           this.props.nextOtherQuestionsSection()
-//         }
-//         this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
-//         this.props.changePage(CurrentPage)
-//       } else if (CurrentPage === 7) {
-
-//         let lastSelectedScore = localStorage.getItem("SelctedNutriScore");
-//         let lastDeslectedScore = localStorage.getItem("DeSelctedNutriScore");
-//         if (lastSelectedScore && lastDeslectedScore) {
-//           this.props.fillSelectedDeselectedNutriScores({
-//             lastSelectedScore: Number(lastSelectedScore),
-//             lastDeselectedScore: Number(lastDeslectedScore)
-//           })
-//         }
-//         this.props.changePage(CurrentPage)
-//       } else if (CurrentPage === 8) {
-//         this.props.changePage(CurrentPage)
-//       }
-
-//     }
-
-
-
-//     // this.props.changeCurrentQuestion(JSON.parse(localStorage.getItem('CurrentQuestion')))
-//     // this.props.changePage(CurrentPage)
-
-//   }
-
-//   onSubmit = (values) => {
-//     //this.props.create(values)
-//   }
-
-//   onNext = () => {
-//     this.props.nextPage()
-//   }
-
-//   onPrev = () => {
-//     this.props.prevPage()
-//   }
-//   onContinueFirstPage = () => {
-
-//     this.props.nextOtherQuestionsSection();
-//     this.onNext()
-//   }
-//   changePage = () => {
-//     this.props.changeCurrentQuestion(otherQuestionsTreeNode["ERGONOMIE"])
-//     this.props.changePage(4)
-//   }
-//   onExit = () => {
-//     this.props.exitPage()
-//   }
-//   componentWillReceiveProps(nextProps) {
-//     if (nextProps.page !== this.props.page && nextProps.page > 2) {
-//       this.setState({ showWhitePage: true, fade: false })
-//       this.setState({ titlePage: this.titleWhitePage(nextProps.page) })
-//       setTimeout(() => {
-//         this.setState({ fade: true })
-//       }, 1000);
-//       setTimeout(() => {
-//         this.setState({ showWhitePage: false })
-//       }, 2500);
-//     }
-
-//   }
-//   titleWhitePage = (page) => {
-
-//     switch (page) {
-//       case 3:
-//         return "Questionnaire Santé"
-//       case 4:
-//         return 'Questionnaire Ergonomie '
-//       case 5:
-//         return "Questionnaire Psychologie"
-//       case 6:
-//         return 'Questionnaire Activité Physique '
-//       case 7:
-//         return 'Questionnaire Nutritionnelle'
-//       case 8:
-//         return 'Résultat et Scores'
-//       default:
-//         break;
-//     }
-//   }
 const useStateWithPromise = (initialState) => {
   const [state, setState] = useState(initialState);
   const resolverRef = useRef(null);
@@ -183,7 +57,6 @@ const Questionnaire = (props) => {
   const [continueSecond, setContinueSecond] = useState(true)
   // PAgeHandle
   useEffect(() => {
-
     if (prevPage && prevPage !== page) {
       if (firstLoad) {
         if ((page === 6 || page === 4 || page === 5) && questionnaire.otherSectionQuestionToUse.length === 0) {
@@ -206,8 +79,8 @@ const Questionnaire = (props) => {
       }, 2500);
 
     }
-
   }, [page])
+
 
   // state handel
   useEffect(() => {
@@ -218,25 +91,8 @@ const Questionnaire = (props) => {
     , [questionnaire])
   //first Load ........................
   useEffect(() => {
-    //props.saveUserState({})
-    // fetch('https://predicta.fulltech.io/api/login_check', {
-    //   method: "post",
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     password: "&20HelloPredict20!",
-    //     username: "admin@predict-a.com",
-    //     _remember_me: ""
-    //   }),
-    // }).then(resp => {
-    //   return resp.json()
-
-    // }).then(response => {
-
-
-    // })
+    // props.saveUserState({})
+    
     props.getUserHistory()
 
   }, [])
@@ -260,7 +116,7 @@ const Questionnaire = (props) => {
   }
   const changePage = () => {
     props.changeCurrentQuestion(otherQuestionsTreeNode["ERGONOMIE"])
-    props.changePage(4)
+    props.changePageAfterSelection()
   }
   const onExit = () => {
     props.exitPage()
@@ -303,7 +159,7 @@ const Questionnaire = (props) => {
                       <div className={`d-flex justify-content-center align-items-center ${fade ? "fade-out" : "fade-in"}  `} style={{
                         height: 240
                       }}>
-                        <Transitionpages title={titlePage} page={page} />
+                        <Transitionpages title={titlePage} page={page} exit={exit} />
                       </div>
                       :
                       <>
@@ -335,4 +191,4 @@ const mapStateToProps = state => {
   return { questionnaire: questionnaire }
 }
 
-export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePage, fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable, saveUserState, getUserHistory, updateotherSectionQuestionToUse })(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePageAfterSelection, changePage, fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable, saveUserState, getUserHistory, updateotherSectionQuestionToUse })(withTranslation()(Questionnaire))

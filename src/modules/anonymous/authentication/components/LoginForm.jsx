@@ -63,8 +63,10 @@ const LoginForm = (props) => {
         value={true}
         type="checkbox"
       />
-      <div className="text-center">
-        <Button className="mt-4 btn btn-block" color="primary" type="submit">
+      <div className="d-flex justify-content-center">
+        <Button className="mt-4 btn btn-block next-button login-button"  type="submit" style={{
+          width:"fit-content"
+        }}>
           {isLoading && <Spinner color="white" className="mr-2" />}
           {t("Connenxion")}
         </Button>

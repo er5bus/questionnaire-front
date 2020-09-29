@@ -8,13 +8,8 @@ const QuestionHead = ({ title, pageTitle }) => {
     const { t } = useTranslation()
     return (
         <>
-            <div style={{
-                textAlign: "center"
-            }}>
-                <p className="text-primary" style={{
-                    fontSize: pageTitle ? 25 : 19,
-                    fontWeight: "bold"
-                }}> {t(title)} </p>
+            <div className="sections-head"  >
+                <p  > {t(title)} </p>
             </div>
         </>
     )
