@@ -37,7 +37,7 @@ class AnonymousLayout extends React.Component {
             <p>Predict Analyse</p>
           </div>
           <Container className="section-content">
-            <Row className="justify-content-center khalil">
+            <Row className="justify-content-center">
               <Switch>
                 {
                   Object.keys(anonymousRoutes.routes).map((routeName, i) =>

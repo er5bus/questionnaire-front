@@ -487,7 +487,7 @@ class NutritionalPage extends React.Component {
                                     </DragDropContext>
                                     <Row className="justify-content-end">
                                         {this.state.periode !== 0 ?
-                                            <Button className="nutri-button"
+                                            <Button className="next-button"
                                                 style={{
                                                     background: "#AABCC9",
                                                     borderColor: "#AABCC9"
@@ -500,11 +500,8 @@ class NutritionalPage extends React.Component {
                                             >
                                                 Retour </Button> : ""
                                         }
-                                        <Button className="nutri-button"
-                                            style={{
-                                                background: "#062484",
-                                                borderColor: " #062484"
-                                            }}
+                                        <Button className="next-button"
+                    
                                             onClick={() => {
                                                 this.saveData()
 

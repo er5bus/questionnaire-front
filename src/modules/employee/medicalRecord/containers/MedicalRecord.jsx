@@ -2,7 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 // reactstrap components
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, Col, Container, Row } from "reactstrap";
+import { Card, CardBody, Col, Container, Row } from "reactstrap";
 import Loader from "../../../../components/Loader";
 import { createMedicalRecord, retriveMedicalRecord } from '../actions';
 import employeeRoutes from './../../../../routes/employee';
@@ -44,24 +44,13 @@ class MedicalRecord extends React.Component {
       <>
         {this.state.isLoadingData && isLoadingRecord ? <Loader></Loader> :
           <>
-            <div className="header bg-primary pb-5">
-              <Container fluid>
-                <div className="header-body">
-                  <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> {t("Votre profil")} </h6>
-                  <Row className="align-items-center py-2">
-                    <Col lg="6">
-                      <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                        <BreadcrumbItem active><i className="fas fa-save"></i> {t("Remplissez vos informations personnelles")}</BreadcrumbItem>
-                      </Breadcrumb>
-                    </Col>
-                  </Row>
-                </div>
-              </Container>
-            </div>
-            <Container className="mt--4" fluid>
+
+            <Container className="mt--4" >
               <Row className="justify-content-center">
                 <Col lg="12" md="12">
-                  <Card className="shadow">
+                  <Card className="shadow card-shadow-style" style={{
+                    position: "relative"
+                  }}>
                     <CardBody className="px-lg-5 py-lg-5">
                       <MedicalRecordForm onSubmit={this.onSubmit} isLoading={isLoading} errors={error || {}} />
                     </CardBody>

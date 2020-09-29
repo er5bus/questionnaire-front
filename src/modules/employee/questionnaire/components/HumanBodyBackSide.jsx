@@ -12,7 +12,9 @@ class HumanBodyBackSide extends React.Component {
     const { selectedPartBody, nextBodyArea } = this.props
 
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" style= {{
+        height:400
+      }}>
         <defs><style>{".cls-1{fill:#dee1e0;}.cls-2{fill:none;}.cls-3{fill:#84c7d1;"}</style></defs>
         <g id="Layer_2" data-name="Layer 2" style={{ cursor: "pointer" }}>
           <path className="cls-1" d="M177.68,221.21l-.26.33c-.07-.27-.08-.47.29-.28Z" />

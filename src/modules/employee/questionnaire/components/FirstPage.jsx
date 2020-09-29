@@ -16,9 +16,14 @@ const FirstQuestion = ({ onExit, onContinue }) => {
       <div>
         <h1 className="h2"> {t('Votre corps vous fait-il souffrir?')}</h1>
 
-        <div className="pb-5" />
-        <Button onClick={onContinue}>{t('Oui')}</Button>
-        <Button onClick={onExit}>{t('Non')}</Button>
+        <div className="pt-5" style = {{
+          display:"flex"
+        }} >
+        <Button onClick={onContinue} className="next-button">{t('Oui')}</Button>
+        <Button onClick={onExit} className="nope-button">{t('Non')}</Button>
+         </div>
+        
+       
       </div>
     </>
   )

@@ -1,28 +1,16 @@
-import React from "react"
-import PropTypes from 'prop-types'
-import { Link } from "react-router-dom"
-
-import anonymousRoutes from './../../../../routes/anonymous'
-import employeeRoutes from './../../../../routes/employee'
-
-import {
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  UncontrolledDropdown,
-  Media,
-  Navbar,
-  Nav,
-  NavItem,
-  NavLink,
-  Container,
-} from "reactstrap"
+import PropTypes from 'prop-types';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Container, DropdownItem, DropdownMenu, DropdownToggle, Media, Nav, Navbar, NavItem, NavLink, UncontrolledDropdown } from "reactstrap";
+import newLogo from './../../../../assets/img/newLogo.svg';
+import userIcon from './../../../../assets/img/user.png';
+import anonymousRoutes from './../../../../routes/anonymous';
+import employeeRoutes from './../../../../routes/employee';
 
 
-import { useTranslation } from "react-i18next"
 
-import userIcon from './../../../../assets/img/user.png'
-import logo from './../../../../assets/img/qa.svg'
+
 
 
 const LogoutModal = anonymousRoutes.routes.logout.component
@@ -31,7 +19,7 @@ const UserNavbar = ({ userName }) => {
 
   const { t } = useTranslation()
 
-  const [ showModal, setShowModal ] = React.useState(false)
+  const [showModal, setShowModal] = React.useState(false)
 
   const onToggleModal = () => {
     setShowModal(!showModal)
@@ -39,19 +27,23 @@ const UserNavbar = ({ userName }) => {
 
   return (
     <>
-      <LogoutModal openModal={ showModal } onToggle={onToggleModal} />
-      <Navbar className="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom" expand="md" id="navbar-main">
+      <LogoutModal openModal={showModal} onToggle={onToggleModal} />
+      <Navbar className="navbar navbar-top navbar-expand navbar-dark  navbarCustomStyle" expand="md" id="navbar-main">
         <Container fluid>
           <Link
             className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
             to="/"
           >
-            { " " }
+            {" "}
           </Link>
           <Nav className="navbar-nav-hover align-items-lg-center" navbar>
             <NavItem>
-              <NavLink replace to={ employeeRoutes.path + employeeRoutes.routes.medicalRecord.path  } tag={Link}>
-                <img src={logo} alt="..." className="icon-sm mr-1" />
+              <NavLink replace to={employeeRoutes.path + employeeRoutes.routes.medicalRecord.path} tag={Link}>
+                <div className="fixed-logo ">
+                  <img src={newLogo} alt="..." className="icon-sm mr-1" />
+                  <p>Predict Analyse</p>
+                </div>
+
               </NavLink>
             </NavItem>
           </Nav>
@@ -76,16 +68,16 @@ const UserNavbar = ({ userName }) => {
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-single-02" />
-                  <span>{ t("Profile") }</span>
+                  <span>{t("Profile")}</span>
                 </DropdownItem>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-settings-gear-65" />
-                  <span>{ t("Settings") }</span>
+                  <span>{t("Settings")}</span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={onToggleModal}>
                   <i className="ni ni-user-run" />
-                  <span>{ t("Logout") }</span>
+                  <span>{t("Logout")}</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
