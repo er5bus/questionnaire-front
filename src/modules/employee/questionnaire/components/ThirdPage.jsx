@@ -171,7 +171,7 @@ class OverviewNode extends React.PureComponent {
                 />
               </Col>
             </Row>
-          ) : <div>
+          ) : <div className="ask-parent" >
               <AskContinue title={"Vous avez déjà répondu à des questions sur les douleurs corporelles, passez à l'étape suivante"}
                 onContinue={this.onContinue} onExit={this.props.onExit}  >
               </AskContinue>

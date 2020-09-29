@@ -140,7 +140,7 @@ class FourthPage extends React.Component {
                             />
                         </Col>
                     </Row>
-                ) : <div>
+                ) : <div className="ask-parent">
                         <AskContinue title={`Vous avez déjà répondu à des questions ${this.state.titleAsk}, passez à l'étape suivante`}
                             onContinue={this.onContinue} onExit={this.props.onExit}  >
                         </AskContinue>

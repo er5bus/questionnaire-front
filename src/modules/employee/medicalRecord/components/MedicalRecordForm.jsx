@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // Bootstrap
-import { Button, Spinner } from 'reactstrap';
+import { Button, Col, Row, Spinner } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import InputField from "./../../../../components/InputField";
 import InputRadioCheckboxField from './../../../../components/InputRadioCheckboxField';
@@ -19,13 +19,17 @@ const MedicalRecordForm = props => {
 
   return (
     <>
+      <div className="medical-title">
+        <h3>Votre Profil</h3>
+        <p>Remplissez vos informations personnelles</p>
+      </div>
       <form onSubmit={handleSubmit}>
         <Label> Vous êtes:</Label>
         <div className="form-inline mb-3">
           <Field
             name="sexe"
             component={InputRadioCheckboxField}
-            className="form-control input-style"
+            className="form-control input-radio"
             label={t("Homme")}
             type="radio"
             value="1"
@@ -33,38 +37,50 @@ const MedicalRecordForm = props => {
           <Field
             name="sexe"
             component={InputRadioCheckboxField}
-            className="form-control input-style"
+            className="form-control input-radio"
             placeholder={t("")}
             label={t("Femme")}
             type="radio"
             value="2"
           />
         </div>
-        <Field
-          name="age"
-          component={InputField}
-          className="form-control input-style"
-          label={t("Quel âge avez-vous ? ")}
-          type="text"
-          validate={[required, number]}
-        />
-        <Field
-          name="tall"
-          component={InputField}
-          className="form-control input-style"
-          label={t("Quelle est votre taille ?")}
-          type="text"
-          validate={[required, number]}
+        <Row>
+          <Col md="6" xs="12">
 
-        />
-        <Field
-          name="weight"
-          component={InputField}
-          className="form-control input-style"
-          label={t("Quel est votre poids ?")}
-          type="text"
-          validate={[required, number]}
-        />
+            <Field
+              name="age"
+              component={InputField}
+              className="form-control input-style"
+              label={t("Quel âge avez-vous ? ")}
+              type="text"
+              validate={[required, number]}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col md="6" xs="12">
+            <Field
+              name="tall"
+              component={InputField}
+              className="form-control input-style"
+              label={t("Quelle est votre taille ?")}
+              type="text"
+              validate={[required, number]}
+
+            />
+          </Col>
+          <Col md="6" xs="12">
+            <Field
+              name="weight"
+              component={InputField}
+              className="form-control input-style"
+              label={t("Quel est votre poids ?")}
+              type="text"
+              validate={[required, number]}
+            />
+          </Col>
+        </Row>
+
         <Field
           name="profession"
           component={InputField}
@@ -82,9 +98,9 @@ const MedicalRecordForm = props => {
           validate={[required]}
         />
         <div className="mt-0">
-          <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
-            {isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-save mr-2"></i>}
-            Save
+          <Button className="mt-4 next-button next-button-position" color="primary" type="submit">
+            {isLoading && <Spinner color="white mr-2" />}
+            {t("Suivant")}
           </Button>
         </div>
       </form>

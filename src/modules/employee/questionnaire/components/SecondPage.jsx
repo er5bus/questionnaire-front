@@ -37,9 +37,12 @@ class FirstQuestion extends React.Component {
             {this.props.selectedPartBodyID.map((el, index) => {
               const boyAreaObject = HUMAN_BODY[el]
               return (
-                <Badge key={index} color={index === 0 ? "danger" : "warning"} style={{
+                <Badge key={index} style={{
                   marginLeft: 5,
-                  marginBottom: 5
+                  marginBottom: 5,
+                  background: "#30E8BD",
+                  color: "white",
+                  marginTop: 2
                 }}> {boyAreaObject.value} <span style={{
                   marginLeft: 5,
                   cursor: "pointer"
@@ -57,11 +60,14 @@ class FirstQuestion extends React.Component {
               <HumanBodyBackSide />
             </Col>
           </Row>
+          <div className='next-button-position d-flex' style={{
+            alignItems: "baseline"
+          }} >
+            <h1 className="h4 pb-2 mr-2"> {'Voulez-vous continuer ?'} </h1>
+            <Button onClick={this.submitSelectedArea} className="next-button" disabled={this.props.selectedPartBody.length === 0}>{'Oui'}</Button>
+            <Button onClick={onExit} className="nope-button">{'Non'}</Button>
+          </div>
 
-          <div className="pb-5" />
-          <h1 className="h4 pb-2"> {'Voulez-vous continuer ?'} </h1>
-          <Button onClick={this.submitSelectedArea} disabled={this.props.selectedPartBody.length === 0}>{'Oui'}</Button>
-          <Button onClick={onExit}>{'Non'}</Button>
         </div>
       </>
     )

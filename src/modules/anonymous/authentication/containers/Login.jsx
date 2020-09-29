@@ -25,7 +25,10 @@ class Login extends React.Component {
     return (
       <>
         <Col lg="6" md="8">
-          <Card className="shadow">
+          <Card className="shadow card-shadow-style" style={{
+            marginTop: 100,
+
+          }}>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-md-center mb-4 mt-md-0">
                 <h1 className="mb-3 h3"> Connectez-vous à notre plateforme </h1>

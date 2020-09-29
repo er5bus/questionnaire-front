@@ -7,8 +7,8 @@ import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import Loader from '../../../../components/Loader';
 import FourthPage from '../components/FourthPage';
 import NutritionalPage from '../components/NutritionalPage';
-import QuestionHead from '../components/QuestionHead';
 import ScoresInterpratation from '../components/ScoresInterpratation';
+import Transitionpages from '../components/TransitionPages';
 import { otherQuestionsTreeNode } from '../constants';
 import { changeCurrentQuestion, changePage, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, getUserHistory, nextOtherQuestionsSection, nextPage, prevPage, saveUserState, selectDiselectPartBody, tasksEnded, updateotherSectionQuestionToUse } from './../actions';
 import ExitPage from './../components/ExitPage';
@@ -16,7 +16,6 @@ import ExitPage from './../components/ExitPage';
 import FirstPage from './../components/FirstPage';
 import SecondPage from './../components/SecondPage';
 import ThirdPage from './../components/ThirdPage';
-
 // class Questionnaire extends React.Component {
 //   constructor(props) {
 //     super(props)
@@ -247,6 +246,7 @@ const Questionnaire = (props) => {
   }
 
   const onNext = () => {
+    setContinueSecond(false)
     props.nextPage()
   }
 
@@ -287,19 +287,14 @@ const Questionnaire = (props) => {
   }
   return (
     <>
-      <div className="header bg-primary pb-5">
-        <Container fluid>
-          <div className="header-body">
-            <h6 className="h2 text-white d-inline-block pt-4 ml-md-3"> {t("Scaling questions")} </h6>
-          </div>
-        </Container>
-      </div>
-      <Container className="mt--4" fluid>
+
+      <Container className="mt--4" >
         <Row className="justify-content-center">
           <Col lg="12" md="12">
-            <Card className="shadow" style={{
-              minHeight: 500,
-              backgroundColor: "#E5E5E5"
+            <Card className="shadow card-shadow-style" style={{
+              marginTop: page === 2 ? -50 : 0,
+              minHeight: 300,
+              maxHeight: page === 2 ? 550 : "auto"
             }}>
               {
                 isLoadingUserState ? <Loader /> :
@@ -308,12 +303,12 @@ const Questionnaire = (props) => {
                       <div className={`d-flex justify-content-center align-items-center ${fade ? "fade-out" : "fade-in"}  `} style={{
                         height: 240
                       }}>
-                        <QuestionHead title={titlePage} pageTitle={true} />
+                        <Transitionpages title={titlePage} page={page} />
                       </div>
                       :
                       <>
-                        {page === 1 && <FirstPage onExit={changePage} onContinue={onContinueFirstPage} />}
-                        {page === 2 && <SecondPage onExit={onExit} onContinue={onNext} />}
+                        {page === 1 && <FirstPage onExit={changePage} onContinue={onNext} />}
+                        {page === 2 && <SecondPage onExit={changePage} onContinue={onContinueFirstPage} />}
                         {page === 3 && <ThirdPage onExit={onExit} onContinue={onNext} />}
                         {(page === 4 || page === 5 || page === 6) && <FourthPage onExit={onExit} onContinue={onNext} />}
                         {page === 7 && <NutritionalPage />}

@@ -1,18 +1,17 @@
-import React from "react"
-import { connect } from "react-redux"
-import { Redirect, Switch } from "react-router-dom"
-
-import { isEmployee } from './../../../../utils/helpers'
-
-import employeeRoutes from "./../../../../routes/employee"
-import anonymousRoutes from "./../../../../routes/anonymous"
-
-import Navbar from "./../components/Navbar"
+import React from "react";
+import Notifications from 'react-notification-system-redux';
+import { connect } from "react-redux";
+import { Redirect, Switch } from "react-router-dom";
 //import Sidebar from './../components/Sidebar'
+import AccessControl from './../../../../components/AccessControl';
+import anonymousRoutes from "./../../../../routes/anonymous";
+import employeeRoutes from "./../../../../routes/employee";
+import { isEmployee } from './../../../../utils/helpers';
+import Navbar from "./../components/Navbar";
 
-import AccessControl from './../../../../components/AccessControl'
 
-import Notifications from 'react-notification-system-redux'
+
+
 
 class EmployeeLayout extends React.Component {
 
@@ -35,7 +34,9 @@ class EmployeeLayout extends React.Component {
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
 
-          <div className="main-content">
+          <div className="main-content" style= {{
+            paddingBottom: 80
+          }}>
             <Navbar userName={username} />
             <Switch>
               {
