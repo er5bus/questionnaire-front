@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, Media, Nav, Navbar, NavItem, NavLink, UncontrolledDropdown } from "reactstrap";
 import newLogo from './../../../../assets/img/newLogo.svg';
@@ -11,12 +12,11 @@ import employeeRoutes from './../../../../routes/employee';
 
 
 
-
 const LogoutModal = anonymousRoutes.routes.logout.component
 
 const UserNavbar = ({ userName }) => {
 
-
+  const { t } = useTranslation()
   const [showModal, setShowModal] = React.useState(false)
 
   const onToggleModal = () => {

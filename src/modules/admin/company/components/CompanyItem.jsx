@@ -1,12 +1,12 @@
-import React from 'react'
-import { Link } from "react-router-dom"
-import { Button, Card, CardBody, Col} from "reactstrap"
-
-import adminRoutes from './../../../../routes/admin'
+import React from 'react';
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Button, Card, CardBody, Col } from "reactstrap";
+import adminRoutes from './../../../../routes/admin';
 
 
 export default ({ onToggleModal =f=>f, name, description, universalName, color, id }) => {
-
+  const { t } = useTranslation()
   return (
     <Col lg="4" className="pb-5">
       <Card className="shadow border-0">

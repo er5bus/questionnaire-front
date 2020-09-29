@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 // Bootstrap
 import { Button, Col, Row, Spinner } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
@@ -8,14 +9,13 @@ import Label from "./../../../../components/Label";
 import SelectField from "./../../../../components/SelectField";
 import { number, required } from "./../../../../utils/validations";
 
-
 const MedicalRecordForm = props => {
 
   const { handleSubmit, isLoading } = props
   useEffect(() => {
     props.initialize({ sexe: '1' })
   }, []);
-
+  const { t } = useTranslation()
 
   return (
     <>
