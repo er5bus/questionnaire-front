@@ -115,6 +115,7 @@ export const saveScoresUser = (payload) => ({
       fail: ACTIONS.SAVE_SCORES_FAILED
     },
     jwt: true,
+    userId: true,
     endpoint: ENDPOINT.SAVE_SCORS,
     method: HTTP_METHODS.POST,
   }

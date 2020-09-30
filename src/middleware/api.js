@@ -9,9 +9,9 @@ export const api = store => next => async action => {
   }
 
   const dispatch = dispatchActions(next)
-  const { actions, messages = {}, endpoint, method, jwt, params = {}, extraData = {} } = action.meta
+  const { actions, messages = {}, endpoint, method, jwt, params = {}, extraData = {}, userId } = action.meta
   const { user: { access_token: accessToken = null, id } } = store.getState().session
-  localStorage.setItem('id', id)
+
 
 
 
@@ -33,11 +33,25 @@ export const api = store => next => async action => {
 
   let headers = {}
   if (jwt) {
-
-
     headers = { Authorization: `Bearer  ${accessToken}` }
   }
+  if (userId) {
+    makeBaseCall(method, `/api/employee/${id}/questionnaires`, action.payload, headers, params)
+      .then(resp => {
+        if (messages.success) {
+          next(notif.success(createNotificationOpts("Oh!", messages.success)))
+        }
+        dispatch(actions.success, Object.assign({}, resp.data, extraData))
 
+      })
+      .catch(err => {
+        if (messages.fail) {
+          next(notif.error(createNotificationOpts("Oops!", messages.fail)))
+        }
+        dispatch(actions.fail, (err.response && err.response.data) || {})
+      })
+    return
+  }
   makeBaseCall(method, endpoint, action.payload, headers, params)
     .then(resp => {
       if (messages.success) {
@@ -99,7 +113,7 @@ export const questionFoodApi = store => next => async action => {
         _remember_me: ""
       }),
     }).then(resp => resp.json())
-    
+
 
     token = response.token
   }

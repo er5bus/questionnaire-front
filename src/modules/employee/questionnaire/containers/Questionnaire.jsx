@@ -91,6 +91,7 @@ const Questionnaire = (props) => {
     , [questionnaire])
   //first Load ........................
   useEffect(() => {
+   // props.saveUserState({})
     props.getUserHistory()
 
   }, [])
@@ -145,11 +146,7 @@ const Questionnaire = (props) => {
       <Container className="mt--4" >
         <Row className="justify-content-center">
           <Col lg="12" md="12">
-            <Card className="shadow card-shadow-style" style={{
-              marginTop: page === 2 ? -50 : 0,
-              minHeight: 300,
-              maxHeight: page === 2 ? 550 : "auto"
-            }}>
+            <Card className={`shadow card-shadow-style ${page === 2 && "second-page-style"} ${page === 7 && "seven-page-style"}`} >
               {
                 isLoadingUserState ? <Loader /> :
                   <CardBody className="px-lg-5 py-lg-5">

@@ -482,7 +482,9 @@ class NutritionalPage extends React.Component {
                                         </Row>
 
                                     </DragDropContext>
-                                    <Row className="justify-content-end">
+                                    <Row className="justify-content-end" style={{
+                                        paddingBottom:50
+                                    }}>
                                         {this.state.periode !== 0 ?
                                             <Button className="next-button"
                                                 style={{
