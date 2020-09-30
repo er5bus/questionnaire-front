@@ -20,7 +20,7 @@ const MedicalRecordForm = props => {
   return (
     <>
       <div className="medical-title">
-        <h3>Votre Profil</h3>
+        <h3> Votre Profil </h3>
         <p>Remplissez vos informations personnelles</p>
       </div>
       <form onSubmit={handleSubmit}>

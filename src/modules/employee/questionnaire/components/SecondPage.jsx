@@ -64,8 +64,9 @@ class FirstQuestion extends React.Component {
             alignItems: "baseline"
           }} >
             <h1 className="h4 pb-2 mr-2"> {'Voulez-vous continuer ?'} </h1>
-            <Button onClick={this.submitSelectedArea} className="next-button" disabled={this.props.selectedPartBody.length === 0}>{'Oui'}</Button>
+           
             <Button onClick={onExit} className="nope-button">{'Non'}</Button>
+            <Button onClick={this.submitSelectedArea} className="next-button" disabled={this.props.selectedPartBody.length === 0}>{'Oui'}</Button>
           </div>
 
         </div>
