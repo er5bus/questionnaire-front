@@ -56,7 +56,7 @@ export const ACTIONS = {
   SAVE_SCORES_FAILED: 'questionnaire@SAVE_SCORES_FAILED',
   CLEAN_CACH: "CLEAN_CACH",
   GO_TO_NUTRUTION: "questionnaire@GO_TO_NUTRUTION",
-  CHANGE_PAGE_AFTER_SELECTION:"questionnaire@CHANGE_PAGE_AFTER_SELECTION"
+  CHANGE_PAGE_AFTER_SELECTION: "questionnaire@CHANGE_PAGE_AFTER_SELECTION"
 }
 
 export const ENDPOINT = {
@@ -72,28 +72,28 @@ export const ENDPOINT = {
 
 
 export const HUMAN_BODY = {
-  HEADACHE: { value: "Céphalées (maux de tête)", id: "HEADACHE" },
-  CERVICAL: { value: "Cervicales", id: "CERVICAL" },
+  HEADACHE: { value: "Céphalées (maux de tête) avec le visage de face", id: "HEADACHE" },
+  CERVICAL: { value: "Cervicalgies (cou)", id: "CERVICAL" },
   SHOULDERS: { value: "Épaules", id: "SHOULDERS" },
   BACK_THORAX: { value: "Dos/Thorax", id: "BACK_THORAX" },
   ELBOW_WIRST_HAND: { value: "Coude/Poignet/Main", id: "ELBOW_WIRST_HAND" },
-  ABDOMINAL_PAIN: { value: "Douleurs abdominales", id: "ABDOMINAL_PAIN" },
-  LUMBAR_BUTTOCKS: { value: "Lombaires/Fesses", id: "LUMBAR_BUTTOCKS" },
-  HIP: { value: "Hanche", id: "HIP" },
+  ABDOMINAL_PAIN: { value: "Douleurs digestives (maux de ventre)", id: "ABDOMINAL_PAIN" },
+  LUMBAR_BUTTOCKS: { value: "Lombalgies/fessalgies (avec l'arrière des cuisses)", id: "LUMBAR_BUTTOCKS" },
+  HIP: { value: "Hanche (que sur la vue de face)", id: "HIP" },
   KNEES: { value: "Genoux", id: "KNEES" },
   LEG_FOOT: { value: "Jambe/Pied", id: "LEG_FOOT" },
 }
 export const statcTreeNode = {
-  HEADACHE: { treeparam: "39c3358bf398410480c20c6df669d69a", nodeparam: "892cababeedc4ba799c7406c8fe7ed16" },
-  CERVICAL: { treeparam: "f1b49c3b2919444f969f173de6db8c9b", nodeparam: "0324c2cbec264e16aa61a8dc3ff209f4" },
-  SHOULDERS: { treeparam: "37f56136dc4a42a1ae72e421453ffec6", nodeparam: "1d44f88ae48643a7b72bb14efb3de95d" },
+  HEADACHE: { treeparam: "ccb5d1793e5f45a18861fccfb4a06216", nodeparam: "20d73d9958fb43629fbfacb4b49413b2" },
+  CERVICAL: { treeparam: "f7b857ccf6dc4061a1820a0a5ca6440c", nodeparam: "123e8f8a010547c285c7a2c9e86ca89e" },
+  SHOULDERS: { treeparam: "07b6f8ca782e449b88041033037accdc", nodeparam: "6c0572c6f4834be38e01f23357864015" },
   BACK_THORAX: { treeparam: "bc1254428f474bb5ba2525d84c66055c", nodeparam: "29bcc98ac5bf410a93d432cafd71a83d" },
-  ELBOW_WIRST_HAND: { treeparam: "5a96522e51364c658a20e8c05cf6f22e", nodeparam: "d3792daabdab44b490edbee950b2200f" },
-  ABDOMINAL_PAIN: { treeparam: "2c7c3f37da444d52a6fece527f4a0b99", nodeparam: "910e49087df64539b00ab1b3731c3169" },
-  LUMBAR_BUTTOCKS: { treeparam: "2c7c3f37da444d52a6fece527f4a0b99", nodeparam: "910e49087df64539b00ab1b3731c3169" },
-  HIP: { treeparam: "6553ba39019e4a8cb7a0fbe46ef24771", nodeparam: "ae1748506865410882138351391d99ac" },
-  KNEES: { treeparam: "45c4308cd22347b39ee99cc2dbb4bea9", nodeparam: "690855bf0c5b44169fbe9de34aec7839" },
-  LEG_FOOT: { treeparam: "25c33f7013e74540a0d66faa8caee9a3", nodeparam: "fede40a5aa7c4413a3c7bc25250c704b" },
+  ELBOW_WIRST_HAND: { treeparam: "e199669151894fddb3c15600e8459d54", nodeparam: "fab8aa138432409283a09ee931308f90" },
+  ABDOMINAL_PAIN: { treeparam: "d2844841b8e944dab115c67a69983722", nodeparam: "d036099a268e49ddb129fee0c0fd0760" },
+  LUMBAR_BUTTOCKS: { treeparam: "eda8d9baad0349f49a487a4fd5898a21", nodeparam: "4ac2f6fb5ee349b5af25bbc16914a7892" },
+  HIP: { treeparam: "1d344f888862487dbdcaeebfc6ab7ed0", nodeparam: "b8d0ce1d66c04a278645178aece2f881" },
+  KNEES: { treeparam: "2c9d40170f6341ea8f056fb1efb80adb", nodeparam: "d818ba0988ef40489b79f6ddc8281168" },
+  LEG_FOOT: { treeparam: "7127f7f61ae141d6920cb43d00698887", nodeparam: "2b92410322094201abd78c02b25ff47e" },
 
 }
 

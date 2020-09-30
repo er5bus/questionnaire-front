@@ -497,8 +497,8 @@ class NutritionalPage extends React.Component {
                                             >
                                                 Retour </Button> : ""
                                         }
-                                        <Button className="next-button"
-                    
+                                        <Button className="next-button login-button"
+                                                
                                             onClick={() => {
                                                 this.saveData()
 

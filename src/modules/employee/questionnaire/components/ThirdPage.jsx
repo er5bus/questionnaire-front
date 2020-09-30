@@ -117,6 +117,7 @@ class OverviewNode extends React.PureComponent {
     this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
   }
   onSelectChoice = (item, action) => {
+    console.log(action);
 
     let pageAction = this.props.page
     let questionAction = item;
@@ -142,13 +143,13 @@ class OverviewNode extends React.PureComponent {
     })
 
     let { currentQuestion } = this.props
-    if (action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
+    if (action.pointToType && (action.pointToType !== "NOTHING") && action.pointToTree && Object.keys(action.pointToTree).length !== 0) {
       currentQuestion = { nodeparam: action.pointToTree.firstNode.uid, treeparam: action.pointToTree.uid }
       this.props.changeCurrentQuestion(currentQuestion)
-    } else if (action.pointToNode && Object.keys(action.pointToNode).length !== 0) {
+    } else if (action.pointToType && (action.pointToType !== "NOTHING") && action.pointToNode && Object.keys(action.pointToNode).length !== 0) {
       currentQuestion = { ...currentQuestion, nodeparam: action.pointToNode.uid }
       this.props.changeCurrentQuestion(currentQuestion)
-    } else if (action.pointToType === "NOTHING" && action.pointToNode == null && action.pointToTree == null) {
+    } else if (!action.pointToType || (action.pointToNode == null && action.pointToTree == null) || (action.pointToType === "NOTHING")) {
       this.props.nextSelectedFromBodyQuestions();
     }
   }

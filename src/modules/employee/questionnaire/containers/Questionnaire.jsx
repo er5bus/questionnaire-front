@@ -91,7 +91,8 @@ const Questionnaire = (props) => {
     , [questionnaire])
   //first Load ........................
   useEffect(() => {
-    props.getUserHistory()
+    props.saveUserState({})
+    //props.getUserHistory()
 
   }, [])
   //..............................
