@@ -17,17 +17,13 @@ class FourthPage extends React.Component {
     }
     componentDidMount() {
         if (this.props.nextSectionFourthState) {
-            console.log("trueeeueeueu next section");
-            
             // this.props.nextOtherQuestionsSection()
             // this.setState({ nextSection: true })
             this.setState({ titleAsk: this.returnTextAsk(this.props.page) })
             return
         }
-
         const { currentQuestion } = this.props
         this.props.fetchQuestion(currentQuestion)
-        console.log(this.props.otherSectionQuestionToUse, "");
 
 
     }

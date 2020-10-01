@@ -98,7 +98,7 @@ export default (state = {
       const newState = payload
 
       if (Object.entries(newState).length > 0) {
-        console.log("bababaabab");
+        
         return { ...newState, isLoadingUserState: false }
       }
       return { ...state, ...defaultState, isLoadingUserState: false }

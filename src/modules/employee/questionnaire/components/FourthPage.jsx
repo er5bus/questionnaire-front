@@ -17,7 +17,7 @@ class FourthPage extends React.Component {
     }
     componentDidMount() {
         if (this.props.nextSectionFourthState) {
-            console.log("trueeeueeueu next section");
+           
             
             // this.props.nextOtherQuestionsSection()
             // this.setState({ nextSection: true })
@@ -27,7 +27,7 @@ class FourthPage extends React.Component {
 
         const { currentQuestion } = this.props
         this.props.fetchQuestion(currentQuestion)
-        console.log(this.props.otherSectionQuestionToUse, "");
+       
 
 
     }

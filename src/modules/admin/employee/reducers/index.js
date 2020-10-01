@@ -1,4 +1,4 @@
-import { ACTIONS } from "./../constants"
+import { ACTIONS } from "./../constants";
 
 
 export default (state = { items: [], item: {}, page: 0, isLoading: false, searchTerm: "", hasMore: true, error: null }, action) => {
@@ -17,7 +17,6 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
       return { ...state, items: page === 1 ? items : [ ...state.items, ...items], page, hasMore: hasMore || false, isLoading: false, error: null }
     }
     case ACTIONS.FETCH_EMPLOYEES_FAILED : {
-      console.log(payload)
       return { ...state, items: [], isLoading: false, hasMore: false, page: 1, error: payload }
     }
 

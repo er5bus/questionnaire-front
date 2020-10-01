@@ -33,7 +33,7 @@ const QuestionDisplay = ({ item, isLoading, onSelectChoice = f => f }) => {
                   </div>
                   : <div
                     key={action.id}
-                    className="ansewer mb-2"
+                    className="ansewer mt-4 mr-2"
                     onClick={() => onSelectChoice(item.question, action)}
                   >
                     <div className="answer-item">

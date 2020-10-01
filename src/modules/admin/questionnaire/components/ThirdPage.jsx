@@ -154,7 +154,7 @@ class OverviewNode extends React.PureComponent {
 
   render() {
     const { item, isLoading, isLoadingSectionBody, scores } = this.props
-    console.log(this.props.nextSectionThirdState);
+    
 
     return (
       <> {isLoadingSectionBody ? <Loader /> :

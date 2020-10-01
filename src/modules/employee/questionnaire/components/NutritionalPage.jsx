@@ -274,7 +274,7 @@ class NutritionalPage extends React.Component {
                     this.setState({ dataSoir: this.formattedTabel(zonePeriodeData, snack, 3) }, () => {
                         this.setState({ dataNuit: this.formattedTabel(zonePeriodeData, dinner, 2) }, () => {
                             this.setState({ isLoadingFood: false })
-                            console.log(this.props.deselectedScoreNut);
+                          
 
                         })
                     })
@@ -284,7 +284,7 @@ class NutritionalPage extends React.Component {
 
         }
         if (nextProps.deselectedScoreNut !== this.props.deselectedScoreNut) {
-            console.log(nextProps.deselectedScoreNut);
+          
 
         }
 

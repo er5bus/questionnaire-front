@@ -38,6 +38,7 @@ const TaskList = styled.div`
   min-height: 100px;
   display : flex;
   flex-wrap:wrap;
+  overflow: auto;
   width: 100%;
   max-width:100%;
   border-top-right-radius: ${props => props.indexColumn === 0 ? "24px" : "0px"};
@@ -56,6 +57,7 @@ class InnerList extends React.Component {
 }
 
 export default class column extends React.Component {
+
   render() {
 
 

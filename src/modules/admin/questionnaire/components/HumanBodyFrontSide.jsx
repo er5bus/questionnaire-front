@@ -16,7 +16,7 @@ class HumanBodyFrontSide extends React.Component {
 
   render() {
     const { selectedPartBody, selectedPartBodyID } = this.props
-    console.log(selectedPartBodyID);
+   
 
     return (
       <>

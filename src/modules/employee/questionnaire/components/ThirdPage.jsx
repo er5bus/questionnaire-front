@@ -86,10 +86,6 @@ class OverviewNode extends React.PureComponent {
     const { currentQuestion, } = this.props
     const { currentQuestion: prevCurrentQuestion } = prevProps
 
-    if (currentQuestion.treeparam && prevCurrentQuestion.treeparam && currentQuestion.treeparam !== prevCurrentQuestion.treeparam) {
-      this.props.fetchQuestionScores(currentQuestion)
-    }
-
     if (currentQuestion.nodeparam && prevCurrentQuestion.nodeparam && currentQuestion.nodeparam !== prevCurrentQuestion.nodeparam) {
       this.props.fetchQuestion(currentQuestion)
     }
@@ -117,7 +113,7 @@ class OverviewNode extends React.PureComponent {
     this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
   }
   onSelectChoice = (item, action) => {
-    console.log(action);
+  
 
     let pageAction = this.props.page
     let questionAction = item;
@@ -156,7 +152,7 @@ class OverviewNode extends React.PureComponent {
 
   render() {
     const { item, isLoading, isLoadingSectionBody, scores } = this.props
-    console.log(this.props.nextSectionThirdState);
+  
 
     return (
       <> {isLoadingSectionBody ? <Loader /> :
