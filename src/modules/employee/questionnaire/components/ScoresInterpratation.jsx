@@ -65,7 +65,7 @@ const scoreTable = [
         idForSend: "STOPP_WORKING"
     },
 ]
-const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
+const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
     const [scoresToSubmit, setScoresToSubmit] = useState([])
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -91,13 +91,19 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
         });
         return finalScore
     }
-    const testQuestion = {
-        question: "test",
-        answer: "test",
-        score: 0
-    }
-    const formatAnsewerQuestionTable = (table) => {
-
+    
+    const formatAnsewerQuestionTable = (table, type) => {
+            if (type) {
+                return table.map(el => {
+                    return {
+                        question: el.question,
+                        answer: el.name,
+                        score: el.score,
+                        area: el.type
+                    }
+                })
+                
+            }
         return table.map(el => {
             return {
                 question: el.question,
@@ -121,10 +127,11 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
 
         })
 
-        totalScores[1] = { ...totalScores[1], questions: healthAnsweredQuestion.length > 0 ? formatAnsewerQuestionTable(healthAnsweredQuestion) : formatAnsewerQuestionTable(ergonomicsAnsweredQuestion) }
-        totalScores[3] = { ...totalScores[3], questions: formatAnsewerQuestionTable(psychologiqueAnsweredQuestion) }
-        totalScores[4] = { ...totalScores[4], questions: formatAnsewerQuestionTable(coachingAnsweredQuestion) }
-
+        totalScores[1] = { ...totalScores[1], questions: healthAnsweredQuestion.length > 0 ? formatAnsewerQuestionTable(healthAnsweredQuestion, true) : formatAnsewerQuestionTable(ergonomicsAnsweredQuestion, false)}
+        totalScores[3] = { ...totalScores[3], questions: formatAnsewerQuestionTable(psychologiqueAnsweredQuestion , false) }
+        totalScores[4] = { ...totalScores[4], questions: formatAnsewerQuestionTable(coachingAnsweredQuestion , false) }
+        console.log(totalScores);
+        
         return totalScores
 
     }
