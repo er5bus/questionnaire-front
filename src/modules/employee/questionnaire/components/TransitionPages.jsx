@@ -29,7 +29,7 @@ const Transitionpages = ({ title, page, exit }) => {
                 logo = NutriLogo
                 break;
             default:
-            logo = whiteLogo
+                logo = whiteLogo
                 break;
         }
         return logo
@@ -42,7 +42,7 @@ const Transitionpages = ({ title, page, exit }) => {
                 alignItems: "center"
             }}>
                 <div>
-                    { <img src={returnLogo(page)} alt="..." />}
+                    {page !== 8 && <img src={returnLogo(page)} alt="..." />}
                 </div>
                 <div className="transition-text">
                     {title}
