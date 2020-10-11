@@ -51,7 +51,7 @@ const LoginForm = (props) => {
         className="form-control input-style"
         icon="ni ni-lock-circle-open"
         placeholder={t("Espace Manager")}
-        choices={[{ label: "Espace Empolyee ", value: 1 }
+        choices={[{ label: "Espace Empolyé ", value: 1 }
           , { label: "  Espace Manager ", value: 2 },
         { label: "Espace Admin ", value: 3 }]}
         validate={[required, minLength4, maxLength30]}
@@ -68,7 +68,7 @@ const LoginForm = (props) => {
           width:"fit-content"
         }}>
           {isLoading && <Spinner color="white" className="mr-2" />}
-          {t("Connenxion")}
+          {t("Connexion")}
         </Button>
       </div>
     </Form>

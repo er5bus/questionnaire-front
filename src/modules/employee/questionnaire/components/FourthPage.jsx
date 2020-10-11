@@ -27,18 +27,15 @@ class FourthPage extends React.Component {
 
         const { currentQuestion } = this.props
         this.props.fetchQuestion(currentQuestion)
-       
-
-
     }
     returnTextAsk = (currentPage) => {
         switch (currentPage) {
             case 4:
-                return "Ergonomique "
+                return "Vous avez déjà répondu à des questions ergonomique "
             case 5:
-                return "Psychologique "
+                return "Vous avez complété le questionnaire concernant les risques psycho-sociaux"
             case 6:
-                return "Activité Physique"
+                return "Vous avez compléte le questionnaire sur l'activité physique"
             default:
                 break;
         }
@@ -141,7 +138,7 @@ class FourthPage extends React.Component {
                         </Col>
                     </Row>
                 ) : <div className="ask-parent">
-                        <AskContinue title={`Vous avez déjà répondu à des questions ${this.state.titleAsk}, passez à l'étape suivante`}
+                        <AskContinue title={`${this.state.titleAsk}, passez à l'étape suivante`}
                             onContinue={this.onContinue} onExit={this.props.onExit}  >
                         </AskContinue>
                     </div>}

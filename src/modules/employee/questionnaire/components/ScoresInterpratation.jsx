@@ -271,12 +271,12 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
                     ))}
                     <tr>
                         <th scope="row"> {t("Aliments sélectionnés")}  </th>
-                        <td> {t("Valeure ajoutée des aliments sélectionnés")}  </td>
+                        <td> {t("Valeur ajoutée des aliments sélectionnés")}  </td>
                         <td> {selectedScoreNut} </td>
                     </tr>
                     <tr>
                         <th scope="row"> {t("Aliments non sélectionnés")}  </th>
-                        <td> {t("Valeure non ajoutée des aliments non sélectionnés")}  </td>
+                        <td> {t("Valeur non ajoutée des aliments non sélectionnés")}  </td>
                         <td> {deselectedScoreNut} </td>
                     </tr>
                 </tbody>

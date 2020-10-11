@@ -422,10 +422,13 @@ class NutritionalPage extends React.Component {
                                     justifyContent: "center"
                                 }} >
                                     <Col xs="12" className="shadow-nutrition">
-                                        <p>
-                                            “Passons au questionnaire nutritionnel. Pour chaque repas, veuillez renseigner ce que vous mangez habituellement par ordre de fréquence sur
-                                            une semaine type. Les petits écarts exceptionnels ne comptent pas
-                                            Si vous ne mangez pas lors d’un repas, ne remplissez pas le tableau”
+                                        <p style={{
+                                            fontWeight:"bold"
+                                        }}>
+                                            Passons au questionnaire nutritionnel. Pour chaque repas, veuillez renseigner ce que vous mangez habituellement par ordre de fréquence sur
+                                            une semaine type.
+                                             Les petits écarts exceptionnels ne comptent pas. <br/>
+                                            Si vous ne mangez pas lors d’un repas, ne remplissez pas le tableau
                                         </p>
                                         <Button className="next-button next-button-position"
                                             
@@ -433,7 +436,7 @@ class NutritionalPage extends React.Component {
                                                 
                                                 this.props.readedInformationsNutri()
                                             }}
-                                        > SuiVant </Button>
+                                        > Suivant </Button>
                                     </Col>
                                 </Row>
                             </>

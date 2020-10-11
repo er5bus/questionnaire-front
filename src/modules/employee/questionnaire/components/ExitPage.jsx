@@ -25,13 +25,6 @@ const ExitQuestions = ({ tasksEnded }) => {
       <div className=" d-flex flex-column align-items-center justify-content-center login-title">
         <img width="200" src={thanksImg} alt="..." />
         <h1 className=" pt-4 mb-0"> {t('Merci pour votre temps')}</h1>
-        {tasksEnded && (
-
-          < div className="">
-            {t("Vous avez completer le  parcour des questions, vous recevrez une réponse le plus tôt possible")}
-          </div>
-
-        )}
       </div>
 
 

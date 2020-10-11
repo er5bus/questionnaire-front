@@ -91,6 +91,7 @@ const Questionnaire = (props) => {
     , [questionnaire])
   //first Load ........................
   useEffect(() => {
+    //props.saveUserState({})
     props.getUserHistory()
 
   }, [])
@@ -124,17 +125,17 @@ const Questionnaire = (props) => {
       case 3:
       case 1:
       case 2:
-        return "Questionnaire Santé"
+        return "Questionnaire santé"
       case 4:
-        return 'Questionnaire Ergonomie '
+        return 'Questionnaire ergonomie '
       case 5:
-        return "Questionnaire  Psycho-social"
+        return "Questionnaire  psycho-social"
       case 6:
-        return 'Questionnaire Activité Physique '
+        return 'Questionnaire activité Physique '
       case 7:
         return 'Questionnaire nutritionnel'
       case 8:
-        return 'Résultat et Scores'
+        return 'Résultat et scores'
       default:
         break;
     }

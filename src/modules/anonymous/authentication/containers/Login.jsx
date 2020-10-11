@@ -32,7 +32,6 @@ class Login extends React.Component {
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-md-center mb-4 mt-md-0 login-title">
                 <h1 className="mb-3"> {'Sign In'}</h1>
-                <p >Remplissez le formulaire <br /> pour accéder à votre compte</p>
               </div>
               <LoginForm onSubmit={this.onSubmit} errors={error} isLoading={isLoading} />
               { /*<div className="d-block d-sm-flex justify-content-center align-items-center mt-4">
