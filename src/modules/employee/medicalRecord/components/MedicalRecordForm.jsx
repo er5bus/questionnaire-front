@@ -63,7 +63,7 @@ const MedicalRecordForm = props => {
               name="tall"
               component={InputField}
               className="form-control input-style"
-              label={t("Quelle est votre taille ?")}
+              label={t("Quelle est votre taille ?(Cm)")}
               type="text"
               validate={[required, number]}
 
@@ -74,7 +74,7 @@ const MedicalRecordForm = props => {
               name="weight"
               component={InputField}
               className="form-control input-style"
-              label={t("Quel est votre poids ?")}
+              label={t("Quel est votre poids ? (Kg)")}
               type="text"
               validate={[required, number]}
             />
