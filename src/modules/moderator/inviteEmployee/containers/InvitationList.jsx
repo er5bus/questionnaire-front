@@ -73,7 +73,7 @@ class InvitationList extends React.Component {
                 <Col  lg="6" className="text-right">
                   <Link to={ moderatorRoutes.path + moderatorRoutes.routes.invitationEmployeeNew.path.replace(":departmentParam", departmentParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
-                    Invitation de nouvel employé
+                    Créer une invitation
                   </Link>
                 </Col>
               </Row>

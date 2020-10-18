@@ -35,8 +35,10 @@
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.1",
+    "react-papaparse": "^3.9.0",
     "redux-react-session": "^2.6.1",
     "redux-thunk": "^2.3.0",
+    "copy-to-clipboard":" ^3.3.1",
     "reselect": "^4.0.0",
     "styled-components": "^5.1.1",
     "typescript": "^3.8.3"

@@ -1,12 +1,14 @@
 import React from 'react'
-import { Field, reduxForm, stopSubmit, clearSubmitErrors, FieldArray } from 'redux-form'
+import { Field, reduxForm, stopSubmit, clearSubmitErrors, FieldArray, arrayInsert, formValueSelector } from 'redux-form'
 import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
 
 import { Spinner, Row, Col } from 'reactstrap'
 
+
 import { required, maxLength, minLength, email } from './../../../../utils/validations'
 
+import CSVReader from './../../../../components/CSVReader'
 import Form from './../../../../components/Form'
 import InputField from './../../../../components/InputField'
 import InputTextareaField from './../../../../components/InputTextareaField'
@@ -21,7 +23,7 @@ const renderInvitations = ({ fields }) => (
     <div className="mt-4">
       <Button onClick={() => fields.push({})} color="primary" type="button">
         <i className="fas fa-plus-circle" />
-        Ajouter une invitation
+        {" "} Ajouter une invitation
       </Button>
     </div>
     {fields.map((invitation, index) => (
@@ -45,7 +47,7 @@ const renderInvitations = ({ fields }) => (
             label="Nom complet du responsable"
             placeholder="Nom complet."
             type="text"
-            validate={[ required, minLength2, maxLength200 ]}
+            validate={[ minLength2, maxLength200 ]}
           />
         </Col>
         <Col lg="1">
@@ -61,18 +63,33 @@ const renderInvitations = ({ fields }) => (
 
 let InvitationForm = (props) => {
 
-  const { handleSubmit, isLoading, reset } = props
+  const { handleSubmit, isLoading, arrayInsertItem, invitations = [], reset } = props
 
   React.useEffect(() => {
-    if (props.errors && props.errors.error && props.errors.error.match("bad-request")){
-      props.dispatch(stopSubmit("invite-company", props.errors && props.errors.message))
+    if (props.errors && props.errors.code && props.errors.code.match("bad-request")){
+      props.dispatch(stopSubmit("invite-company", props.errors && props.errors.constraints))
     }else {
       props.dispatch(clearSubmitErrors("invite-company"))
     }
   }, [props])
 
+  const handleOnFileLoad = (data = []) => {
+    const emailInvitations = invitations.map(value => value.email)
+    data.forEach((value, i) => {
+      const emailField = value.data.find((data) => /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(data))
+      if (emailField && !emailInvitations.includes(emailField)){
+        arrayInsertItem("invite-company", "invitations", i, { email: emailField })
+      }
+    })
+  }
+
+  const handleOnError = (err, file, inputElem, reason) => {
+    console.log(err, file, inputElem, reason)
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
+      <CSVReader onFileLoad={handleOnFileLoad} onError={handleOnError} />
       <FieldArray name="invitations" component={renderInvitations} />
       <div className="mt-4" />
       <Field
@@ -104,7 +121,14 @@ InvitationForm = reduxForm({
 })(InvitationForm)
 
 export default connect(
-  state => ({
-    initialValues: state.inviteEmployee.item // pull initial values from account reducer
-  })
+  state => {
+    const selector = formValueSelector('invite-company')
+    return ({
+      invitations: selector(state, 'invitations'),
+      initialValues: state.inviteEmployee.item // pull initial values from account reducer
+    })
+  },
+  {
+    arrayInsertItem: arrayInsert,
+  }
 )(InvitationForm)
