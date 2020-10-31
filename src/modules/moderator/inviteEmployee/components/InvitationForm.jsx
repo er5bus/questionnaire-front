@@ -33,7 +33,7 @@ const renderInvitations = ({ fields }) => (
             name={`${invitation}.email`}
             component={InputField}
             className="form-control"
-            label="E-mail du responsable"
+            label="E-mail du employee"
             placeholder="E-mail"
             type="text"
             validate={[ required, email, minLength2, maxLength200 ]}
@@ -44,7 +44,7 @@ const renderInvitations = ({ fields }) => (
             name={`${invitation}.fullName`}
             component={InputField}
             className="form-control"
-            label="Nom complet du responsable"
+            label="Nom complet du employee"
             placeholder="Nom complet."
             type="text"
             validate={[ minLength2, maxLength200 ]}

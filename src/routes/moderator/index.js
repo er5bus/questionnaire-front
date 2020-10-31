@@ -4,6 +4,7 @@ import * as dashbord from './dashbord'
 import * as department from './department'
 import * as employee from './employee'
 import * as inviteEmployee from './inviteEmployee'
+import * as rps from './rps'
 
 
 export default {
@@ -14,6 +15,7 @@ export default {
     ...dashbord,
     ...department,
     ...employee,
+    ...rps,
     ...inviteEmployee
   }
 }

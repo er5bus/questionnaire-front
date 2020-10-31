@@ -22,6 +22,7 @@ import dashbordModeratorReducer from './modules/moderator/dashbord/reducers'
 import departmentReducer from './modules/moderator/department/reducers'
 import employeeReducer from './modules/moderator/employee/reducers'
 import inviteEmployeeReducer from './modules/moderator/inviteEmployee/reducers'
+import rpsReducer from './modules/moderator/rps/reducers'
 
 
 const rootReducer = combineReducers({
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   employee: employeeReducer,
   dashbordModerator: dashbordModeratorReducer,
   inviteEmployee: inviteEmployeeReducer,
+  rps: rpsReducer,
 
   // employee
   medicalRecord: medicalRecordReducer,

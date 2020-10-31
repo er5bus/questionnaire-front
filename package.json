@@ -34,6 +34,7 @@
     "react-select": "^3.1.0",
     "reactstrap": "^8.4.1",
     "redux": "^4.0.5",
+    "recharts": "^1.8.5",
     "redux-form": "^8.3.1",
     "react-papaparse": "^3.9.0",
     "redux-react-session": "^2.6.1",
