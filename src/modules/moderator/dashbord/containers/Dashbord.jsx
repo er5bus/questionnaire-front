@@ -10,22 +10,24 @@ import { Container, Col, Row, Card, CardTitle,  CardBody, CardHeader, Breadcrumb
 import {   fetchAlldepartment , fetchBreakdownOfFailures ,  fetchNeedForInterventions } from "./../actions"
 import FilterByDepartment from "../components/FilterByDepartment"
 import Stats from "../components/Stats"
-class Dashbord extends React.Component {
-  
 
-     UNSAFE_componentWillMount(){
-       
-         this.props.fetchAlldepartment(this.props.user.company.id)
-         console.log("props",this.props)
-       }
-     
-       onSubmit = (values) => {
-         
-         const { department } = values
-        
-         this.props.fetchBreakdownOfFailures(department)
-        this.props.fetchNeedForInterventions(department)
-       }
+
+class Dashbord extends React.Component {
+
+
+  UNSAFE_componentWillMount(){
+
+    this.props.fetchAlldepartment(this.props.user.company.id)
+    console.log("props",this.props)
+  }
+
+  onSubmit = (values) => {
+
+    const { department } = values
+
+    this.props.fetchBreakdownOfFailures(department)
+    this.props.fetchNeedForInterventions(department)
+  }
 
   handleChange() {
     this.setState({
@@ -59,28 +61,28 @@ class Dashbord extends React.Component {
           </Container>
         </div>
         <Container className="mt--4" fluid>
-            <Row>
-              <Col lg="12">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="mb-0">Filtrer par département</CardTitle>
-                  </CardHeader>
-                  <CardBody>
-                    <FilterByDepartment departments={departments} onSubmit={this.onSubmit} isLoading={isLoading} />
-                  </CardBody>
-                </Card>
-                { (needForInterventions && breakdownOfFailures) && <Stats needForInterventions={needForInterventions} breakdownOfFailures={breakdownOfFailures} />}
-              </Col>
-            </Row>
-          </Container>
-         
+          <Row>
+            <Col lg="12">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="mb-0">Filtrer par département</CardTitle>
+                </CardHeader>
+                <CardBody>
+                  <FilterByDepartment departments={departments} onSubmit={this.onSubmit} isLoading={isLoading} />
+                </CardBody>
+              </Card>
+              { (needForInterventions && breakdownOfFailures) && <Stats needForInterventions={needForInterventions} breakdownOfFailures={breakdownOfFailures} />}
+            </Col>
+          </Row>
+        </Container>
+
       </>
     )
   }
 }
 
 
- 
- const mapStateToProps = state => ( { ...state.dashbordModerator, ...state.session })
- 
- export default connect(mapStateToProps, {fetchBreakdownOfFailures ,  fetchNeedForInterventions ,  fetchAlldepartment })(withTranslation()(Dashbord))
+
+const mapStateToProps = state => ( { ...state.dashbordModerator, ...state.session })
+
+export default connect(mapStateToProps, {fetchBreakdownOfFailures ,  fetchNeedForInterventions ,  fetchAlldepartment })(withTranslation()(Dashbord))

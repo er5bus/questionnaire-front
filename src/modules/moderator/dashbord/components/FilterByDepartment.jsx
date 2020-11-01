@@ -12,8 +12,6 @@ import SelectField from "./../../../../components/SelectField"
 const FilterByDepartmentForm = (props) => {
 
   const { handleSubmit, isLoading, departments, reset } = props
- 
-  console.log( "departement", departments)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,5 +37,6 @@ const FilterByDepartmentForm = (props) => {
 
 
 export default reduxForm({
-  form: 'filter-by-department',
+  form: 'rps-filter-by-department',
+  destroyOnUnmount: false
 })(FilterByDepartmentForm)
