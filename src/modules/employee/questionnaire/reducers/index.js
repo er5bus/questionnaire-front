@@ -164,7 +164,7 @@ export default (state = {
       let newArrayScores = [...state.scores]
       if (newArrayScores.length > 0) {
         for (let i = 0; i < payload.length; i++) {
-          let indexScore = newArrayScores.map(el => el.id).indexOf(payload[i].id);
+          let indexScore = newArrayScores.map(el => el.name).indexOf(payload[i].name);
           if (indexScore > -1) {
             newArrayScores[indexScore] = { id: payload[i].id, value: newArrayScores[indexScore].value + payload[i].value, name: payload[i].name }
           } else {

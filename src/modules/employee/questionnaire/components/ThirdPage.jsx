@@ -8,6 +8,8 @@ import { askContinueScreen, changeCurrentQuestion, changePage, fetchQuestion, fe
 import AskContinue from './AskContinue';
 import QuestionDisplay from './QuestionDisplay';
 import QuestionHead from "./QuestionHead";
+import CalculHealth from "../../../../utils/CalculHelper"
+
 class OverviewNode extends React.PureComponent {
 
   constructor(props) {
@@ -108,6 +110,10 @@ class OverviewNode extends React.PureComponent {
     }
   }
   onContinue = () => {
+    console.log("CalculHealth before",this.props);
+   
+     CalculHealth(this.props);
+ 
     let currentQuestion = otherQuestionsTreeNode[this.props.otherSectionQuestionToUse[0].id]
     this.props.changeCurrentQuestion(currentQuestion)
     this.props.changePage(this.props.otherSectionQuestionToUse[0].page)
@@ -183,4 +189,4 @@ class OverviewNode extends React.PureComponent {
 
 const mapStateToProps = state => state.questionnaire
 
-export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, askContinueScreen, updateScore, changePage, saveQuestionAnswered, nextSectionThird })(OverviewNode)
+export default connect(mapStateToProps, { fetchQuestion, fetchQuestionScores, changeCurrentQuestion, nextSelectedFromBodyQuestions, CalculHealth , askContinueScreen, updateScore, changePage, saveQuestionAnswered, nextSectionThird })(OverviewNode)
