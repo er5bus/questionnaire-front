@@ -44,7 +44,7 @@ export const createInvitation = (departmentParam, payload) =>
       },
       messages: {
         success: "Votre invitation a été créée avec succès",
-        fail: "Une erreur s'est produite. Veuillez réessayer"
+        fail: "Vérifiez vos emails, un email existe déjà. Veuillez réessayer"
       },
       endpoint: ENDPOINT.EMPLOYEE_INVITATIONS.replace(":departmentParam", departmentParam),
       method: HTTP_METHODS.POST,

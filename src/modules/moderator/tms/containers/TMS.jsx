@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next"
 import { fetchDetailsOfTroubles, fetchNeedForInterventions, fetchAlldepartment } from "./../actions"
 
 // reactstrap components
-import { Container, Col, Row, Card, CardTitle, Button, Breadcrumb, BreadcrumbItem, CardBody, CardHeader } from "reactstrap"
+import { Container, Col, Row, Card, CardTitle, Breadcrumb, BreadcrumbItem, CardBody, CardHeader } from "reactstrap"
 import FilterByDepartment from "../components/FilterByDepartment"
 import Stats from "../components/Stats"
 
@@ -31,11 +31,11 @@ class Dashbord extends React.Component {
         <div className="header bg-primary pb-5">
           <Container fluid>
             <div className="header-body">
-              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> RPS </h6>
+              <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> TMS </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
                   <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                    <BreadcrumbItem active><i className="fas fa-home"></i> RPS </BreadcrumbItem>
+                    <BreadcrumbItem active><i className="fas fa-home"></i> TMS </BreadcrumbItem>
                   </Breadcrumb>
                 </Col>
                 <Col  lg="6" className="text-right">
@@ -72,6 +72,6 @@ class Dashbord extends React.Component {
 }
 
 
-const mapStateToProps = state => ({ ...state.rps, ...state.session })
+const mapStateToProps = state => ({ ...state.tms, ...state.session })
 
 export default connect(mapStateToProps, { fetchDetailsOfTroubles, fetchNeedForInterventions, fetchAlldepartment })(withTranslation()(Dashbord))

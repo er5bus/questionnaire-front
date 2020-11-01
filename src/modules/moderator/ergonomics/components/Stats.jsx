@@ -18,7 +18,7 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
   const { width: needForInterventionsWidth } = useResize(needForInterventionsRef)
 
   return (
-    <Row className="align-items-stretch">
+    <Row>
 
       <Col lg="6">
         <Card>
@@ -28,10 +28,11 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
           <CardBody>
             <div ref={detailsOfTroubleRef} className="pt-4">
               <BarChart
+                margin={{ top: 5, right: 30, left: 50, bottom: 5 }}
                 width={detailsOfTroubleWidth}
                 height={300}
                 data={[
-                  { name: "Stress ", points: [0, detailsOfTrouble.stress] }
+                  { name: "Ergonomie ", points: [0, detailsOfTrouble.ergonomics] }
                 ]}
                 layout="vertical"
               >
@@ -53,8 +54,8 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
             <div ref={needForInterventionsRef}>
               <BarChart
                 width={needForInterventionsWidth}
-                margin={{ top: 5, right: 3, left: 5, bottom: 50 }}
                 height={320}
+                margin={{ top: 5, right: 10, left: 10, bottom: 50 }}
                 data={ [
                   { name: "Pas d'intervention nécessaire", value: needForInterventions.important },
                   { name: "Préventif", value: needForInterventions.preventive },

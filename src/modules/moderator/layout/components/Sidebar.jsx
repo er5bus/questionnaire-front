@@ -87,7 +87,7 @@ class Sidebar extends React.PureComponent {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/tms" }
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.tms.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
@@ -109,7 +109,7 @@ class Sidebar extends React.PureComponent {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/ergonomie" }
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.ergonomics.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
@@ -120,7 +120,7 @@ class Sidebar extends React.PureComponent {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/nutrition" }
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.nutrition.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
@@ -131,7 +131,7 @@ class Sidebar extends React.PureComponent {
                 </NavItem>
                 <NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/activity" }
+                    to={ moderatorRoutes.path + moderatorRoutes.routes.physical.path }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
@@ -140,9 +140,9 @@ class Sidebar extends React.PureComponent {
                     <span className="nav-link-text">Activités physiques</span>
                   </NavLink>
                 </NavItem>
-                <NavItem>
+                {/*<NavItem>
                   <NavLink
-                    to={ moderatorRoutes.path + moderatorRoutes.routes.dashbord.path + "/planning" }
+                    to={ moderatorRoutes.path + "/" }
                     tag={NavLinkRRD}
                     onClick={this.closeCollapse}
                     activeClassName="active"
@@ -150,7 +150,7 @@ class Sidebar extends React.PureComponent {
                     <i className="fas fa-calendar-week" />
                     <span className="nav-link-text">Planification</span>
                   </NavLink>
-                </NavItem>
+                </NavItem>*/}
                 <NavItem>
                   <NavLink
                     to={ moderatorRoutes.path + moderatorRoutes.routes.departmentList.path }

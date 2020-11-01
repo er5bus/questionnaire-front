@@ -5,6 +5,11 @@ import * as department from './department'
 import * as employee from './employee'
 import * as inviteEmployee from './inviteEmployee'
 import * as rps from './rps'
+import * as tms from './tms'
+import * as ergonomics from './ergonomics'
+import * as physical from './physical'
+import * as nutrition from './nutrition'
+
 
 
 export default {
@@ -16,6 +21,10 @@ export default {
     ...department,
     ...employee,
     ...rps,
+    ...tms,
+    ...ergonomics,
+    ...physical,
+    ...nutrition,
     ...inviteEmployee
   }
 }

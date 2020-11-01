@@ -39,6 +39,6 @@ const FilterByDepartmentForm = (props) => {
 
 
 export default reduxForm({
-  form: 'rps-filter-by-department',
+  form: 'physical-filter-by-department',
   destroyOnUnmount: false
 })(FilterByDepartmentForm)

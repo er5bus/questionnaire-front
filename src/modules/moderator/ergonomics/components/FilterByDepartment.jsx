@@ -2,7 +2,7 @@ import React from "react"
 import { Field, reduxForm } from "redux-form"
 import { Button } from "reactstrap"
 
-import { Spinner } from "reactstrap"
+import { Spinner, Col, Row } from "reactstrap"
 
 import { required } from "./../../../../utils/validations"
 
@@ -11,9 +11,7 @@ import SelectField from "./../../../../components/SelectField"
 
 const FilterByDepartmentForm = (props) => {
 
-  const { handleSubmit, isLoading, departments } = props
-
-  console.log(typeof departments)
+  const { handleSubmit, isLoading, departments, reset } = props
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,6 +37,6 @@ const FilterByDepartmentForm = (props) => {
 
 
 export default reduxForm({
-  form: 'rps-filter-by-department',
+  form: 'ergonomics-filter-by-department',
   destroyOnUnmount: false
 })(FilterByDepartmentForm)

@@ -39,6 +39,6 @@ const FilterByDepartmentForm = (props) => {
 
 
 export default reduxForm({
-  form: 'rps-filter-by-department',
+  form: 'nutrition-filter-by-department',
   destroyOnUnmount: false
 })(FilterByDepartmentForm)

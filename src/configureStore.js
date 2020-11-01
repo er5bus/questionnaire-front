@@ -12,6 +12,7 @@ import dashbordAdminReducer from './modules/admin/dashbord/reducers'
 import inviteManagerReducer from './modules/admin/inviteManager/reducers'
 import managerReducer from './modules/admin/manager/reducers'
 // reducers
+
 // anonymous
 import authReducer from './modules/anonymous/authentication/reducers'
 // employee
@@ -23,6 +24,11 @@ import departmentReducer from './modules/moderator/department/reducers'
 import employeeReducer from './modules/moderator/employee/reducers'
 import inviteEmployeeReducer from './modules/moderator/inviteEmployee/reducers'
 import rpsReducer from './modules/moderator/rps/reducers'
+import tmsReducer from './modules/moderator/tms/reducers'
+import ergonomicsReducer from './modules/moderator/ergonomics/reducers'
+import physicalReducer from './modules/moderator/physical/reducers'
+import nutritionReducer from './modules/moderator/nutrition/reducers'
+
 
 
 const rootReducer = combineReducers({
@@ -46,6 +52,10 @@ const rootReducer = combineReducers({
   dashbordModerator: dashbordModeratorReducer,
   inviteEmployee: inviteEmployeeReducer,
   rps: rpsReducer,
+  tms: tmsReducer,
+  ergonomics: ergonomicsReducer,
+  physical: physicalReducer,
+  nutrition: nutritionReducer,
 
   // employee
   medicalRecord: medicalRecordReducer,

@@ -8,7 +8,7 @@ class CustomizedAxisTick extends React.Component {
     //return ( <Text x={x} y={y} textAnchor="end" verticalAnchor="start" angle={-45} fill="#333">{payload.value}</Text> );
     //return ( <g transform={`translate(${x},${y})`}><Text width={100} scaleToFit textAnchor="end" verticalAnchor="start" angle={-45} fill="#333">{payload.value}</Text></g> );
     //return ( <g transform={`translate(${x},${y})`}><Text width={50} scaleToFit textAnchor="middle" verticalAnchor="start" angle={0} fill="#333">{payload.value}</Text></g> );
-    const rx = new RegExp(`.{1,${maxChars}}`, 'g');
+    //const rx = new RegExp(`.{1,${maxChars}}`, 'g');
     const chunks = payload.value.replace(/-/g,' ').split(' ').flat();
     const tspans = chunks.map((s,i) => <tspan x={0} y={lineHeight} dy={(i*lineHeight)}>{s}</tspan>);
     return (
