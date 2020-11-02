@@ -117,6 +117,21 @@ export const saveScoresUser = (payload) => ({
   }
 })
 
+export const getScoresUser = (payload) => (  {      
+  type: CALL_API,
+  payload,
+  meta: {
+    actions: {
+      init: ACTIONS.GET_SCORES_INIT,
+      success: ACTIONS.GET_SCORES_SUCCEDED,
+      fail: ACTIONS.GET_SCORES_FAILED
+    },
+    jwt: true,
+    endpoint: ENDPOINT.GET_SCORS.replace(":userId", payload.userId),
+    method: HTTP_METHODS.GET,
+  }
+})
+
 export const getUserHistory = () => ({
   type: CALL_API,
   meta: {

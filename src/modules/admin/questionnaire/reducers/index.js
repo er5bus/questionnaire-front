@@ -2,47 +2,12 @@ import { ACTIONS, otherSectionToUseQuestions } from './../constants';
 
 
 export default (state = {
-  page: 1,
-  tasksEnded: false,
-  exit: false,
-  isLoadingUserState: false,
-  isLoading: false,
-  item: null,
-  error: null,
-  selectedPartBody: [],
-  selectedPartBodyID: [],
-  questionsAnswered: [],
-  questions: [],
-  currentQuestion: { treeparam: "", nodeparam: "" },
-  selectedPartBodyToUse: [],
-  isLoadingSectionBody: false,
-  selectedPartBodyIDToUse: [],
-  scores: [],
-  otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
-  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }],
-  isLoadingNextOtherSectionQuestion: false,
-  foodCategories: [],
-  foods: [],
-  isLoadingFoodCategories: false,
-  isLoadingFoods: false,
-  selectedScoreNut: 0,
-  deselectedScoreNut: 0,
-  deselectedScoreNutState: false,
-  healthAnsweredQuestion: [],
-  ergonomicsAnsweredQuestion: [],
-  coachingAnsweredQuestion: [],
-  psychologiqueAnsweredQuestion: [],
-  nextSectionThirdState: false,
-  nextSectionFourthState: false,
-  periodeNut: 0,
-  Breakfast: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  Lunch: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  Dinner: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  Snack: { selectedColumn: [[], [], [], []], selectedNutri: [] },
-  scorsSaved: null
+  rapport : null,
+  isLoading: false
 }, action) => {
   const { payload, type } = action
-
+ 
+  
   switch (type) {
     case ACTIONS.GET_STATE_INIT: {
       return { ...state, isLoadingUserState: true }
@@ -51,7 +16,14 @@ export default (state = {
       return { ...state, scorsSaved: true }
     }
     case ACTIONS.SAVE_SCORES_FAILED: {
-      return { ...state, scorsSaved: false }
+      return { ...state, rapport: false }
+    }
+    case ACTIONS.GET_SCORES_SUCCEDED: {
+     
+      return { ...state, isLoading: true, rapport: payload.items[0].questionCategories }
+    }
+    case ACTIONS.GET_SCORES_FAILED: {
+      return { ...state, isLoading: false, error: payload }
     }
     case ACTIONS.GET_STATE_SUCCEDED: {
       let newState = payload
