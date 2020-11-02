@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 
-const Questionnaire = lazy( () => import('../../modules/admin/questionnaire/containers/Questionnaire'))
+const Rapport = lazy( () => import('../../modules/admin/questionnaire/containers/Rapport'))
 
-export const questionnaire = {
-  path: "/questionnaire",
-  component: Questionnaire
+export const rapport = {
+  path: "/Rapport/:param",
+  component: Rapport
 }

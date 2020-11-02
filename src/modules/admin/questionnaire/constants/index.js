@@ -54,6 +54,10 @@ export const ACTIONS = {
   SAVE_SCORES_INIT: 'questionnaire@SAVE_SCORES_INIT',
   SAVE_SCORES_SUCCEDED: 'questionnaire@SAVE_SCORES_SUCCEDED',
   SAVE_SCORES_FAILED: 'questionnaire@SAVE_SCORES_FAILED',
+
+  GET_SCORES_INIT: 'rapport@GET_SCORES_INIT',
+  GET_SCORES_SUCCEDED: 'rapport@GET_SCORES_SUCCEDED',
+  GET_SCORES_FAILED: 'rapport@GET_SCORES_FAILED',
 }
 
 export const ENDPOINT = {
@@ -63,7 +67,8 @@ export const ENDPOINT = {
   FOOD_FOODS: "food/list?page=1&searchName=&searchLegend=&searchSelectedScore=&searchDeselectedScore=",
   IMAGES_PATH: "https://predicta.fulltech.io/public/uploads/",
   HISTORY_SAVE: "/api/question-history",
-  SAVE_SCORS: `/api/employee/${localStorage.getItem("id")}/questionnaires`
+  SAVE_SCORS: `/api/employee/${localStorage.getItem("id")}/questionnaires`,
+  GET_SCORS: `/api/employee/:userId/questionnaires`
 }
 
 
@@ -132,3 +137,4 @@ export const zonePeriodeData = {
   // Facilitate reordering of the columns
   columnOrder: ['column-1', 'column-2', 'column-3', 'column-4']
 };
+ 

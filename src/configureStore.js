@@ -11,6 +11,7 @@ import companyReducer from './modules/admin/company/reducers'
 import dashbordAdminReducer from './modules/admin/dashbord/reducers'
 import inviteManagerReducer from './modules/admin/inviteManager/reducers'
 import managerReducer from './modules/admin/manager/reducers'
+import employeeRapportReducer from './modules/admin/questionnaire/reducers'
 // reducers
 
 // anonymous
@@ -45,6 +46,7 @@ const rootReducer = combineReducers({
   dashbordAdmin: dashbordAdminReducer,
   manager: managerReducer,
   inviteManager: inviteManagerReducer,
+  employeeRapport: employeeRapportReducer,
 
   // moderator
   department: departmentReducer,

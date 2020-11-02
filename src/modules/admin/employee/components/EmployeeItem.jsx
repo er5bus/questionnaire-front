@@ -6,10 +6,10 @@ import { Button, Card, CardBody, Col} from "reactstrap"
 import adminRoutes from './../../../../routes/admin'
 
 
-export default ({ firstName, lastName, email, departmentParam, id }) => {
+export default ({ firstName, lastName, email, questionnaires , departmentParam, id }) => {
 
   const { t } = useTranslation()
-
+console.log(questionnaires[0] )
   return (
     <Col lg="4" className="pb-5">
       <Card className="shadow border-0">
@@ -23,6 +23,7 @@ export default ({ firstName, lastName, email, departmentParam, id }) => {
           <p className="description mt-3">
             { email }
           </p>
+           
           <Button
             className="btn-sm mt-4"
             color="warning"
@@ -31,14 +32,15 @@ export default ({ firstName, lastName, email, departmentParam, id }) => {
           >
             <i className="fa fa-pencil-alt" /> { t("Edit") }
           </Button>
-          <Button
+          {questionnaires[0]  ? <Button
             className="btn-sm mt-4"
             color="primary"
-            to={ adminRoutes.path + adminRoutes.routes.questionnaire.path.replace(":param", id)   }
+            to={ adminRoutes.path + adminRoutes.routes.rapport.path.replace(":param", id)   }
             tag={Link}
           >
             <i className="fa fa-eye" /> { t("Rapport") }
-          </Button>
+          </Button>  : null  }
+          
         </CardBody>
       </Card>
     </Col>
