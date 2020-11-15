@@ -9,9 +9,6 @@ export const ACTIONS = {
 }
 
 export const ENDPOINT = {
-  LOGIN: "/api/auth/login",
-  LOGOUT: "/api/auth/logout",
-  REGISTER: "/api/auth/register",
   CREATE_MEDICAL_RECORD: "/api/medical-record",
   RETEIVE_MEDICAL_RECORD: "/api/medical-record"
 }

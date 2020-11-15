@@ -6,14 +6,12 @@ import { Button } from 'reactstrap';
 
 const AskContinue = ({ onExit, onContinue, title }) => {
 
-    const { t } = useTranslation()
-
     return (
         <>
             <div className="continue-text">
-                <span > {t(title)}</span>
+                <span > {title} </span>
                 <div className="pb-5" />
-                <Button className="nextButton next-button" onClick={onContinue}>{t('Suivant')}</Button>
+                <Button className="nextButton next-button" onClick={onContinue}>Suivant</Button>
             </div>
         </>
     )

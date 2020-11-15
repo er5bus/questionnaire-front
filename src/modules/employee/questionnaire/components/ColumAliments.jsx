@@ -2,6 +2,8 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Task from './task';
+
+
 const Container = styled.div`
   min-width: 280px;
   display: block;
@@ -38,45 +40,47 @@ const TaskList = styled.div`
   flex-wrap:wrap;
   max-width:100%;
 `;
+
+
 class InnerList extends React.Component {
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.tasks === this.props.tasks) {
-            return false
-        }
-        return true
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.tasks === this.props.tasks) {
+      return false
     }
-    render() {
-        return this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} />)
-    }
+    return true
+  }
+  render() {
+    return this.props.tasks.map((task, index) => <Task key={task.id} task={task} index={index} />)
+  }
 }
 
 export default class ColumnAliments extends React.Component {
-    render() {
-        return (
-            <Container>
-                {this.props.indexColumn === 0 && <TitleAliment> Les aliments </TitleAliment>}
-                <div style={{
-                    padding: '0px 10px'
-                }}>
-                    <Title>{this.props.column.title}</Title>
-                    <Droppable droppableId={this.props.column.id}
-                        direction="horizontal"
-                    >
-                        {(provided, snapshot) => (
-                            <TaskList
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                                isDraggingOver={snapshot.isDraggingOver}
-                            >
-                                <InnerList tasks={this.props.tasks} />
-                                {provided.placeholder}
-                            </TaskList>
-                        )}
+  render() {
+    return (
+      <Container>
+        {this.props.indexColumn === 0 && <TitleAliment> Les aliments </TitleAliment>}
+        <div style={{
+          padding: '0px 10px'
+        }}>
+          <Title>{this.props.column.title}</Title>
+          <Droppable droppableId={this.props.column.id}
+            direction="horizontal"
+          >
+            {(provided, snapshot) => (
+              <TaskList
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
+                <InnerList tasks={this.props.tasks} />
+                {provided.placeholder}
+              </TaskList>
+            )}
 
-                    </Droppable>
-                </div>
-            </Container>)
+          </Droppable>
+        </div>
+      </Container>)
 
 
-    }
+  }
 }

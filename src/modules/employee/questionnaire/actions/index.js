@@ -121,6 +121,11 @@ export const saveScoresUser = (payload) => ({
   }
 })
 
+export const hasPain = (hasPain) => ({
+  type: ACTIONS.HAS_PAIN,
+  payload: {hasPain}
+})
+
 export const getUserHistory = () => ({
   type: CALL_API,
   meta: {

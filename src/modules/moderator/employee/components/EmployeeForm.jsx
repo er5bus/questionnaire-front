@@ -1,7 +1,6 @@
 import React from "react"
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
 import { Button } from "reactstrap"
-import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
 import { Spinner, Col, Row } from "reactstrap"
@@ -9,15 +8,12 @@ import { Spinner, Col, Row } from "reactstrap"
 import { required, maxLength, minLength, email } from "./../../../../utils/validations"
 
 import InputField from "./../../../../components/InputField"
-import SelectField from "./../../../../components/SelectField"
-
 
 const minLength4 = minLength(4)
 const maxLength30 = maxLength(30)
 
 let TagForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading, reset } = props
 
   React.useEffect(() => {

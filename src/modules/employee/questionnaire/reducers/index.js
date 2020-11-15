@@ -12,16 +12,53 @@ const defaultState = {
   selectedPartBodyID: [],
   questionsAnswered: [],
   questions: [],
+  categories: [
+    { id: "Kinésithérapie", idForSend: "PHYSIOTHERAPY"},
+    { id: "Kinésithérapeute", idForSend: "PHYSIOTHERAPY" },
+    { id: "Ergonomie", idForSend: "ERGONOMICS"},
+    { id: "Médecine", idForSend: "MEDICINE"},
+    { id: "Psychologie", idForSend: "PSYCHOLOGY"},
+    { id: "Coach", idForSend: "COACH"},
+    { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
+    { id: "AT", idForSend: "STOPP_WORKING"},
+  ],
+  categoryScore: {
+    PHYSIOTHERAPY: 0,
+    ERGONOMICS: 0,
+    MEDICINE: 0,
+    PSYCHOLOGY: 0,
+    COACH: 0,
+    OSTEOPATHY: 0,
+    STOPP_WORKING: 0
+  },
   currentQuestion: { treeparam: "", nodeparam: "" },
   selectedPartBodyToUse: [],
   isLoadingSectionBody: false,
   selectedPartBodyIDToUse: [],
   scores: [],
-  otherSectionQuestion: [{ id: "ERGONOMIE", value: "Ergonomique" }, { id: "COACHING", value: "Activité Physique" }, { id: "PSYCHOLOGIE", value: "Psychologique" }],
-  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique", page: 4 }, { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux", page: 5 }],
+  otherSectionQuestion: [
+    { id: "ERGONOMIE", value: "Ergonomique" },
+    { id: "COACHING", value: "Activité Physique" },
+    { id: "PSYCHOLOGIE", value: "Psychologique" }
+  ],
+  otherSectionQuestionToUse: [
+    { id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique", page: 4 },
+    { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique", page: 6 },
+    { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux", page: 5 }
+  ],
+  categoryScore: {
+    PHYSIOTHERAPY: 0,
+    ERGONOMICS: 0,
+    MEDICINE: 0,
+    PSYCHOLOGY: 0,
+    COACH: 0,
+    OSTEOPATHY: 0,
+    STOPP_WORKING: 0
+  },
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
   foods: [],
+  hasPain: false,
   isLoadingFoodCategories: false,
   isLoadingFoods: false,
   selectedScoreNut: 0,
@@ -49,6 +86,16 @@ export default (state = {
   isLoading: false,
   item: null,
   error: null,
+  categories: [
+    { id: "Kinésithérapie", idForSend: "PHYSIOTHERAPY"},
+    { id: "Ergonomie", idForSend: "ERGONOMICS"},
+    { id: "Médecine", idForSend: "MEDICINE"},
+    { id: "Psychologie", idForSend: "PSYCHOLOGY"},
+    { id: "Psychologue", idForSend: "PSYCHOLOGY" },
+    { id: "Coach", idForSend: "COACH"},
+    { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
+    { id: "AT", idForSend: "STOPP_WORKING"},
+  ],
   selectedPartBody: [],
   selectedPartBodyID: [],
   questionsAnswered: [],
@@ -58,8 +105,26 @@ export default (state = {
   isLoadingSectionBody: false,
   selectedPartBodyIDToUse: [],
   scores: [],
-  otherSectionQuestion: [{ id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique" }, { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique" }, { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux" }],
-  otherSectionQuestionToUse: [{ id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique", page: 4 }, { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux", page: 5 }],
+  bodyPartChoices: {},
+  categoryScore: {
+    PHYSIOTHERAPY: 0,
+    ERGONOMICS: 0,
+    MEDICINE: 0,
+    PSYCHOLOGY: 0,
+    COACH: 0,
+    OSTEOPATHY: 0,
+    STOPP_WORKING: 0
+  },
+  otherSectionQuestion: [
+    { id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique" },
+    { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique" },
+    { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux" }
+  ],
+  otherSectionQuestionToUse: [
+    { id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique", page: 4 },
+    { id: "COACHING", value: "Vous avez compléte le questionnaire sur l'activité physique", page: 6 },
+    { id: "PSYCHOLOGIE", value: "Vous avez complété le questionnaire concernant les risques psycho-sociaux", page: 5 }
+  ],
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
   foods: [],
@@ -98,7 +163,7 @@ export default (state = {
       const newState = payload
 
       if (Object.entries(newState).length > 0) {
-        
+
         return { ...newState, isLoadingUserState: false }
       }
       return { ...state, ...defaultState, isLoadingUserState: false }
@@ -135,8 +200,6 @@ export default (state = {
       } else {
         return state
       }
-
-
     }
     case ACTIONS.CHANGE_PAGE_AFTER_SELECTION : {
       return {...state, page:4, selectedPartBody:[], selectedPartBodyID:[], selectedPartBodyToUse:[], selectedPartBodyIDToUse:[] }
@@ -148,8 +211,8 @@ export default (state = {
       return { ...state, nextSectionFourthState: payload }
     }
     case ACTIONS.NEXT_PAGE: {
-
-      return { ...state, page: state.page + 1 }
+      const page = state.page + 1
+      return { ...state, page }
     }
 
     case ACTIONS.PREV_PAGE: {
@@ -161,6 +224,12 @@ export default (state = {
       return { ...state, tasksEnded: true }
     }
     case ACTIONS.UPDATE_SCORE: {
+      const categoryScore = { ...state.categoryScore };
+      (payload || []).forEach(element => {
+        const key = state.categories.find( (cat) => cat.id === element.name)
+        categoryScore[key.idForSend] += element.value
+      })
+
       let newArrayScores = [...state.scores]
       if (newArrayScores.length > 0) {
         for (let i = 0; i < payload.length; i++) {
@@ -174,8 +243,7 @@ export default (state = {
       } else {
         newArrayScores = payload
       }
-
-      return { ...state, scores: newArrayScores }
+      return { ...state, scores: newArrayScores, categoryScore }
     }
     case ACTIONS.FILL_SCORES: {
       return { ...state, scores: payload }
@@ -185,12 +253,11 @@ export default (state = {
     }
 
     case ACTIONS.NEXT_QUESTION: {
-      return { ...state, questionsAnswered: [...state.questionsAnswered, state.currentQuestion], currentQuestion: payload }
+      const questionsAnswered = [...state.questionsAnswered, state.currentQuestion]
+      return { ...state, questionsAnswered, currentQuestion: payload }
     }
     case ACTIONS.CHANGE_PAGE: {
-      let newPage = payload
-
-      return { ...state, page: newPage }
+      return { ...state, page: payload }
     }
     case ACTIONS.FETCH_QUESTION_INIT: {
       return { ...state, isLoading: true, item: null, error: null, success: false }
@@ -222,9 +289,6 @@ export default (state = {
         newSeletedbody[0] = payload.value
         newSeletedbodyID[0] = payload.id
       }
-
-      ;
-
       return { ...state, selectedPartBody: newSeletedbody, selectedPartBodyToUse: newSeletedbody, selectedPartBodyID: newSeletedbodyID, selectedPartBodyIDToUse: newSeletedbodyID }
     }
     case ACTIONS.NEXT_SELECTED_FROM_BODY_QUESTION: {
@@ -244,7 +308,175 @@ export default (state = {
       if (nextArray.length > 0) {
         nextArray.shift()
       }
-      return { ...state, otherSectionQuestionToUse: nextArray, isLoadingNextOtherSectionQuestion: true }
+      const page = state.page
+      const categoryScore = { ...state.categoryScore }
+      if (page === 4) {
+        const ergoMax = 10
+        categoryScore.ERGONOMICS = categoryScore.ERGONOMICS > ergoMax ? ergoMax : categoryScore.ERGONOMICS
+        if( state.hasPain && categoryScore.ERGONOMICS >= 4) {
+          categoryScore.ERGONOMICS = 4
+        }else if(state.hasPain && categoryScore.ERGONOMICS === 3) {
+          categoryScore.ERGONOMICS = 3
+        }else if (state.hasPain && categoryScore.ERGONOMICS === 2) {
+          categoryScore.ERGONOMICS = 2
+        }else if (state.hasPain && categoryScore.ERGONOMICS < 2) {
+          categoryScore.ERGONOMICS = 0
+        }
+        const psychotherapyMax = 8
+        categoryScore.PHYSIOTHERAPY = categoryScore.PHYSIOTHERAPY > psychotherapyMax ? psychotherapyMax : categoryScore.PHYSIOTHERAPY
+        if (state.hasPain && categoryScore.PHYSIOTHERAPY >= 4) {
+          categoryScore.PHYSIOTHERAPY = 2
+        }else if (state.hasPain && categoryScore.PHYSIOTHERAPY >= 2 &&  categoryScore.PHYSIOTHERAPY < 4 ) {
+          categoryScore.PHYSIOTHERAPY = 2
+        }else if (state.hasPain && categoryScore.PHYSIOTHERAPY < 2 ) {
+          categoryScore.PHYSIOTHERAPY = 0
+        }
+      } else if (page === 5) {
+        let max = 50
+        categoryScore.PSYCHOLOGY = categoryScore.PSYCHOLOGY > max ? max : categoryScore.PSYCHOLOGY
+        if (categoryScore.PSYCHOLOGY >= 31 ) {
+          categoryScore.PSYCHOLOGY =+ 3
+        }else if ( 23 <= categoryScore.PSYCHOLOGY && categoryScore.PSYCHOLOGY < 31) {
+          categoryScore.PSYCHOLOGY += 2
+        }else if ( 10 <= categoryScore.PSYCHOLOGY && categoryScore.PSYCHOLOGY < 23) {
+          categoryScore.PSYCHOLOGY += 0
+        }
+      } else if (page === 6) {
+        let max = 9
+        categoryScore.COACH = categoryScore.COACH > max ? max : categoryScore.COACH
+        if(categoryScore.COACH >= 8){
+          categoryScore.COACH = 4
+        }else if( 4 <= categoryScore.COACH && categoryScore.COACH < 8) {
+          categoryScore.COACH = 3
+        }else if (2 <= categoryScore.COACH && categoryScore.COACH < 4) {
+          categoryScore.COACH = 2
+        } else if (categoryScore.COACH < 2) {
+          categoryScore.COACH = 0
+        }
+      } else if (!state.hasPain && page === 6) {
+        if (state.bodyPartChoices["CERVICAL"] === 1){
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY === 5) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+
+          if (categoryScore.ERGONOMICS === 6) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS === 4) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+
+          if (categoryScore.PHYSIOTHERAPY === 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( 2 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY <= 3) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if ( categoryScore.PHYSI > 2) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 2) {
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if (categoryScore.OSTEOPATHY >=  7) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 7) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 1
+          }
+
+          if (categoryScore.ERGONOMICS >= 9) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS <= 8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 3) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+
+          if (categoryScore.PHYSIOTHERAPY >= 9 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if ( 6 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 9) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSI < 6) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 3) {
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+
+          if (categoryScore.ERGONOMICS >= 8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+
+          if (categoryScore.PHYSIOTHERAPY >= 12 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if ( 10 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 12) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 10) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSI < 5) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 4) {
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
+            categoryScore.OSTEOPATHY = 2
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+
+          if (categoryScore.ERGONOMICS >= 8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+
+          if (categoryScore.PHYSIOTHERAPY >= 13 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if ( 9 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 13) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 9) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSIOTHERAPY < 5) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }
+      }
+      return { ...state, otherSectionQuestionToUse: nextArray, isLoadingNextOtherSectionQuestion: true, categoryScore }
     }
     case ACTIONS.FETCH_CATEGORY_FOOD_INIT: {
 
@@ -289,17 +521,39 @@ export default (state = {
       let lastDeselectedScore = payload.lastDeselectedScore
       return { ...state, selectedScoreNut: lastSelectedScore, deselectedScoreNut: lastDeselectedScore }
     }
+    case ACTIONS.HAS_PAIN : {
+      return { ...state, hasPain: payload.hasPain }
+    }
     case ACTIONS.SAVE_QUESTION_ANSWER: {
       if (payload.page === 3) {
+        const bodyPartChoices = { ...state.bodyPartChoices }
+        if (payload.name === "Moins de 3 semaines" && payload.type === "CERVICAL"){
+          bodyPartChoices["CERVICAL"] = 1
+        }
+        if (payload.name === "Entre 3 semaines et 3 mois" && payload.type === "CERVICAL"){
+          bodyPartChoices["CERVICAL"] = 2
+        }
+        if (payload.name === "Entre 3 mois et un an" && payload.type === "CERVICAL"){
+          bodyPartChoices["CERVICAL"] = 3
+        }
+        if (payload.name === "Plus d'un an" && payload.type === "CERVICAL"){
+          bodyPartChoices["CERVICAL"] = 4
+        }
         let newAnswersHealth = [...state.healthAnsweredQuestion, payload]
-        return { ...state, healthAnsweredQuestion: newAnswersHealth }
+        return { ...state, bodyPartChoices, healthAnsweredQuestion: newAnswersHealth, bodyPartChoices /*categoryScore*/ }
+
       } else if (payload.page === 4) {
+
         let newAnswersErgonimics = [...state.ergonomicsAnsweredQuestion, payload]
         return { ...state, ergonomicsAnsweredQuestion: newAnswersErgonimics }
+
       } else if (payload.page === 5) {
+
         let newAnswersPsy = [...state.psychologiqueAnsweredQuestion, payload]
         return { ...state, psychologiqueAnsweredQuestion: newAnswersPsy }
+
       } else if (payload.page === 6) {
+
         let newAnswersCoching = [...state.coachingAnsweredQuestion, payload]
         return { ...state, coachingAnsweredQuestion: newAnswersCoching }
       }

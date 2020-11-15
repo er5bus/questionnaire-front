@@ -1,7 +1,6 @@
 import React from "react"
 import { Field, reduxForm, stopSubmit, clearSubmitErrors } from "redux-form"
 import { Button } from "reactstrap"
-import { useTranslation } from "react-i18next"
 import { connect } from "react-redux"
 
 import { Spinner, Col, Row } from "reactstrap"
@@ -17,7 +16,6 @@ const maxLength30 = maxLength(30)
 
 let TagForm = (props) => {
 
-  const { t } = useTranslation()
   const { handleSubmit, isLoading, reset } = props
 
   React.useEffect(() => {
@@ -36,8 +34,8 @@ let TagForm = (props) => {
             name="firstName"
             component={InputField}
             className="form-control"
-            placeholder={t("First Name")}
-            label={t("First Name")}
+            placeholder="First Name"
+            label="First Name"
             type="text"
             validate={[ required, minLength4, maxLength30 ]}
           />
@@ -47,8 +45,8 @@ let TagForm = (props) => {
             name="lastName"
             component={InputField}
             className="form-control"
-            placeholder={t("Last Name")}
-            label={t("Last Name")}
+            placeholder="Last Name"
+            label="Last Name"
             type="text"
             validate={[ required, minLength4, maxLength30 ]}
           />
@@ -58,8 +56,8 @@ let TagForm = (props) => {
         name="professionalEmail"
         component={InputField}
         className="form-control"
-        placeholder={t("Professional Email")}
-        label={t("Professional Email")}
+        placeholder="Professional Email"
+        label="Professional Email"
         type="text"
         validate={[ email, required ]}
       />
@@ -70,8 +68,8 @@ let TagForm = (props) => {
             name="username"
             component={InputField}
             className="form-control"
-            placeholder={t("Username")}
-            label={t("Username")}
+            placeholder="Username"
+            label="Username"
             type="text"
             validate={[ required ]}
           />
@@ -81,8 +79,8 @@ let TagForm = (props) => {
             name="email"
             component={InputField}
             className="form-control"
-            placeholder={t("Email")}
-            label={t("Email")}
+            placeholder="Email"
+            label="Email"
             type="text"
             validate={[ email, required ]}
           />
@@ -92,18 +90,18 @@ let TagForm = (props) => {
         name="password"
         component={InputField}
         className="form-control"
-        placeholder={t("Password")}
-        label={t("Password")}
+        placeholder="Password"
+        label="Password"
         type="password"
         validate={[required, minLength4, maxLength30]}
       />
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
           { isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-save mr-2"></i> }
-          {t("Save Employee")}
+          Save Employee
         </Button>
         <Button className="mt-4 pl-5 pr-5" color="warning" onClick={reset}>
-          <i className="fas fa-trash mr-2"></i> {t("Clear values")}
+          <i className="fas fa-trash mr-2"></i> Clear values
         </Button>
       </div>
     </form>

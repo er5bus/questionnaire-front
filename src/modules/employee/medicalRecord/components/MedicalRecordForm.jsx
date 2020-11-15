@@ -15,7 +15,6 @@ const MedicalRecordForm = props => {
   useEffect(() => {
     props.initialize({ sexe: '1' })
   }, []);
-  const { t } = useTranslation()
 
   return (
     <>
@@ -30,7 +29,7 @@ const MedicalRecordForm = props => {
             name="sexe"
             component={InputRadioCheckboxField}
             className="form-control input-radio"
-            label={t("Homme")}
+            label="Homme"
             type="radio"
             value="1"
           />
@@ -38,8 +37,7 @@ const MedicalRecordForm = props => {
             name="sexe"
             component={InputRadioCheckboxField}
             className="form-control input-radio"
-            placeholder={t("")}
-            label={t("Femme")}
+            label="Femme"
             type="radio"
             value="2"
           />
@@ -51,7 +49,7 @@ const MedicalRecordForm = props => {
               name="age"
               component={InputField}
               className="form-control input-style"
-              label={t("Quel âge avez-vous ? ")}
+              label="Quel âge avez-vous ? "
               type="text"
               validate={[required, number]}
             />
@@ -63,7 +61,7 @@ const MedicalRecordForm = props => {
               name="tall"
               component={InputField}
               className="form-control input-style"
-              label={t("Quelle est votre taille ?(Cm)")}
+              label="Quelle est votre taille ?(Cm)"
               type="text"
               validate={[required, number]}
 
@@ -74,7 +72,7 @@ const MedicalRecordForm = props => {
               name="weight"
               component={InputField}
               className="form-control input-style"
-              label={t("Quel est votre poids ? (Kg)")}
+              label="Quel est votre poids ? (Kg)"
               type="text"
               validate={[required, number]}
             />
@@ -85,7 +83,7 @@ const MedicalRecordForm = props => {
           name="profession"
           component={InputField}
           className="form-control input-style"
-          label={t("Quelle est votre profession ?")}
+          label="Quelle est votre profession ?"
           type="text"
           validate={[required]}
         />
@@ -93,14 +91,14 @@ const MedicalRecordForm = props => {
           name="homeWork"
           component={SelectField}
           className="form-control input-style"
-          label={t("Faites-vous du télétravail ")}
+          label="Faites-vous du télétravail"
           choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }, { label: "Non", value: 4 }]}
           validate={[required]}
         />
         <div className="mt-0">
           <Button className="mt-4 next-button next-button-position" color="primary" type="submit">
             {isLoading && <Spinner color="white mr-2" />}
-            {t("Suivant")}
+            Suivant
           </Button>
         </div>
       </form>

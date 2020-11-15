@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Container, DropdownItem, DropdownMenu, DropdownToggle, Media, Nav, Navbar, NavItem, NavLink, UncontrolledDropdown } from "reactstrap";
 import newLogo from './../../../../assets/img/newLogo.svg';
@@ -9,14 +8,10 @@ import anonymousRoutes from './../../../../routes/anonymous';
 import employeeRoutes from './../../../../routes/employee';
 
 
-
-
-
 const LogoutModal = anonymousRoutes.routes.logout.component
 
 const UserNavbar = ({ userName }) => {
 
-  const { t } = useTranslation()
   const [showModal, setShowModal] = React.useState(false)
 
   const onToggleModal = () => {
@@ -68,16 +63,16 @@ const UserNavbar = ({ userName }) => {
               <DropdownMenu className="dropdown-menu-arrow" right>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-single-02" />
-                  <span>{t("Profile")}</span>
+                  <span>Mon compte</span>
                 </DropdownItem>
                 <DropdownItem disabled={true} to="/admin/user-profile" tag={Link}>
                   <i className="ni ni-settings-gear-65" />
-                  <span>{t("Settings")}</span>
+                  <span>Paramètres</span>
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem onClick={onToggleModal}>
                   <i className="ni ni-user-run" />
-                  <span>{t("Logout")}</span>
+                  <span>Se déconnecter</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

@@ -36,6 +36,8 @@ export const ACTIONS = {
   FILL_SELECTED_DESELECTED_NUTRI_SCORES: 'questionnaire@FILL_SELECTED_DESELECTED_NUTRI_SCORES',
   SAVE_QUESTION_ANSWER: 'questionnaire@SAVE_QUEStION_ANSWER',
 
+  HAS_PAIN: 'questionnaire@HAS_PAIN',
+
   SAVE_STATE_INIT: 'questionnaire@SAVE_STATE_INIT',
   SAVE_STATE_SUCCEDED: 'questionnaire@SAVE_STATE_SUCCEDED',
   SAVE_STATE_FAILED: 'questionnaire@SAVE_STATE_FAILED',
@@ -103,7 +105,11 @@ export const otherQuestionsTreeNode = {
   COACHING: { treeparam: "5e88325207f74342814b401467bfad98", nodeparam: "fb6a8f2fed1a42c0b0e3cd9afc5309ab" },
 }
 
-export const otherSectionToUseQuestions = [{ id: "ERGONOMIE", value: "Ergonomique", page: 4 }, { id: "COACHING", value: "Activité Physique", page: 6 }, { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }]
+export const otherSectionToUseQuestions = [
+  { id: "ERGONOMIE", value: "Ergonomique", page: 4 }, 
+  { id: "COACHING", value: "Activité Physique", page: 6 }, 
+  { id: "PSYCHOLOGIE", value: "Psychologique", page: 5 }
+]
 
 export const zonePeriodeData = {
   tasks: {

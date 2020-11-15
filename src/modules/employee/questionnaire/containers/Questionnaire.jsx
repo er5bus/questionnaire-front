@@ -10,7 +10,7 @@ import NutritionalPage from '../components/NutritionalPage';
 import ScoresInterpratation from '../components/ScoresInterpratation';
 import Transitionpages from '../components/TransitionPages';
 import { otherQuestionsTreeNode } from '../constants';
-import { changeCurrentQuestion, changePage, changePageAfterSelection, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, getUserHistory, nextOtherQuestionsSection, nextPage, prevPage, saveUserState, selectDiselectPartBody, tasksEnded, updateotherSectionQuestionToUse } from './../actions';
+import { changeCurrentQuestion, hasPain, changePage, changePageAfterSelection, exitPage, fillScoresTable, fillSelectedDeselectedNutriScores, getUserHistory, nextOtherQuestionsSection, nextPage, prevPage, saveUserState, selectDiselectPartBody, tasksEnded, updateotherSectionQuestionToUse } from './../actions';
 import ExitPage from './../components/ExitPage';
 //import employeeRoutes from './../../../../routes/employee'
 import FirstPage from './../components/FirstPage';
@@ -158,7 +158,7 @@ const Questionnaire = (props) => {
                       </div>
                       :
                       <>
-                        {page === 1 && <FirstPage onExit={changePage} onContinue={onNext} />}
+                        {page === 1 && <FirstPage onExit={changePage} onContinue={() => { onNext(); props.hasPain() } } />}
                         {page === 2 && <SecondPage onExit={changePage} onContinue={onContinueFirstPage} />}
                         {page === 3 && <ThirdPage onExit={onExit} onContinue={onNext} />}
                         {(page === 4 || page === 5 || page === 6) && <FourthPage onExit={onExit} onContinue={onNext} />}
@@ -186,4 +186,4 @@ const mapStateToProps = state => {
   return { questionnaire: questionnaire }
 }
 
-export default connect(mapStateToProps, { nextPage, prevPage, exitPage, changePageAfterSelection, changePage, fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable, saveUserState, getUserHistory, updateotherSectionQuestionToUse })(withTranslation()(Questionnaire))
+export default connect(mapStateToProps, { nextPage, hasPain, prevPage, exitPage, changePageAfterSelection, changePage, fillSelectedDeselectedNutriScores, nextOtherQuestionsSection, changeCurrentQuestion, tasksEnded, selectDiselectPartBody, fillScoresTable, saveUserState, getUserHistory, updateotherSectionQuestionToUse })(withTranslation()(Questionnaire))

@@ -2,6 +2,8 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import Task from './task';
+
+
 const Container = styled.div`
   margin: 0px 8px;
   min-width: 280px;
@@ -16,6 +18,8 @@ const Container = styled.div`
   display: block; 
   display:flex;
 `;
+
+
 const Title = styled.div`
   margin-bottom:-0.5rem;
   padding: 0px 8px;
@@ -31,8 +35,9 @@ font-weight: normal;
 font-size: 16px;
 line-height: 20px;
 color: #7C7C7C;
-
 `;
+
+
 const TaskList = styled.div`
   transition: background-color 0.2s ease;
   min-height: 100px;
@@ -44,6 +49,8 @@ const TaskList = styled.div`
   border-top-right-radius: ${props => props.indexColumn === 0 ? "24px" : "0px"};
   border-bottom-right-radius: ${props => props.indexColumn === 3 ? "24px" : "0px"}
 `;
+
+
 class InnerList extends React.Component {
   shouldComponentUpdate(nextProps) {
     if (nextProps.tasks === this.props.tasks) {

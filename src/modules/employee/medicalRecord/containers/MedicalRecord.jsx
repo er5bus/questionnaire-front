@@ -8,7 +8,6 @@ import employeeRoutes from './../../../../routes/employee';
 import MedicalRecordForm from './../components/MedicalRecordForm';
 
 
-
 class MedicalRecord extends React.Component {
   constructor(props) {
     super(props)

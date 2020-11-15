@@ -12,9 +12,6 @@ export const api = store => next => async action => {
   const { actions, messages = {}, endpoint, method, jwt, params = {}, extraData = {}, userId } = action.meta
   const { user: { access_token: accessToken = null, id } } = store.getState().session
 
-
-
-
   const createNotificationOpts = (title, message) => ({
     title,
     message,
@@ -89,6 +86,8 @@ export const questionApi = store => next => async action => {
       dispatch(actions.fail, (err.response && err.response.data) || {})
     })
 }
+
+
 export const questionFoodApi = store => next => async action => {
   if (!action || action.type !== CALL_FOOD_API) {
     return next(action)
@@ -113,11 +112,9 @@ export const questionFoodApi = store => next => async action => {
         _remember_me: ""
       }),
     }).then(resp => resp.json())
-
-
     token = response.token
   }
-  let headers = { Authorization: `Bearer ${token}  ` }
+  let headers = { Authorization: `Bearer ${token}` }
 
   makeFoodQuestion(method, endpoint, action.payload, headers, params)
     .then(resp => {

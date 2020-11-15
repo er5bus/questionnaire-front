@@ -18,13 +18,11 @@ padding: 20px 0
 
 const ExitQuestions = ({ tasksEnded }) => {
 
-  const { t } = useTranslation()
-
   return (
     <>
       <div className=" d-flex flex-column align-items-center justify-content-center login-title">
         <img width="200" src={thanksImg} alt="..." />
-        <h1 className=" pt-4 mb-0"> {t('Merci pour votre temps')}</h1>
+        <h1 className=" pt-4 mb-0"> Merci pour votre temps </h1>
       </div>
 
 

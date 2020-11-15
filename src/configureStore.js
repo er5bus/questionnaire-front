@@ -3,22 +3,27 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { sessionReducer } from 'redux-react-session'
 import thunk from 'redux-thunk'
-// middleware redux-thunk
+
+
+// middlewares
 import { api, questionApi, questionFoodApi } from './middleware/api'
 import { deleteSession, saveSession } from './middleware/session'
+
+// reducers
 // admin
 import companyReducer from './modules/admin/company/reducers'
 import dashbordAdminReducer from './modules/admin/dashbord/reducers'
 import inviteManagerReducer from './modules/admin/inviteManager/reducers'
 import managerReducer from './modules/admin/manager/reducers'
 import employeeRapportReducer from './modules/admin/questionnaire/reducers'
-// reducers
 
 // anonymous
 import authReducer from './modules/anonymous/authentication/reducers'
+
 // employee
 import medicalRecordReducer from './modules/employee/medicalRecord/reducers'
 import questionnaireReducer from './modules/employee/questionnaire/reducers'
+
 // moderator
 import dashbordModeratorReducer from './modules/moderator/dashbord/reducers'
 import departmentReducer from './modules/moderator/department/reducers'
@@ -29,7 +34,6 @@ import tmsReducer from './modules/moderator/tms/reducers'
 import ergonomicsReducer from './modules/moderator/ergonomics/reducers'
 import physicalReducer from './modules/moderator/physical/reducers'
 import nutritionReducer from './modules/moderator/nutrition/reducers'
-
 
 
 const rootReducer = combineReducers({
