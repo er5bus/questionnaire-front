@@ -89,7 +89,7 @@ export const statcTreeNode = {
   HEADACHE: { treeparam: "ccb5d1793e5f45a18861fccfb4a06216", nodeparam: "20d73d9958fb43629fbfacb4b49413b2" },
   CERVICAL: { treeparam: "f7b857ccf6dc4061a1820a0a5ca6440c", nodeparam: "123e8f8a010547c285c7a2c9e86ca89e" },
   SHOULDERS: { treeparam: "07b6f8ca782e449b88041033037accdc", nodeparam: "6c0572c6f4834be38e01f23357864015" },
-  BACK_THORAX: { treeparam: "bc1254428f474bb5ba2525d84c66055c", nodeparam: "29bcc98ac5bf410a93d432cafd71a83d" },
+  BACK_THORAX: { treeparam: "d2844841b8e944dab115c67a69983722", nodeparam: "d036099a268e49ddb129fee0c0fd0760" },
   ELBOW_WIRST_HAND: { treeparam: "e199669151894fddb3c15600e8459d54", nodeparam: "fab8aa138432409283a09ee931308f90" },
   ABDOMINAL_PAIN: { treeparam: "d2844841b8e944dab115c67a69983722", nodeparam: "d036099a268e49ddb129fee0c0fd0760" },
   LUMBAR_BUTTOCKS: { treeparam: "eda8d9baad0349f49a487a4fd5898a21", nodeparam: "4ac2f6fb5ee349b5af25bbc16914a789" },
