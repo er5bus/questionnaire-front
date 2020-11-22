@@ -91,8 +91,8 @@ const MedicalRecordForm = props => {
           name="homeWork"
           component={SelectField}
           className="form-control input-style"
-          label="Faites-vous du télétravail"
-          choices={[{ label: "Oui", value: 1 }, { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }, { label: "Non", value: 4 }]}
+          label="Faites-vous du télétravail ?"
+          choices={[/*{ label: "Oui", value: 1 }, */ { label: "Souvent", value: 2 }, { label: "Parfois", value: 3 }, { label: "Non", value: 4 }]}
           validate={[required]}
         />
         <div className="mt-0">
