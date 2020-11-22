@@ -131,7 +131,7 @@ const Questionnaire = (props) => {
       case 5:
         return "Questionnaire  psycho-social"
       case 6:
-        return 'Questionnaire activité Physique '
+        return 'Questionnaire activité physique '
       case 7:
         return 'Questionnaire nutritionnel'
       case 8:

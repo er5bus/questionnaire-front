@@ -35,7 +35,7 @@ let TagForm = (props) => {
             placeholder="Prénom"
             label="Prénom"
             type="text"
-            validate={[ required, minLength4, maxLength30 ]}
+            validate={[ required,  maxLength30 ]}
           />
         </Col>
         <Col lg="6">
@@ -46,7 +46,7 @@ let TagForm = (props) => {
             placeholder="Nom de famille"
             label="Nom de famille"
             type="text"
-            validate={[ required, minLength4, maxLength30 ]}
+            validate={[ required,  maxLength30 ]}
           />
         </Col>
       </Row>
