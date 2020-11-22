@@ -1,4 +1,5 @@
 import React from 'react'
+import { isEmpty } from 'lodash'
 import { CSVReader } from 'react-papaparse'
 import {Button} from 'reactstrap'
 
@@ -18,8 +19,10 @@ const CSVReaderBase = ({ onFileLoad, onError=f=>f, onRemoveFile }) => {
 
   const handleOnFileLoad = (data = [], file) => {
     setFiles(files.concat([file]))
-    setData(data)
-    onFileLoad(data)
+    if (data){
+      setData(data.filter(row=> !isEmpty(row)))
+      onFileLoad(data.filter(row=> !isEmpty(row)))
+    }
   }
 
   const handleOnRemoveFile = () => {

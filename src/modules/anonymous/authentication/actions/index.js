@@ -18,7 +18,7 @@ export const login = (payload) =>
         fail: ACTIONS.ACCOUNT_LOGIN_FAILED
       },
       messages: {
-        fail: "email ou mot de passe invalide, veuillez réessayer"
+        fail: "Email ou mot de passe invalide, veuillez réessayer"
       },
       endpoint: ENDPOINT.LOGIN,
       method: HTTP_METHODS.POST
@@ -52,7 +52,7 @@ export const register = (token, payload) =>
         fail: ACTIONS.CREATE_ACCOUNT_FAILED
       },
       messages: {
-        fail: "Une erreur s'est produite. Veuillez réessayer"
+        fail: "Votre email ou Nom d'utilisateur existe déjà. Veuillez réessayer"
       },
       endpoint: ENDPOINT.REGISTER.replace(":param", token),
       method: HTTP_METHODS.POST

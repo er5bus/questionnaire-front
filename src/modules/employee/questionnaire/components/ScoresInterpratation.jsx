@@ -59,6 +59,12 @@ const scoreTable = [
     idForSend: "OSTEOPATHY"
   },
   {
+    name: "Aliments",
+    descriptions: "Besoin interventionnel en aliments",
+    id: "Aliments",
+    idForSend: "NUTRITION"
+  },
+  {
     name: "Arrêt de travail",
     descriptions: "Risque d'arrêt de travail",
     id: "AT",
@@ -67,7 +73,6 @@ const scoreTable = [
 ]
 const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, categoryScore, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
   const [scoresToSubmit, setScoresToSubmit] = useState([])
-  console.log(healthAnsweredQuestion, ergonomicsAnsweredQuestion, psychologiqueAnsweredQuestion, coachingAnsweredQuestion)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setScoresToSubmit(FormatScoresToSend())

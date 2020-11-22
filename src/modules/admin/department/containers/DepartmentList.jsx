@@ -20,7 +20,15 @@ import { getFilteredDepartments } from './../selector'
 
 
 class DepartmentList extends React.Component {
-  
+
+  constructor(props){
+    super(props)
+    this.state = {
+      openModal: false,
+      id: null,
+    }
+  }
+
   onFetchDepartments = (pageNumber) => {
     if (!this.props.isLoading){
       this.props.fetchDepartments(this.props.match.params.companyParam, pageNumber)
@@ -29,6 +37,10 @@ class DepartmentList extends React.Component {
 
   onSearch = (e) => {
     this.props.filterDepartments(e.target.value.trim())
+  }
+
+  onToggleModal = (id) => {
+    this.setState({ openModal: !this.state.openModal, id })
   }
 
   render() {
@@ -41,11 +53,11 @@ class DepartmentList extends React.Component {
               <h6 className="h2 text-white d-inline-block mb-0 pt-4 ml-md-3"> { t(" Departments") } </h6>
               <Row className="align-items-center py-2">
                 <Col lg="6">
-                    <Breadcrumb className="breadcrumb-links breadcrumb-dark">
-                      <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Departments List")}</BreadcrumbItem>
-                    </Breadcrumb>
+                  <Breadcrumb className="breadcrumb-links breadcrumb-dark">
+                    <BreadcrumbItem active><i className="fas fa-home"></i> {t(" Departments List")}</BreadcrumbItem>
+                  </Breadcrumb>
                 </Col>
-                  {/* <Col  lg="6" className="text-right">
+                {/* <Col  lg="6" className="text-right">
                   <Link to={  adminRoutes.path + adminRoutes.routes.departmentList.path.replace(":companyParam", companyParam) } className="btn btn-sm btn-neutral">
                     <i className="fas fa-plus-circle" /> { " " }
                     {t('New department')}

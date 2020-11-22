@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, Card, CardBody, Col} from "reactstrap"
 
 import adminRoutes from './../../../../routes/admin'
+import { API_BASE_URL } from './../../../../constants'
 
 
 export default ({ name, description, id, onToggleModal }) => {
@@ -32,6 +33,9 @@ export default ({ name, description, id, onToggleModal }) => {
           >
             <i className="fa fa-eye" /> { t("Empolyees") }
           </Button>
+          <a className="btn-sm mt-4 btn btn-success" href={`${API_BASE_URL}/api/export/csv/${id}`}>
+            <i className="fa fa-save" /> { t("Télécharger csv") }
+          </a>
           {/* <Button
             className="btn-sm mt-4"
             color="warning"

@@ -19,6 +19,7 @@ const defaultState = {
     { id: "Médecine", idForSend: "MEDICINE"},
     { id: "Psychologie", idForSend: "PSYCHOLOGY"},
     { id: "Coach", idForSend: "COACH"},
+    { id: "Aliments", idForSend: "NUTRITION" },
     { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
     { id: "AT", idForSend: "STOPP_WORKING"},
   ],
@@ -29,6 +30,7 @@ const defaultState = {
     PSYCHOLOGY: 0,
     COACH: 0,
     OSTEOPATHY: 0,
+    NUTRITION: 0,
     STOPP_WORKING: 0
   },
   currentQuestion: { treeparam: "", nodeparam: "" },
@@ -52,11 +54,13 @@ const defaultState = {
     MEDICINE: 0,
     PSYCHOLOGY: 0,
     COACH: 0,
+    NUTRITION: 0,
     OSTEOPATHY: 0,
     STOPP_WORKING: 0
   },
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
+  foodList: {},
   foods: [],
   hasPain: false,
   isLoadingFoodCategories: false,
@@ -93,6 +97,8 @@ export default (state = {
     { id: "Psychologie", idForSend: "PSYCHOLOGY"},
     { id: "Psychologue", idForSend: "PSYCHOLOGY" },
     { id: "Coach", idForSend: "COACH"},
+    { id: "Coach", idForSend: "COACH"},
+    { id: "Aliments", idForSend: "NUTRITION" },
     { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
     { id: "AT", idForSend: "STOPP_WORKING"},
   ],
@@ -112,6 +118,7 @@ export default (state = {
     MEDICINE: 0,
     PSYCHOLOGY: 0,
     COACH: 0,
+    NUTRITION: 0,
     OSTEOPATHY: 0,
     STOPP_WORKING: 0
   },
@@ -127,6 +134,7 @@ export default (state = {
   ],
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
+  foodList: {},
   foods: [],
   isLoadingFoodCategories: false,
   isLoadingFoods: false,
@@ -184,19 +192,116 @@ export default (state = {
       return { ...state, otherSectionQuestionToUse: newArraySections }
     }
     case ACTIONS.SAVE_NUTRI_STATE: {
-
+      const categoryScore = { ...state.categoryScore }
       if (payload.Breakfast) {
-        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast }
+        const selectedScore = payload.Breakfast.selectedColumn.reduce((acc, selectedFoods, index) => {
+          let score = 0
+          let cof = 4 - index
+          selectedFoods.forEach((selectedFood) => {
+            const [categoryId, id] = selectedFood.split("-")
+            const foodObject = state.foodList.breakfast.find((food) => food.id === id && food.category_id === categoryId)
+            score += ( parseInt(foodObject.selected_score, 10) || 0 )
+          })
+          acc += score * cof
+          return acc
+        }, 0)
+        const unselectedScore = state.foodList.breakfast.reduce((acc, unselectedFood) => {
+          const exists = payload.Breakfast.selectedNutri.some((selectedNutri) => {
+            const [categoryId, id] = selectedNutri.split("-")
+            return unselectedFood.id === id && unselectedFood.category_id === categoryId
+          })
+          if (!exists){
+            acc += (parseInt(unselectedFood.selected_score, 10) || 0)
+          }
+          return acc
+        }, 0)
+        categoryScore.NUTRITION += (selectedScore + unselectedScore)
+        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast, categoryScore }
 
       } else if (payload.Lunch) {
-        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch }
+        const selectedScore = payload.Lunch.selectedColumn.reduce((acc, selectedFoods, index) => {
+          let score = 0
+          let cof = 4 - index
+          selectedFoods.forEach((selectedFood) => {
+            const [categoryId, id] = selectedFood.split("-")
+            const foodObject = state.foodList.lunch.find((food) => food.id === id && food.category_id === categoryId)
+            score += ( parseInt(foodObject.selected_score, 10) || 0 )
+          })
+          acc += score * cof
+          return acc
+        }, 0)
+        const unselectedScore = state.foodList.lunch.reduce((acc, unselectedFood) => {
+          const exists = payload.Lunch.selectedNutri.some((selectedNutri) => {
+            const [categoryId, id] = selectedNutri.split("-")
+            return unselectedFood.id === id && unselectedFood.category_id === categoryId
+          })
+          if (!exists){
+            acc += (parseInt(unselectedFood.selected_score, 10) || 0)
+          }
+          return acc
+        }, 0)
+        categoryScore.NUTRITION += (selectedScore + unselectedScore)
+        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch, categoryScore }
 
       } else if (payload.Snack) {
-        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack }
-
+        const selectedScore = payload.Snack.selectedColumn.reduce((acc, selectedFoods, index) => {
+          let score = 0
+          let cof = 4 - index
+          selectedFoods.forEach((selectedFood) => {
+            const [categoryId, id] = selectedFood.split("-")
+            const foodObject = state.foodList.snack.find((food) => food.id === id && food.category_id === categoryId)
+            score += ( parseInt(foodObject.selected_score, 10) || 0 )
+          })
+          acc += score * cof
+          return acc
+        }, 0)
+        const unselectedScore = state.foodList.snack.reduce((acc, unselectedFood) => {
+          const exists = payload.Snack.selectedNutri.some((selectedNutri) => {
+            const [categoryId, id] = selectedNutri.split("-")
+            return unselectedFood.id === id && unselectedFood.category_id === categoryId
+          })
+          if (!exists){
+            acc += (parseInt(unselectedFood.selected_score, 10) || 0)
+          }
+          return acc
+        }, 0)
+        categoryScore.NUTRITION += (selectedScore + unselectedScore)
+        const nutritionMax = 5
+        if( categoryScore.NUTRITION > 0 && categoryScore.NUTRITION <= 150) {
+          categoryScore.NUTRITION = 1
+        }else if(categoryScore.NUTRITION > 150 && categoryScore.NUTRITION <= 210) {
+          categoryScore.NUTRITION = 2
+        }else if (categoryScore.NUTRITION > 210 && categoryScore.NUTRITION <= 280) {
+          categoryScore.NUTRITION = 3
+        }else if (categoryScore.NUTRITION > 280) {
+          categoryScore.NUTRITION = 4
+        }
+        categoryScore.NUTRITION = categoryScore.NUTRITION > nutritionMax ? nutritionMax : categoryScore.NUTRITION
+        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack, categoryScore }
       } else if (payload.Dinner) {
-        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner }
-
+        const selectedScore = payload.Dinner.selectedColumn.reduce((acc, selectedFoods, index) => {
+          let score = 0
+          let cof = 4 - index
+          selectedFoods.forEach((selectedFood) => {
+            const [categoryId, id] = selectedFood.split("-")
+            const foodObject = state.foodList.dinner.find((food) => food.id === id && food.category_id === categoryId)
+            score += ( parseInt(foodObject.selected_score, 10) || 0 )
+          })
+          acc += score * cof
+          return acc
+        }, 0)
+        const unselectedScore = state.foodList.dinner.reduce((acc, unselectedFood) => {
+          const exists = payload.Dinner.selectedNutri.some((selectedNutri) => {
+            const [categoryId, id] = selectedNutri.split("-")
+            return unselectedFood.id === id && unselectedFood.category_id === categoryId
+          })
+          if (!exists){
+            acc += (parseInt(unselectedFood.selected_score, 10) || 0)
+          }
+          return acc
+        }, 0)
+        categoryScore.NUTRITION += (selectedScore + unselectedScore)
+        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner, categoryScore }
       } else {
         return state
       }
@@ -214,9 +319,7 @@ export default (state = {
       const page = state.page + 1
       return { ...state, page }
     }
-
     case ACTIONS.PREV_PAGE: {
-
       return { ...state, page: state.page - 1 }
     }
     case ACTIONS.TASKES_ENDED: {
@@ -483,8 +586,30 @@ export default (state = {
       return { ...state, isLoadingFoodCategories: true }
     }
     case ACTIONS.FETCH_CATEGORY_FOOD_SUCCEDED: {
-
-      return { ...state, isLoadingFoodCategories: false, foodCategories: payload }
+      const foodList = Object.keys(payload).reduce((acc, key) => {
+        const breakfast = payload[key].meals.every((meal) => meal.id === 4)
+        const lunch = payload[key].meals.every((meal) => meal.id === 5)
+        const snack = payload[key].meals.every((meal) => meal.id === 3)
+        const dinner = payload[key].meals.every((meal) => meal.id === 6)
+        if (breakfast){
+          acc.breakfast = acc.breakfast.concat(payload[key].foods)
+            .filter(food => food.hasOwnProperty('category_id'))
+        }
+        if (lunch){
+          acc.lunch = acc.lunch.concat(payload[key].foods)
+            .filter(food => food.hasOwnProperty('category_id'))
+        }
+        if (snack){
+          acc.snack = acc.snack.concat(payload[key].foods)
+            .filter(food => food.hasOwnProperty('category_id'))
+        }
+        if (dinner){
+          acc.dinner = acc.dinner.concat(payload[key].foods)
+            .filter(food => food.hasOwnProperty('category_id'))
+        }
+        return acc
+      }, {breakfast: [], lunch: [], snack: [], dinner: []})
+      return { ...state, isLoadingFoodCategories: false, foodCategories: payload, foodList }
     }
     case ACTIONS.FETCH_CATEGORY_FOOD_FAILED: {
       return { ...state, isLoadingFoodCategories: false, foodCategories: [] }
