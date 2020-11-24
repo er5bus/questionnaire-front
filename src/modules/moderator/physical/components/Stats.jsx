@@ -23,7 +23,7 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
       <Col lg="6">
         <Card>
           <CardHeader>
-            <CardTitle className="mb-0">Détails de troubles</CardTitle>
+            <CardTitle className="mb-0">Détail des troubles</CardTitle>
           </CardHeader>
           <CardBody>
             <div ref={detailsOfTroubleRef} className="pt-4">

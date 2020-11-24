@@ -80,7 +80,7 @@ export const HUMAN_BODY = {
   BACK_THORAX: { value: "Dos/Thorax", id: "BACK_THORAX" },
   ELBOW_WIRST_HAND: { value: "Coude/Poignet/Main", id: "ELBOW_WIRST_HAND" },
   ABDOMINAL_PAIN: { value: "Douleurs digestives (maux de ventre)", id: "ABDOMINAL_PAIN" },
-  LUMBAR_BUTTOCKS: { value: "Lombalgies/fessalgies (avec l'arrière des cuisses)", id: "LUMBAR_BUTTOCKS" },
+  LUMBAR_BUTTOCKS: { value: "Lombalgies/fessalgies  ", id: "LUMBAR_BUTTOCKS" },
   HIP: { value: "Hanche (que sur la vue de face)", id: "HIP" },
   KNEES: { value: "Genoux", id: "KNEES" },
   LEG_FOOT: { value: "Jambe/Pied", id: "LEG_FOOT" },

@@ -13,7 +13,7 @@ export const createMedicalRecord = (payload) =>
         fail: ACTIONS.CREATE_MEDICAL_RECORD_FAILED
       },
       messages: {
-        success: "Votre dossier médical a été créé avec succès",
+        success: "Votre dossier a été créé avec succès",
         fail: "Une erreur s'est produite. Veuillez réessaye"
       },
       endpoint: ENDPOINT.CREATE_MEDICAL_RECORD,
