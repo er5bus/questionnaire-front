@@ -22,6 +22,7 @@ const defaultState = {
     { id: "Aliments", idForSend: "NUTRITION" },
     { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
     { id: "AT", idForSend: "STOPP_WORKING"},
+    { id: "Diététicien", idForSend: "DIET"},
   ],
   currentQuestion: { treeparam: "", nodeparam: "" },
   selectedPartBodyToUse: [],
@@ -46,7 +47,8 @@ const defaultState = {
     COACH: 0,
     NUTRITION: 0,
     OSTEOPATHY: 0,
-    STOPP_WORKING: 0
+    STOPP_WORKING: 0,
+    DIET : 0
   },
   isLoadingNextOtherSectionQuestion: false,
   foodCategories: [],
@@ -90,6 +92,7 @@ export default (state = {
     { id: "Aliments", idForSend: "NUTRITION" },
     { id: "Ostéopathie", idForSend: "OSTEOPATHY"},
     { id: "AT", idForSend: "STOPP_WORKING"},
+    { id: "Diététicien", idForSend: "DIET"},
   ],
   selectedPartBody: [],
   selectedPartBodyID: [],
@@ -109,7 +112,9 @@ export default (state = {
     COACH: 0,
     NUTRITION: 0,
     OSTEOPATHY: 0,
-    STOPP_WORKING: 0
+    STOPP_WORKING: 0,
+    DIET : 0
+
   },
   otherSectionQuestion: [
     { id: "ERGONOMIE", value: "Vous avez déjà répondu à des questions ergonomique" },
@@ -447,567 +452,1393 @@ export default (state = {
         }
       } else if (!state.hasPain && page === 6) {
 
+               
+
+        if (state.bodyPartChoices["HEADACHE"] === 1){
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY == 5 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS ==  6) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS == 4  ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY == 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (   categoryScore.PHYSIOTHERAPY >= 2 && categoryScore.PHYSIOTHERAPY <= 3  ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else  if (categoryScore.ERGONOMICS < 2){
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["HEADACHE"] === 2){
+          if(categoryScore.MEDICINE >= 2) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  7) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 6 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  12) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 7 && categoryScore.ERGONOMICS < 12  ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 7  ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (   categoryScore.PHYSIOTHERAPY == 2 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else  {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["HEADACHE"] === 3){
+          if(categoryScore.MEDICINE >= 2) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  8) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 7 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY == 4 ) {
+            categoryScore.OSTEOPATHY = 2
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  13) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 10 && categoryScore.ERGONOMICS < 13  ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 10  ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6  ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 6) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (   categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 8  ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if (categoryScore.PHYSIOTHERAPY < 5 )  {
+            categoryScore.OSTEOPATHY = 2
+          }
+      
+          if (categoryScore.PSYCHOLOGY >= 8 ) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (   categoryScore.PSYCHOLOGY >= 5 && categoryScore.PSYCHOLOGY < 8  ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (categoryScore.PSYCHOLOGY < 6 )  {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          
+        }else if (state.bodyPartChoices["HEADACHE"] === 4){
+          if(categoryScore.MEDICINE >= 2) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  8) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 7 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY == 4 ) {
+            categoryScore.OSTEOPATHY = 2
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  13) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 10 && categoryScore.ERGONOMICS < 13  ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 10  ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6  ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 6) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (   categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 8  ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if (categoryScore.PHYSIOTHERAPY < 5 )  {
+            categoryScore.OSTEOPATHY = 2
+          }
+      
+          if (categoryScore.PSYCHOLOGY >= 8 ) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (   categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 8  ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (categoryScore.PSYCHOLOGY < 6 )  {
+            categoryScore.PSYCHOLOGY = 0
+          }
+        }
+      
+        if (state.bodyPartChoices["CERVICAL"] === 1){
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY === 5) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS === 6) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS === 4) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY === 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( 2 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY <= 3) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if ( categoryScore.PHYSIOTHERAPY < 2) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 2) {
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  7) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 7) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 1
+          }
+      
+          if (categoryScore.ERGONOMICS >= 9) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS <= 8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 3) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 9 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if ( 6 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 9) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSIOTHERAPY < 6) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 3) {
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >= 8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 12 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if ( 10 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 12) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 10) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSIOTHERAPY < 5) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["CERVICAL"] === 4) {
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
+            categoryScore.OSTEOPATHY = 2
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >= 8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 13 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if ( 9 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 13) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 9) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSIOTHERAPY < 5) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }
+        
+      
+        if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.PSYCHOLOGY == 3) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  5) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  7) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+      
+        }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.PSYCHOLOGY >= 5) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  8) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >=  5 && categoryScore.OSTEOPATHY <  8 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5   ) {
+            categoryScore.OSTEOPATHY = 2
+          }
+      
+          if (categoryScore.ERGONOMICS >=  7) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 7 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  6) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 6 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if (categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+        }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 3){
+          
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 2
+          } else {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  7) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  8) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY < 6) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+          
+        }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 4){
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+        
+          if (categoryScore.ERGONOMICS >=  7) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 5) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 3  ) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  8) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY < 6) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+        }
+      
+        if (state.bodyPartChoices["BACK_THORAX"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+      
+          if (categoryScore.OSTEOPATHY >=  6) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY == 5) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 5) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  5) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 5 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 3) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY ==  8) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else  {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+        }else  if (state.bodyPartChoices["BACK_THORAX"] === 2){
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if(categoryScore.DIET == 4 ) {
+            categoryScore.DIET = 4
+          }else {
+            categoryScore.DIET = 0
+          }
+      
+      
+          if (categoryScore.OSTEOPATHY >  6) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.ERGONOMICS <= 5 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY < 4) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  9) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 9 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  7) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 7 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (categoryScore.PHYSIOTHERAPY >= 3 && categoryScore.PHYSIOTHERAPY < 6 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else  if (categoryScore.PHYSIOTHERAPY < 3) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+          if (categoryScore.PSYCHOLOGY == 10) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 10 ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (  categoryScore.PSYCHOLOGY < 6 ) {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+      
+        }else  if (state.bodyPartChoices["BACK_THORAX"] === 3){
+          
+      
+          if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 2
+          } else  {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  9) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (categoryScore.PHYSIOTHERAPY >= 7 && categoryScore.PHYSIOTHERAPY < 9 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else  if (categoryScore.PHYSIOTHERAPY < 7) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+      
+          if (categoryScore.PSYCHOLOGY == 10) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 10 ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (  categoryScore.PSYCHOLOGY < 6 ) {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+      
+        }else  if (state.bodyPartChoices["BACK_THORAX"] === 4){
+          
+      
+          if (categoryScore.OSTEOPATHY ==  4) {
+            categoryScore.OSTEOPATHY = 3
+          } else  if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 1
+          } else {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  10) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 10 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >=  8) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else  if (categoryScore.PHYSIOTHERAPY < 6) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }
+      
+          if (categoryScore.PSYCHOLOGY == 8) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 8 ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (  categoryScore.PSYCHOLOGY < 6 ) {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+      
+        }
+
        
-
-          if (state.bodyPartChoices["HEADACHE"] === 1){
-            if(categoryScore.MEDICINE >= 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  6) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY == 5 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 5) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS ==  6) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS == 4  ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY == 4 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (   categoryScore.PHYSIOTHERAPY >= 2 && categoryScore.PHYSIOTHERAPY <= 3  ) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else  if (categoryScore.ERGONOMICS < 2){
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["HEADACHE"] === 2){
-            if(categoryScore.MEDICINE >= 2) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  7) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 6 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 5) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  12) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 7 && categoryScore.ERGONOMICS < 12  ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 7  ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 4 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (   categoryScore.PHYSIOTHERAPY == 2 ) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else  {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["HEADACHE"] === 3){
-            if(categoryScore.MEDICINE >= 2) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY ==  8) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 7 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY == 4 ) {
-              categoryScore.OSTEOPATHY = 2
-            }else if (categoryScore.OSTEOPATHY < 4) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  13) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 10 && categoryScore.ERGONOMICS < 13  ) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 10  ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6  ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 6) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 8 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (   categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 8  ) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if (categoryScore.PHYSIOTHERAPY < 5 )  {
-              categoryScore.OSTEOPATHY = 2
-            }
-
-            if (categoryScore.PSYCHOLOGY >= 8 ) {
-              categoryScore.PSYCHOLOGY = 2
-            }else if (   categoryScore.PSYCHOLOGY >= 5 && categoryScore.PSYCHOLOGY < 8  ) {
-              categoryScore.PSYCHOLOGY = 1
-            }else if (categoryScore.PSYCHOLOGY < 6 )  {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            
-          }else if (state.bodyPartChoices["HEADACHE"] === 4){
-            if(categoryScore.MEDICINE >= 2) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY ==  8) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY >= 5 && categoryScore.OSTEOPATHY <= 7 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY == 4 ) {
-              categoryScore.OSTEOPATHY = 2
-            }else if (categoryScore.OSTEOPATHY < 4) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  13) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 10 && categoryScore.ERGONOMICS < 13  ) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 10  ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6  ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 6) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 8 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (   categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 8  ) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if (categoryScore.PHYSIOTHERAPY < 5 )  {
-              categoryScore.OSTEOPATHY = 2
-            }
-
-            if (categoryScore.PSYCHOLOGY >= 8 ) {
-              categoryScore.PSYCHOLOGY = 2
-            }else if (   categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 8  ) {
-              categoryScore.PSYCHOLOGY = 1
-            }else if (categoryScore.PSYCHOLOGY < 6 )  {
-              categoryScore.PSYCHOLOGY = 0
-            }
+       
+        if (state.bodyPartChoices["SHOULDERS"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
           }
-
-          if (state.bodyPartChoices["CERVICAL"] === 1){
-            if(categoryScore.MEDICINE >= 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  6) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY === 5) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 5) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS === 6) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS === 4) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY === 4 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if ( 2 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY <= 3) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if ( categoryScore.PHYSIOTHERAPY < 2) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["CERVICAL"] === 2) {
-            if(categoryScore.MEDICINE >= 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  7) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 7) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 4) {
-              categoryScore.OSTEOPATHY = 1
-            }
-
-            if (categoryScore.ERGONOMICS >= 9) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS <= 8) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 3) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 9 ) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if ( 6 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 9) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if ( categoryScore.PHYSIOTHERAPY < 6) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["CERVICAL"] === 3) {
-            if (categoryScore.OSTEOPATHY >=  6) {
-              categoryScore.OSTEOPATHY = 4
-            }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 4) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >= 8) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS < 5) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 12 ) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if ( 10 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 12) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 10) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if ( categoryScore.PHYSIOTHERAPY < 5) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["CERVICAL"] === 4) {
-            if(categoryScore.MEDICINE >= 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  6) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6) {
-              categoryScore.OSTEOPATHY = 2
-            }else if (categoryScore.OSTEOPATHY < 4) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >= 8) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS < 5) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 13 ) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if ( 9 <= categoryScore.PHYSIOTHERAPY && categoryScore.PHYSIOTHERAPY < 13) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 9) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if ( categoryScore.PHYSIOTHERAPY < 5) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }
-          
-
-          if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 1){
-            if(categoryScore.MEDICINE == 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.PSYCHOLOGY == 3) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  5) {
-              categoryScore.OSTEOPATHY = 4
-            } else if (categoryScore.OSTEOPATHY < 5) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  7) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 5) {
-              categoryScore.ERGONOMICS = 0
-            }
-
       
-          }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 2){
-            if(categoryScore.MEDICINE == 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  10) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 8 && categoryScore.OSTEOPATHY < 10 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY >= 6 && categoryScore.OSTEOPATHY < 8 ) {
+            categoryScore.OSTEOPATHY = 1
+          }else if (categoryScore.OSTEOPATHY < 6  ) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (  categoryScore.PHYSIOTHERAPY <= 4  && categoryScore.PHYSIOTHERAPY < 8) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if ( categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        } else if (state.bodyPartChoices["SHOULDERS"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.PSYCHOLOGY >= 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  9) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 6 && categoryScore.OSTEOPATHY < 9 ) {
+            categoryScore.OSTEOPATHY = 3
+          }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6 ) {
+            categoryScore.OSTEOPATHY = 1
+          }else if (categoryScore.OSTEOPATHY < 4  ) {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 10 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (  categoryScore.PHYSIOTHERAPY <= 7  && categoryScore.PHYSIOTHERAPY < 10) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (  categoryScore.PHYSIOTHERAPY <= 5  && categoryScore.PHYSIOTHERAPY < 7) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if ( categoryScore.PHYSIOTHERAPY < 5) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        }else if (state.bodyPartChoices["SHOULDERS"] === 3){
+          
+      
+          if (categoryScore.OSTEOPATHY ==  4) {
+            categoryScore.OSTEOPATHY = 3
+          }  else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+      
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  10) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 8 && categoryScore.ERGONOMICS < 10 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 10 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (  categoryScore.PHYSIOTHERAPY <= 6  && categoryScore.PHYSIOTHERAPY < 10) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if ( categoryScore.PHYSIOTHERAPY < 6) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }
+      
+      
+        }else if (state.bodyPartChoices["SHOULDERS"] === 4){
+      
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  4) {
+            categoryScore.OSTEOPATHY = 2
+          }  else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  10) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 8 && categoryScore.ERGONOMICS < 10 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }else if (  categoryScore.PHYSIOTHERAPY <= 4  && categoryScore.PHYSIOTHERAPY < 8) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if ( categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }
+      
+      
+        }
+      
+        if (state.bodyPartChoices["KNEES"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  7) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY == 5 ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY < 5  ) {
+            categoryScore.OSTEOPATHY = 1
+          }
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 2) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          } else if ( categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        }else if (state.bodyPartChoices["KNEES"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
 
-            if (categoryScore.PSYCHOLOGY >= 5) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
+          if(categoryScore.COACH == 4) {
+            categoryScore.COACH = 2 
+          }else {
+            categoryScore.COACH = 0
+          }
 
-            if (categoryScore.OSTEOPATHY >=  8) {
-              categoryScore.OSTEOPATHY = 4
-            } else if (categoryScore.OSTEOPATHY >=  5 && categoryScore.OSTEOPATHY <  8 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY < 5   ) {
-              categoryScore.OSTEOPATHY = 2
-            }
-
-            if (categoryScore.ERGONOMICS >=  7) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 7 ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >=  6) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 6 ) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if (categoryScore.PHYSIOTHERAPY < 4) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-          }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 3){
-            
-            if (categoryScore.PSYCHOLOGY == 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            if (categoryScore.OSTEOPATHY ==  2) {
-              categoryScore.OSTEOPATHY = 2
-            } else {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  7) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS < 5) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >=  8) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (categoryScore.PHYSIOTHERAPY < 6) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }
-            
-          }else if (state.bodyPartChoices["ELBOW_WIRST_HAND"] === 4){
-            if (categoryScore.PSYCHOLOGY == 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
+          if(categoryScore.DIET == 4) {
+            categoryScore.DIET = 2
+          }else {
+            categoryScore.DIET = 0
+          }
 
           
-            if (categoryScore.ERGONOMICS >=  7) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 7 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 5) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 3  ) {
-              categoryScore.ERGONOMICS = 0
-            }
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
 
-            if (categoryScore.PHYSIOTHERAPY >=  8) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (categoryScore.PHYSIOTHERAPY < 6) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }
+          if (categoryScore.OSTEOPATHY ==  8) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 8  ) {
+            categoryScore.OSTEOPATHY = 3
+          } else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS < 4) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 12 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if (categoryScore.PHYSIOTHERAPY >= 6   && categoryScore.PHYSIOTHERAPY < 12  ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (categoryScore.PHYSIOTHERAPY >= 4   && categoryScore.PHYSIOTHERAPY < 6  ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if ( categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        }else if (state.bodyPartChoices["KNEES"] === 3){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if (categoryScore.OSTEOPATHY ==  4) {
+            categoryScore.OSTEOPATHY = 2
+          }  else   {
+            categoryScore.OSTEOPATHY = 0
           }
  
-          if (state.bodyPartChoices["SHOULDERS"] === 1){
-            if(categoryScore.MEDICINE == 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.PSYCHOLOGY == 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  10) {
-              categoryScore.OSTEOPATHY = 4
-            } else if (categoryScore.OSTEOPATHY >= 8 && categoryScore.OSTEOPATHY < 10 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY >= 6 && categoryScore.OSTEOPATHY < 8 ) {
-              categoryScore.OSTEOPATHY = 1
-            }else if (categoryScore.OSTEOPATHY < 6  ) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  8) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 8 ) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (  categoryScore.PHYSIOTHERAPY <= 4  && categoryScore.PHYSIOTHERAPY < 8) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if ( categoryScore.PHYSIOTHERAPY < 4) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-
-      
-          } else if (state.bodyPartChoices["SHOULDERS"] === 2){
-            if(categoryScore.MEDICINE == 4) {
-              categoryScore.MEDICINE = 4
-            }else {
-              categoryScore.MEDICINE = 0
-            }
-
-            if (categoryScore.PSYCHOLOGY >= 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            if (categoryScore.OSTEOPATHY >=  9) {
-              categoryScore.OSTEOPATHY = 4
-            } else if (categoryScore.OSTEOPATHY >= 6 && categoryScore.OSTEOPATHY < 9 ) {
-              categoryScore.OSTEOPATHY = 3
-            }else if (categoryScore.OSTEOPATHY >= 4 && categoryScore.OSTEOPATHY < 6 ) {
-              categoryScore.OSTEOPATHY = 1
-            }else if (categoryScore.OSTEOPATHY < 4  ) {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-            if (categoryScore.ERGONOMICS >=  8) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 6 ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 2) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 10 ) {
-              categoryScore.PHYSIOTHERAPY = 3
-            }else if (  categoryScore.PHYSIOTHERAPY <= 7  && categoryScore.PHYSIOTHERAPY < 10) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }else if (  categoryScore.PHYSIOTHERAPY <= 5  && categoryScore.PHYSIOTHERAPY < 7) {
-              categoryScore.PHYSIOTHERAPY = 1
-            }else if ( categoryScore.PHYSIOTHERAPY < 5) {
-              categoryScore.PHYSIOTHERAPY = 0
-            }
-
-      
-          }else if (state.bodyPartChoices["SHOULDERS"] === 3){
-            
-
-            if (categoryScore.OSTEOPATHY ==  4) {
-              categoryScore.OSTEOPATHY = 3
-            }  else   {
-              categoryScore.OSTEOPATHY = 0
-            }
-
-
-            if (categoryScore.PSYCHOLOGY == 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-
-            if (categoryScore.ERGONOMICS >=  10) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 8 && categoryScore.ERGONOMICS < 10 ) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 8 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS < 4) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 10 ) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if (  categoryScore.PHYSIOTHERAPY <= 6  && categoryScore.PHYSIOTHERAPY < 10) {
-              categoryScore.PHYSIOTHERAPY = 3
-            } else if ( categoryScore.PHYSIOTHERAPY < 6) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }
-
-      
-          }else if (state.bodyPartChoices["SHOULDERS"] === 4){
-   
-            if (categoryScore.PSYCHOLOGY == 4) {
-              categoryScore.PSYCHOLOGY = 1
-            }else {
-              categoryScore.PSYCHOLOGY = 0
-            }
-
-            if (categoryScore.OSTEOPATHY ==  4) {
-              categoryScore.OSTEOPATHY = 2
-            }  else   {
-              categoryScore.OSTEOPATHY = 0
-            }
- 
-            if (categoryScore.ERGONOMICS >=  10) {
-              categoryScore.ERGONOMICS = 4
-            }else if (categoryScore.ERGONOMICS >= 8 && categoryScore.ERGONOMICS < 10 ) {
-              categoryScore.ERGONOMICS = 3
-            }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 8 ) {
-              categoryScore.ERGONOMICS = 2
-            }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
-              categoryScore.ERGONOMICS = 1
-            }else if (categoryScore.ERGONOMICS < 2) {
-              categoryScore.ERGONOMICS = 0
-            }
-
-            if (categoryScore.PHYSIOTHERAPY >= 8 ) {
-              categoryScore.PHYSIOTHERAPY = 4
-            }else if (  categoryScore.PHYSIOTHERAPY <= 4  && categoryScore.PHYSIOTHERAPY < 8) {
-              categoryScore.PHYSIOTHERAPY = 3
-            } else if ( categoryScore.PHYSIOTHERAPY < 4) {
-              categoryScore.PHYSIOTHERAPY = 2
-            }
-
-      
+          
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
           }
 
+         
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else  {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          } else if (categoryScore.PHYSIOTHERAPY >= 6   && categoryScore.PHYSIOTHERAPY < 10  ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY >= 4   && categoryScore.PHYSIOTHERAPY < 6  ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if ( categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+      
+      
+        }else if (state.bodyPartChoices["KNEES"] === 4){
           
 
+          if (categoryScore.OSTEOPATHY ==  4) {
+            categoryScore.OSTEOPATHY = 2
+          }  else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+ 
+          
+          if (categoryScore.PSYCHOLOGY == 4) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+
+         
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          }else  {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          } else if ( categoryScore.PHYSIOTHERAPY < 8) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }
+      
+      
+        }
+      
+      
+        if (state.bodyPartChoices["HIP"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY ==  7) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 4  && categoryScore.OSTEOPATHY < 7 ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY < 4  ) {
+            categoryScore.OSTEOPATHY = 1
+          }
+      
+          if (categoryScore.PHYSIOTHERAPY == 4 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }  
+      
+      
+          if (categoryScore.ERGONOMICS ==  8) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 1
+          } 
+      
+          
+      
+      
+        } else if (state.bodyPartChoices["HIP"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+          
+          if(categoryScore.DIET == 4) {
+            categoryScore.DIET = 2
+          }else {
+            categoryScore.DIET = 0
+          }
+
+          if (categoryScore.PSYCHOLOGY == 2) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+ 
+          if(categoryScore.COACH == 4) {
+            categoryScore.COACH = 2 
+          }else {
+            categoryScore.COACH = 0
+          }
+ 
+          if (categoryScore.OSTEOPATHY ==  6) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY == 4    ) {
+            categoryScore.OSTEOPATHY = 2
+          } else if (categoryScore.OSTEOPATHY < 4  ) {
+            categoryScore.OSTEOPATHY = 1
+          }
+ 
+          if (categoryScore.ERGONOMICS >=  9) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 8 && categoryScore.ERGONOMICS < 9 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 3 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 1
+          } else   {
+            categoryScore.ERGONOMICS = 0
+          } 
+          
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if (categoryScore.PHYSIOTHERAPY >= 6 &&  categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          } else if (categoryScore.PHYSIOTHERAPY >= 4 &&  categoryScore.PHYSIOTHERAPY < 6 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if (  categoryScore.PHYSIOTHERAPY < 4 ) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }    
+      
+          
+      
+      
+        }else if (state.bodyPartChoices["HIP"] === 3){
+          
+          if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 1
+          }  else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+ 
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 5 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 5 ) {
+            categoryScore.ERGONOMICS = 1
+          } else   {
+            categoryScore.ERGONOMICS = 0
+          } 
+          
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          } else if (categoryScore.PHYSIOTHERAPY >= 6 &&  categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if (categoryScore.PHYSIOTHERAPY >= 4 &&  categoryScore.PHYSIOTHERAPY < 6 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }else if (  categoryScore.PHYSIOTHERAPY < 4 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }    
+      
+          
+      
+      
+        }else if (state.bodyPartChoices["HIP"] === 4){
+          
+         
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 1
+          } else   {
+            categoryScore.ERGONOMICS = 0
+          } 
+          
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }  else if (categoryScore.PHYSIOTHERAPY >= 4 &&  categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (  categoryScore.PHYSIOTHERAPY < 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }    
+      
+          
+      
+      
+        }
+        
+        if (state.bodyPartChoices["LEG_FOOT"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >=  7) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY >= 5  && categoryScore.OSTEOPATHY < 7 ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY < 5  ) {
+            categoryScore.OSTEOPATHY = 1
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  7) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 7 ) {
+            categoryScore.ERGONOMICS = 1
+          } else {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY == 6 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }  else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 6 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          } else {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+      
+        }else if (state.bodyPartChoices["LEG_FOOT"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if(categoryScore.DIET == 4) {
+            categoryScore.DIET = 2
+          }else {
+            categoryScore.DIET = 0
+          }
+
+          if (categoryScore.PSYCHOLOGY == 2) {
+            categoryScore.PSYCHOLOGY = 1
+          }else {
+            categoryScore.PSYCHOLOGY = 0
+          }
+
+          if (categoryScore.COACH == 4) {
+            categoryScore.COACH = 2
+          }else {
+            categoryScore.COACH = 0
+          }
+
+          if (categoryScore.OSTEOPATHY ==  6) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY == 4  ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY < 4  ) {
+            categoryScore.OSTEOPATHY = 1
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          } else {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 13 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }  else if (categoryScore.PHYSIOTHERAPY >= 8 && categoryScore.PHYSIOTHERAPY < 13 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          } else if (categoryScore.PHYSIOTHERAPY >= 6 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          } else if (  categoryScore.PHYSIOTHERAPY < 6 ){
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+      
+        }else if (state.bodyPartChoices["LEG_FOOT"] === 3){
+         
+
+          if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 2
+          }   else {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          } else {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 9 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }  else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 9 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if (  categoryScore.PHYSIOTHERAPY < 5 ){
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+      
+      
+      
+        }else if (state.bodyPartChoices["LEG_FOOT"] === 4){
+         
+
+          if (categoryScore.OSTEOPATHY ==  2) {
+            categoryScore.OSTEOPATHY = 2
+          }   else {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 6 && categoryScore.ERGONOMICS < 8 ) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 4 && categoryScore.ERGONOMICS < 6 ) {
+            categoryScore.ERGONOMICS = 1
+          } else {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 9 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }  else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 9 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          } else if (  categoryScore.PHYSIOTHERAPY < 5 ){
+            categoryScore.PHYSIOTHERAPY = 1
+          }
+      
+      
+      
+        }
+      
+        if (state.bodyPartChoices["LUMBAR_BUTTOCKS"] === 1){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY >= 6) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY == 5   ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY <= 3  ) {
+            categoryScore.OSTEOPATHY = 2
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  4) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS == 3  ) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS == 2  ) {
+            categoryScore.ERGONOMICS = 2
+          } else if (categoryScore.ERGONOMICS < 2  ) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 4 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }  else if (categoryScore.PHYSIOTHERAPY >= 2 && categoryScore.PHYSIOTHERAPY < 4 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          } else if (categoryScore.PHYSIOTHERAPY < 2 ) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+      
+        } else if (state.bodyPartChoices["LUMBAR_BUTTOCKS"] === 2){
+          if(categoryScore.MEDICINE == 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+
+          if(categoryScore.DIET == 4) {
+            categoryScore.DIET = 4
+          }else {
+            categoryScore.DIET = 0
+          }
+
+          if(categoryScore.COACH == 4) {
+            categoryScore.COACH = 4
+          }else {
+            categoryScore.COACH = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY > 5) {
+            categoryScore.OSTEOPATHY = 4
+          } else if (categoryScore.OSTEOPATHY == 5   ) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY < 5  ) {
+            categoryScore.OSTEOPATHY = 2
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 5  && categoryScore.ERGONOMICS <  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 4  && categoryScore.ERGONOMICS <  5) {
+            categoryScore.ERGONOMICS = 1
+          } else if (categoryScore.ERGONOMICS < 4 ) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 8 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }  else if (categoryScore.PHYSIOTHERAPY >= 5 && categoryScore.PHYSIOTHERAPY < 8 ) {
+            categoryScore.PHYSIOTHERAPY = 2
+          } else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 5 ) {
+            categoryScore.PHYSIOTHERAPY = 1
+          }else if (categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+          
+          if (categoryScore.PSYCHOLOGY >= 8) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 8  ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (categoryScore.PSYCHOLOGY < 6) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        } else if (state.bodyPartChoices["LUMBAR_BUTTOCKS"] === 3){
+          if(categoryScore.MEDICINE >= 4) {
+            categoryScore.MEDICINE = 4
+          }else {
+            categoryScore.MEDICINE = 0
+          }
+ 
+          if(categoryScore.COACH == 3) {
+            categoryScore.COACH = 1
+          }else {
+            categoryScore.COACH = 0
+          }
+      
+          if (categoryScore.OSTEOPATHY == 3) {
+            categoryScore.OSTEOPATHY = 3
+          } else if (categoryScore.OSTEOPATHY == 2   ) {
+            categoryScore.OSTEOPATHY = 2
+          } else   {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+      
+          if (categoryScore.ERGONOMICS >=  8) {
+            categoryScore.ERGONOMICS = 4
+          }else if (categoryScore.ERGONOMICS >= 6  && categoryScore.ERGONOMICS <  8) {
+            categoryScore.ERGONOMICS = 3
+          }else if (categoryScore.ERGONOMICS >= 3  && categoryScore.ERGONOMICS <  6) {
+            categoryScore.ERGONOMICS = 2
+          }else if (categoryScore.ERGONOMICS >= 2  && categoryScore.ERGONOMICS <  3) {
+            categoryScore.ERGONOMICS = 1
+          } else if (categoryScore.ERGONOMICS < 3 ) {
+            categoryScore.ERGONOMICS = 0
+          }
+      
+          
+          if (categoryScore.PHYSIOTHERAPY >= 5 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }  else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 5 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }
+          
+          if (categoryScore.PSYCHOLOGY >= 10) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 7 && categoryScore.PSYCHOLOGY < 10  ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (categoryScore.PSYCHOLOGY < 7) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        } else if (state.bodyPartChoices["LUMBAR_BUTTOCKS"] === 4){
+          
+ 
+          if(categoryScore.COACH == 4) {
+            categoryScore.COACH = 1
+          }else {
+            categoryScore.COACH = 0
+          }
+
+          if (categoryScore.OSTEOPATHY == 3) {
+            categoryScore.OSTEOPATHY = 2
+          } else  {
+            categoryScore.OSTEOPATHY = 0
+          }
+      
+          if (categoryScore.ERGONOMICS >= 8) {
+            categoryScore.ERGONOMICS = 4
+          } else if (categoryScore.ERGONOMICS >= 6  && categoryScore.ERGONOMICS <  8)  {
+            categoryScore.ERGONOMICS = 3
+          } else if (categoryScore.ERGONOMICS >= 3  && categoryScore.ERGONOMICS <  6)  {
+            categoryScore.ERGONOMICS = 1
+          }else if (categoryScore.ERGONOMICS < 3 ) {
+            categoryScore.ERGONOMICS = 0
+          }
+       
+          if (categoryScore.PHYSIOTHERAPY >= 7 ) {
+            categoryScore.PHYSIOTHERAPY = 4
+          }  else if (categoryScore.PHYSIOTHERAPY >= 4 && categoryScore.PHYSIOTHERAPY < 7 ) {
+            categoryScore.PHYSIOTHERAPY = 3
+          }else if (categoryScore.PHYSIOTHERAPY < 4) {
+            categoryScore.PHYSIOTHERAPY = 2
+          }
+          
+          if (categoryScore.PSYCHOLOGY >= 10) {
+            categoryScore.PSYCHOLOGY = 2
+          }else if (categoryScore.PSYCHOLOGY >= 6 && categoryScore.PSYCHOLOGY < 10  ) {
+            categoryScore.PSYCHOLOGY = 1
+          }else if (categoryScore.PSYCHOLOGY < 6) {
+            categoryScore.PHYSIOTHERAPY = 0
+          }
+      
+      
+        }     
+      
       }
       return { ...state, otherSectionQuestionToUse: nextArray, isLoadingNextOtherSectionQuestion: true, categoryScore }
     }
