@@ -31,7 +31,7 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
       <Col lg="12">
         <Card>
           <CardHeader>
-            <CardTitle className="mb-0">Détails de troubles</CardTitle>
+            <CardTitle className="mb-0">Détail de troubles</CardTitle>
           </CardHeader>
           <CardBody>
             <div ref={detailsOfTroubleRef} className="pt-4">

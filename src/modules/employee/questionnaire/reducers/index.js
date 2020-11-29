@@ -55,6 +55,9 @@ const defaultState = {
   hasPain: false,
   isLoadingFoodCategories: false,
   isLoadingFoods: false,
+  selectedScoreNutrition: 0,
+  deselectedScoreNutrition: 0,
+
   selectedScoreNut: 0,
   deselectedScoreNut: 0,
   deselectedScoreNutState: false,
@@ -80,6 +83,8 @@ export default (state = {
   isLoading: false,
   item: null,
   error: null,
+  selectedScoreNutrition: 0,
+  deselectedScoreNutrition: 0,
   categories: [
     { id: "Kinésithérapie", idForSend: "PHYSIOTHERAPY"},
     { id: "Ergonomie", idForSend: "ERGONOMICS"},
@@ -266,7 +271,7 @@ export default (state = {
           categoryScore.NUTRITION = 4
         }
         categoryScore.NUTRITION = categoryScore.NUTRITION > nutritionMax ? nutritionMax : categoryScore.NUTRITION
-        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack, categoryScore }
+        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack, categoryScore, selectedScoreNutrition: selectedScore, deselectedScoreNutrition: unselectedScore }
       } else if (payload.Dinner) {
         const selectedScore = payload.Dinner.selectedColumn.reduce((acc, selectedFoods, index) => {
           let score = 0
@@ -319,7 +324,10 @@ export default (state = {
       const categoryScore = { ...state.categoryScore };
       (payload || []).forEach(element => {
         const key = state.categories.find( (cat) => cat.id === element.name)
-        categoryScore[key.idForSend] += element.value
+        if (key && key.idForSend){
+
+          categoryScore[key.idForSend] += element.value
+        }
       })
 
       let newArrayScores = [...state.scores]

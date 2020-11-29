@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 
 import moderatorRoutes from './../../../../routes/moderator'
 
-//import ConfirmModal from "./../../../components/ConfirmModal"
+import ConfirmModal from "./../../../../components/ConfirmModal"
 import CardNotFound from './../../../../components/CardNotFound'
 import InfiniteScroll from './../../../../components/InfiniteScroll'
 
 import EmployeeItem from './../components/EmployeeItem'
 import EmployeeLoader from './../components/EmployeeLoader'
 
-import { fetchEmployees, filterEmployees } from './../actions'
+import { fetchEmployees, filterEmployees, deleteEmployee } from './../actions'
 import { getFilteredEmployees } from './../selector'
 
 
@@ -21,6 +21,14 @@ import { getFilteredEmployees } from './../selector'
 
 class EmployeeList extends React.Component {
   
+  constructor(props){
+    super(props)
+    this.state = {
+      openDeleteModal: false,
+      id: null,
+    }
+  }
+
   onFetchEmployees = (pageNumber) => {
     if (!this.props.isLoading){
       this.props.fetchEmployees(this.props.match.params.departmentParam, pageNumber)
@@ -29,6 +37,15 @@ class EmployeeList extends React.Component {
 
   onSearch = (e) => {
     this.props.filterEmployees(e.target.value.trim())
+  }
+
+  onToggleModal = (id) => {
+    this.setState({ openDeleteModal: !this.state.openDeleteModal, id })
+  }
+
+  onDelete = () => {
+    const { departmentParam } = this.props.match.params
+    this.props.deleteEmployee(departmentParam, this.state.id)
   }
 
   render() {
@@ -58,6 +75,14 @@ class EmployeeList extends React.Component {
         </div>
 
         <Container className="mt--4" fluid>
+          <ConfirmModal
+            isOpen={ this.state.openDeleteModal }
+            title="Confirmation"
+            content="Êtes-vous sûr de vouloir supprimer cette employee?"
+            onClick={ this.onDelete }
+            onToggle={ this.onToggleModal }
+            buttonText="Supprimer cette employee"
+          />
           <Row>
             <Col lg="12">
               <Row className="row-grid">
@@ -84,4 +109,4 @@ const mapStateToProps = state => ({
   ...state.employee, user: state.session.user, items: getFilteredEmployees(state)
 })
 
-export default connect(mapStateToProps, { fetchEmployees, filterEmployees })(EmployeeList)
+export default connect(mapStateToProps, { fetchEmployees, filterEmployees, deleteEmployee })(EmployeeList)

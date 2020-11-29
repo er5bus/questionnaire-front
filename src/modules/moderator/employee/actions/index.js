@@ -44,7 +44,7 @@ export const createEmployee = (departmentParam, payload) =>
       },
       messages: {
         success: "Votre utilisateur a été créé avec succès",
-        fail: "Something went wrong please try again"
+        fail: "Votre e-mail déja existe"
       },
       endpoint: ENDPOINT.EMPLOYEES.replace(":departmentParam", departmentParam),
       method: HTTP_METHODS.POST,
@@ -85,6 +85,26 @@ export const fetchEmployee = ({departmentParam, param}) =>
       },
       endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", param),
       method: HTTP_METHODS.GET,
+      jwt: true
+    }
+  })
+
+export const deleteEmployee = (departmentParam, employeeParam) =>
+  ({
+    type: CALL_API,
+    meta: {
+      actions: {
+        init: ACTIONS.DELETE_EMPLOYEE_INIT,
+        success: ACTIONS.DELETE_EMPLOYEE_SUCCEDED,
+        fail: ACTIONS.DELETE_EMPLOYEE_FAILED,
+      },
+      messages: {
+        success: "Votre employée a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
+      },
+      endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", employeeParam),
+      extraData: { id: employeeParam },
+      method: HTTP_METHODS.DELETE,
       jwt: true
     }
   })

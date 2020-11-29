@@ -71,7 +71,7 @@ const scoreTable = [
     idForSend: "STOPP_WORKING"
   },
 ]
-const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, categoryScore, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
+const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedScoreNutrition, deselectedScoreNutrition, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, categoryScore, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
   const [scoresToSubmit, setScoresToSubmit] = useState([])
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -268,7 +268,7 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
           </tr>
         </thead>
         <tbody>
-          {scoreTable.map(el => (
+          {scoreTable.sort((a, b) => ((categoryScore && categoryScore[b.idForSend]) || calculateScore(b.id, scores)) - ((categoryScore && categoryScore[a.idForSend]) || calculateScore(a.id, scores))).map(el => (
             <tr key={el.name}>
               <th scope="row"> {t(`${el.name}`)}  </th>
               <td> {t(`${el.descriptions}`)}  </td>
@@ -278,12 +278,12 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
           <tr>
             <th scope="row"> {t("Aliments sélectionnés")}  </th>
             <td> {t("Valeur ajoutée des aliments sélectionnés")}  </td>
-            <td> {selectedScoreNut} </td>
+            <td> {selectedScoreNutrition} </td>
           </tr>
           <tr>
             <th scope="row"> {t("Aliments non sélectionnés")}  </th>
             <td> {t("Valeur non ajoutée des aliments non sélectionnés")}  </td>
-            <td> {deselectedScoreNut} </td>
+            <td> {deselectedScoreNutrition} </td>
           </tr>
         </tbody>
 

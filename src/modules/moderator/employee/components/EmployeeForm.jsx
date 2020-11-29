@@ -10,7 +10,7 @@ import { required, maxLength, minLength, email } from "./../../../../utils/valid
 import InputField from "./../../../../components/InputField"
 
 const minLength4 = minLength(4)
-const maxLength30 = maxLength(30)
+const maxLength30 = maxLength(50)
 
 let TagForm = (props) => {
 

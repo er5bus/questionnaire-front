@@ -33,7 +33,7 @@ class FourthPage extends React.Component {
       case 4:
         return "Vous avez déjà répondu à des questions ergonomique "
       case 5:
-        return "Vous avez complété le questionnaire concernant les risques psycho-sociaux"
+        return "Concernant les risques psycho-sociaux"
       case 6:
         return "Vous avez compléte le questionnaire sur l'activité physique"
       default:

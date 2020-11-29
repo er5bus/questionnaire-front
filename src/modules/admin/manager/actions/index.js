@@ -89,3 +89,23 @@ export const fetchManager = ({companyParam, param}) =>
     }
   })
 
+export const deleteManager = (companyParam, employeeParam) =>
+  ({
+    type: CALL_API,
+    meta: {
+      actions: {
+        init: ACTIONS.DELETE_MANAGER_INIT,
+        success: ACTIONS.DELETE_MANAGER_SUCCEDED,
+        fail: ACTIONS.DELETE_MANAGER_FAILED,
+      },
+      messages: {
+        success: "Votre manager a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
+      },
+      endpoint: ENDPOINT.MANAGER.replace(":companyParam", companyParam).replace(":param", employeeParam),
+      extraData: { id: employeeParam },
+      method: HTTP_METHODS.DELETE,
+      jwt: true
+    }
+  })
+

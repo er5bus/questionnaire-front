@@ -5,21 +5,29 @@ import { Link } from 'react-router-dom'
 
 import moderatorRoutes from './../../../../routes/moderator'
 
-//import ConfirmModal from "./../../../components/ConfirmModal"
+import ConfirmModal from "./../../../../components/ConfirmModal"
 import CardNotFound from './../../../../components/CardNotFound'
 import InfiniteScroll from './../../../../components/InfiniteScroll'
 
 import DepartmentItem from './../components/DepartmentItem'
 import DepartmentLoader from './../components/DepartmentLoader'
 
-import { fetchDepartments, filterDepartments } from './../actions'
+import { fetchDepartments, filterDepartments, deleteDepartment } from './../actions'
 import { getFilteredDepartments } from './../selector'
 
 //import Moment from 'react-moment'
 
 
 class DepartmentList extends React.Component {
-  
+ 
+  constructor(props){
+    super(props)
+    this.state = {
+      openDeleteModal: false,
+      id: null,
+    }
+  }
+
   onFetchDepartments = (pageNumber) => {
     if (!this.props.isLoading){
       this.props.fetchDepartments(this.props.user.company.id, pageNumber)
@@ -28,6 +36,14 @@ class DepartmentList extends React.Component {
 
   onSearch = (e) => {
     this.props.filterDepartments(e.target.value.trim())
+  }
+
+  onDelete = () => {
+    this.props.deleteDepartment(this.props.user.company.id, this.state.id)
+  }
+
+  onToggleModal = (id) => {
+    this.setState({ openDeleteModal: !this.state.openDeleteModal, id })
   }
 
   render() {
@@ -56,6 +72,14 @@ class DepartmentList extends React.Component {
         </div>
 
         <Container className="mt--4" fluid>
+          <ConfirmModal
+            isOpen={ this.state.openDeleteModal }
+            title="Confirmation"
+            content="Êtes-vous sûr de vouloir supprimer cette department?"
+            onClick={ this.onDelete }
+            onToggle={ this.onToggleModal }
+            buttonText="Supprimer cette department"
+          />
           <Row>
             <Col lg="12">
               <Row className="row-grid">
@@ -82,4 +106,4 @@ const mapStateToProps = state => ({
   ...state.department, ...state.session, items: getFilteredDepartments(state)
 })
 
-export default connect(mapStateToProps, { fetchDepartments, filterDepartments })(DepartmentList)
+export default connect(mapStateToProps, { fetchDepartments, filterDepartments, deleteDepartment })(DepartmentList)

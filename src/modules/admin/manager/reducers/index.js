@@ -54,6 +54,16 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
     case ACTIONS.FILTER_MANAGERS: {
       return { ...state, searchTerm: payload.searchTerm }
     }
+
+    case ACTIONS.DELETE_MANAGER_INIT : {
+      return { ...state, isLoading: true, error: null }
+    }
+    case ACTIONS.DELETE_MANAGER_SUCCEDED : {
+      return { ...state, items: state.items.filter( item => item.id !== payload.id ), isLoading: false, error: null }
+    }
+    case ACTIONS.DELETE_MANAGER_FAILED : {
+      return { ...state, isLoading: false, error: null }
+    }
     
     default: {
       return state

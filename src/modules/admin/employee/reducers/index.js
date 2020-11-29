@@ -51,6 +51,16 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
       return { ...state, isLoading: false, error: payload }
     }
 
+    case ACTIONS.DELETE_EMPLOYEE_INIT : {
+      return { ...state, isLoading: true, error: null }
+    }
+    case ACTIONS.DELETE_EMPLOYEE_SUCCEDED : {
+      return { ...state, items: state.items.filter( item => item.id !== payload.id ), isLoading: false, error: null }
+    }
+    case ACTIONS.DELETE_EMPLOYEE_FAILED : {
+      return { ...state, isLoading: false, error: null }
+    }
+
     case ACTIONS.FILTER_EMPLOYEES: {
       return { ...state, searchTerm: payload.searchTerm }
     }

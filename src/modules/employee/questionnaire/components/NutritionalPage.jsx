@@ -109,7 +109,7 @@ class NutritionalPage extends React.Component {
       case 2:
         return "Dîner"
       case 3:
-        return "Collation (matin ou soir)"
+        return "Collation ou apéritif"
       default:
         break;
     }

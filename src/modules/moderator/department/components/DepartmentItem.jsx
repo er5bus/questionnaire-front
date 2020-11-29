@@ -34,7 +34,7 @@ export default ({ name, description, id, onToggleModal }) => {
             to={ moderatorRoutes.path + moderatorRoutes.routes.employeeList.path.replace(":departmentParam", id) }
             tag={Link}
           >
-            <i className="fa fa-eye" /> Empolye(e)s
+            <i className="fa fa-eye" /> Empolyé(e)s
           </Button>
           <Button
             className="btn-sm mt-4"

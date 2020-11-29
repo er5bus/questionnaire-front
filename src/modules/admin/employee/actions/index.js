@@ -89,3 +89,23 @@ export const fetchEmployee = ({departmentParam, param}) =>
     }
   })
 
+export const deleteEmployee = (departmentParam, employeeParam) =>
+  ({
+    type: CALL_API,
+    meta: {
+      actions: {
+        init: ACTIONS.DELETE_EMPLOYEE_INIT,
+        success: ACTIONS.DELETE_EMPLOYEE_SUCCEDED,
+        fail: ACTIONS.DELETE_EMPLOYEE_FAILED,
+      },
+      messages: {
+        success: "Votre employée a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
+      },
+      endpoint: ENDPOINT.EMPLOYEE.replace(":departmentParam", departmentParam).replace(":param", employeeParam),
+      extraData: { id: employeeParam },
+      method: HTTP_METHODS.DELETE,
+      jwt: true
+    }
+  })
+

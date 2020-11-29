@@ -159,14 +159,15 @@ class OverviewNode extends React.PureComponent {
   render() {
     const { item, isLoading, isLoadingSectionBody, scores } = this.props
   
-
+/*pour  ${this.props.selectedPartBodyToUse[0]*/
     return (
       <> {isLoadingSectionBody ? <Loader /> :
         <>
           {!this.props.nextSectionThirdState ? (
             <Row className="justify-content-center">
               <Col lg="12">
-                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Questionnaire santé pour  ${this.props.selectedPartBodyToUse[0]} `} pageTitle={false} />}
+
+                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Questionnaire santé`} pageTitle={false} />}
                 <QuestionDisplay
                   item={item}
                   onSelectChoice={this.onSelectChoice}

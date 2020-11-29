@@ -10,8 +10,8 @@ import 'react-circular-progressbar/dist/styles.css';
 
 
 const LABES = {
-  STOPP_WORKING : "Arrête de travailler",
-  MEDICINE : "Médecine",
+  /*STOPP_WORKING : "Arrête de travailler",
+  MEDICINE : "Médecine",*/
   PHYSIOTHERAPY : "Kinésithérapie",
   ERGONOMICS : "Ergonomie",
   OSTEOPATHY : "Ostéopathie",
@@ -29,7 +29,7 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
   }
 
   let Interventions = needForInterventions.KPIS.sort(function (a, b) {
-    return a.category_score - b.category_score;
+    return b.category_score - a.category_score;
   })
 
   const breakdownOfFailuresRef = useRef()
@@ -94,7 +94,7 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
             style={{marginRight : "5px", backgroundColor:"red"}}/>Besoins interventionnels</CardTitle>
           <div className="text-center pt-4 pb-3" style={{color: 'white',background:"linear-gradient(180deg, #FF8B5B 0%, #FF736B 45.83%, #EC5E68 100%)",borderRadius: "37px"}}>
             {Interventions.sort((a, b) => a.category_score > b.category_score).map((item , key) =>
-            <p key={item.category} style={{ textTransform: 'capitalize', fontWeight: 'bold'}}> {LABES[item.category]} :  {item.category_score} </p>
+             LABES[item.category] && <p key={item.category} style={{ textTransform: 'capitalize', fontWeight: 'bold'}}> {LABES[item.category]} :  {item.category_score} </p>
             )}
 
             {!checked? null : <p style={{ textTransform: 'capitalize', fontWeight: 'bold'}}>Gestes et postures : {needForInterventions.GPT}</p>}

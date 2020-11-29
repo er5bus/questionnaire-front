@@ -89,3 +89,23 @@ export const fetchDepartment = (companyParam, param) =>
     }
   })
 
+
+export const deleteDepartment = (companyParam, param) =>
+  ({
+    type: CALL_API,
+    meta: {
+      actions: {
+        init: ACTIONS.DELETE_DEPARTMENT_INIT,
+        success: ACTIONS.DELETE_DEPARTMENT_SUCCEDED,
+        fail: ACTIONS.DELETE_DEPARTMENT_FAILED,
+      },
+      messages: {
+        success: "Votre department a été supprimée avec succès",
+        fail: "Une erreur s'est produite. Veuillez réessayer"
+      },
+      endpoint: ENDPOINT.DEPARTMENT.replace(":companyParam", companyParam).replace(":param", param),
+      extraData: { id: param },
+      method: HTTP_METHODS.DELETE,
+      jwt: true
+    }
+  })

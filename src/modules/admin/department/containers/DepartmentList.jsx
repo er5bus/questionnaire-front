@@ -6,14 +6,14 @@ import { withTranslation } from 'react-i18next'
 
 import adminRoutes from './../../../../routes/admin'
 
-//import ConfirmModal from "./../../../components/ConfirmModal"
+import ConfirmModal from "./../../../../components/ConfirmModal"
 import CardNotFound from './../../../../components/CardNotFound'
 import InfiniteScroll from './../../../../components/InfiniteScroll'
 
 import DepartmentItem from './../components/DepartmentItem'
 import DepartmentLoader from './../components/DepartmentLoader'
 
-import { fetchDepartments, filterDepartments } from './../actions'
+import { fetchDepartments, filterDepartments, deleteDepartment } from './../actions'
 import { getFilteredDepartments } from './../selector'
 
 //import Moment from 'react-moment'
@@ -24,7 +24,7 @@ class DepartmentList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      openModal: false,
+      openDeleteModal: false,
       id: null,
     }
   }
@@ -40,7 +40,12 @@ class DepartmentList extends React.Component {
   }
 
   onToggleModal = (id) => {
-    this.setState({ openModal: !this.state.openModal, id })
+    this.setState({ openDeleteModal: !this.state.openDeleteModal, id })
+  }
+
+  onDelete = () => {
+    const { companyParam } = this.props.match.params
+    this.props.deleteDepartment(companyParam, this.state.id)
   }
 
   render() {
@@ -69,6 +74,14 @@ class DepartmentList extends React.Component {
         </div>
 
         <Container className="mt--4" fluid>
+          <ConfirmModal
+            isOpen={ this.state.openDeleteModal }
+            title="Confirmation"
+            content="Êtes-vous sûr de vouloir supprimer cette department?"
+            onClick={ this.onDelete }
+            onToggle={ this.onToggleModal }
+            buttonText="Supprimer cette department"
+          />
           <Row>
             <Col lg="12">
               <Row className="row-grid">
@@ -95,4 +108,4 @@ const mapStateToProps = state => ({
   ...state.department, ...state.session, items: getFilteredDepartments(state)
 })
 
-export default connect(mapStateToProps, { fetchDepartments, filterDepartments })(withTranslation()(DepartmentList))
+export default connect(mapStateToProps, { fetchDepartments, filterDepartments, deleteDepartment })(withTranslation()(DepartmentList))

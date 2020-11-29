@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom'
 
 import adminRoutes from './../../../../routes/admin'
 
-//import ConfirmModal from "./../../../components/ConfirmModal"
+import ConfirmModal from "./../../../../components/ConfirmModal"
 import CardNotFound from './../../../../components/CardNotFound'
 import InfiniteScroll from './../../../../components/InfiniteScroll'
 
 import ManagerItem from './../components/ManagerItem'
 import ManagerLoader from './../components/ManagerLoader'
 
-import { fetchManagers, filterManagers } from './../actions'
+import { fetchManagers, filterManagers, deleteManager } from './../actions'
 import { getFilteredManagers } from './../selector'
 
 
@@ -21,6 +21,14 @@ import { getFilteredManagers } from './../selector'
 
 class ManagerList extends React.Component {
   
+  constructor(props){
+    super(props)
+    this.state = {
+      openDeleteModal: false,
+      id: null,
+    }
+  }
+
   onFetchManagers = (pageNumber) => {
     if (!this.props.isLoading){
       this.props.fetchManagers(this.props.match.params.companyParam, pageNumber)
@@ -29,6 +37,15 @@ class ManagerList extends React.Component {
 
   onSearch = (e) => {
     this.props.filterManagers(e.target.value.trim())
+  }
+
+  onToggleModal = (id) => {
+    this.setState({ openDeleteModal: !this.state.openDeleteModal, id })
+  }
+
+  onDelete = () => {
+    const { companyParam } = this.props.match.params
+    this.props.deleteManager(companyParam, this.state.id)
   }
 
   render() {
@@ -58,6 +75,14 @@ class ManagerList extends React.Component {
         </div>
 
         <Container className="mt--4" fluid>
+          <ConfirmModal
+            isOpen={ this.state.openDeleteModal }
+            title="Confirmation"
+            content="Êtes-vous sûr de vouloir supprimer cette responsable?"
+            onClick={ this.onDelete }
+            onToggle={ this.onToggleModal }
+            buttonText="Supprimer cette responsable"
+          />
           <Row>
             <Col lg="12">
               <Row className="row-grid">
@@ -84,4 +109,4 @@ const mapStateToProps = state => ({
   ...state.manager, items: getFilteredManagers(state)
 })
 
-export default connect(mapStateToProps, { fetchManagers, filterManagers })(ManagerList)
+export default connect(mapStateToProps, { fetchManagers, filterManagers, deleteManager })(ManagerList)

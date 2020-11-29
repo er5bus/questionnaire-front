@@ -6,15 +6,15 @@ import { Button } from 'reactstrap';
 
 const AskContinue = ({ onExit, onContinue, title }) => {
 
-    return (
-        <>
-            <div className="continue-text">
-                <span > {title} </span>
-                <div className="pb-5" />
-                <Button className="nextButton next-button" onClick={onContinue}>Suivant</Button>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div className="continue-text">
+        <span > {title} </span>
+        <div className="pb-5" />
+        <Button className="nextButton next-button" onClick={onContinue}>Suivant</Button>
+      </div>
+    </>
+  )
 }
 
 

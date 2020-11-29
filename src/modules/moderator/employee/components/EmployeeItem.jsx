@@ -5,7 +5,7 @@ import { Button, Card, CardBody, Col} from "reactstrap"
 import moderatorRoutes from './../../../../routes/moderator'
 
 
-export default ({ firstName, lastName, email, departmentParam, id }) => {
+export default ({ firstName, lastName, email, departmentParam, id, onToggleModal }) => {
 
 
   return (
@@ -28,6 +28,13 @@ export default ({ firstName, lastName, email, departmentParam, id }) => {
             tag={Link}
           >
             <i className="fa fa-pencil-alt" /> Éditer
+          </Button>
+          <Button
+            className="btn-sm mt-4"
+            color="danger"
+            onClick={() => onToggleModal(id) }
+          >
+            <i className="fas fa-trash" /> Supprimer
           </Button>
         </CardBody>
       </Card>

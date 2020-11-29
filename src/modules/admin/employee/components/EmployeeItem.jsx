@@ -6,10 +6,9 @@ import { Button, Card, CardBody, Col} from "reactstrap"
 import adminRoutes from './../../../../routes/admin'
 
 
-export default ({ firstName, lastName, email, questionnaires , departmentParam, id }) => {
+export default ({ firstName, lastName, email, questionnaires , departmentParam, id, onToggleModal }) => {
 
   const { t } = useTranslation()
-console.log(questionnaires[0] )
   return (
     <Col lg="4" className="pb-5">
       <Card className="shadow border-0">
@@ -40,7 +39,13 @@ console.log(questionnaires[0] )
           >
             <i className="fa fa-eye" /> { t("Rapport") }
           </Button>  : null  }
-          
+          <Button
+            className="btn-sm mt-4"
+            color="danger"
+            onClick={() => onToggleModal(id) }
+          >
+            <i className="fas fa-trash" /> Supprimer
+          </Button>
         </CardBody>
       </Card>
     </Col>

@@ -5,7 +5,7 @@ import { Button, Card, CardBody, Col} from "reactstrap"
 import adminRoutes from './../../../../routes/admin'
 
 
-export default ({ firstName, lastName, email, companyParam, id }) => {
+export default ({ firstName, lastName, email, companyParam, id, onToggleModal }) => {
 
   return (
     <Col lg="4" className="pb-5">
@@ -27,6 +27,13 @@ export default ({ firstName, lastName, email, companyParam, id }) => {
             tag={Link}
           >
             <i className="fa fa-pencil-alt" /> Éditer
+          </Button>
+          <Button
+            className="btn-sm mt-4"
+            color="danger"
+            onClick={() => onToggleModal(id) }
+          >
+            <i className="fas fa-trash" /> Supprimer
           </Button>
         </CardBody>
       </Card>

@@ -22,10 +22,7 @@ const ExitQuestions = ({ tasksEnded }) => {
     <>
       <div className=" d-flex flex-column align-items-center justify-content-center login-title">
         <img width="200" src={thanksImg} alt="..." />
-        <h1 className=" pt-4 mb-0"> Merci pour votre temps </h1>
       </div>
-
-
     </>
   )
 }

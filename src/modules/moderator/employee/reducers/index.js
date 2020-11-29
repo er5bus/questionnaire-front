@@ -17,7 +17,6 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
       return { ...state, items: page === 1 ? items : [ ...state.items, ...items], page, hasMore: hasMore || false, isLoading: false, error: null }
     }
     case ACTIONS.FETCH_EMPLOYEES_FAILED : {
-      console.log(payload)
       return { ...state, items: [], isLoading: false, hasMore: false, page: 1, error: payload }
     }
 
@@ -54,6 +53,16 @@ export default (state = { items: [], item: {}, page: 0, isLoading: false, search
 
     case ACTIONS.FILTER_EMPLOYEES: {
       return { ...state, searchTerm: payload.searchTerm }
+    }
+
+    case ACTIONS.DELETE_EMPLOYEE_INIT : {
+      return { ...state, isLoading: true, error: null }
+    }
+    case ACTIONS.DELETE_EMPLOYEE_SUCCEDED : {
+      return { ...state, items: state.items.filter( item => item.id !== payload.id ), isLoading: false, error: null }
+    }
+    case ACTIONS.DELETE_EMPLOYEE_FAILED : {
+      return { ...state, isLoading: false, error: null }
     }
     
     default: {
