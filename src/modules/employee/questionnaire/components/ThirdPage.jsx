@@ -166,8 +166,7 @@ class OverviewNode extends React.PureComponent {
           {!this.props.nextSectionThirdState ? (
             <Row className="justify-content-center">
               <Col lg="12">
-
-                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Questionnaire santé`} pageTitle={false} />}
+                {this.props.selectedPartBodyToUse.length > 0 && <QuestionHead title={`Questionnaire santé  `} pageTitle={false} />}
                 <QuestionDisplay
                   item={item}
                   onSelectChoice={this.onSelectChoice}
