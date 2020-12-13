@@ -71,7 +71,7 @@ const scoreTable = [
     idForSend: "STOPP_WORKING"
   },
 ]
-const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedScoreNutrition, deselectedScoreNutrition, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, categoryScore, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser }) => {
+const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, exitPage, tasksEnded, selectedScoreNutrition, deselectedScoreNutrition, selectedPartBody,selectedPartBodyID, healthAnsweredQuestion, ergonomicsAnsweredQuestion, categoryScore, psychologiqueAnsweredQuestion, coachingAnsweredQuestion, scorsSaved, saveScoresUser  , selectedScoreNutritionBreakfast ,deselectedScoreNutritionBreakfast ,selectedScoreNutritionLunch ,  deselectedScoreNutritionLunch , selectedScoreNutritionDinner , deselectedScoreNutritionDinner , selectedScoreNutritionSnack , deselectedScoreNutritionSnack}) => {
   const [scoresToSubmit, setScoresToSubmit] = useState([])
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -278,12 +278,12 @@ const ScoresInterpratation = ({ scores, selectedScoreNut, deselectedScoreNut, ex
           <tr>
             <th scope="row"> {t("Aliments sélectionnés")}  </th>
             <td> {t("Valeur ajoutée des aliments sélectionnés")}  </td>
-            <td> {selectedScoreNutrition} </td>
+            <td> {selectedScoreNutritionBreakfast + selectedScoreNutritionLunch + selectedScoreNutritionDinner + selectedScoreNutritionSnack} </td>
           </tr>
           <tr>
             <th scope="row"> {t("Aliments non sélectionnés")}  </th>
             <td> {t("Valeur non ajoutée des aliments non sélectionnés")}  </td>
-            <td> {deselectedScoreNutrition} </td>
+            <td> {deselectedScoreNutritionBreakfast + deselectedScoreNutritionLunch + deselectedScoreNutritionDinner  + deselectedScoreNutritionSnack} </td>
           </tr>
         </tbody>
 
