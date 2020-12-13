@@ -78,11 +78,10 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
                   height={300}
                   width={200}
                   data={ [
-                    { name: "Pas d'intervention nécessaire", value: needForInterventions[key].important , fill: "#062484"   ,radius:30 },
-                    { name: "Préventif", value: needForInterventions[key].preventive , fill: "#D08528"   , radius:30  },
-                    { name: "Modéré", value: needForInterventions[key].moderate , fill: "#EB404C"   , radius:30  },
-                    { name: "Urgent", value: needForInterventions[key].urgent , fill: "#BF4F3B"   , radius:30  }
-                  ] }
+                    { name: "Préventif", value: needForInterventions[key].preventive, fill: "#062484"   ,radius:30 },
+                    { name: "Modéré", value: needForInterventions[key].moderate, fill: "#D08528"   , radius:30  },
+                    { name: "Important", value: needForInterventions[key].important, fill: "#EB404C"   , radius:30  },
+                    { name: "Urgent", value: needForInterventions[key].urgent, fill: "#BF4F3B"   , radius:30 }                  ] }
                 >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" tick={<CustomizedAxisTick />}  />

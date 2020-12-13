@@ -24,7 +24,7 @@ const FilterByDepartmentForm = (props) => {
         placeholder="Sélectionnez un département"
         label="Sélectionnez un départment"
         type="text"
-        choices={departments && [{ label: "Tout", value: -1 }, ...departments]}
+        choices={departments && [{ label: "Aucun", value: -1 }, ...departments]}
         validate={[ required ]}
       />
       <Field component="input" type="hidden" name="company" />

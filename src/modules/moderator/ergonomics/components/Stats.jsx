@@ -57,10 +57,10 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
                 height={250}
                 margin={{ top: 5, right: 10, left: 10, bottom: 50 }}
                 data={ [
-                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important , fill: "#062484"   ,radius:30 },
-                  { name: "Préventif", value: needForInterventions.preventive , fill: "#D08528"   , radius:30  },
-                  { name: "Modéré", value: needForInterventions.moderate , fill: "#EB404C"   , radius:30  },
-                  { name: "Urgent", value: needForInterventions.urgent , fill: "#BF4F3B"   , radius:30 }
+                  { name: "Préventif", value: needForInterventions.preventive, fill: "#062484"   ,radius:30 },
+                  { name: "Modéré", value: needForInterventions.moderate, fill: "#D08528"   , radius:30  },
+                  { name: "Important", value: needForInterventions.important, fill: "#EB404C"   , radius:30  },
+                  { name: "Urgent", value: needForInterventions.urgent, fill: "#BF4F3B"   , radius:30 }
                 ] }
               >
                 <CartesianGrid strokeDasharray="3 3" />
