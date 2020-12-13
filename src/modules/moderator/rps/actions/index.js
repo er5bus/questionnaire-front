@@ -17,7 +17,7 @@ export const fetchAlldepartment = (companyParam) => ({
 })
 
 
-export const fetchDetailsOfTroubles = (deparmentParam) => ({
+export const fetchDetailsOfTroubles = (deparmentParam, params) => ({
   type: CALL_API,
   meta: {
     actions: {
@@ -27,12 +27,13 @@ export const fetchDetailsOfTroubles = (deparmentParam) => ({
     },
     endpoint: ENDPOINT.DETAILS_OF_TROUBLES.replace(":deparmentParam", deparmentParam),
     method: HTTP_METHODS.GET,
+    params,
     jwt: true
   }
 })
 
 
-export const fetchNeedForInterventions = (deparmentParam) => ({
+export const fetchNeedForInterventions = (deparmentParam, params) => ({
   type: CALL_API,
   meta: {
     actions: {
@@ -42,6 +43,7 @@ export const fetchNeedForInterventions = (deparmentParam) => ({
     },
     endpoint: ENDPOINT.NEED_FOR_INTERVENTIONS.replace(":deparmentParam", deparmentParam),
     method: HTTP_METHODS.GET,
+    params,
     jwt: true
   }
 })

@@ -15,12 +15,13 @@ class Dashbord extends React.Component {
 
   UNSAFE_componentWillMount(){
     this.props.fetchAlldepartment(this.props.user.company.id)
+    this.onSubmit({ department: -1, company: this.props.user.company.id })
   }
 
   onSubmit = (values) => {
-    const { department } = values
-    this.props.fetchNeedForInterventions(department)
-    this.props.fetchDetailsOfTroubles(department)
+    const { department, ...params } = values
+    this.props.fetchNeedForInterventions(department, params)
+    this.props.fetchDetailsOfTroubles(department, params)
   }
 
   render() {
@@ -59,7 +60,7 @@ class Dashbord extends React.Component {
                   <CardTitle className="mb-0">Filtrer par département</CardTitle>
                 </CardHeader>
                 <CardBody>
-                  <FilterByDepartment departments={departments} onSubmit={this.onSubmit} isLoading={isLoading} />
+                  <FilterByDepartment departments={departments} initialValues={{ department: -1, company: this.props.user.company.id }} onSubmit={this.onSubmit} isLoading={isLoading} />
                 </CardBody>
               </Card>
               { (needForInterventions && detailsOfTrouble) && <Stats needForInterventions={needForInterventions} detailsOfTrouble={detailsOfTrouble} />}

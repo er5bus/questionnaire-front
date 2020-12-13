@@ -171,4 +171,5 @@ class Sidebar extends React.PureComponent {
   }
 }
 
+
 export default Sidebar

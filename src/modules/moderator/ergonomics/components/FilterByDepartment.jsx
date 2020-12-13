@@ -22,9 +22,10 @@ const FilterByDepartmentForm = (props) => {
         placeholder="Sélectionnez un département"
         label="Sélectionnez un départment"
         type="text"
-        choices={departments}
+        choices={departments && [{ label: "Tout", value: -1 }, ...departments]}
         validate={[ required ]}
       />
+      <Field component="input" type="hidden" name="company" />
       <div className="mt-0">
         <Button className="mt-4 pl-5 pr-5" color="primary" type="submit">
           { isLoading ? <Spinner color="white mr-2" /> : <i className="fas fa-search mr-2"></i> }

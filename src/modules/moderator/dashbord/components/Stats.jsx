@@ -28,7 +28,7 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
 
   }
 
-  let Interventions = needForInterventions.KPIS.sort(function (a, b) {
+  let Interventions = needForInterventions.kpis.sort(function (a, b) {
     return b.category_score - a.category_score;
   })
 
@@ -72,8 +72,8 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
           <CardTitle>% de questionnaires complétés</CardTitle>
           <div style={{ height: 300 }}>
             <CircularProgressbar
-              value={10}
-              text={`10%`}
+              value={ needForInterventions.questionCompleted }
+              text={ `${needForInterventions.questionCompleted.toFixed(2)}%` }
               styles={buildStyles({
                 textColor: "rgb(250, 125, 99)",
                 pathColor: "rgb(250, 125, 99)",
@@ -97,7 +97,7 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
              LABES[item.category] && <p key={item.category} style={{ textTransform: 'capitalize', fontWeight: 'bold'}}> {LABES[item.category]} :  {item.category_score} </p>
             )}
 
-            {!checked? null : <p style={{ textTransform: 'capitalize', fontWeight: 'bold'}}>Gestes et postures : {needForInterventions.GPT}</p>}
+            {!checked? null : <p style={{ textTransform: 'capitalize', fontWeight: 'bold'}}>Gestes et postures : {needForInterventions.gpt}</p>}
           </div>
         </Card>
       </Col>

@@ -56,8 +56,8 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
                 margin={{ top: 5, right: 3, left: 5, bottom: 50 }}
                 height={320}
                 data={ [
-                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important },
                   { name: "Préventif", value: needForInterventions.preventive },
+                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important },
                   { name: "Modéré", value: needForInterventions.moderate },
                   { name: "Urgent", value: needForInterventions.urgent }
                 ] }

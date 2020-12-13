@@ -20,7 +20,7 @@ import userIcon from "./../../../../assets/img/user.png"
 
 const LogoutModal = anonymousRoutes.routes.logout.component
 
-const UserNavbar = ({ userName }) => {
+const UserNavbar = ({ userName, company }) => {
 
   const [ showModal, setShowModal ] = React.useState(false)
 
@@ -37,7 +37,7 @@ const UserNavbar = ({ userName }) => {
             className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
             to="/"
           >
-            { " " }
+            { company.name }
           </Link>
           <Nav className="align-items-center d-none d-md-flex" navbar>
             <UncontrolledDropdown nav>

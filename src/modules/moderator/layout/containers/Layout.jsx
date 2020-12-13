@@ -27,18 +27,16 @@ class ModeratorLayout extends React.Component {
 
   render() {
 
-    const { user: { username, role }, authenticated, notifications = null } = this.props
+    const { user: { username, role, company }, authenticated, notifications = null } = this.props
 
     return !authenticated || !isModerator(role)
       ? <Redirect to={ anonymousRoutes.path } />
       : (
         <div className={ this.state.openMenu ? "g-sidenav-show g-sidenav-pinned" : "g-sidenav-hidden" }>
           { notifications && <Notifications notifications={notifications} />}
-
           <Sidebar toggle={ this.toggle } />
-
           <div className="main-content">
-            <Navbar userName={username} />
+            <Navbar userName={username} company={company} />
             <Switch>
               {
                 Object.keys(moderatorRoutes.routes).map((routeName, i) =>
