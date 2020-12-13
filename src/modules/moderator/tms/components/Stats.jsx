@@ -27,19 +27,31 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
 
   return (
     <Row>
-
+ 
+  
       <Col lg="12">
         <Card>
           <CardHeader>
             <CardTitle className="mb-0">Détail des troubles</CardTitle>
           </CardHeader>
           <CardBody>
+     
             <div ref={detailsOfTroubleRef} className="pt-4">
+                  {console.log(detailsOfTrouble)} 
               <BarChart
+               
                 width={detailsOfTroubleWidth}
                 height={300}
                 margin={{ top: 30, right: 30, left: 50, bottom: 5 }}
-                data={ Object.keys(detailsOfTrouble).map(key => ({ name: LABES[key], points: [0, detailsOfTrouble[key]] }))}
+                data= { [
+                  { name: "Douleurs abdominales", points:[0, detailsOfTrouble.abdominalPains ] , fill: "#062484"   ,radius:30 },
+                  { name: "Dos", points:[0, detailsOfTrouble.back ] , fill: "#D08528"   , radius:30  },
+                  { name: "Maux de téte", points:[0, detailsOfTrouble.headache ] , fill: "#EB404C"   , radius:30  },
+                  { name: "Membres inférieurs", points:[0, detailsOfTrouble.lowerBodyLimbs ] , fill: "#BF4F3B"   , radius:30  },
+                  { name: "Membres supèrieurs", points:[0, detailsOfTrouble.upperBodyLimbs ] , fill: "#89ABC5"   , radius:30  }
+                ] }
+
+                 // data={ Object.keys(detailsOfTrouble).map(key => ({ name: LABES[key], points: [0, detailsOfTrouble[key]] , radius:30 }))}
                 layout="vertical"
               >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -51,6 +63,7 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
           </CardBody>
         </Card>
       </Col>
+     
       { Object.keys(needForInterventions).map(key => (
         <Col lg="6">
           <Card>
@@ -63,11 +76,12 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
                   width={needForInterventionsWidth}
                   margin={{ top: 5, right: 3, left: 5, bottom: 50 }}
                   height={300}
+                  width={200}
                   data={ [
-                    { name: "Pas d'intervention nécessaire", value: needForInterventions[key].important },
-                    { name: "Préventif", value: needForInterventions[key].preventive },
-                    { name: "Modéré", value: needForInterventions[key].moderate },
-                    { name: "Urgent", value: needForInterventions[key].urgent }
+                    { name: "Pas d'intervention nécessaire", value: needForInterventions[key].important , fill: "#062484"   ,radius:30 },
+                    { name: "Préventif", value: needForInterventions[key].preventive , fill: "#D08528"   , radius:30  },
+                    { name: "Modéré", value: needForInterventions[key].moderate , fill: "#EB404C"   , radius:30  },
+                    { name: "Urgent", value: needForInterventions[key].urgent , fill: "#BF4F3B"   , radius:30  }
                   ] }
                 >
                   <CartesianGrid strokeDasharray="3 3" />

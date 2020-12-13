@@ -28,11 +28,11 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
             <div ref={detailsOfTroubleRef} className="pt-4">
               <BarChart
                 width={detailsOfTroubleWidth}
-                height={300}
+                height={250}
                 margin={{ top: 5, right: 30, left: 50, bottom: 5 }}
                 data={[
-                  { name: "Répondu ", points: [0, detailsOfTrouble.answered] },
-                  { name: "Autres ", points: [0, detailsOfTrouble.others] }
+                  { name: "Répondu ", points: [0, detailsOfTrouble.answered], fill: "#062484" ,radius:30},
+                  { name: "Autres ", points: [0, detailsOfTrouble.others], fill: "#D08528" ,radius:30}
                 ]}
                 layout="vertical"
               >
@@ -54,13 +54,13 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
             <div ref={needForInterventionsRef}>
               <BarChart
                 width={needForInterventionsWidth}
-                height={320}
-                margin={{ top: 5, right: 10, left: 10, bottom: 40 }}
+                height={250}
+                margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                 data={ [
-                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important },
-                  { name: "Préventif", value: needForInterventions.preventive },
-                  { name: "Modéré", value: needForInterventions.moderate },
-                  { name: "Urgent", value: needForInterventions.urgent }
+                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important , fill: "#062484"   ,radius:30 },
+                  { name: "Préventif", value: needForInterventions.preventive , fill: "#D08528"   , radius:30  },
+                  { name: "Modéré", value: needForInterventions.moderate , fill: "#EB404C"   , radius:30  },
+                  { name: "Urgent", value: needForInterventions.urgent , fill: "#BF4F3B"   , radius:30 }
                 ] }
               >
                 <CartesianGrid strokeDasharray="3 3" />

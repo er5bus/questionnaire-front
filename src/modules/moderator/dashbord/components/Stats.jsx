@@ -48,13 +48,13 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
               <BarChart
                 margin={{ top: 5, right: 30, left: 50, bottom: 5 }}
                 width={breakdownOfFailuresWidth}
-                height={300}
+                height={250} 
                 data={[
-                  { name: "TMS ", points: [0, breakdownOfFailures.TMS] },
-                  { name: "RPS ", points: [0, breakdownOfFailures.RPS] },
-                  { name: "Ergonomie ", points: [0, breakdownOfFailures.ergonomics] },
-                  { name: "Nutrition ", points: [0, breakdownOfFailures.nutrition] },
-                  { name: "Activités physiques ", points: [0, breakdownOfFailures.physicalActivity] },
+                  { name: "TMS ", points:[0, breakdownOfFailures.TMS], fill: "#062484"   ,radius:30 },
+                  { name: "RPS ", points: [0, breakdownOfFailures.RPS], fill: "#D08528"   , radius:30  },
+                  { name: "Ergonomie ", points: [0, breakdownOfFailures.ergonomics], fill: "#EB404C"   , radius:30  },
+                  { name: "Nutrition ", points: [0, breakdownOfFailures.nutrition], fill: "#BF4F3B"   , radius:30  },
+                  { name: "Activités physiques ", points: [0, breakdownOfFailures.physicalActivity], fill: "#89ABC5"   , radius:30  },
                 ]}
                 layout="vertical"
               >
@@ -75,9 +75,9 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
               value={10}
               text={`10%`}
               styles={buildStyles({
-                textColor: "rgb(250, 125, 99)",
-                pathColor: "rgb(250, 125, 99)",
-                trailColor: "#0A48B3"
+                textColor: "rgb(24,34,61,1)",
+                pathColor: "rgb(152,172,189,1)",
+                trailColor: "rgb(24,34,61,1)"
               })}
             />
           </div>
@@ -87,13 +87,13 @@ const Stats = ({ needForInterventions, breakdownOfFailures }) => {
         <Card body>
 
 
-          <CardTitle>  <input
+         <CardTitle> {/*   <input
             type="checkbox"
             checked={ checked }
             onChange={ handleChange}
-            style={{marginRight : "5px", backgroundColor:"red"}}/>Besoins interventionnels</CardTitle>
+            style={{marginRight : "5px", backgroundColor:"red"}}/> */}Besoins interventionnels</CardTitle>
           <div className="text-center pt-4 pb-3" style={{color: 'white',background:"linear-gradient(180deg, #FF8B5B 0%, #FF736B 45.83%, #EC5E68 100%)",borderRadius: "37px"}}>
-            {Interventions.sort((a, b) => a.category_score > b.category_score).map((item , key) =>
+            {Interventions.slice(0, 3).sort((a, b) => a.category_score > b.category_score).map((item , key) =>
              LABES[item.category] && <p key={item.category} style={{ textTransform: 'capitalize', fontWeight: 'bold'}}> {LABES[item.category]} :  {item.category_score} </p>
             )}
 
