@@ -60,6 +60,15 @@ const defaultState = {
   selectedScoreNutrition: 0,
   deselectedScoreNutrition: 0,
 
+  selectedScoreNutritionBreakfast: 0,
+  deselectedScoreNutritionBreakfast: 0,
+  selectedScoreNutritionLunch: 0,
+  deselectedScoreNutritionLunch: 0,
+  selectedScoreNutritionDinner: 0,
+  deselectedScoreNutritionDinner: 0,
+  selectedScoreNutritionSnack: 0,
+  deselectedScoreNutritionSnack: 0,
+
   selectedScoreNut: 0,
   deselectedScoreNut: 0,
   deselectedScoreNutState: false,
@@ -87,6 +96,17 @@ export default (state = {
   error: null,
   selectedScoreNutrition: 0,
   deselectedScoreNutrition: 0,
+
+  selectedScoreNutritionBreakfast: 0,
+  deselectedScoreNutritionBreakfast: 0,
+  selectedScoreNutritionLunch: 0,
+  deselectedScoreNutritionLunch: 0,
+  selectedScoreNutritionDinner: 0,
+  deselectedScoreNutritionDinner: 0,
+  selectedScoreNutritionSnack: 0,
+  deselectedScoreNutritionSnack: 0,
+
+
   categories: [
     { id: "Kinésithérapie", idForSend: "PHYSIOTHERAPY"},
     { id: "Ergonomie", idForSend: "ERGONOMICS"},
@@ -192,7 +212,9 @@ export default (state = {
     }
     case ACTIONS.SAVE_NUTRI_STATE: {
       const categoryScore = { ...state.categoryScore }
+      
       if (payload.Breakfast) {
+    
         const selectedScore = payload.Breakfast.selectedColumn.reduce((acc, selectedFoods, index) => {
           let score = 0
           let cof = 4 - index
@@ -201,7 +223,9 @@ export default (state = {
             const foodObject = state.foodList.breakfast.find((food) => food.id === id && food.category_id === categoryId)
             score += ( parseInt(foodObject.selected_score, 10) || 0 )
           })
+          
           acc += score * cof
+          
           return acc
         }, 0)
         const unselectedScore = state.foodList.breakfast.reduce((acc, unselectedFood) => {
@@ -215,9 +239,11 @@ export default (state = {
           return acc
         }, 0)
         categoryScore.NUTRITION += (selectedScore + unselectedScore)
-        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast, categoryScore }
-
+      
+        return { ...state, periodeNut: payload.periodeNut, Breakfast: payload.Breakfast, categoryScore,  selectedScoreNutritionBreakfast : selectedScore , deselectedScoreNutritionBreakfast : unselectedScore  }
+       
       } else if (payload.Lunch) {
+
         const selectedScore = payload.Lunch.selectedColumn.reduce((acc, selectedFoods, index) => {
           let score = 0
           let cof = 4 - index
@@ -226,7 +252,9 @@ export default (state = {
             const foodObject = state.foodList.lunch.find((food) => food.id === id && food.category_id === categoryId)
             score += ( parseInt(foodObject.selected_score, 10) || 0 )
           })
+          
           acc += score * cof
+          
           return acc
         }, 0)
         const unselectedScore = state.foodList.lunch.reduce((acc, unselectedFood) => {
@@ -240,7 +268,7 @@ export default (state = {
           return acc
         }, 0)
         categoryScore.NUTRITION += (selectedScore + unselectedScore)
-        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch, categoryScore }
+        return { ...state, periodeNut: payload.periodeNut, Lunch: payload.Lunch, categoryScore ,  selectedScoreNutritionLunch : selectedScore , deselectedScoreNutritionLunch : unselectedScore  }
 
       } else if (payload.Snack) {
         const selectedScore = payload.Snack.selectedColumn.reduce((acc, selectedFoods, index) => {
@@ -251,7 +279,9 @@ export default (state = {
             const foodObject = state.foodList.snack.find((food) => food.id === id && food.category_id === categoryId)
             score += ( parseInt(foodObject.selected_score, 10) || 0 )
           })
+          
           acc += score * cof
+          
           return acc
         }, 0)
         const unselectedScore = state.foodList.snack.reduce((acc, unselectedFood) => {
@@ -264,7 +294,11 @@ export default (state = {
           }
           return acc
         }, 0)
-        categoryScore.NUTRITION += (selectedScore + unselectedScore)
+        
+
+
+        categoryScore.NUTRITION += (payload.selectedScoreNutritionBreakfast +  payload.selectedScoreNutritionLunch + payload.selectedScoreNutritionDinnerselectedScore + selectedScore  + unselectedScore + payload.deselectedScoreNutritionBreakfast +  payload.deselectedScoreNutritionLunch +   payload.deselectedScoreNutritionDinner)
+        
         const nutritionMax = 5
         if( categoryScore.NUTRITION > 0 && categoryScore.NUTRITION <= 150) {
           categoryScore.NUTRITION = 1
@@ -276,7 +310,7 @@ export default (state = {
           categoryScore.NUTRITION = 4
         }
         categoryScore.NUTRITION = categoryScore.NUTRITION > nutritionMax ? nutritionMax : categoryScore.NUTRITION
-        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack, categoryScore, selectedScoreNutrition: selectedScore, deselectedScoreNutrition: unselectedScore }
+        return { ...state, periodeNut: payload.periodeNut, Snack: payload.Snack, categoryScore, selectedScoreNutritionSnack: selectedScore, deselectedScoreNutritionSnack: unselectedScore }
       } else if (payload.Dinner) {
         const selectedScore = payload.Dinner.selectedColumn.reduce((acc, selectedFoods, index) => {
           let score = 0
@@ -286,7 +320,9 @@ export default (state = {
             const foodObject = state.foodList.dinner.find((food) => food.id === id && food.category_id === categoryId)
             score += ( parseInt(foodObject.selected_score, 10) || 0 )
           })
+          
           acc += score * cof
+          
           return acc
         }, 0)
         const unselectedScore = state.foodList.dinner.reduce((acc, unselectedFood) => {
@@ -300,7 +336,7 @@ export default (state = {
           return acc
         }, 0)
         categoryScore.NUTRITION += (selectedScore + unselectedScore)
-        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner, categoryScore }
+        return { ...state, periodeNut: payload.periodeNut, Dinner: payload.Dinner, categoryScore ,  selectedScoreNutritionDinner : selectedScore , deselectedScoreNutritionDinner : unselectedScore  }
       } else {
         return state
       }

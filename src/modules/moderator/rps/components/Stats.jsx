@@ -29,9 +29,9 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
             <div ref={detailsOfTroubleRef} className="pt-4">
               <BarChart
                 width={detailsOfTroubleWidth}
-                height={300}
+                height={250}
                 data={[
-                  { name: "Stress ", points: [0, detailsOfTrouble.stress] }
+                  { name: "Stress ", points: [0, detailsOfTrouble.stress], fill: "#062484"  , radius:30}
                 ]}
                 layout="vertical"
               >
@@ -54,12 +54,12 @@ const Stats = ({ needForInterventions, detailsOfTrouble }) => {
               <BarChart
                 width={needForInterventionsWidth}
                 margin={{ top: 5, right: 3, left: 5, bottom: 50 }}
-                height={320}
+                height={250}
                 data={ [
-                  { name: "Préventif", value: needForInterventions.preventive },
-                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important },
-                  { name: "Modéré", value: needForInterventions.moderate },
-                  { name: "Urgent", value: needForInterventions.urgent }
+                  { name: "Pas d'intervention nécessaire", value: needForInterventions.important , fill: "#062484"   ,radius:30 },
+                  { name: "Préventif", value: needForInterventions.preventive , fill: "#D08528"   , radius:30  },
+                  { name: "Modéré", value: needForInterventions.moderate , fill: "#EB404C"   , radius:30  },
+                  { name: "Urgent", value: needForInterventions.urgent , fill: "#BF4F3B"   , radius:30 }
                 ] }
               >
                 <CartesianGrid strokeDasharray="3 3" />
